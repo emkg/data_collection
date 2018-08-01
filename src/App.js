@@ -1,6 +1,7 @@
 import React from 'react';
-import Event from './Event';
-import RadarSignatures from './RadarSignatures';
+import Event from './components/Event';
+import RadarSignatures from './components/RadarSignatures';
+
 
 import './App.css';
 

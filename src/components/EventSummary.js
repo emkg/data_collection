@@ -3,11 +3,7 @@ import DayPickerInput from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
 
-//possibly, we'll route or just consitionally render
-
-// event needs to render a router element -- collection
-// when a collection is submitted and event ends, we can
-// render a event completion form
+// TODO: handle submit
 
 export default class EventSummary extends React.Component {
   render() {

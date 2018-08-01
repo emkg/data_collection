@@ -2,6 +2,7 @@ import React from 'react';
 import DayPickerInput from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
+// TODO: handle submit
 
 export default class RadarSignatures extends React.Component {
   render() {
