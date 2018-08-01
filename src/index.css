@@ -12,3 +12,24 @@ form {
   border: solid 2px lightgray;
   padding: 10%;
 }
+
+.collection {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 1%;
+  border: solid 2px lightgray;
+  padding: 2%;
+}
+
+.collection > div > form {
+  border: none;
+}
+
+.tab-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tab {
+
+}

@@ -4,6 +4,7 @@ import 'react-day-picker/lib/style.css';
 
 
 // TODO: handle submit
+// TODO: add RadarSignatures?
 
 export default class EventSummary extends React.Component {
   render() {
