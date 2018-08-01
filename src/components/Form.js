@@ -3,43 +3,70 @@ import DayPickerInput from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import cx from 'classnames';
 
+// TODO: handle submit
+// TODO:
+
+const stop = (event) => (event.stopPropagation(), event.preventDefault());
 
 export default class Form extends React.Component {
+
+  handleSubmit = (event) => {
+    stop(event);
+
+    let data = {
+      startTime: event.target.startTime.value,
+      locationLat: event.target.lat.value,
+      locationLong: event.target.long.value,
+      VCP: event.target.vcp.value,
+      sectorStart: event.target.sectorStart.value,
+      sectorEnd: event.target.sectorEnd.value,
+      warningCounties: event.target.counties.value,
+      warningText: event.target.warningText.value,
+      reportText: event.target.reportText.value,
+      remark: event.target.remark.value,
+    }
+    console.log(data)
+  }
+
   render() {
     return (
-      <div>
-        <form onSubmit={ () => (console.log("submitted!"))}>
-           // kickoff
+      <div className={cx(this.props.className)}>
+        <form onSubmit={this.handleSubmit}>
            <DayPickerInput />
-           <input type="time" name="time" min="00:00" max="23:59" />
-           // location
-           <input type="number" placeholder="start sector"/>
-           <input type="number" placeholder="end sector"/>
+           <input type="time" name="startTime" min="00:00" max="23:59" />
 
-           // VCP
-           <input type="text" placeholder="VCP"/>
+           {this.props.className === "mobile" && (
+             <div>
+                <input type="number" name="lat" placeholder="lat"/>
+                <input type="number" name="long" placeholder="long"/>
+             </div>
+           )}
 
-           // Sector
-           <DayPickerInput />
-           <input type="time" name="time" min="00:00" max="23:59" />
-           <input type="number" placeholder="start sector"/>
-           <input type="number" placeholder="end sector"/>
+           {this.props.className === "vcp" && (
+             <input type="text" name="vcp" placeholder="VCP"/>
+           )}
 
-           // Warning
-           <DayPickerInput />
-           <input type="time" name="time" min="00:00" max="23:59" />
-           <input type="text" placeholder="counties..."  />
-           <textarea name="paragraph_text" cols="50" rows="10" placeholder="Warning text"/>
+           {this.props.className === "sector" && (
+             <div>
+                <input type="number" name="sectorStart" placeholder="start sector"/>
+                <input type="number" name="sectorEnd" placeholder="end sector"/>
+             </div>
+           )}
 
-           // Report
-           <DayPickerInput />
-           <input type="time" name="time" min="00:00" max="23:59" />
-           <textarea name="paragraph_text" cols="50" rows="10" placeholder="Report text"/>
+           {this.props.className === "warning" && (
+             <div>
+                <input type="text" name="counties" placeholder="counties..."  />
+                <textarea name="warningText" cols="50" rows="10" placeholder="Warning text"/>
+             </div>
+           )}
 
-           // Remark
-           <DayPickerInput />
-           <input type="time" name="time" min="00:00" max="23:59" />
-           <textarea name="paragraph_text" cols="50" rows="10" placeholder="remarks..."/>
+           {this.props.className === "report" && (
+             <textarea name="reportText" cols="50" rows="10" placeholder="Report text"/>
+           )}
+
+           {this.props.className === "remark" && (
+             <textarea name="remark" cols="50" rows="10" placeholder="remarks..."/>
+           )}
 
            <input type="submit" />
         </form>
