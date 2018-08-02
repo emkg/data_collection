@@ -28,14 +28,15 @@ export default class Collection extends React.Component {
   }
 
   render () {
+    const { openTab } = this.state;
     return (
       <div className="collection">
         <div className="tab-container">
-          <Tab tab="vcp" handleClick={this.handleClick} />
-          <Tab tab="sector" handleClick={this.handleClick} />
-          <Tab tab="warning" handleClick={this.handleClick} />
-          <Tab tab="report" handleClick={this.handleClick} />
-          <Tab tab="remark" handleClick={this.handleClick} />
+          <Tab tab="vcp" clicked={openTab === "vcp"} handleClick={this.handleClick} />
+          <Tab tab="sector" clicked={openTab === "sector"} handleClick={this.handleClick} />
+          <Tab tab="warning" clicked={openTab === "warning"} handleClick={this.handleClick} />
+          <Tab tab="report" clicked={openTab === "report"} handleClick={this.handleClick} />
+          <Tab tab="remark" clicked={openTab === "remark"} handleClick={this.handleClick} />
         </div>
         <Form className={this.state.openTab}/>
       </div>

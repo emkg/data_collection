@@ -31,5 +31,9 @@ form {
 }
 
 .tab {
+  cursor: pointer;
+}
 
+.tab.clicked {
+  color: red;
 }
