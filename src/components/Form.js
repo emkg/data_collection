@@ -12,19 +12,48 @@ export default class Form extends React.Component {
 
   handleSubmit = (event) => {
     stop(event);
-
     let data = {
       startTime: event.target.startTime.value,
-      locationLat: event.target.lat.value,
-      locationLong: event.target.long.value,
-      VCP: event.target.vcp.value,
-      sectorStart: event.target.sectorStart.value,
-      sectorEnd: event.target.sectorEnd.value,
-      warningCounties: event.target.counties.value,
-      warningText: event.target.warningText.value,
-      reportText: event.target.reportText.value,
-      remark: event.target.remark.value,
     }
+
+    if(this.props.className === "mobile") {
+        const location = {
+          locationLat: event.target.lat.value,
+          locationLong: event.target.long.value
+        };
+
+        data = {...data, location};
+
+    } else if(this.props.className === "vcp") {
+        const vcp = event.target.vcp.value;
+
+        data = {...data, VCP: vcp};
+
+    } else if(this.props.className === "sector") {
+        const sector = {
+          sectorStart: event.target.sectorStart.value,
+          sectorEnd: event.target.sectorEnd.value
+        };
+
+        data = {...data, sector}
+
+    } else if(this.props.className === "warning") {
+        const warning = {
+          warningCounties: event.target.counties.value,
+          warningText: event.target.warningText.value
+        };
+
+        data = {...data, warning};
+
+    } else if(this.props.className === "report") {
+        const report = event.target.reportText.value;
+        data = {...data, reportText: report};
+    } else {
+      // remark
+      const remark = event.target.remark.value;
+      data = {...data, remark: remark};
+    }
+
     console.log(data)
   }
 
