@@ -5,31 +5,31 @@ import EventSummary from './EventSummary';
 
 // TODO: handle submit
 
-// IDEA: possibly, we'll route or just consitionally render
-// event needs to render a router element -- collection
-// when a collection is submitted and event ends, we can
-// render a event completion form
-
 // TODO: establish correct event id
 
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 
 export default class Event extends React.Component {
   state = {
-    mode: "begin" // "collect" or "end"
+    mode: "begin", // "collect" or "end"
+    collectionID: 0
   };
 
-  handleSubmit = (mode) => {
+  handleInstrument = (mode) => {
     this.setState({ mode });
+  }
+
+  handleNewCollection = () => {
+    this.setState({ collectionID: this.state.collectionID + 1, mode: "end" });
   }
 
   render() {
     return (
       <div>
         {this.state.mode === "begin" ?
-          (<Instrument handleSubmit={this.handleSubmit} />)
+          (<Instrument handleSubmit={this.handleInstrument} />)
           : this.state.mode === "collect"
-            ? (<Collection />)
+            ? (<Collection handleSubmit={this.handleNewCollection} collectionID={this.state.collectionID} />)
             : (<EventSummary />)
         }
       </div>

@@ -1,22 +1,12 @@
 import React from 'react';
-/*import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
-import Kickoff from './Kickoff';
-import VCP from './VCP';
-import Sector from './Sector';
-import Remark from './Remark';
-import Warning from './Warning';
-import Report from './Report';*/
 import Tab from './Tab';
 import Form from './Form';
 
 
 // TODO: handle submit
-// TODO: set up router?
 // TODO: set up logic for collection ID
+// TODO: make sure mobile start kicks off when location reset
+// TODO: create megastore
 
 export default class Collection extends React.Component {
   state = {
@@ -25,6 +15,10 @@ export default class Collection extends React.Component {
 
   handleClick = (newTab) => {
     this.setState({ openTab: newTab })
+  }
+
+  handleNewCollection = () => {
+    this.props.handleSubmit();
   }
 
   render () {
@@ -39,6 +33,7 @@ export default class Collection extends React.Component {
           <Tab tab="remark" clicked={openTab === "remark"} handleClick={this.handleClick} />
         </div>
         <Form className={this.state.openTab}/>
+        <div className="new-collection" onClick={this.handleNewCollection}>COLLECTION COMPLETE</div>
       </div>
     )
   }

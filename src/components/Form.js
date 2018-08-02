@@ -4,7 +4,7 @@ import 'react-day-picker/lib/style.css';
 import cx from 'classnames';
 
 // TODO: handle submit
-// TODO:
+// TODO: pass data up to store
 
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 
@@ -16,13 +16,15 @@ export default class Form extends React.Component {
       startTime: event.target.startTime.value,
     }
 
-    if(this.props.className === "mobile") {
+    if(this.props.className === "mobileStart") {
         const location = {
           locationLat: event.target.lat.value,
           locationLong: event.target.long.value
         };
 
         data = {...data, location};
+
+    } else if(this.props.className === "stationaryStart") {
 
     } else if(this.props.className === "vcp") {
         const vcp = event.target.vcp.value;
