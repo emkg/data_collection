@@ -10,24 +10,34 @@ import Sector from './Sector';
 import Remark from './Remark';
 import Warning from './Warning';
 import Report from './Report';*/
+import Tab from './Tab';
 import Form from './Form';
+
 
 // TODO: handle submit
 // TODO: set up router?
 // TODO: set up logic for collection ID
 
 export default class Collection extends React.Component {
+  state = {
+    openTab: "vcp"
+  }
+
+  handleClick = (newTab) => {
+    this.setState({ openTab: newTab })
+  }
+
   render () {
     return (
       <div className="collection">
         <div className="tab-container">
-          <div className="tab">VCP</div>
-          <div className="tab">SECTOR</div>
-          <div className="tab">WARNING</div>
-          <div className="tab">REPORT</div>
-          <div className="tab">REMARK</div>
+          <Tab tab="vcp" handleClick={this.handleClick} />
+          <Tab tab="sector" handleClick={this.handleClick} />
+          <Tab tab="warning" handleClick={this.handleClick} />
+          <Tab tab="report" handleClick={this.handleClick} />
+          <Tab tab="remark" handleClick={this.handleClick} />
         </div>
-        <Form />
+        <Form className={this.state.openTab}/>
       </div>
     )
   }
