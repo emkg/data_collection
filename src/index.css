@@ -28,6 +28,10 @@ input {
   width: 100%;
 }
 
+input[type="checkbox"] {
+  width: unset;
+}
+
 textarea {
   width: 100%;
 }
@@ -117,8 +121,4 @@ textarea {
 
 .new-collection:focus {
   outline: 0;
-}
-
-.event-summary > form > div > input {
-  width: unset ;
 }
