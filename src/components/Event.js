@@ -25,7 +25,7 @@ export default class Event extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="event">
         {this.state.mode === "begin" ?
           (<Instrument handleSubmit={this.handleInstrument} />)
           : this.state.mode === "collect"

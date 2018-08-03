@@ -15,7 +15,7 @@ export default class Instrument extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="instrument">
         <form onSubmit={this.handleSubmit}>
           <select name="instrument">
             <option value="stationary">KOUN</option>

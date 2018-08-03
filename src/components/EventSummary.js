@@ -9,7 +9,7 @@ import React from 'react';
 export default class EventSummary extends React.Component {
   render() {
     return (
-      <div>
+      <div className="event-summary">
         <form>
           <div>
             <input type="checkbox" id="tornadic-supercell" name="feature" value="tornadic-supercell" checked />

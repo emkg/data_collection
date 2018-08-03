@@ -2,6 +2,17 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background: lightgray;
+  overflow-x: hidden;
+}
+
+.app {
+  margin: 0 15%;
+  background: white;
+  height: 100vh;
+  padding: 10%;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
 form {
@@ -21,12 +32,38 @@ textarea {
   width: 100%;
 }
 
+.event {
+  background-color: #434343;
+  background-image:linear-gradient(#FFFFFF, #FFFFFF);
+}
+
 .collection {
   display: flex;
   flex-flow: column nowrap;
   margin: 1%;
   border: solid 2px lightgray;
   padding: 2%;
+}
+
+.collection, .event-summary {
+  background-color: transparent;
+  background-image:
+  linear-gradient(0deg, transparent 24%,
+    rgba(0, 0, 0, .05) 25%,
+    rgba(0, 0, 0, .05) 26%,
+    transparent 27%, transparent 74%,
+    rgba(0, 0, 0, .05) 75%,
+    rgba(0, 0, 0, .05) 76%,
+    transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%,
+    rgba(0, 0, 0, .05) 25%,
+    rgba(0, 0, 0, .05) 26%,
+    transparent 27%, transparent 74%,
+    rgba(0, 0, 0, .05) 75%,
+    rgba(0, 0, 0, .05) 76%,
+    transparent 77%, transparent);
+  height:100%;
+  background-size:50px 50px;
 }
 
 .collection > div > form {
@@ -46,14 +83,8 @@ textarea {
   color: red;
 }
 
-/*.new-collection {
-  background: orange;
-
-  cursor: pointer;
-}*/
-
 .new-collection {
-  /*margin: 25px auto;*/
+  text-align: center;
   width: 33%;
   align-self: center;
   padding: 1%;
