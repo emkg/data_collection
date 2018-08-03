@@ -118,3 +118,7 @@ textarea {
 .new-collection:focus {
   outline: 0;
 }
+
+.event-summary > form > div > input {
+  width: unset ;
+}
