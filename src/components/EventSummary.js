@@ -1,16 +1,15 @@
 import React from 'react';
-//import DayPickerInput from 'react-day-picker';
-//import 'react-day-picker/lib/style.css';
+import RadarSignatures from './RadarSignatures';
 
 
 // TODO: handle submit
-// TODO: add RadarSignatures?
 
 export default class EventSummary extends React.Component {
   render() {
     return (
       <div className="event-summary">
         <form>
+          <RadarSignatures />
           <div>
             <input type="checkbox" id="tornadic-supercell" name="feature" value="tornadic-supercell" checked />
             <label for="downburst">Downburst</label>

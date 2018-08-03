@@ -29,7 +29,10 @@ export default class Event extends React.Component {
         {this.state.mode === "begin" ?
           (<Instrument handleSubmit={this.handleInstrument} />)
           : this.state.mode === "collect"
-            ? (<Collection handleSubmit={this.handleNewCollection} collectionID={this.state.collectionID} />)
+            ? (<Collection
+                  saveData={this.props.saveData}
+                  handleSubmit={this.handleNewCollection}
+                  collectionID={this.state.collectionID} />)
             : (<EventSummary />)
         }
       </div>

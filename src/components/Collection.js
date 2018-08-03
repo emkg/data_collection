@@ -32,7 +32,9 @@ export default class Collection extends React.Component {
           <Tab tab="report" clicked={openTab === "report"} handleClick={this.handleClick} />
           <Tab tab="remark" clicked={openTab === "remark"} handleClick={this.handleClick} />
         </div>
-        <Form className={this.state.openTab}/>
+        <Form saveData={this.props.saveData}
+              className={this.state.openTab}
+              collectionID={this.props.collectionID}/>
         <div className="new-collection" onClick={this.handleNewCollection}>COLLECTION COMPLETE</div>
       </div>
     )

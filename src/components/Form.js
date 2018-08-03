@@ -14,6 +14,7 @@ export default class Form extends React.Component {
     stop(event);
     const e = event.target;
     const data = {
+      collectionID: this.props.collectionID,
       startDay: e.startDay.value,
       startTime: e.startTime.value
     }
@@ -26,12 +27,12 @@ export default class Form extends React.Component {
           locationLong: e.long.value
         };
         e.lat.value = ""; e.long.value = "";
-        console.log(location)
+        this.props.saveData(location)
     } else if(this.props.className === "stationaryStart") {
 
     } else if(this.props.className === "vcp") {
         const vcp = {...data, VCP: e.vcp.value};
-        console.log(vcp);
+        this.props.saveData(vcp);
         e.vcp.value = ""
     } else if(this.props.className === "sector") {
         const sector = {...data,
@@ -41,7 +42,7 @@ export default class Form extends React.Component {
 
         e.sectorStart.value = ""; e.sectorEnd.value = "";
 
-        console.log(sector)
+        this.props.saveData(sector)
     } else if(this.props.className === "warning") {
         const warning = {...data,
           warningCounties: e.counties.value,
@@ -50,16 +51,16 @@ export default class Form extends React.Component {
 
         e.counties.value = ""; e.warningText.value = "";
 
-        console.log(warning)
+        this.props.saveData(warning)
     } else if(this.props.className === "report") {
         const report = {...data, reportText: e.reportText.value };
         e.reportText.value = "";
-        console.log(report)
+        this.props.saveData(report)
     } else {
         // remark
         const remark = {...data, remark: e.remark.value};
         e.remark.value = "";
-        console.log(remark)
+        this.props.saveData(remark)
     }
 
   }
@@ -104,7 +105,7 @@ export default class Form extends React.Component {
              <textarea name="remark" cols="50" rows="10" placeholder="remarks..."/>
            )}
 
-           <input type="submit" value="enter data" /> 
+           <input type="submit" value="enter data" />
         </form>
       </div>
     )
