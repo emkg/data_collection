@@ -104,7 +104,7 @@ export default class Form extends React.Component {
              <textarea name="remark" cols="50" rows="10" placeholder="remarks..."/>
            )}
 
-           <input type="submit" />
+           <input type="submit" value="enter data" /> 
         </form>
       </div>
     )
