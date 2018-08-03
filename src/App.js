@@ -1,6 +1,5 @@
 import React from 'react';
-import Event from './components/Event';
-import RadarSignatures from './components/RadarSignatures';
+import Megastore from './components/Megastore';
 
 
 import './App.css';
@@ -26,7 +25,7 @@ export default class App extends React.Component {
                  onClick={this.startEvent}>GO</div>
         </div>)}
 
-      {this.state.event && (<Event />)}
+      {this.state.event && (<Megastore />)}
 
       </div>
     );
