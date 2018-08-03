@@ -12,60 +12,65 @@ export default class Form extends React.Component {
 
   handleSubmit = (event) => {
     stop(event);
-    let data = {
-      startTime: event.target.startTime.value,
+    const e = event.target;
+    const data = {
+      startDay: e.startDay.value,
+      startTime: e.startTime.value
     }
 
+    e.startTime.value = "";
+
     if(this.props.className === "mobileStart") {
-        const location = {
-          locationLat: event.target.lat.value,
-          locationLong: event.target.long.value
+        const location = {...data,
+          locationLat: e.lat.value,
+          locationLong: e.long.value
         };
-
-        data = {...data, location};
-
+        e.lat.value = ""; e.long.value = "";
+        console.log(location)
     } else if(this.props.className === "stationaryStart") {
 
     } else if(this.props.className === "vcp") {
-        const vcp = event.target.vcp.value;
-
-        data = {...data, VCP: vcp};
-
+        const vcp = {...data, VCP: e.vcp.value};
+        console.log(vcp);
+        e.vcp.value = ""
     } else if(this.props.className === "sector") {
-        const sector = {
-          sectorStart: event.target.sectorStart.value,
-          sectorEnd: event.target.sectorEnd.value
+        const sector = {...data,
+          sectorStart: e.sectorStart.value,
+          sectorEnd: e.sectorEnd.value
         };
 
-        data = {...data, sector}
+        e.sectorStart.value = ""; e.sectorEnd.value = "";
 
+        console.log(sector)
     } else if(this.props.className === "warning") {
-        const warning = {
-          warningCounties: event.target.counties.value,
-          warningText: event.target.warningText.value
+        const warning = {...data,
+          warningCounties: e.counties.value,
+          warningText: e.warningText.value
         };
 
-        data = {...data, warning};
+        e.counties.value = ""; e.warningText.value = "";
 
+        console.log(warning)
     } else if(this.props.className === "report") {
-        const report = event.target.reportText.value;
-        data = {...data, reportText: report};
+        const report = {...data, reportText: e.reportText.value };
+        e.reportText.value = "";
+        console.log(report)
     } else {
-      // remark
-      const remark = event.target.remark.value;
-      data = {...data, remark: remark};
+        // remark
+        const remark = {...data, remark: e.remark.value};
+        e.remark.value = "";
+        console.log(remark)
     }
 
-    console.log(data)
   }
 
   render() {
     return (
       <div className={cx(this.props.className)}>
         <form onSubmit={this.handleSubmit}>
-           <DayPickerInput />
+           <input type="date" name="startDay" min="2018-01-01"/>
            <input type="time" name="startTime" min="00:00" max="23:59" />
-
+           <input type="datetime-local" />
            {this.props.className === "mobile" && (
              <div>
                 <input type="number" name="lat" placeholder="lat"/>

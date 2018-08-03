@@ -18,7 +18,7 @@ export default class Collection extends React.Component {
   }
 
   handleNewCollection = () => {
-    this.props.handleSubmit();
+    //this.props.handleSubmit();
   }
 
   render () {

@@ -1,6 +1,6 @@
 import React from 'react';
-import DayPickerInput from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
+//import DayPickerInput from 'react-day-picker';
+//import 'react-day-picker/lib/style.css';
 
 
 // TODO: handle submit
@@ -24,7 +24,7 @@ export default class EventSummary extends React.Component {
             <label for="tornado">Tornado</label>
           </div>
 
-          <DayPickerInput />
+          <input type="date" name="day" min="2018-01-01"/>
           <input type="time" name="time" min="00:00" max="23:59" />
           <textarea name="paragraph_text" cols="50" rows="10" placeholder="remarks..."/>
           <input type="submit" />
