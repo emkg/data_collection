@@ -6,7 +6,8 @@ import Form from './Form';
 // TODO: handle submit
 // TODO: set up logic for collection ID
 // TODO: make sure mobile start kicks off when location reset
-// TODO: create megastore
+// TODO: break tab container into a new component with
+// logic to control startng a new collection
 
 export default class Collection extends React.Component {
   state = {

@@ -5,7 +5,8 @@ import EventSummary from './EventSummary';
 
 // TODO: handle submit
 
-// TODO: establish correct event id
+// TODO: establish correct event id, validate this
+
 
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 
