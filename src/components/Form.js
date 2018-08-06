@@ -3,8 +3,9 @@ import DayPickerInput from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import cx from 'classnames';
 
-// TODO: handle submit
-// TODO: pass data up to store
+//TODO: editable data...
+// have an option to pass props and have form autofilled with Data
+// make sure that if in edit mode, that data overwrites correctly
 
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 
