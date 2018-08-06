@@ -34,12 +34,17 @@ export default class Event extends React.Component {
     this.setState({ mode: "collect", instrument, mobile });
   }
 
-  handleEndEvent = (event) => {
-    this.setState({ event, mode: "summary" })
+  handleEndCollection = () => {
+    this.setState({ mode: "summary" })
   }
 
-  handleNewCollection = () => {
-    this.setState({ collectionID: this.state.collectionID + 1, mode: "end" });
+  handleEventSummary = (event) => {
+    this.setState({ event, mode: "end" })
+  }
+
+  handleSubmit = () => {
+    // TODO: send state data to a fetch method
+    this.props.eventOver("Your data has been collected!");
   }
 
   render() {
@@ -50,13 +55,21 @@ export default class Event extends React.Component {
           : this.state.mode === "collect"
             ? (<Collection
                   saveData={this.saveData}
-                  handleSubmit={this.handleNewCollection}
+                  handleSubmit={this.handleEndCollection}
                   collectionID={this.state.collectionID}
                   mobile={this.state.mobile} />)
-            : this.state.mode === "end"
-              ? (<EventSummaryForm  handleSubmit={this.handleEndEvent} />)
-              : (<Summary  data={this.state}/>)
+            : this.state.mode === "summary"
+              ? (<EventSummaryForm  handleSubmit={this.handleEventSummary} />)
+              : (<div>
+                    <Summary  data={this.state}/>
+                    <div className="new-collection"
+                       onClick={this.handleSubmit}>{"It's ALL GOOD!"}
+                    </div>
+                  </div>
+                )
         }
+
+
       </div>
     )
   }

@@ -1,5 +1,7 @@
 import React from 'react';
 
+//TODO: add summary Data
+//TODO: add a way to edit the data
 
 export default class Summary extends React.Component {
   render() {

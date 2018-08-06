@@ -7,8 +7,8 @@ import './App.css';
 export default class App extends React.Component {
   state = { event: false }
 
-  startEvent = () => {
-    this.setState({ event: !this.state.event })
+  startEvent = (thankyou) => {
+    this.setState({ event: !this.state.event, thankyou })
   }
 
   render() {
@@ -18,6 +18,7 @@ export default class App extends React.Component {
 
       {!this.state.event && (
         <div>
+          {this.state.thankyou}
           <p>Press go to collect data
           when weather events are in progress.</p>
 
@@ -25,7 +26,7 @@ export default class App extends React.Component {
                  onClick={this.startEvent}>GO</div>
         </div>)}
 
-      {this.state.event && (<Event />)}
+      {this.state.event && (<Event eventOver={this.startEvent} />)}
 
       </div>
     );
