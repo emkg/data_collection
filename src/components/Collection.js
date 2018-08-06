@@ -3,11 +3,14 @@ import Tab from './Tab';
 import Form from './Form';
 
 
-// TODO: handle submit
+
 // TODO: set up logic for collection ID
 // TODO: make sure mobile start kicks off when location reset
+
 // TODO: break tab container into a new component with
 // logic to control startng a new collection
+
+// TODO:  push buttons should be a separate component too
 
 export default class Collection extends React.Component {
   state = {
@@ -18,7 +21,7 @@ export default class Collection extends React.Component {
     this.setState({ openTab: newTab })
   }
 
-  handleNewCollection = () => {
+  handleSubmit = () => {
     this.props.handleSubmit();
   }
 
@@ -37,8 +40,12 @@ export default class Collection extends React.Component {
         </div>
         <Form saveData={this.props.saveData}
               className={this.state.openTab}
-              collectionID={this.props.collectionID}/>
-        <div className="new-collection" onClick={this.handleNewCollection}>COLLECTION COMPLETE</div>
+              collectionID={this.props.collectionID}
+        />
+        <div className="new-collection"
+             onClick={this.handleSubmit}>
+            COLLECTION COMPLETE
+        </div>
       </div>
     )
   }
