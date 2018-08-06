@@ -27,6 +27,7 @@ export default class Collection extends React.Component {
     return (
       <div className="collection">
         <div className="tab-container">
+          <Tab tab="loc" clicked={openTab === "loc"} handleClick={this.handleClick} />
           <Tab tab="vcp" clicked={openTab === "vcp"} handleClick={this.handleClick} />
           <Tab tab="sector" clicked={openTab === "sector"} handleClick={this.handleClick} />
           <Tab tab="warning" clicked={openTab === "warning"} handleClick={this.handleClick} />

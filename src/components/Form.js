@@ -21,7 +21,7 @@ export default class Form extends React.Component {
 
     e.startTime.value = "";
 
-    if(this.props.className === "mobileStart") {
+    if(this.props.className === "loc") {
         const location = {...data,
           locationLat: e.lat.value,
           locationLong: e.long.value
@@ -72,7 +72,7 @@ export default class Form extends React.Component {
            <input type="date" name="startDay" min="2018-01-01"/>
            <input type="time" name="startTime" min="00:00" max="23:59" />
            <input type="datetime-local" />
-           {this.props.className === "mobile" && (
+           {this.props.className === "loc" && (
              <div>
                 <input type="number" name="lat" placeholder="lat"/>
                 <input type="number" name="long" placeholder="long"/>

@@ -8,10 +8,12 @@ import Event from './Event';
 // TODO: save instrument Data
 
 export default class Megastore extends React.Component {
-  state = {};
+  state = { entries: [] };
 
   saveData = (data) => {
-    this.setState( data )
+    const { entries } = this.state;
+    entries.push(data);
+    this.setState( { entries } )
   }
 
   render() {

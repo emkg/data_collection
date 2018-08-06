@@ -13,8 +13,14 @@ const stop = (event) => (event.stopPropagation(), event.preventDefault());
 export default class Event extends React.Component {
   state = {
     mode: "begin", // "collect" or "end"
-    collectionID: 0
+    collectionID: 0,
+    collections: [],
+
   };
+
+  saveData = (data) => {
+    
+  }
 
   handleInstrument = (mode) => {
     this.setState({ mode });
