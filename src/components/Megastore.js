@@ -18,7 +18,7 @@ export default class Megastore extends React.Component {
 
   render() {
     return (
-      <Event saveData={this.saveData} />
+      <Event  />
     );
   }
 

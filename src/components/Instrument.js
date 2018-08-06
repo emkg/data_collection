@@ -9,8 +9,10 @@ export default class Instrument extends React.Component {
 
   handleSubmit = (event) => {
     stop(event);
-    this.props.handleSubmit( "collect" );
-    console.log("collect")
+    const instrument = event.target.instrument.value;
+    console.log(instrument)
+    this.props.handleSubmit(instrument);
+
   }
 
   render() {
@@ -18,8 +20,8 @@ export default class Instrument extends React.Component {
       <div className="instrument">
         <form onSubmit={this.handleSubmit}>
           <select name="instrument">
-            <option value="stationary">KOUN</option>
-            <option value="mobile">NOXP</option>
+            <option value="KOUN">KOUN</option>
+            <option value="NOXP">NOXP</option>
           </select>
           <input type="submit" />
         </form>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Megastore from './components/Megastore';
+import Event from './components/Event';
 
 
 import './App.css';
@@ -25,7 +25,7 @@ export default class App extends React.Component {
                  onClick={this.startEvent}>GO</div>
         </div>)}
 
-      {this.state.event && (<Megastore />)}
+      {this.state.event && (<Event />)}
 
       </div>
     );
