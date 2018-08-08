@@ -14,7 +14,10 @@ const stop = (event) => (event.stopPropagation(), event.preventDefault());
 const mobileInstruments = ['NOXP'];
 
 
-
+/**
+ * Testing esdoc
+ *
+ */
 export default class Event extends React.Component {
   state = {
     mode: "begin", // "collect" or "end"
