@@ -26,6 +26,10 @@ export default class Event extends React.Component {
 
   };
 
+  /**
+   *
+   * @param data - a data object
+   */
   saveData = (data) => {
     const { collections } = this.state;
     collections.push(data);
