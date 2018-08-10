@@ -4,7 +4,10 @@ import Collection from './Collection';
 import EventSummaryForm from './EventSummaryForm';
 import Summary from './Summary';
 
-// TODO: handle submit
+import DayPickerInput from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
+
+
 
 // TODO: establish correct event id, validate this
 
@@ -47,16 +50,22 @@ export default class Event extends React.Component {
   }
 
   /**
-   * handleSubmit stores the instrument in state,
-   * determines if we're mobile, and sets the mode to "collect".
-   * passed as function prop to Instrument
-   * @param instrument - the value of the selected instrument from
-   * Instrument
+   * handleInstrument stores the instrument in state,
+   * determines if we're mobile and therefore controls whether
+   * or not we see location fields rendered for the Event.
+   * @param event - the change event from select option fields
    */
-  handleInstrument = (instrument) => {
+  handleInstrument = (event) => {
+    stop(event);
+    const instrument = event.target.value;
     const mobile = mobileInstruments.includes(instrument);
-    //this.setState({ mode: "collect", instrument, mobile });
     this.setState({ instrument, mobile });
+  }
+
+  handleKickoffSubmit = (event) => {
+    stop(event);
+    // TODO: gather up the event data
+    this.setState({ mode: "collect" });
   }
 
   /**
@@ -97,8 +106,21 @@ export default class Event extends React.Component {
       <div className="event">
         {this.state.mode === "begin" ?
           ( <div className="kickoff">
-              <Instrument handleSubmit={this.handleInstrument} />
-               {this.state.mobile && ("YES BITCH")}
+              <form onSubmit={this.handleKickoffSubmit}>
+                <DayPickerInput />
+                <select name="instrument" onChange={this.handleInstrument}>
+                  <option value="KOUN">KOUN</option>
+                  <option value="NOXP">NOXP</option>
+                </select>
+                <input type="time" name="time" min="00:00" max="23:59" />
+                {this.state.mobile && (
+                  <div>
+                    <input type="number" placeholder="lat"/>
+                    <input type="number" placeholder="long"/>
+                  </div>
+                )}
+                <input type="submit" />
+              </form>
             </div>
           )
           : this.state.mode === "collect"

@@ -4,15 +4,26 @@ import 'react-day-picker/lib/style.css';
 
 // TODO: handle submit
 
+// without stop, form will reset the app with a window refresh
+const stop = (event) => (event.stopPropagation(), event.preventDefault());
+
 export default class Kickoff extends React.Component {
   render() {
     return (
       <div>
         <form>
-        <DayPickerInput />
+          <DayPickerInput />
+          <select name="instrument" onChange={this.handleInstrument}>
+            <option value="KOUN">KOUN</option>
+            <option value="NOXP">NOXP</option>
+          </select>
           <input type="time" name="time" min="00:00" max="23:59" />
-          <input type="number" placeholder="start sector"/>
-          <input type="number" placeholder="end sector"/>
+          {this.state.mobile && (
+            <div>
+              <input type="number" placeholder="lat"/>
+              <input type="number" placeholder="long"/>
+            </div>
+          )}
           <input type="submit" />
         </form>
       </div>
