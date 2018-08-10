@@ -57,17 +57,22 @@ import Summary from &apos;./Summary&apos;;
 
 // TODO: establish correct event id, validate this
 
-
-const stop = (event) =&gt; (event.stopPropagation(), event.preventDefault());
-
+// we do want a list of mobile radars because mobile radars need locations
 const mobileInstruments = [&apos;NOXP&apos;];
 
 
 /**
- * Testing esdoc
- *
+ * An Event is the object that stores data collections.
+ * If an instrument is stationary, an Event will have
+ * one collectionID for its collections.
+ * If an instrument is mobile, then the event will
+ * have a new collectionID for every location update.
  */
 export default class Event extends React.Component {
+  /**
+   * String mode, Number collectionID, Array collections
+   * String instrument, boolean mobile, Object weatherEventData
+   */
   state = {
     mode: &quot;begin&quot;, // &quot;collect&quot; or &quot;end&quot;
     collectionID: 0,
@@ -75,42 +80,80 @@ export default class Event extends React.Component {
 
   };
 
+  /**
+   * saveData pushes a new data object into the
+   * collections array and saves it to state.
+   * Each &quot;collection&quot; is an object from
+   * a specific state of the Form in Collection.
+   *
+   * @param data - a data object.
+   */
   saveData = (data) =&gt; {
     const { collections } = this.state;
     collections.push(data);
     this.setState( { collections } )
   }
 
+  /**
+   * handleSubmit stores the instrument in state,
+   * determines if we&apos;re mobile, and sets the mode to &quot;collect&quot;.
+   * passed as function prop to Instrument
+   * @param instrument - the value of the selected instrument from
+   * Instrument
+   */
   handleInstrument = (instrument) =&gt; {
     const mobile = mobileInstruments.includes(instrument);
     this.setState({ mode: &quot;collect&quot;, instrument, mobile });
   }
 
+  /**
+   * handleEndCollection changes the mode to &quot;summary&quot;.
+   * passed as function prop to Collection.
+   */
   handleEndCollection = () =&gt; {
     this.setState({ mode: &quot;summary&quot; })
   }
 
-  handleEventSummary = (event) =&gt; {
-    this.setState({ event, mode: &quot;end&quot; })
+  /**
+   * handleEventSummary stores the summary data and flips mode to &quot;end&quot;.
+   * sent as function prop to EventSummaryForm
+   */
+  handleEventSummary = (weatherEventData) =&gt; {
+    this.setState({ weatherEventData, mode: &quot;end&quot; })
   }
 
+  /**
+   *  handleSubmit will send the full state of this weather event
+   *  to storage. Send Thankyou to app. Submits this Event.
+   */
   handleSubmit = () =&gt; {
     // TODO: send state data to a fetch method
     this.props.eventOver(&quot;Your data has been collected!&quot;);
   }
 
+  /**
+   *  Event renders different forms depending on the
+   *  mode in state.
+   *  @return Instrument if mode &quot;begin&quot;, Collection
+   *  if mode &quot;collect&quot;, EventSummaryForm if mode is
+   *  &quot;summary&quot;, and a Summary if mode is &quot;end&quot;.
+   *
+   */
   render() {
     return (
       &lt;div className=&quot;event&quot;&gt;
         {this.state.mode === &quot;begin&quot; ?
           (&lt;Instrument handleSubmit={this.handleInstrument} /&gt;)
           : this.state.mode === &quot;collect&quot;
+
             ? (&lt;Collection
                   saveData={this.saveData}
-                  handleSubmit={this.handleEndCollection}
+                  endCollection={this.handleEndCollection}
                   collectionID={this.state.collectionID}
                   mobile={this.state.mobile} /&gt;)
+
             : this.state.mode === &quot;summary&quot;
+
               ? (&lt;EventSummaryForm  handleSubmit={this.handleEventSummary} /&gt;)
               : (&lt;div&gt;
                     &lt;Summary  data={this.state}/&gt;
@@ -120,8 +163,6 @@ export default class Event extends React.Component {
                   &lt;/div&gt;
                 )
         }
-
-
       &lt;/div&gt;
     )
   }

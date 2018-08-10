@@ -1,22 +1,38 @@
 import React from 'react';
 import Event from './components/Event';
-
-
 import './App.css';
 
-export default class App extends React.Component {
-  state = { event: false }
 
+
+/**
+ *  App houses the data collection mechanism and model
+ *  for the Radar Operations.
+ *
+ */
+export default class App extends React.Component {
+  state = { weatherEvent: false }
+
+  /**
+   * When startEvent is triggered, the weatherEvent in state
+   *   is flipped on or off. A thankyou message can be supplied,
+   *   which will be displayed when the event is flipped to false.
+   */
   startEvent = (thankyou) => {
-    this.setState({ event: !this.state.event, thankyou })
+    this.setState({ weatherEvent: !this.state.weatherEvent, thankyou })
   }
 
+  /**
+   * Render the app.
+   * @return In a weather event, an Event will be rendered.
+   * Otherwise, we will see the GO button, and a thankyou message if it
+   * exists.
+   */
   render() {
     return (
       <div className="app">
       <h1>Radar Operations Data Collection</h1>
 
-      {!this.state.event && (
+      {!this.state.weatherEvent && (
         <div>
           {this.state.thankyou}
           <p>Press go to collect data
@@ -26,7 +42,7 @@ export default class App extends React.Component {
                  onClick={this.startEvent}>GO</div>
         </div>)}
 
-      {this.state.event && (<Event eventOver={this.startEvent} />)}
+      {this.state.weatherEvent && (<Event eventOver={this.startEvent} />)}
 
       </div>
     );

@@ -2,29 +2,43 @@ import React from 'react';
 import Tab from './Tab';
 import Form from './Form';
 
-
-
 // TODO: set up logic for collection ID
 // TODO: make sure mobile start kicks off when location reset
-
 // TODO: break tab container into a new component with
 // logic to control startng a new collection
-
 // TODO:  push buttons should be a separate component too
 
+
+/**
+ * Collection renders the form where data is collected.
+ */
 export default class Collection extends React.Component {
+  /**
+   * string: openTab
+   */
   state = {
     openTab: "vcp"
   }
 
+  /**
+   * change the openTab in state on click
+   */
   handleClick = (newTab) => {
     this.setState({ openTab: newTab })
   }
 
-  handleSubmit = () => {
-    this.props.handleSubmit();
+  /**
+   * stop ends the data collection.
+   */
+  stop = () => {
+    this.props.endCollection();
   }
 
+  /**
+   * render the clickable tabs, Form, and a stop button.
+   * @return a tab container full of Tabs, Form, and a pressable div
+   * to end the data collection
+   */
   render () {
     const { openTab } = this.state;
     return (
@@ -43,7 +57,7 @@ export default class Collection extends React.Component {
               collectionID={this.props.collectionID}
         />
         <div className="new-collection"
-             onClick={this.handleSubmit}>
+             onClick={this.stop}>
             COLLECTION COMPLETE
         </div>
       </div>

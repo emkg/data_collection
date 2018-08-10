@@ -7,21 +7,36 @@ import cx from 'classnames';
 // have an option to pass props and have form autofilled with Data
 // make sure that if in edit mode, that data overwrites correctly
 
+// prevent default form behavior so app doesn't refresh on submit
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 
+/**
+ * Form is the master form where all the data is input.
+ * Form renders only the fields needed based on the
+ *  className prop.
+ */
 export default class Form extends React.Component {
 
+  /**
+   * handleSubmit collects the data from the
+   *  form based on the className and sends it
+   *  up to parent. Also clears form.
+   */
   handleSubmit = (event) => {
-    stop(event);
+    stop(event);  // do not let app refresh here
     const e = event.target;
+    // data we always need
     const data = {
       collectionID: this.props.collectionID,
       startDay: e.startDay.value,
       startTime: e.startTime.value
     }
 
+    // clear fields we saved data from
     e.startTime.value = "";
 
+    // based on className, store certain fields in object
+    // and saveData.
     if(this.props.className === "loc") {
         const location = {...data,
           locationLat: e.lat.value,
@@ -66,6 +81,10 @@ export default class Form extends React.Component {
 
   }
 
+  /**
+   * renders the form elements based on className prop.
+   * @return only the fields appropriate for the className
+   */
   render() {
     return (
       <div className={cx(this.props.className)}>

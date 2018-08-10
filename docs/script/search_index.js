@@ -396,12 +396,6 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/components/collection.js~collection#handlesubmit",
-    "class/src/components/Collection.js~Collection.html#instance-member-handleSubmit",
-    "src/components/Collection.js~Collection#handleSubmit",
-    "member"
-  ],
-  [
     "src/components/collection.js~collection#render",
     "class/src/components/Collection.js~Collection.html#instance-method-render",
     "src/components/Collection.js~Collection#render",
@@ -411,6 +405,12 @@ window.esdocSearchIndex = [
     "src/components/collection.js~collection#state",
     "class/src/components/Collection.js~Collection.html#instance-member-state",
     "src/components/Collection.js~Collection#state",
+    "member"
+  ],
+  [
+    "src/components/collection.js~collection#stop",
+    "class/src/components/Collection.js~Collection.html#instance-member-stop",
+    "src/components/Collection.js~Collection#stop",
     "member"
   ],
   [

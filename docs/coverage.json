@@ -1,42 +1,28 @@
 {
-  "coverage": "2.04%",
-  "expectCount": 49,
-  "actualCount": 1,
+  "coverage": "41.66%",
+  "expectCount": 48,
+  "actualCount": 20,
   "files": {
     "src/App.js": {
       "expectCount": 4,
-      "actualCount": 0,
+      "actualCount": 2,
       "undocumentLines": [
-        7,
-        8,
-        10,
-        14
+        13,
+        20
       ]
     },
     "src/components/Collection.js": {
       "expectCount": 5,
-      "actualCount": 0,
+      "actualCount": 4,
       "undocumentLines": [
-        15,
-        16,
-        20,
-        24,
-        28
+        26
       ]
     },
     "src/components/Event.js": {
-      "expectCount": 10,
-      "actualCount": 1,
+      "expectCount": 9,
+      "actualCount": 8,
       "undocumentLines": [
-        12,
-        14,
-        22,
-        29,
-        35,
-        40,
-        44,
-        48,
-        53
+        12
       ]
     },
     "src/components/EventSummaryForm.js": {
@@ -51,22 +37,16 @@
     },
     "src/components/Form.js": {
       "expectCount": 4,
-      "actualCount": 0,
+      "actualCount": 3,
       "undocumentLines": [
-        10,
-        12,
-        14,
-        69
+        11
       ]
     },
     "src/components/Instrument.js": {
       "expectCount": 4,
-      "actualCount": 0,
+      "actualCount": 3,
       "undocumentLines": [
-        6,
-        8,
-        10,
-        18
+        7
       ]
     },
     "src/components/Kickoff.js": {
