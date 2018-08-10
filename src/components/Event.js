@@ -124,9 +124,14 @@ export default class Event extends React.Component {
         {this.state.mode === "begin" ?
           ( <div className="kickoff">
               <form onSubmit={this.handleKickoffSubmit}>
-                <input type="date" name="eventstartday" min="2018-01-01"/>
-                <input type="time" name="eventstarttime" min="00:00" max="23:59" />
+                Weather Event Start:
+                <div className="datetime-input">
+                  <input type="date" name="eventstartday" min="2018-01-01"/>
+                  <input type="time" name="eventstarttime" min="00:00" max="23:59" />
+                </div>
                 <input type="number" name="initID" placeholder="Daily Collection Number"/>
+
+                Instrument:
                 <select name="instrument" onChange={this.handleInstrument}>
                   <option value="KOUN">KOUN</option>
                   <option value="NOXP">NOXP</option>

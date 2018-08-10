@@ -6,7 +6,6 @@ import Form from './Form';
 // logic to control startng a new collection
 // TODO:  push buttons should be a separate component too
 
-
 /**
  * Collection renders the form where data is collected.
  */

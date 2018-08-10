@@ -91,8 +91,11 @@ export default class Form extends React.Component {
     return (
       <div className={cx(this.props.className)}>
         <form onSubmit={this.handleSubmit}>
-           <input type="date" name="startDay" min="2018-01-01"/>
-           <input type="time" name="startTime" min="00:00" max="23:59" />
+           Start Time:
+           <div className="datetime-input">    
+              <input type="date" name="startDay" min="2018-01-01"/>
+              <input type="time" name="startTime" min="00:00" max="23:59" />
+            </div>
            {this.props.className === "loc" && (
              <div>
                 <input type="number" name="lat" placeholder="lat"/>
