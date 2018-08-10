@@ -37,7 +37,6 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html">EventSummaryForm</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Form.js~Form.html">Form</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Kickoff.js~Kickoff.html">Kickoff</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Megastore.js~Megastore.html">Megastore</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/RadarSignatures.js~RadarSignatures.html">RadarSignatures</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Summary.js~Summary.html">Summary</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Tab.js~Tab.html">Tab</a></span></span></li>
@@ -77,7 +76,8 @@ export default class Form extends React.Component {
     const data = {
       collectionID: this.props.collectionID,
       startDay: e.startDay.value,
-      startTime: e.startTime.value
+      startTime: e.startTime.value,
+      collectionType: this.props.className
     }
 
     // clear fields we saved data from
@@ -139,8 +139,11 @@ export default class Form extends React.Component {
     return (
       &lt;div className={cx(this.props.className)}&gt;
         &lt;form onSubmit={this.handleSubmit}&gt;
-           &lt;input type=&quot;date&quot; name=&quot;startDay&quot; min=&quot;2018-01-01&quot;/&gt;
-           &lt;input type=&quot;time&quot; name=&quot;startTime&quot; min=&quot;00:00&quot; max=&quot;23:59&quot; /&gt;
+           Start Time:
+           &lt;div className=&quot;datetime-input&quot;&gt;
+              &lt;input type=&quot;date&quot; name=&quot;startDay&quot; min=&quot;2018-01-01&quot;/&gt;
+              &lt;input type=&quot;time&quot; name=&quot;startTime&quot; min=&quot;00:00&quot; max=&quot;23:59&quot; /&gt;
+            &lt;/div&gt;
            {this.props.className === &quot;loc&quot; &amp;&amp; (
              &lt;div&gt;
                 &lt;input type=&quot;number&quot; name=&quot;lat&quot; placeholder=&quot;lat&quot;/&gt;

@@ -652,7 +652,7 @@
     "__docId__": 53,
     "kind": "file",
     "name": "src/components/Collection.js",
-    "content": "import React from 'react';\nimport Tab from './Tab';\nimport Form from './Form';\n\n// TODO: break tab container into a new component with\n// logic to control startng a new collection\n// TODO:  push buttons should be a separate component too\n\n\n/**\n * Collection renders the form where data is collected.\n */\nexport default class Collection extends React.Component {\n  /**\n   * string: openTab, Number collectionID\n   */\n  state = {\n    openTab: \"vcp\",\n    collectionID: 1,\n  }\n\n  /**\n   * change the openTab in state on click\n   */\n  handleClick = (newTab) => {\n    this.setState({ openTab: newTab })\n  }\n\n  /**\n   * When location is updated for mobile radar,\n   * we want to update the collection id. This\n   * signals on all new entries that the location is updated.\n   */\n  handleLocationSubmit = (newID) => {\n    this.setState({ collectionID: newID });\n  }\n\n  /**\n   * stop ends the data collection.\n   */\n  stop = () => {\n    this.props.endCollection();\n  }\n\n  /**\n   * render the clickable tabs, Form, and a stop button.\n   * @return a tab container full of Tabs, Form, and a pressable div\n   * to end the data collection\n   */\n  render () {\n    const { openTab } = this.state;\n    return (\n      <div className=\"collection\">\n        <div className=\"tab-container\">\n          {this.props.mobile &&\n            (<Tab tab=\"loc\" clicked={openTab === \"loc\"} handleClick={this.handleClick} />\n          )}\n          <Tab tab=\"vcp\" clicked={openTab === \"vcp\"} handleClick={this.handleClick} />\n          <Tab tab=\"sector\" clicked={openTab === \"sector\"} handleClick={this.handleClick} />\n          <Tab tab=\"warning\" clicked={openTab === \"warning\"} handleClick={this.handleClick} />\n          <Tab tab=\"report\" clicked={openTab === \"report\"} handleClick={this.handleClick} />\n          <Tab tab=\"remark\" clicked={openTab === \"remark\"} handleClick={this.handleClick} />\n        </div>\n        <Form saveData={this.props.saveData}\n              className={this.state.openTab}\n              collectionID={this.state.collectionID}\n              handleLocationSubmit={this.handleLocationSubmit}\n        />\n        <div className=\"new-collection\"\n             onClick={this.stop}>\n            COLLECTION COMPLETE\n        </div>\n      </div>\n    )\n  }\n}\n",
+    "content": "import React from 'react';\nimport Tab from './Tab';\nimport Form from './Form';\n\n// TODO: break tab container into a new component with\n// logic to control startng a new collection\n// TODO:  push buttons should be a separate component too\n\n/**\n * Collection renders the form where data is collected.\n */\nexport default class Collection extends React.Component {\n  /**\n   * string: openTab, Number collectionID\n   */\n  state = {\n    openTab: \"vcp\",\n    collectionID: 1,\n  }\n\n  /**\n   * change the openTab in state on click\n   */\n  handleClick = (newTab) => {\n    this.setState({ openTab: newTab })\n  }\n\n  /**\n   * When location is updated for mobile radar,\n   * we want to update the collection id. This\n   * signals on all new entries that the location is updated.\n   */\n  handleLocationSubmit = (newID) => {\n    this.setState({ collectionID: newID });\n  }\n\n  /**\n   * stop ends the data collection.\n   */\n  stop = () => {\n    this.props.endCollection();\n  }\n\n  /**\n   * render the clickable tabs, Form, and a stop button.\n   * @return a tab container full of Tabs, Form, and a pressable div\n   * to end the data collection\n   */\n  render () {\n    const { openTab } = this.state;\n    return (\n      <div className=\"collection\">\n        <div className=\"tab-container\">\n          {this.props.mobile &&\n            (<Tab tab=\"loc\" clicked={openTab === \"loc\"} handleClick={this.handleClick} />\n          )}\n          <Tab tab=\"vcp\" clicked={openTab === \"vcp\"} handleClick={this.handleClick} />\n          <Tab tab=\"sector\" clicked={openTab === \"sector\"} handleClick={this.handleClick} />\n          <Tab tab=\"warning\" clicked={openTab === \"warning\"} handleClick={this.handleClick} />\n          <Tab tab=\"report\" clicked={openTab === \"report\"} handleClick={this.handleClick} />\n          <Tab tab=\"remark\" clicked={openTab === \"remark\"} handleClick={this.handleClick} />\n        </div>\n        <Form saveData={this.props.saveData}\n              className={this.state.openTab}\n              collectionID={this.state.collectionID}\n              handleLocationSubmit={this.handleLocationSubmit}\n        />\n        <div className=\"new-collection\"\n             onClick={this.stop}>\n            COLLECTION COMPLETE\n        </div>\n      </div>\n    )\n  }\n}\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/Collection.js",
     "access": "public",
@@ -671,7 +671,7 @@
     "importPath": "ops_coll_front/src/components/Collection.js",
     "importStyle": "Collection",
     "description": "Collection renders the form where data is collected.",
-    "lineNumber": 13,
+    "lineNumber": 12,
     "interface": false,
     "extends": [
       "react~React.Component"
@@ -686,7 +686,7 @@
     "longname": "src/components/Collection.js~Collection#state",
     "access": "public",
     "description": "string: openTab, Number collectionID",
-    "lineNumber": 17,
+    "lineNumber": 16,
     "type": {
       "types": [
         "*"
@@ -702,7 +702,7 @@
     "longname": "src/components/Collection.js~Collection#handleClick",
     "access": "public",
     "description": null,
-    "lineNumber": 25,
+    "lineNumber": 24,
     "undocument": true,
     "type": {
       "types": [
@@ -719,7 +719,7 @@
     "longname": "src/components/Collection.js~Collection#handleLocationSubmit",
     "access": "public",
     "description": "When location is updated for mobile radar,\nwe want to update the collection id. This\nsignals on all new entries that the location is updated.",
-    "lineNumber": 34,
+    "lineNumber": 33,
     "type": {
       "types": [
         "*"
@@ -735,7 +735,7 @@
     "longname": "src/components/Collection.js~Collection#stop",
     "access": "public",
     "description": "stop ends the data collection.",
-    "lineNumber": 41,
+    "lineNumber": 40,
     "type": {
       "types": [
         "*"
@@ -753,7 +753,7 @@
     "longname": "src/components/Collection.js~Collection#render",
     "access": "public",
     "description": "render the clickable tabs, Form, and a stop button.",
-    "lineNumber": 50,
+    "lineNumber": 49,
     "return": {
       "nullable": null,
       "types": [
@@ -768,7 +768,7 @@
     "__docId__": 60,
     "kind": "file",
     "name": "src/components/Event.js",
-    "content": "import React from 'react';\nimport Collection from './Collection';\nimport EventSummaryForm from './EventSummaryForm';\nimport Summary from './Summary';\n\n\n// TODO: establish correct event id, validate this\n\n// we do want a list of mobile radars because mobile radars need locations\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\nconst mobileInstruments = ['NOXP'];\n\n/**\n * An Event is the object that stores data collections.\n * If an instrument is stationary, an Event will have\n * one collectionID for its collections.\n * If an instrument is mobile, then the event will\n * have a new collectionID for every location update.\n */\nexport default class Event extends React.Component {\n  /**\n   * String mode, Array collections\n   * String instrument, boolean mobile, Object weatherEventData\n   */\n  state = {\n    mode: \"begin\", // \"collect\" or \"end\"\n    collections: [],\n  };\n\n  /**\n   * saveData pushes a new data object into the\n   * collections array and saves it to state.\n   * Each \"collection\" is an object from\n   * a specific state of the Form in Collection.\n   *\n   * @param data - a data object.\n   */\n  saveData = (data) => {\n    const { collections } = this.state;\n    collections.push(data);\n    this.setState( { collections } )\n  }\n\n  /**\n   * handleInstrument stores the instrument in state,\n   * determines if we're mobile and therefore controls whether\n   * or not we see location fields rendered for the Event.\n   * @param event - the change event from select option fields\n   */\n  handleInstrument = (event) => {\n    stop(event);\n    const instrument = event.target.value;\n    const mobile = mobileInstruments.includes(instrument);\n    this.setState({ instrument, mobile });\n  }\n\n  /**\n   * handleKickoffSubmit changes the mode to \"collect\",\n   * saves initial event info, and if the instrument\n   * is mobile, adds the first collection to state\n   */\n  handleKickoffSubmit = (event) => {\n    stop(event);\n\n    const event_info = {\n      eventstartday: event.target.eventstartday.value,\n      eventstarttime: event.target.eventstarttime.value\n    }\n\n    if(this.state.mobile) {\n      const initCollection = {...event_info,\n          collectionID: event.target.initID.value,\n          locationLat: event.target.lat.value,\n          locationLong: event.target.long.value\n        };\n      //this.setState({ initID: initCollection.collectionID })\n      this.saveData(initCollection);\n    }\n\n    this.setState({\n      mode: \"collect\",\n      eventstartday: event_info.eventstartday,\n      eventstarttime: event_info.eventstarttime\n    });\n\n    console.log(this.state)\n  }\n\n  /**\n   * handleEndCollection changes the mode to \"summary\".\n   * passed as function prop to Collection.\n   */\n  handleEndCollection = () => {\n    this.setState({ mode: \"summary\" })\n  }\n\n  /**\n   * handleEventSummary stores the summary data and flips mode to \"end\".\n   * sent as function prop to EventSummaryForm\n   */\n  handleEventSummary = (weatherEventData) => {\n    this.setState({ weatherEventData, mode: \"end\" })\n  }\n\n  /**\n   *  handleSubmit will send the full state of this weather event\n   *  to storage. Send Thankyou to app. Submits this Event.\n   */\n  handleSubmit = () => {\n    // TODO: send state data to a fetch method\n    this.props.eventOver(\"Your data has been collected!\");\n  }\n\n  /**\n   *  Event renders different forms depending on the\n   *  mode in state.\n   *  @return Instrument if mode \"begin\", Collection\n   *  if mode \"collect\", EventSummaryForm if mode is\n   *  \"summary\", and a Summary if mode is \"end\".\n   */\n  render() {\n    return (\n      <div className=\"event\">\n        {this.state.mode === \"begin\" ?\n          ( <div className=\"kickoff\">\n              <form onSubmit={this.handleKickoffSubmit}>\n                <input type=\"date\" name=\"eventstartday\" min=\"2018-01-01\"/>\n                <input type=\"time\" name=\"eventstarttime\" min=\"00:00\" max=\"23:59\" />\n                <input type=\"number\" name=\"initID\" placeholder=\"Daily Collection Number\"/>\n                <select name=\"instrument\" onChange={this.handleInstrument}>\n                  <option value=\"KOUN\">KOUN</option>\n                  <option value=\"NOXP\">NOXP</option>\n                </select>\n                {this.state.mobile && (\n                  <div>\n                    <input type=\"number\" name=\"lat\" placeholder=\"lat\"/>\n                    <input type=\"number\" name=\"long\" placeholder=\"long\"/>\n                  </div>\n                )}\n\n                <input type=\"submit\" />\n              </form>\n            </div>\n          )\n          : this.state.mode === \"collect\"\n\n            ? (<Collection\n                  saveData={this.saveData}\n                  endCollection={this.handleEndCollection}\n                  mobile={this.state.mobile} />)\n\n            : this.state.mode === \"summary\"\n\n              ? (<EventSummaryForm  handleSubmit={this.handleEventSummary} />)\n              : (<div>\n                    <Summary  data={this.state}/>\n                    <div className=\"new-collection\"\n                       onClick={this.handleSubmit}>{\"It's ALL GOOD!\"}\n                    </div>\n                  </div>\n                )\n        }\n      </div>\n    )\n  }\n }\n",
+    "content": "import React from 'react';\nimport Collection from './Collection';\nimport EventSummaryForm from './EventSummaryForm';\nimport Summary from './Summary';\n\n\n// TODO: establish correct event id, validate this\n// TODO: send data to a store\n// TODO: organize data batches to send to db tables\n// TODO: create a json preview to display...\n// TODO: save data in cookies\n\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n// we do want a list of mobile radars because mobile radars need locations\nconst mobileInstruments = ['NOXP'];\n\n/**\n * An Event is the object that stores data collections.\n * If an instrument is stationary, an Event will have\n * one collectionID for its collections.\n * If an instrument is mobile, then the event will\n * have a new collectionID for every location update.\n */\nexport default class Event extends React.Component {\n  /**\n   * String mode, Array collections\n   * String instrument, boolean mobile, Object weatherEventData\n   */\n  state = {\n    mode: \"begin\", // \"collect\" or \"end\"\n    collections: [],\n  };\n\n  /**\n   * saveData pushes a new data object into the\n   * collections array and saves it to state.\n   * Each \"collection\" is an object from\n   * a specific state of the Form in Collection.\n   *\n   * @param data - a data object.\n   */\n  saveData = (data) => {\n    const { collections } = this.state;\n    collections.push(data);\n    this.setState( { collections } )\n  }\n\n  /**\n   * handleInstrument stores the instrument in state,\n   * determines if we're mobile and therefore controls whether\n   * or not we see location fields rendered for the Event.\n   * @param event - the change event from select option fields\n   */\n  handleInstrument = (event) => {\n    stop(event);\n    const instrument = event.target.value;\n    const mobile = mobileInstruments.includes(instrument);\n    this.setState({ instrument, mobile });\n  }\n\n  /**\n   * handleKickoffSubmit changes the mode to \"collect\",\n   * saves initial event info, and if the instrument\n   * is mobile, adds the first collection to state\n   */\n  handleKickoffSubmit = (event) => {\n    stop(event);\n\n    const event_info = {\n      eventstartday: event.target.eventstartday.value,\n      eventstarttime: event.target.eventstarttime.value\n    }\n\n    if(this.state.mobile) {\n      const initCollection = {...event_info,\n          collectionID: event.target.initID.value,\n          locationLat: event.target.lat.value,\n          locationLong: event.target.long.value\n        };\n      //this.setState({ initID: initCollection.collectionID })\n      this.saveData(initCollection);\n    }\n\n    this.setState({\n      mode: \"collect\",\n      eventstartday: event_info.eventstartday,\n      eventstarttime: event_info.eventstarttime\n    });\n\n    console.log(this.state)\n  }\n\n  /**\n   * handleEndCollection changes the mode to \"summary\".\n   * passed as function prop to Collection.\n   */\n  handleEndCollection = () => {\n    this.setState({ mode: \"summary\" })\n  }\n\n  /**\n   * handleEventSummary stores the summary data and flips mode to \"end\".\n   * sent as function prop to EventSummaryForm\n   */\n  handleEventSummary = (weatherEventData) => {\n    this.setState({ weatherEventData, mode: \"end\" })\n  }\n\n  /**\n   *  handleSubmit will send the full state of this weather event\n   *  to storage. Send Thankyou to app. Submits this Event.\n   */\n  handleSubmit = () => {\n    // TODO: send state data to a fetch method\n    this.props.eventOver(\"Your data has been collected!\");\n  }\n\n  /**\n   *  Event renders different forms depending on the\n   *  mode in state.\n   *  @return Instrument if mode \"begin\", Collection\n   *  if mode \"collect\", EventSummaryForm if mode is\n   *  \"summary\", and a Summary if mode is \"end\".\n   */\n  render() {\n    return (\n      <div className=\"event\">\n        {this.state.mode === \"begin\" ?\n          ( <div className=\"kickoff\">\n              <form onSubmit={this.handleKickoffSubmit}>\n                Weather Event Start:\n                <div className=\"datetime-input\">\n                  <input type=\"date\" name=\"eventstartday\" min=\"2018-01-01\"/>\n                  <input type=\"time\" name=\"eventstarttime\" min=\"00:00\" max=\"23:59\" />\n                </div>\n                <input type=\"number\" name=\"initID\" placeholder=\"Daily Collection Number\"/>\n\n                Instrument:\n                <select name=\"instrument\" onChange={this.handleInstrument}>\n                  <option value=\"KOUN\">KOUN</option>\n                  <option value=\"NOXP\">NOXP</option>\n                </select>\n                {this.state.mobile && (\n                  <div>\n                    <input type=\"number\" name=\"lat\" placeholder=\"lat\"/>\n                    <input type=\"number\" name=\"long\" placeholder=\"long\"/>\n                  </div>\n                )}\n\n                <input type=\"submit\" />\n              </form>\n            </div>\n          )\n          : this.state.mode === \"collect\"\n\n            ? (<Collection\n                  saveData={this.saveData}\n                  endCollection={this.handleEndCollection}\n                  mobile={this.state.mobile} />)\n\n            : this.state.mode === \"summary\"\n\n              ? (<EventSummaryForm handleSubmit={this.handleEventSummary} />)\n              : (<div>\n                    <Summary  data={this.state}/>\n                    <div className=\"new-collection\"\n                       onClick={this.handleSubmit}>{\"It's ALL GOOD!\"}\n                    </div>\n                  </div>\n                )\n        }\n      </div>\n    )\n  }\n }\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/Event.js",
     "access": "public",
@@ -789,7 +789,7 @@
     "importPath": "ops_coll_front/src/components/Event.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 10,
+    "lineNumber": 13,
     "undocument": true,
     "params": [
       {
@@ -814,7 +814,7 @@
     "importPath": "ops_coll_front/src/components/Event.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 11,
+    "lineNumber": 15,
     "undocument": true,
     "type": {
       "types": [
@@ -835,7 +835,7 @@
     "importPath": "ops_coll_front/src/components/Event.js",
     "importStyle": "Event",
     "description": "An Event is the object that stores data collections.\nIf an instrument is stationary, an Event will have\none collectionID for its collections.\nIf an instrument is mobile, then the event will\nhave a new collectionID for every location update.",
-    "lineNumber": 20,
+    "lineNumber": 24,
     "interface": false,
     "extends": [
       "react~React.Component"
@@ -850,7 +850,7 @@
     "longname": "src/components/Event.js~Event#state",
     "access": "public",
     "description": "String mode, Array collections\nString instrument, boolean mobile, Object weatherEventData",
-    "lineNumber": 25,
+    "lineNumber": 29,
     "type": {
       "types": [
         "*"
@@ -866,7 +866,7 @@
     "longname": "src/components/Event.js~Event#saveData",
     "access": "public",
     "description": "saveData pushes a new data object into the\ncollections array and saves it to state.\nEach \"collection\" is an object from\na specific state of the Form in Collection.",
-    "lineNumber": 38,
+    "lineNumber": 42,
     "params": [
       {
         "nullable": null,
@@ -894,7 +894,7 @@
     "longname": "src/components/Event.js~Event#handleInstrument",
     "access": "public",
     "description": "handleInstrument stores the instrument in state,\ndetermines if we're mobile and therefore controls whether\nor not we see location fields rendered for the Event.",
-    "lineNumber": 50,
+    "lineNumber": 54,
     "params": [
       {
         "nullable": null,
@@ -922,7 +922,7 @@
     "longname": "src/components/Event.js~Event#handleKickoffSubmit",
     "access": "public",
     "description": "handleKickoffSubmit changes the mode to \"collect\",\nsaves initial event info, and if the instrument\nis mobile, adds the first collection to state",
-    "lineNumber": 62,
+    "lineNumber": 66,
     "type": {
       "types": [
         "*"
@@ -938,7 +938,7 @@
     "longname": "src/components/Event.js~Event#handleEndCollection",
     "access": "public",
     "description": "handleEndCollection changes the mode to \"summary\".\npassed as function prop to Collection.",
-    "lineNumber": 93,
+    "lineNumber": 97,
     "type": {
       "types": [
         "*"
@@ -954,7 +954,7 @@
     "longname": "src/components/Event.js~Event#handleEventSummary",
     "access": "public",
     "description": "handleEventSummary stores the summary data and flips mode to \"end\".\nsent as function prop to EventSummaryForm",
-    "lineNumber": 101,
+    "lineNumber": 105,
     "type": {
       "types": [
         "*"
@@ -970,7 +970,7 @@
     "longname": "src/components/Event.js~Event#handleSubmit",
     "access": "public",
     "description": " handleSubmit will send the full state of this weather event\n to storage. Send Thankyou to app. Submits this Event.",
-    "lineNumber": 109,
+    "lineNumber": 113,
     "type": {
       "types": [
         "*"
@@ -988,7 +988,7 @@
     "longname": "src/components/Event.js~Event#render",
     "access": "public",
     "description": " Event renders different forms depending on the\n mode in state.",
-    "lineNumber": 121,
+    "lineNumber": 125,
     "return": {
       "nullable": null,
       "types": [
@@ -1003,7 +1003,7 @@
     "__docId__": 72,
     "kind": "file",
     "name": "src/components/EventSummaryForm.js",
-    "content": "import React from 'react';\nimport RadarSignatures from './RadarSignatures';\n\n\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n\nexport default class EventSummaryForm extends React.Component {\n\n  handleSubmit = (event) => {\n    stop(event);\n    const e = event.target;\n    const data = {\n      collectionID: this.props.collectionID,\n      eventType: e.eventType.value,\n      endDay: e.endDay.value,\n      endTime: e.endTime.value,\n      eventSummary: e.summary.value\n    }\n\n    this.props.handleSubmit(data);\n  }\n\n  render() {\n    return (\n      <div className=\"event-summary\">\n        <form onSubmit={this.handleSubmit}>\n          <RadarSignatures />\n          <div>\n            <input type=\"checkbox\" id=\"tornadic-supercell\" name=\"eventType\" value=\"tornadic-supercell\" checked />\n            <label for=\"downburst\">Downburst</label>\n          </div>\n          <div>\n            <input type=\"checkbox\" id=\"hail\" name=\"eventType\" value=\"hail\" />\n            <label for=\"thunderstorm\">Thunderstorm</label>\n          </div>\n          <div>\n            <input type=\"checkbox\" id=\"claws\" name=\"eventType\" value=\"claws\" />\n            <label for=\"tornado\">Tornado</label>\n          </div>\n\n          <input type=\"date\" name=\"endDay\" min=\"2018-01-01\"/>\n          <input type=\"time\" name=\"endTime\" min=\"00:00\" max=\"23:59\" />\n          <textarea name=\"summary\" cols=\"50\" rows=\"10\" placeholder=\"remarks...\"/>\n          <input type=\"submit\" />\n\n        </form>\n      </div>\n    )\n  }\n }\n",
+    "content": "import React from 'react';\nimport RadarSignatures from './RadarSignatures';\n\n// TODO: add esdoc\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n\nexport default class EventSummaryForm extends React.Component {\n\n  handleSubmit = (event) => {\n    stop(event);\n    const e = event.target;\n    const data = {\n      eventType: e.eventType.value,\n      eventendday: e.endDay.value,\n      eventendtime: e.endTime.value,\n      eventDescription: e.summary.value\n    }\n\n    this.props.handleSubmit(data);\n  }\n\n  render() {\n    return (\n      <div className=\"event-summary\">\n        <form onSubmit={this.handleSubmit}>\n          <RadarSignatures />\n          <div>\n            <input type=\"checkbox\" id=\"tornadic-supercell\" name=\"eventType\" value=\"tornadic-supercell\" checked />\n            <label for=\"downburst\">Downburst</label>\n          </div>\n          <div>\n            <input type=\"checkbox\" id=\"hail\" name=\"eventType\" value=\"hail\" />\n            <label for=\"thunderstorm\">Thunderstorm</label>\n          </div>\n          <div>\n            <input type=\"checkbox\" id=\"claws\" name=\"eventType\" value=\"claws\" />\n            <label for=\"tornado\">Tornado</label>\n          </div>\n\n          <input type=\"date\" name=\"endDay\" min=\"2018-01-01\"/>\n          <input type=\"time\" name=\"endTime\" min=\"00:00\" max=\"23:59\" />\n          <textarea name=\"summary\" cols=\"50\" rows=\"10\" placeholder=\"remarks...\"/>\n          <input type=\"submit\" />\n\n        </form>\n      </div>\n    )\n  }\n }\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/EventSummaryForm.js",
     "access": "public",
@@ -1084,7 +1084,7 @@
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#render",
     "access": "public",
     "description": null,
-    "lineNumber": 23,
+    "lineNumber": 22,
     "undocument": true,
     "params": [],
     "return": {
@@ -1097,7 +1097,7 @@
     "__docId__": 77,
     "kind": "file",
     "name": "src/components/Form.js",
-    "content": "import React from 'react';\nimport DayPickerInput from 'react-day-picker';\nimport 'react-day-picker/lib/style.css';\nimport cx from 'classnames';\n\n//TODO: editable data...\n// have an option to pass props and have form autofilled with Data\n// make sure that if in edit mode, that data overwrites correctly\n\n// prevent default form behavior so app doesn't refresh on submit\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n\n/**\n * Form is the master form where all the data is input.\n * Form renders only the fields needed based on the\n *  className prop.\n */\nexport default class Form extends React.Component {\n\n  /**\n   * handleSubmit collects the data from the\n   *  form based on the className and sends it\n   *  up to parent. Also clears form.\n   */\n  handleSubmit = (event) => {\n    stop(event);  // do not let app refresh here\n    const e = event.target;\n    // data we always need\n    const data = {\n      collectionID: this.props.collectionID,\n      startDay: e.startDay.value,\n      startTime: e.startTime.value\n    }\n\n    // clear fields we saved data from\n    e.startTime.value = \"\";\n\n    // based on className, store certain fields in object\n    // and saveData.\n    if(this.props.className === \"loc\") {\n        const location = {...data,\n          collectionID: e.id.value,\n          locationLat: e.lat.value,\n          locationLong: e.long.value\n        };\n        e.lat.value = \"\"; e.long.value = \"\";\n        this.props.handleLocationSubmit(location.collectionID);\n        this.props.saveData(location)\n    } else if(this.props.className === \"stationaryStart\") {\n\n    } else if(this.props.className === \"vcp\") {\n        const vcp = {...data, VCP: e.vcp.value};\n        this.props.saveData(vcp);\n        e.vcp.value = \"\"\n    } else if(this.props.className === \"sector\") {\n        const sector = {...data,\n          sectorStart: e.sectorStart.value,\n          sectorEnd: e.sectorEnd.value\n        };\n\n        e.sectorStart.value = \"\"; e.sectorEnd.value = \"\";\n\n        this.props.saveData(sector)\n    } else if(this.props.className === \"warning\") {\n        const warning = {...data,\n          warningCounties: e.counties.value,\n          warningText: e.warningText.value\n        };\n\n        e.counties.value = \"\"; e.warningText.value = \"\";\n\n        this.props.saveData(warning)\n    } else if(this.props.className === \"report\") {\n        const report = {...data, reportText: e.reportText.value };\n        e.reportText.value = \"\";\n        this.props.saveData(report)\n    } else {\n        // remark\n        const remark = {...data, remark: e.remark.value};\n        e.remark.value = \"\";\n        this.props.saveData(remark)\n    }\n\n  }\n\n  /**\n   * renders the form elements based on className prop.\n   * @return only the fields appropriate for the className\n   */\n  render() {\n    return (\n      <div className={cx(this.props.className)}>\n        <form onSubmit={this.handleSubmit}>\n           <input type=\"date\" name=\"startDay\" min=\"2018-01-01\"/>\n           <input type=\"time\" name=\"startTime\" min=\"00:00\" max=\"23:59\" />\n           {this.props.className === \"loc\" && (\n             <div>\n                <input type=\"number\" name=\"lat\" placeholder=\"lat\"/>\n                <input type=\"number\" name=\"long\" placeholder=\"long\"/>\n                <input type=\"number\" name=\"newID\" placeholder=\"Daily Collection Number\"/>\n             </div>\n           )}\n\n           {this.props.className === \"vcp\" && (\n             <input type=\"text\" name=\"vcp\" placeholder=\"VCP\"/>\n           )}\n\n           {this.props.className === \"sector\" && (\n             <div>\n                <input type=\"number\" name=\"sectorStart\" placeholder=\"start sector\"/>\n                <input type=\"number\" name=\"sectorEnd\" placeholder=\"end sector\"/>\n             </div>\n           )}\n\n           {this.props.className === \"warning\" && (\n             <div>\n                <input type=\"text\" name=\"counties\" placeholder=\"counties...\"  />\n                <textarea name=\"warningText\" cols=\"50\" rows=\"10\" placeholder=\"Warning text\"/>\n             </div>\n           )}\n\n           {this.props.className === \"report\" && (\n             <textarea name=\"reportText\" cols=\"50\" rows=\"10\" placeholder=\"Report text\"/>\n           )}\n\n           {this.props.className === \"remark\" && (\n             <textarea name=\"remark\" cols=\"50\" rows=\"10\" placeholder=\"remarks...\"/>\n           )}\n\n           <input type=\"submit\" value=\"enter data\" />\n        </form>\n      </div>\n    )\n  }\n }\n",
+    "content": "import React from 'react';\nimport DayPickerInput from 'react-day-picker';\nimport 'react-day-picker/lib/style.css';\nimport cx from 'classnames';\n\n//TODO: editable data...\n// have an option to pass props and have form autofilled with Data\n// make sure that if in edit mode, that data overwrites correctly\n\n// prevent default form behavior so app doesn't refresh on submit\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n\n/**\n * Form is the master form where all the data is input.\n * Form renders only the fields needed based on the\n *  className prop.\n */\nexport default class Form extends React.Component {\n\n  /**\n   * handleSubmit collects the data from the\n   *  form based on the className and sends it\n   *  up to parent. Also clears form.\n   */\n  handleSubmit = (event) => {\n    stop(event);  // do not let app refresh here\n    const e = event.target;\n    // data we always need\n    const data = {\n      collectionID: this.props.collectionID,\n      startDay: e.startDay.value,\n      startTime: e.startTime.value,\n      collectionType: this.props.className\n    }\n\n    // clear fields we saved data from\n    e.startTime.value = \"\";\n\n    // based on className, store certain fields in object\n    // and saveData.\n    if(this.props.className === \"loc\") {\n        const location = {...data,\n          collectionID: e.id.value,\n          locationLat: e.lat.value,\n          locationLong: e.long.value\n        };\n        e.lat.value = \"\"; e.long.value = \"\";\n        this.props.handleLocationSubmit(location.collectionID);\n        this.props.saveData(location)\n    } else if(this.props.className === \"stationaryStart\") {\n\n    } else if(this.props.className === \"vcp\") {\n        const vcp = {...data, VCP: e.vcp.value};\n        this.props.saveData(vcp);\n        e.vcp.value = \"\"\n    } else if(this.props.className === \"sector\") {\n        const sector = {...data,\n          sectorStart: e.sectorStart.value,\n          sectorEnd: e.sectorEnd.value\n        };\n\n        e.sectorStart.value = \"\"; e.sectorEnd.value = \"\";\n\n        this.props.saveData(sector)\n    } else if(this.props.className === \"warning\") {\n        const warning = {...data,\n          warningCounties: e.counties.value,\n          warningText: e.warningText.value\n        };\n\n        e.counties.value = \"\"; e.warningText.value = \"\";\n\n        this.props.saveData(warning)\n    } else if(this.props.className === \"report\") {\n        const report = {...data, reportText: e.reportText.value };\n        e.reportText.value = \"\";\n        this.props.saveData(report)\n    } else {\n        // remark\n        const remark = {...data, remark: e.remark.value};\n        e.remark.value = \"\";\n        this.props.saveData(remark)\n    }\n\n  }\n\n  /**\n   * renders the form elements based on className prop.\n   * @return only the fields appropriate for the className\n   */\n  render() {\n    return (\n      <div className={cx(this.props.className)}>\n        <form onSubmit={this.handleSubmit}>\n           Start Time:\n           <div className=\"datetime-input\">\n              <input type=\"date\" name=\"startDay\" min=\"2018-01-01\"/>\n              <input type=\"time\" name=\"startTime\" min=\"00:00\" max=\"23:59\" />\n            </div>\n           {this.props.className === \"loc\" && (\n             <div>\n                <input type=\"number\" name=\"lat\" placeholder=\"lat\"/>\n                <input type=\"number\" name=\"long\" placeholder=\"long\"/>\n                <input type=\"number\" name=\"newID\" placeholder=\"Daily Collection Number\"/>\n             </div>\n           )}\n\n           {this.props.className === \"vcp\" && (\n             <input type=\"text\" name=\"vcp\" placeholder=\"VCP\"/>\n           )}\n\n           {this.props.className === \"sector\" && (\n             <div>\n                <input type=\"number\" name=\"sectorStart\" placeholder=\"start sector\"/>\n                <input type=\"number\" name=\"sectorEnd\" placeholder=\"end sector\"/>\n             </div>\n           )}\n\n           {this.props.className === \"warning\" && (\n             <div>\n                <input type=\"text\" name=\"counties\" placeholder=\"counties...\"  />\n                <textarea name=\"warningText\" cols=\"50\" rows=\"10\" placeholder=\"Warning text\"/>\n             </div>\n           )}\n\n           {this.props.className === \"report\" && (\n             <textarea name=\"reportText\" cols=\"50\" rows=\"10\" placeholder=\"Report text\"/>\n           )}\n\n           {this.props.className === \"remark\" && (\n             <textarea name=\"remark\" cols=\"50\" rows=\"10\" placeholder=\"remarks...\"/>\n           )}\n\n           <input type=\"submit\" value=\"enter data\" />\n        </form>\n      </div>\n    )\n  }\n }\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/Form.js",
     "access": "public",
@@ -1176,7 +1176,7 @@
     "longname": "src/components/Form.js~Form#render",
     "access": "public",
     "description": "renders the form elements based on className prop.",
-    "lineNumber": 90,
+    "lineNumber": 91,
     "return": {
       "nullable": null,
       "types": [
@@ -1191,7 +1191,7 @@
     "__docId__": 82,
     "kind": "file",
     "name": "src/components/Kickoff.js",
-    "content": "import React from 'react';\nimport DayPickerInput from 'react-day-picker';\nimport 'react-day-picker/lib/style.css';\n\n// TODO: handle submit\n\n// without stop, form will reset the app with a window refresh\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n\nexport default class Kickoff extends React.Component {\n  render() {\n    return (\n      <div>\n        <form>\n          <DayPickerInput />\n          <select name=\"instrument\" onChange={this.handleInstrument}>\n            <option value=\"KOUN\">KOUN</option>\n            <option value=\"NOXP\">NOXP</option>\n          </select>\n          <input type=\"time\" name=\"time\" min=\"00:00\" max=\"23:59\" />\n          {this.state.mobile && (\n            <div>\n              <input type=\"number\" placeholder=\"lat\"/>\n              <input type=\"number\" placeholder=\"long\"/>\n            </div>\n          )}\n          <input type=\"submit\" />\n        </form>\n      </div>\n    )\n  }\n}\n",
+    "content": "import React from 'react';\nimport DayPickerInput from 'react-day-picker';\nimport 'react-day-picker/lib/style.css';\n\n// TODO: do we need this to be a component?\n\n// without stop, form will reset the app with a window refresh\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n\nexport default class Kickoff extends React.Component {\n  render() {\n    return (\n      <div>\n        <form>\n          <DayPickerInput />\n          <select name=\"instrument\" onChange={this.handleInstrument}>\n            <option value=\"KOUN\">KOUN</option>\n            <option value=\"NOXP\">NOXP</option>\n          </select>\n          <input type=\"time\" name=\"time\" min=\"00:00\" max=\"23:59\" />\n          {this.state.mobile && (\n            <div>\n              <input type=\"number\" placeholder=\"lat\"/>\n              <input type=\"number\" placeholder=\"long\"/>\n            </div>\n          )}\n          <input type=\"submit\" />\n        </form>\n      </div>\n    )\n  }\n}\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/Kickoff.js",
     "access": "public",
@@ -1267,92 +1267,8 @@
   {
     "__docId__": 86,
     "kind": "file",
-    "name": "src/components/Megastore.js",
-    "content": "import React from 'react';\nimport Event from './Event';\n\n// TODO: come up with a better schema for the json\n// TODO: add documentation\n// TODO: store data as a cookie\n// TODO: make a summary component\n// TODO: save instrument Data\n\nexport default class Megastore extends React.Component {\n  state = { entries: [] };\n\n  saveData = (data) => {\n    const { entries } = this.state;\n    entries.push(data);\n    this.setState( { entries } )\n  }\n\n  render() {\n    return (\n      <Event  />\n    );\n  }\n\n}\n",
-    "static": true,
-    "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/Megastore.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 87,
-    "kind": "class",
-    "name": "Megastore",
-    "memberof": "src/components/Megastore.js",
-    "static": true,
-    "longname": "src/components/Megastore.js~Megastore",
-    "access": "public",
-    "export": true,
-    "importPath": "ops_coll_front/src/components/Megastore.js",
-    "importStyle": "Megastore",
-    "description": null,
-    "lineNumber": 10,
-    "undocument": true,
-    "interface": false,
-    "extends": [
-      "react~React.Component"
-    ]
-  },
-  {
-    "__docId__": 88,
-    "kind": "member",
-    "name": "state",
-    "memberof": "src/components/Megastore.js~Megastore",
-    "static": false,
-    "longname": "src/components/Megastore.js~Megastore#state",
-    "access": "public",
-    "description": null,
-    "lineNumber": 11,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 89,
-    "kind": "member",
-    "name": "saveData",
-    "memberof": "src/components/Megastore.js~Megastore",
-    "static": false,
-    "longname": "src/components/Megastore.js~Megastore#saveData",
-    "access": "public",
-    "description": null,
-    "lineNumber": 13,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 90,
-    "kind": "method",
-    "name": "render",
-    "memberof": "src/components/Megastore.js~Megastore",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/components/Megastore.js~Megastore#render",
-    "access": "public",
-    "description": null,
-    "lineNumber": 19,
-    "undocument": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 91,
-    "kind": "file",
     "name": "src/components/RadarSignatures.js",
-    "content": "import React from 'react';\nimport DayPickerInput from 'react-day-picker';\nimport 'react-day-picker/lib/style.css';\n\n// TODO: handle submit\n\nexport default class RadarSignatures extends React.Component {\n  render() {\n    return (\n      <div>\n        <form onSubmit={ () => (console.log(\"submitted!\"))}>\n          <div>\n            <input type=\"checkbox\" id=\"tornadic-supercell\" name=\"feature\" value=\"tornadic-supercell\" checked />\n            <label for=\"tornadic-supercell\">Tornadic Supercell</label>\n          </div>\n          <div>\n            <input type=\"checkbox\" id=\"hail\" name=\"feature\" value=\"hail\" />\n            <label for=\"hail\">Hail</label>\n          </div>\n          <div>\n            <input type=\"checkbox\" id=\"claws\" name=\"feature\" value=\"claws\" />\n            <label for=\"claws\">Claws</label>\n          </div>\n        </form>\n      </div>\n    )\n  }\n }\n",
+    "content": "import React from 'react';\nimport DayPickerInput from 'react-day-picker';\nimport 'react-day-picker/lib/style.css';\n\n// TODO: handle submit\n// TODO: fix this so it sneds the correct data, fix the other\n// checkbox in eventSummaryForm as well.\n// TODO: add esdoc\n\nexport default class RadarSignatures extends React.Component {\n  render() {\n    return (\n      <div>\n        <form onSubmit={ () => (console.log(\"submitted!\"))}>\n          <div>\n            <input type=\"checkbox\" id=\"tornadic-supercell\" name=\"feature\" value=\"tornadic-supercell\" checked />\n            <label for=\"tornadic-supercell\">Tornadic Supercell</label>\n          </div>\n          <div>\n            <input type=\"checkbox\" id=\"hail\" name=\"feature\" value=\"hail\" />\n            <label for=\"hail\">Hail</label>\n          </div>\n          <div>\n            <input type=\"checkbox\" id=\"claws\" name=\"feature\" value=\"claws\" />\n            <label for=\"claws\">Claws</label>\n          </div>\n        </form>\n      </div>\n    )\n  }\n }\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/RadarSignatures.js",
     "access": "public",
@@ -1360,7 +1276,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 92,
+    "__docId__": 87,
     "kind": "class",
     "name": "RadarSignatures",
     "memberof": "src/components/RadarSignatures.js",
@@ -1371,7 +1287,7 @@
     "importPath": "ops_coll_front/src/components/RadarSignatures.js",
     "importStyle": "RadarSignatures",
     "description": null,
-    "lineNumber": 7,
+    "lineNumber": 10,
     "undocument": true,
     "interface": false,
     "extends": [
@@ -1379,7 +1295,7 @@
     ]
   },
   {
-    "__docId__": 93,
+    "__docId__": 88,
     "kind": "method",
     "name": "render",
     "memberof": "src/components/RadarSignatures.js~RadarSignatures",
@@ -1389,7 +1305,7 @@
     "longname": "src/components/RadarSignatures.js~RadarSignatures#render",
     "access": "public",
     "description": null,
-    "lineNumber": 8,
+    "lineNumber": 11,
     "undocument": true,
     "params": [],
     "return": {
@@ -1399,10 +1315,10 @@
     }
   },
   {
-    "__docId__": 94,
+    "__docId__": 89,
     "kind": "file",
     "name": "src/components/Summary.js",
-    "content": "import React from 'react';\n\n//TODO: add summary Data\n//TODO: add a way to edit the data\n\nexport default class Summary extends React.Component {\n  render() {\n    return (\n      <div>\n        <h3>How does your data look?</h3>\n      </div>\n    )\n  }\n}\n",
+    "content": "import React from 'react';\n\n//TODO: organize collection data\n//TODO: polish the style\n//TODO: add a way to edit the data\n//TODO: add esdoc\n\nexport default class Summary extends React.Component {\n  render() {\n    return (\n      <div>\n        <h3>How does your data look?</h3>\n        <div className=\"event-summary-row\">Event Start: {this.props.data.eventstartday}</div>\n        <div className=\"event-summary-row\">{this.props.data.eventstarttime}</div>\n        <div className=\"event-summary-row\">Event End: {this.props.data.weatherEventData.eventendday}</div>\n        <div className=\"event-summary-row\">{this.props.data.weatherEventData.eventendday}</div>\n        <div className=\"event-summary-row\">Event Type: {this.props.data.weatherEventData.eventType}</div>\n        <div className=\"event-summary-row\">Event Description: {this.props.data.weatherEventData.eventDescription}</div>\n        {this.props.data.collections.map(c => {\n          return(\n            <div className=\"event-summary-row\">\n              <div>{c.startDay}</div>\n              <div>{c.startTime}</div>\n            </div>\n          )\n        })\n\n        }\n      </div>\n    )\n  }\n}\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/Summary.js",
     "access": "public",
@@ -1410,7 +1326,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 95,
+    "__docId__": 90,
     "kind": "class",
     "name": "Summary",
     "memberof": "src/components/Summary.js",
@@ -1421,7 +1337,7 @@
     "importPath": "ops_coll_front/src/components/Summary.js",
     "importStyle": "Summary",
     "description": null,
-    "lineNumber": 6,
+    "lineNumber": 8,
     "undocument": true,
     "interface": false,
     "extends": [
@@ -1429,7 +1345,7 @@
     ]
   },
   {
-    "__docId__": 96,
+    "__docId__": 91,
     "kind": "method",
     "name": "render",
     "memberof": "src/components/Summary.js~Summary",
@@ -1439,7 +1355,7 @@
     "longname": "src/components/Summary.js~Summary#render",
     "access": "public",
     "description": null,
-    "lineNumber": 7,
+    "lineNumber": 9,
     "undocument": true,
     "params": [],
     "return": {
@@ -1449,10 +1365,10 @@
     }
   },
   {
-    "__docId__": 97,
+    "__docId__": 92,
     "kind": "file",
     "name": "src/components/Tab.js",
-    "content": "import React from 'react';\nimport cx from 'classnames';\n\nexport default class Tab extends React.Component {\n\n  handleClick = () => {\n    this.props.handleClick(this.props.tab);\n  }\n\n  render() {\n    const { clicked } = this.props;\n    return (\n      <div className={cx(\"tab\", { clicked })} onClick={this.handleClick}>\n        {this.props.tab.toUpperCase()}\n      </div>\n    )\n  }\n}\n",
+    "content": "import React from 'react';\nimport cx from 'classnames';\n\n//TODO: add esdoc\n\nexport default class Tab extends React.Component {\n\n  handleClick = () => {\n    this.props.handleClick(this.props.tab);\n  }\n\n  render() {\n    const { clicked } = this.props;\n    return (\n      <div className={cx(\"tab\", { clicked })} onClick={this.handleClick}>\n        {this.props.tab.toUpperCase()}\n      </div>\n    )\n  }\n}\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/Tab.js",
     "access": "public",
@@ -1460,7 +1376,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 98,
+    "__docId__": 93,
     "kind": "class",
     "name": "Tab",
     "memberof": "src/components/Tab.js",
@@ -1471,7 +1387,7 @@
     "importPath": "ops_coll_front/src/components/Tab.js",
     "importStyle": "Tab",
     "description": null,
-    "lineNumber": 4,
+    "lineNumber": 6,
     "undocument": true,
     "interface": false,
     "extends": [
@@ -1479,7 +1395,7 @@
     ]
   },
   {
-    "__docId__": 99,
+    "__docId__": 94,
     "kind": "member",
     "name": "handleClick",
     "memberof": "src/components/Tab.js~Tab",
@@ -1487,7 +1403,7 @@
     "longname": "src/components/Tab.js~Tab#handleClick",
     "access": "public",
     "description": null,
-    "lineNumber": 6,
+    "lineNumber": 8,
     "undocument": true,
     "type": {
       "types": [
@@ -1496,7 +1412,7 @@
     }
   },
   {
-    "__docId__": 100,
+    "__docId__": 95,
     "kind": "method",
     "name": "render",
     "memberof": "src/components/Tab.js~Tab",
@@ -1506,7 +1422,7 @@
     "longname": "src/components/Tab.js~Tab#render",
     "access": "public",
     "description": null,
-    "lineNumber": 10,
+    "lineNumber": 12,
     "undocument": true,
     "params": [],
     "return": {
@@ -1516,7 +1432,7 @@
     }
   },
   {
-    "__docId__": 101,
+    "__docId__": 96,
     "kind": "file",
     "name": "src/components/index.js",
     "content": "export Collection from './Collection';\nexport Event from './Event';\nexport EventSummary from './EventSummary';\nexport Instrument from './Instrument';\nexport Kickoff from './Kickoff';\nexport RadarSignatures from './RadarSignatures';\nexport Remark from './Remark';\nexport Report from './Report';\nexport Sector from './Sector';\nexport VCP from './VCP';\nexport Warning from './Warning';\n",
@@ -1527,7 +1443,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 102,
+    "__docId__": 97,
     "kind": "file",
     "name": "src/index.js",
     "content": "import React from 'react';\nimport ReactDOM from 'react-dom';\nimport './index.css';\nimport App from './App';\nimport registerServiceWorker from './registerServiceWorker';\n\nReactDOM.render(<App />, document.getElementById('root'));\nregisterServiceWorker();\n",
@@ -1538,7 +1454,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 103,
+    "__docId__": 98,
     "kind": "file",
     "name": "src/registerServiceWorker.js",
     "content": "// In production, we register a service worker to serve assets from local cache.\n\n// This lets the app load faster on subsequent visits in production, and gives\n// it offline capabilities. However, it also means that developers (and users)\n// will only see deployed updates on the \"N+1\" visit to a page, since previously\n// cached resources are updated in the background.\n\n// To learn more about the benefits of this model, read https://goo.gl/KwvDNy.\n// This link also includes instructions on opting out of this behavior.\n\nconst isLocalhost = Boolean(\n  window.location.hostname === 'localhost' ||\n    // [::1] is the IPv6 localhost address.\n    window.location.hostname === '[::1]' ||\n    // 127.0.0.1/8 is considered localhost for IPv4.\n    window.location.hostname.match(\n      /^127(?:\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/\n    )\n);\n\nexport default function register() {\n  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {\n    // The URL constructor is available in all browsers that support SW.\n    const publicUrl = new URL(process.env.PUBLIC_URL, window.location);\n    if (publicUrl.origin !== window.location.origin) {\n      // Our service worker won't work if PUBLIC_URL is on a different origin\n      // from what our page is served on. This might happen if a CDN is used to\n      // serve assets; see https://github.com/facebookincubator/create-react-app/issues/2374\n      return;\n    }\n\n    window.addEventListener('load', () => {\n      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;\n\n      if (isLocalhost) {\n        // This is running on localhost. Lets check if a service worker still exists or not.\n        checkValidServiceWorker(swUrl);\n\n        // Add some additional logging to localhost, pointing developers to the\n        // service worker/PWA documentation.\n        navigator.serviceWorker.ready.then(() => {\n          console.log(\n            'This web app is being served cache-first by a service ' +\n              'worker. To learn more, visit https://goo.gl/SC7cgQ'\n          );\n        });\n      } else {\n        // Is not local host. Just register service worker\n        registerValidSW(swUrl);\n      }\n    });\n  }\n}\n\nfunction registerValidSW(swUrl) {\n  navigator.serviceWorker\n    .register(swUrl)\n    .then(registration => {\n      registration.onupdatefound = () => {\n        const installingWorker = registration.installing;\n        installingWorker.onstatechange = () => {\n          if (installingWorker.state === 'installed') {\n            if (navigator.serviceWorker.controller) {\n              // At this point, the old content will have been purged and\n              // the fresh content will have been added to the cache.\n              // It's the perfect time to display a \"New content is\n              // available; please refresh.\" message in your web app.\n              console.log('New content is available; please refresh.');\n            } else {\n              // At this point, everything has been precached.\n              // It's the perfect time to display a\n              // \"Content is cached for offline use.\" message.\n              console.log('Content is cached for offline use.');\n            }\n          }\n        };\n      };\n    })\n    .catch(error => {\n      console.error('Error during service worker registration:', error);\n    });\n}\n\nfunction checkValidServiceWorker(swUrl) {\n  // Check if the service worker can be found. If it can't reload the page.\n  fetch(swUrl)\n    .then(response => {\n      // Ensure service worker exists, and that we really are getting a JS file.\n      if (\n        response.status === 404 ||\n        response.headers.get('content-type').indexOf('javascript') === -1\n      ) {\n        // No service worker found. Probably a different app. Reload the page.\n        navigator.serviceWorker.ready.then(registration => {\n          registration.unregister().then(() => {\n            window.location.reload();\n          });\n        });\n      } else {\n        // Service worker found. Proceed as normal.\n        registerValidSW(swUrl);\n      }\n    })\n    .catch(() => {\n      console.log(\n        'No internet connection found. App is running in offline mode.'\n      );\n    });\n}\n\nexport function unregister() {\n  if ('serviceWorker' in navigator) {\n    navigator.serviceWorker.ready.then(registration => {\n      registration.unregister();\n    });\n  }\n}\n",
@@ -1549,7 +1465,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 104,
+    "__docId__": 99,
     "kind": "variable",
     "name": "isLocalhost",
     "memberof": "src/registerServiceWorker.js",
@@ -1570,7 +1486,7 @@
     "ignore": true
   },
   {
-    "__docId__": 105,
+    "__docId__": 100,
     "kind": "function",
     "name": "register",
     "memberof": "src/registerServiceWorker.js",
@@ -1589,7 +1505,7 @@
     "return": null
   },
   {
-    "__docId__": 106,
+    "__docId__": 101,
     "kind": "function",
     "name": "registerValidSW",
     "memberof": "src/registerServiceWorker.js",
@@ -1616,7 +1532,7 @@
     "ignore": true
   },
   {
-    "__docId__": 107,
+    "__docId__": 102,
     "kind": "function",
     "name": "checkValidServiceWorker",
     "memberof": "src/registerServiceWorker.js",
@@ -1643,7 +1559,7 @@
     "ignore": true
   },
   {
-    "__docId__": 108,
+    "__docId__": 103,
     "kind": "function",
     "name": "unregister",
     "memberof": "src/registerServiceWorker.js",

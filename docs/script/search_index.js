@@ -36,12 +36,6 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "ops_coll_front/src/components/megastore.js~megastore",
-    "class/src/components/Megastore.js~Megastore.html",
-    "<span>Megastore</span> <span class=\"search-result-import-path\">ops_coll_front/src/components/Megastore.js</span>",
-    "class"
-  ],
-  [
     "ops_coll_front/src/components/radarsignatures.js~radarsignatures",
     "class/src/components/RadarSignatures.js~RadarSignatures.html",
     "<span>RadarSignatures</span> <span class=\"search-result-import-path\">ops_coll_front/src/components/RadarSignatures.js</span>",
@@ -514,30 +508,6 @@ window.esdocSearchIndex = [
     "class/src/components/Kickoff.js~Kickoff.html#instance-method-render",
     "src/components/Kickoff.js~Kickoff#render",
     "method"
-  ],
-  [
-    "src/components/megastore.js",
-    "file/src/components/Megastore.js.html",
-    "src/components/Megastore.js",
-    "file"
-  ],
-  [
-    "src/components/megastore.js~megastore#render",
-    "class/src/components/Megastore.js~Megastore.html#instance-method-render",
-    "src/components/Megastore.js~Megastore#render",
-    "method"
-  ],
-  [
-    "src/components/megastore.js~megastore#savedata",
-    "class/src/components/Megastore.js~Megastore.html#instance-member-saveData",
-    "src/components/Megastore.js~Megastore#saveData",
-    "member"
-  ],
-  [
-    "src/components/megastore.js~megastore#state",
-    "class/src/components/Megastore.js~Megastore.html#instance-member-state",
-    "src/components/Megastore.js~Megastore#state",
-    "member"
   ],
   [
     "src/components/radarsignatures.js",

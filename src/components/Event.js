@@ -5,9 +5,13 @@ import Summary from './Summary';
 
 
 // TODO: establish correct event id, validate this
+// TODO: send data to a store
+// TODO: organize data batches to send to db tables
+// TODO: create a json preview to display...
+// TODO: save data in cookies
 
-// we do want a list of mobile radars because mobile radars need locations
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
+// we do want a list of mobile radars because mobile radars need locations
 const mobileInstruments = ['NOXP'];
 
 /**
@@ -156,7 +160,7 @@ export default class Event extends React.Component {
 
             : this.state.mode === "summary"
 
-              ? (<EventSummaryForm  handleSubmit={this.handleEventSummary} />)
+              ? (<EventSummaryForm handleSubmit={this.handleEventSummary} />)
               : (<div>
                     <Summary  data={this.state}/>
                     <div className="new-collection"

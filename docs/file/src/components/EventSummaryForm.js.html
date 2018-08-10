@@ -37,7 +37,6 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html">EventSummaryForm</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Form.js~Form.html">Form</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Kickoff.js~Kickoff.html">Kickoff</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Megastore.js~Megastore.html">Megastore</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/RadarSignatures.js~RadarSignatures.html">RadarSignatures</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Summary.js~Summary.html">Summary</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Tab.js~Tab.html">Tab</a></span></span></li>
@@ -49,7 +48,7 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
 import RadarSignatures from &apos;./RadarSignatures&apos;;
 
-
+// TODO: add esdoc
 const stop = (event) =&gt; (event.stopPropagation(), event.preventDefault());
 
 export default class EventSummaryForm extends React.Component {
@@ -58,11 +57,10 @@ export default class EventSummaryForm extends React.Component {
     stop(event);
     const e = event.target;
     const data = {
-      collectionID: this.props.collectionID,
       eventType: e.eventType.value,
-      endDay: e.endDay.value,
-      endTime: e.endTime.value,
-      eventSummary: e.summary.value
+      eventendday: e.endDay.value,
+      eventendtime: e.endTime.value,
+      eventDescription: e.summary.value
     }
 
     this.props.handleSubmit(data);

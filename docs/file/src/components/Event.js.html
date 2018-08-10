@@ -37,7 +37,6 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html">EventSummaryForm</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Form.js~Form.html">Form</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Kickoff.js~Kickoff.html">Kickoff</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Megastore.js~Megastore.html">Megastore</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/RadarSignatures.js~RadarSignatures.html">RadarSignatures</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Summary.js~Summary.html">Summary</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Tab.js~Tab.html">Tab</a></span></span></li>
@@ -53,9 +52,13 @@ import Summary from &apos;./Summary&apos;;
 
 
 // TODO: establish correct event id, validate this
+// TODO: send data to a store
+// TODO: organize data batches to send to db tables
+// TODO: create a json preview to display...
+// TODO: save data in cookies
 
-// we do want a list of mobile radars because mobile radars need locations
 const stop = (event) =&gt; (event.stopPropagation(), event.preventDefault());
+// we do want a list of mobile radars because mobile radars need locations
 const mobileInstruments = [&apos;NOXP&apos;];
 
 /**
@@ -172,9 +175,14 @@ export default class Event extends React.Component {
         {this.state.mode === &quot;begin&quot; ?
           ( &lt;div className=&quot;kickoff&quot;&gt;
               &lt;form onSubmit={this.handleKickoffSubmit}&gt;
-                &lt;input type=&quot;date&quot; name=&quot;eventstartday&quot; min=&quot;2018-01-01&quot;/&gt;
-                &lt;input type=&quot;time&quot; name=&quot;eventstarttime&quot; min=&quot;00:00&quot; max=&quot;23:59&quot; /&gt;
+                Weather Event Start:
+                &lt;div className=&quot;datetime-input&quot;&gt;
+                  &lt;input type=&quot;date&quot; name=&quot;eventstartday&quot; min=&quot;2018-01-01&quot;/&gt;
+                  &lt;input type=&quot;time&quot; name=&quot;eventstarttime&quot; min=&quot;00:00&quot; max=&quot;23:59&quot; /&gt;
+                &lt;/div&gt;
                 &lt;input type=&quot;number&quot; name=&quot;initID&quot; placeholder=&quot;Daily Collection Number&quot;/&gt;
+
+                Instrument:
                 &lt;select name=&quot;instrument&quot; onChange={this.handleInstrument}&gt;
                   &lt;option value=&quot;KOUN&quot;&gt;KOUN&lt;/option&gt;
                   &lt;option value=&quot;NOXP&quot;&gt;NOXP&lt;/option&gt;
@@ -199,7 +207,7 @@ export default class Event extends React.Component {
 
             : this.state.mode === &quot;summary&quot;
 
-              ? (&lt;EventSummaryForm  handleSubmit={this.handleEventSummary} /&gt;)
+              ? (&lt;EventSummaryForm handleSubmit={this.handleEventSummary} /&gt;)
               : (&lt;div&gt;
                     &lt;Summary  data={this.state}/&gt;
                     &lt;div className=&quot;new-collection&quot;

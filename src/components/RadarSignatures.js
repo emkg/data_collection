@@ -3,6 +3,9 @@ import DayPickerInput from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
 // TODO: handle submit
+// TODO: fix this so it sneds the correct data, fix the other
+// checkbox in eventSummaryForm as well.
+// TODO: add esdoc
 
 export default class RadarSignatures extends React.Component {
   render() {

@@ -1,6 +1,8 @@
 import React from 'react';
 import cx from 'classnames';
 
+//TODO: add esdoc
+
 export default class Tab extends React.Component {
 
   handleClick = () => {

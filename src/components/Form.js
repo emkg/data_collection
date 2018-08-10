@@ -29,7 +29,8 @@ export default class Form extends React.Component {
     const data = {
       collectionID: this.props.collectionID,
       startDay: e.startDay.value,
-      startTime: e.startTime.value
+      startTime: e.startTime.value,
+      collectionType: this.props.className
     }
 
     // clear fields we saved data from
@@ -92,7 +93,7 @@ export default class Form extends React.Component {
       <div className={cx(this.props.className)}>
         <form onSubmit={this.handleSubmit}>
            Start Time:
-           <div className="datetime-input">    
+           <div className="datetime-input">
               <input type="date" name="startDay" min="2018-01-01"/>
               <input type="time" name="startTime" min="00:00" max="23:59" />
             </div>

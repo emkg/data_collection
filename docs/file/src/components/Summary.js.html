@@ -37,7 +37,6 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html">EventSummaryForm</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Form.js~Form.html">Form</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Kickoff.js~Kickoff.html">Kickoff</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Megastore.js~Megastore.html">Megastore</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/RadarSignatures.js~RadarSignatures.html">RadarSignatures</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Summary.js~Summary.html">Summary</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Tab.js~Tab.html">Tab</a></span></span></li>
@@ -48,14 +47,32 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/components/Summary.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
 
-//TODO: add summary Data
+//TODO: organize collection data
+//TODO: polish the style
 //TODO: add a way to edit the data
+//TODO: add esdoc
 
 export default class Summary extends React.Component {
   render() {
     return (
       &lt;div&gt;
         &lt;h3&gt;How does your data look?&lt;/h3&gt;
+        &lt;div className=&quot;event-summary-row&quot;&gt;Event Start: {this.props.data.eventstartday}&lt;/div&gt;
+        &lt;div className=&quot;event-summary-row&quot;&gt;{this.props.data.eventstarttime}&lt;/div&gt;
+        &lt;div className=&quot;event-summary-row&quot;&gt;Event End: {this.props.data.weatherEventData.eventendday}&lt;/div&gt;
+        &lt;div className=&quot;event-summary-row&quot;&gt;{this.props.data.weatherEventData.eventendday}&lt;/div&gt;
+        &lt;div className=&quot;event-summary-row&quot;&gt;Event Type: {this.props.data.weatherEventData.eventType}&lt;/div&gt;
+        &lt;div className=&quot;event-summary-row&quot;&gt;Event Description: {this.props.data.weatherEventData.eventDescription}&lt;/div&gt;
+        {this.props.data.collections.map(c =&gt; {
+          return(
+            &lt;div className=&quot;event-summary-row&quot;&gt;
+              &lt;div&gt;{c.startDay}&lt;/div&gt;
+              &lt;div&gt;{c.startTime}&lt;/div&gt;
+            &lt;/div&gt;
+          )
+        })
+
+        }
       &lt;/div&gt;
     )
   }

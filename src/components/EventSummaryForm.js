@@ -1,7 +1,7 @@
 import React from 'react';
 import RadarSignatures from './RadarSignatures';
 
-
+// TODO: add esdoc
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 
 export default class EventSummaryForm extends React.Component {
@@ -10,11 +10,10 @@ export default class EventSummaryForm extends React.Component {
     stop(event);
     const e = event.target;
     const data = {
-      collectionID: this.props.collectionID,
       eventType: e.eventType.value,
-      endDay: e.endDay.value,
-      endTime: e.endTime.value,
-      eventSummary: e.summary.value
+      eventendday: e.endDay.value,
+      eventendtime: e.endTime.value,
+      eventDescription: e.summary.value
     }
 
     this.props.handleSubmit(data);

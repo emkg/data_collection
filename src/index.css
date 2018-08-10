@@ -145,3 +145,10 @@ textarea {
 .new-collection:focus {
   outline: 0;
 }
+
+
+
+.event-summary-row {
+  border-bottom: solid lightgray 1px;
+  margin: 2px;
+}

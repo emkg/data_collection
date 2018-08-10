@@ -2,7 +2,7 @@ import React from 'react';
 import DayPickerInput from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
-// TODO: handle submit
+// TODO: do we need this to be a component?
 
 // without stop, form will reset the app with a window refresh
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
