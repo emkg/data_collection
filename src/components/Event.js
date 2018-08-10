@@ -1,5 +1,4 @@
 import React from 'react';
-import Instrument from './Instrument';
 import Collection from './Collection';
 import EventSummaryForm from './EventSummaryForm';
 import Summary from './Summary';
