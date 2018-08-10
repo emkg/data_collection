@@ -36,7 +36,6 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Event.js~Event.html">Event</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html">EventSummaryForm</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Form.js~Form.html">Form</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Instrument.js~Instrument.html">Instrument</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Kickoff.js~Kickoff.html">Kickoff</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Megastore.js~Megastore.html">Megastore</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/RadarSignatures.js~RadarSignatures.html">RadarSignatures</a></span></span></li>
@@ -51,8 +50,6 @@
 import Tab from &apos;./Tab&apos;;
 import Form from &apos;./Form&apos;;
 
-// TODO: set up logic for collection ID
-// TODO: make sure mobile start kicks off when location reset
 // TODO: break tab container into a new component with
 // logic to control startng a new collection
 // TODO:  push buttons should be a separate component too
@@ -63,10 +60,11 @@ import Form from &apos;./Form&apos;;
  */
 export default class Collection extends React.Component {
   /**
-   * string: openTab
+   * string: openTab, Number collectionID
    */
   state = {
-    openTab: &quot;vcp&quot;
+    openTab: &quot;vcp&quot;,
+    collectionID: 1,
   }
 
   /**
@@ -74,6 +72,15 @@ export default class Collection extends React.Component {
    */
   handleClick = (newTab) =&gt; {
     this.setState({ openTab: newTab })
+  }
+
+  /**
+   * When location is updated for mobile radar,
+   * we want to update the collection id. This
+   * signals on all new entries that the location is updated.
+   */
+  handleLocationSubmit = (newID) =&gt; {
+    this.setState({ collectionID: newID });
   }
 
   /**
@@ -94,7 +101,8 @@ export default class Collection extends React.Component {
       &lt;div className=&quot;collection&quot;&gt;
         &lt;div className=&quot;tab-container&quot;&gt;
           {this.props.mobile &amp;&amp;
-          (&lt;Tab tab=&quot;loc&quot; clicked={openTab === &quot;loc&quot;} handleClick={this.handleClick} /&gt;)}
+            (&lt;Tab tab=&quot;loc&quot; clicked={openTab === &quot;loc&quot;} handleClick={this.handleClick} /&gt;
+          )}
           &lt;Tab tab=&quot;vcp&quot; clicked={openTab === &quot;vcp&quot;} handleClick={this.handleClick} /&gt;
           &lt;Tab tab=&quot;sector&quot; clicked={openTab === &quot;sector&quot;} handleClick={this.handleClick} /&gt;
           &lt;Tab tab=&quot;warning&quot; clicked={openTab === &quot;warning&quot;} handleClick={this.handleClick} /&gt;
@@ -103,7 +111,8 @@ export default class Collection extends React.Component {
         &lt;/div&gt;
         &lt;Form saveData={this.props.saveData}
               className={this.state.openTab}
-              collectionID={this.props.collectionID}
+              collectionID={this.state.collectionID}
+              handleLocationSubmit={this.handleLocationSubmit}
         /&gt;
         &lt;div className=&quot;new-collection&quot;
              onClick={this.stop}&gt;

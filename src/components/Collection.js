@@ -2,8 +2,6 @@ import React from 'react';
 import Tab from './Tab';
 import Form from './Form';
 
-// TODO: set up logic for collection ID
-// TODO: make sure mobile start kicks off when location reset
 // TODO: break tab container into a new component with
 // logic to control startng a new collection
 // TODO:  push buttons should be a separate component too
@@ -14,10 +12,11 @@ import Form from './Form';
  */
 export default class Collection extends React.Component {
   /**
-   * string: openTab
+   * string: openTab, Number collectionID
    */
   state = {
-    openTab: "vcp"
+    openTab: "vcp",
+    collectionID: 1,
   }
 
   /**
@@ -25,6 +24,15 @@ export default class Collection extends React.Component {
    */
   handleClick = (newTab) => {
     this.setState({ openTab: newTab })
+  }
+
+  /**
+   * When location is updated for mobile radar,
+   * we want to update the collection id. This
+   * signals on all new entries that the location is updated.
+   */
+  handleLocationSubmit = (newID) => {
+    this.setState({ collectionID: newID });
   }
 
   /**
@@ -45,7 +53,8 @@ export default class Collection extends React.Component {
       <div className="collection">
         <div className="tab-container">
           {this.props.mobile &&
-          (<Tab tab="loc" clicked={openTab === "loc"} handleClick={this.handleClick} />)}
+            (<Tab tab="loc" clicked={openTab === "loc"} handleClick={this.handleClick} />
+          )}
           <Tab tab="vcp" clicked={openTab === "vcp"} handleClick={this.handleClick} />
           <Tab tab="sector" clicked={openTab === "sector"} handleClick={this.handleClick} />
           <Tab tab="warning" clicked={openTab === "warning"} handleClick={this.handleClick} />
@@ -54,7 +63,8 @@ export default class Collection extends React.Component {
         </div>
         <Form saveData={this.props.saveData}
               className={this.state.openTab}
-              collectionID={this.props.collectionID}
+              collectionID={this.state.collectionID}
+              handleLocationSubmit={this.handleLocationSubmit}
         />
         <div className="new-collection"
              onClick={this.stop}>

@@ -36,7 +36,6 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Event.js~Event.html">Event</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html">EventSummaryForm</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Form.js~Form.html">Form</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Instrument.js~Instrument.html">Instrument</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Kickoff.js~Kickoff.html">Kickoff</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Megastore.js~Megastore.html">Megastore</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/RadarSignatures.js~RadarSignatures.html">RadarSignatures</a></span></span></li>
@@ -47,13 +46,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Event from &apos;<span><a href="file/src/components/Event.js.html#lineNumber22">ops_coll_front/src/components/Event.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Event from &apos;<span><a href="file/src/components/Event.js.html#lineNumber20">ops_coll_front/src/components/Event.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/components/Event.js.html#lineNumber22">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/components/Event.js.html#lineNumber20">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -169,15 +168,46 @@ have a new collectionID for every location update.</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-handleInstrument">handleInstrument</a></span></span><span class="code" data-ice="signature">(instrument: <span>*</span>): <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-handleInstrument">handleInstrument</a></span></span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>handleSubmit stores the instrument in state,
-determines if we&apos;re mobile, and sets the mode to &quot;collect&quot;.
-passed as function prop to Instrument</p>
+        <div data-ice="description"><p>handleInstrument stores the instrument in state,
+determines if we&apos;re mobile and therefore controls whether
+or not we see location fields rendered for the Event.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-handleKickoffSubmit">handleKickoffSubmit</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>handleKickoffSubmit changes the mode to &quot;collect&quot;,
+saves initial event info, and if the instrument
+is mobile, adds the first collection to state</p>
 </div>
       </div>
     </td>
@@ -266,7 +296,7 @@ collections array and saves it to state.</p>
       <div>
         
         
-        <div data-ice="description"><p>String mode, Number collectionID, Array collections
+        <div data-ice="description"><p>String mode, Array collections
 String instrument, boolean mobile, Object weatherEventData</p>
 </div>
       </div>
@@ -336,7 +366,7 @@ String instrument, boolean mobile, Object weatherEventData</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber64">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber93">source</a></span></span>
     </span>
   </h3>
 
@@ -381,7 +411,7 @@ passed as function prop to Collection.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber72">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber101">source</a></span></span>
     </span>
   </h3>
 
@@ -422,20 +452,66 @@ sent as function prop to EventSummaryForm</p>
     
     
     
-    <span class="code" data-ice="name">handleInstrument</span><span class="code" data-ice="signature">(instrument: <span>*</span>): <span>*</span></span>
+    <span class="code" data-ice="name">handleInstrument</span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber55">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber50">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>handleSubmit stores the instrument in state,
-determines if we&apos;re mobile, and sets the mode to &quot;collect&quot;.
-passed as function prop to Instrument</p>
+  <div data-ice="description"><p>handleInstrument stores the instrument in state,
+determines if we&apos;re mobile and therefore controls whether
+or not we see location fields rendered for the Event.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-handleKickoffSubmit">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">handleKickoffSubmit</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber62">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>handleKickoffSubmit changes the mode to &quot;collect&quot;,
+saves initial event info, and if the instrument
+is mobile, adds the first collection to state</p>
 </div>
 
   
@@ -472,7 +548,7 @@ passed as function prop to Instrument</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber80">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber109">source</a></span></span>
     </span>
   </h3>
 
@@ -517,7 +593,7 @@ passed as function prop to Instrument</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber42">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber38">source</a></span></span>
     </span>
   </h3>
 
@@ -564,14 +640,14 @@ a specific state of the Form in Collection.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber27">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber25">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>String mode, Number collectionID, Array collections
+  <div data-ice="description"><p>String mode, Array collections
 String instrument, boolean mobile, Object weatherEventData</p>
 </div>
 
@@ -612,7 +688,7 @@ String instrument, boolean mobile, Object weatherEventData</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber93">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber121">source</a></span></span>
     </span>
   </h3>
 

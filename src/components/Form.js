@@ -39,10 +39,12 @@ export default class Form extends React.Component {
     // and saveData.
     if(this.props.className === "loc") {
         const location = {...data,
+          collectionID: e.id.value,
           locationLat: e.lat.value,
           locationLong: e.long.value
         };
         e.lat.value = ""; e.long.value = "";
+        this.props.handleLocationSubmit(location.collectionID);
         this.props.saveData(location)
     } else if(this.props.className === "stationaryStart") {
 
@@ -91,11 +93,11 @@ export default class Form extends React.Component {
         <form onSubmit={this.handleSubmit}>
            <input type="date" name="startDay" min="2018-01-01"/>
            <input type="time" name="startTime" min="00:00" max="23:59" />
-           <input type="datetime-local" />
            {this.props.className === "loc" && (
              <div>
                 <input type="number" name="lat" placeholder="lat"/>
                 <input type="number" name="long" placeholder="long"/>
+                <input type="number" name="newID" placeholder="Daily Collection Number"/>
              </div>
            )}
 

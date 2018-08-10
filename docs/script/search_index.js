@@ -30,12 +30,6 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "ops_coll_front/src/components/instrument.js~instrument",
-    "class/src/components/Instrument.js~Instrument.html",
-    "<span>Instrument</span> <span class=\"search-result-import-path\">ops_coll_front/src/components/Instrument.js</span>",
-    "class"
-  ],
-  [
     "ops_coll_front/src/components/kickoff.js~kickoff",
     "class/src/components/Kickoff.js~Kickoff.html",
     "<span>Kickoff</span> <span class=\"search-result-import-path\">ops_coll_front/src/components/Kickoff.js</span>",
@@ -396,6 +390,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/components/collection.js~collection#handlelocationsubmit",
+    "class/src/components/Collection.js~Collection.html#instance-member-handleLocationSubmit",
+    "src/components/Collection.js~Collection#handleLocationSubmit",
+    "member"
+  ],
+  [
     "src/components/collection.js~collection#render",
     "class/src/components/Collection.js~Collection.html#instance-method-render",
     "src/components/Collection.js~Collection#render",
@@ -435,6 +435,12 @@ window.esdocSearchIndex = [
     "src/components/event.js~event#handleinstrument",
     "class/src/components/Event.js~Event.html#instance-member-handleInstrument",
     "src/components/Event.js~Event#handleInstrument",
+    "member"
+  ],
+  [
+    "src/components/event.js~event#handlekickoffsubmit",
+    "class/src/components/Event.js~Event.html#instance-member-handleKickoffSubmit",
+    "src/components/Event.js~Event#handleKickoffSubmit",
     "member"
   ],
   [
@@ -495,24 +501,6 @@ window.esdocSearchIndex = [
     "src/components/form.js~form#render",
     "class/src/components/Form.js~Form.html#instance-method-render",
     "src/components/Form.js~Form#render",
-    "method"
-  ],
-  [
-    "src/components/instrument.js",
-    "file/src/components/Instrument.js.html",
-    "src/components/Instrument.js",
-    "file"
-  ],
-  [
-    "src/components/instrument.js~instrument#handlesubmit",
-    "class/src/components/Instrument.js~Instrument.html#instance-member-handleSubmit",
-    "src/components/Instrument.js~Instrument#handleSubmit",
-    "member"
-  ],
-  [
-    "src/components/instrument.js~instrument#render",
-    "class/src/components/Instrument.js~Instrument.html#instance-method-render",
-    "src/components/Instrument.js~Instrument#render",
     "method"
   ],
   [

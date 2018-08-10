@@ -3,17 +3,12 @@ import Collection from './Collection';
 import EventSummaryForm from './EventSummaryForm';
 import Summary from './Summary';
 
-import DayPickerInput from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
-
-
 
 // TODO: establish correct event id, validate this
 
 // we do want a list of mobile radars because mobile radars need locations
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 const mobileInstruments = ['NOXP'];
-
 
 /**
  * An Event is the object that stores data collections.
@@ -24,14 +19,12 @@ const mobileInstruments = ['NOXP'];
  */
 export default class Event extends React.Component {
   /**
-   * String mode, Number collectionID, Array collections
+   * String mode, Array collections
    * String instrument, boolean mobile, Object weatherEventData
    */
   state = {
     mode: "begin", // "collect" or "end"
-    collectionID: 0,
     collections: [],
-
   };
 
   /**
@@ -61,10 +54,36 @@ export default class Event extends React.Component {
     this.setState({ instrument, mobile });
   }
 
+  /**
+   * handleKickoffSubmit changes the mode to "collect",
+   * saves initial event info, and if the instrument
+   * is mobile, adds the first collection to state
+   */
   handleKickoffSubmit = (event) => {
     stop(event);
-    // TODO: gather up the event data
-    this.setState({ mode: "collect" });
+
+    const event_info = {
+      eventstartday: event.target.eventstartday.value,
+      eventstarttime: event.target.eventstarttime.value
+    }
+
+    if(this.state.mobile) {
+      const initCollection = {...event_info,
+          collectionID: event.target.initID.value,
+          locationLat: event.target.lat.value,
+          locationLong: event.target.long.value
+        };
+      //this.setState({ initID: initCollection.collectionID })
+      this.saveData(initCollection);
+    }
+
+    this.setState({
+      mode: "collect",
+      eventstartday: event_info.eventstartday,
+      eventstarttime: event_info.eventstarttime
+    });
+
+    console.log(this.state)
   }
 
   /**
@@ -98,7 +117,6 @@ export default class Event extends React.Component {
    *  @return Instrument if mode "begin", Collection
    *  if mode "collect", EventSummaryForm if mode is
    *  "summary", and a Summary if mode is "end".
-   *
    */
   render() {
     return (
@@ -106,18 +124,20 @@ export default class Event extends React.Component {
         {this.state.mode === "begin" ?
           ( <div className="kickoff">
               <form onSubmit={this.handleKickoffSubmit}>
-                <DayPickerInput />
+                <input type="date" name="eventstartday" min="2018-01-01"/>
+                <input type="time" name="eventstarttime" min="00:00" max="23:59" />
+                <input type="number" name="initID" placeholder="Daily Collection Number"/>
                 <select name="instrument" onChange={this.handleInstrument}>
                   <option value="KOUN">KOUN</option>
                   <option value="NOXP">NOXP</option>
                 </select>
-                <input type="time" name="time" min="00:00" max="23:59" />
                 {this.state.mobile && (
                   <div>
-                    <input type="number" placeholder="lat"/>
-                    <input type="number" placeholder="long"/>
+                    <input type="number" name="lat" placeholder="lat"/>
+                    <input type="number" name="long" placeholder="long"/>
                   </div>
                 )}
+
                 <input type="submit" />
               </form>
             </div>
@@ -127,7 +147,6 @@ export default class Event extends React.Component {
             ? (<Collection
                   saveData={this.saveData}
                   endCollection={this.handleEndCollection}
-                  collectionID={this.state.collectionID}
                   mobile={this.state.mobile} />)
 
             : this.state.mode === "summary"

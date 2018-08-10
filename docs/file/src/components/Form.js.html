@@ -36,7 +36,6 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Event.js~Event.html">Event</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html">EventSummaryForm</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Form.js~Form.html">Form</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Instrument.js~Instrument.html">Instrument</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Kickoff.js~Kickoff.html">Kickoff</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Megastore.js~Megastore.html">Megastore</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/RadarSignatures.js~RadarSignatures.html">RadarSignatures</a></span></span></li>
@@ -88,10 +87,12 @@ export default class Form extends React.Component {
     // and saveData.
     if(this.props.className === &quot;loc&quot;) {
         const location = {...data,
+          collectionID: e.id.value,
           locationLat: e.lat.value,
           locationLong: e.long.value
         };
         e.lat.value = &quot;&quot;; e.long.value = &quot;&quot;;
+        this.props.handleLocationSubmit(location.collectionID);
         this.props.saveData(location)
     } else if(this.props.className === &quot;stationaryStart&quot;) {
 
@@ -140,11 +141,11 @@ export default class Form extends React.Component {
         &lt;form onSubmit={this.handleSubmit}&gt;
            &lt;input type=&quot;date&quot; name=&quot;startDay&quot; min=&quot;2018-01-01&quot;/&gt;
            &lt;input type=&quot;time&quot; name=&quot;startTime&quot; min=&quot;00:00&quot; max=&quot;23:59&quot; /&gt;
-           &lt;input type=&quot;datetime-local&quot; /&gt;
            {this.props.className === &quot;loc&quot; &amp;&amp; (
              &lt;div&gt;
                 &lt;input type=&quot;number&quot; name=&quot;lat&quot; placeholder=&quot;lat&quot;/&gt;
                 &lt;input type=&quot;number&quot; name=&quot;long&quot; placeholder=&quot;long&quot;/&gt;
+                &lt;input type=&quot;number&quot; name=&quot;newID&quot; placeholder=&quot;Daily Collection Number&quot;/&gt;
              &lt;/div&gt;
            )}
 

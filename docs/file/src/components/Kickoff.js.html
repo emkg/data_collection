@@ -36,7 +36,6 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Event.js~Event.html">Event</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html">EventSummaryForm</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Form.js~Form.html">Form</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Instrument.js~Instrument.html">Instrument</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Kickoff.js~Kickoff.html">Kickoff</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Megastore.js~Megastore.html">Megastore</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/RadarSignatures.js~RadarSignatures.html">RadarSignatures</a></span></span></li>
@@ -53,15 +52,26 @@ import &apos;react-day-picker/lib/style.css&apos;;
 
 // TODO: handle submit
 
+// without stop, form will reset the app with a window refresh
+const stop = (event) =&gt; (event.stopPropagation(), event.preventDefault());
+
 export default class Kickoff extends React.Component {
   render() {
     return (
       &lt;div&gt;
         &lt;form&gt;
-        &lt;DayPickerInput /&gt;
+          &lt;DayPickerInput /&gt;
+          &lt;select name=&quot;instrument&quot; onChange={this.handleInstrument}&gt;
+            &lt;option value=&quot;KOUN&quot;&gt;KOUN&lt;/option&gt;
+            &lt;option value=&quot;NOXP&quot;&gt;NOXP&lt;/option&gt;
+          &lt;/select&gt;
           &lt;input type=&quot;time&quot; name=&quot;time&quot; min=&quot;00:00&quot; max=&quot;23:59&quot; /&gt;
-          &lt;input type=&quot;number&quot; placeholder=&quot;start sector&quot;/&gt;
-          &lt;input type=&quot;number&quot; placeholder=&quot;end sector&quot;/&gt;
+          {this.state.mobile &amp;&amp; (
+            &lt;div&gt;
+              &lt;input type=&quot;number&quot; placeholder=&quot;lat&quot;/&gt;
+              &lt;input type=&quot;number&quot; placeholder=&quot;long&quot;/&gt;
+            &lt;/div&gt;
+          )}
           &lt;input type=&quot;submit&quot; /&gt;
         &lt;/form&gt;
       &lt;/div&gt;

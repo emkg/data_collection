@@ -36,7 +36,6 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Event.js~Event.html">Event</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html">EventSummaryForm</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Form.js~Form.html">Form</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Instrument.js~Instrument.html">Instrument</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Kickoff.js~Kickoff.html">Kickoff</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Megastore.js~Megastore.html">Megastore</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/RadarSignatures.js~RadarSignatures.html">RadarSignatures</a></span></span></li>
@@ -48,18 +47,16 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/components/Event.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
-import Instrument from &apos;./Instrument&apos;;
 import Collection from &apos;./Collection&apos;;
 import EventSummaryForm from &apos;./EventSummaryForm&apos;;
 import Summary from &apos;./Summary&apos;;
 
-// TODO: handle submit
 
 // TODO: establish correct event id, validate this
 
 // we do want a list of mobile radars because mobile radars need locations
+const stop = (event) =&gt; (event.stopPropagation(), event.preventDefault());
 const mobileInstruments = [&apos;NOXP&apos;];
-
 
 /**
  * An Event is the object that stores data collections.
@@ -70,14 +67,12 @@ const mobileInstruments = [&apos;NOXP&apos;];
  */
 export default class Event extends React.Component {
   /**
-   * String mode, Number collectionID, Array collections
+   * String mode, Array collections
    * String instrument, boolean mobile, Object weatherEventData
    */
   state = {
     mode: &quot;begin&quot;, // &quot;collect&quot; or &quot;end&quot;
-    collectionID: 0,
     collections: [],
-
   };
 
   /**
@@ -95,15 +90,48 @@ export default class Event extends React.Component {
   }
 
   /**
-   * handleSubmit stores the instrument in state,
-   * determines if we&apos;re mobile, and sets the mode to &quot;collect&quot;.
-   * passed as function prop to Instrument
-   * @param instrument - the value of the selected instrument from
-   * Instrument
+   * handleInstrument stores the instrument in state,
+   * determines if we&apos;re mobile and therefore controls whether
+   * or not we see location fields rendered for the Event.
+   * @param event - the change event from select option fields
    */
-  handleInstrument = (instrument) =&gt; {
+  handleInstrument = (event) =&gt; {
+    stop(event);
+    const instrument = event.target.value;
     const mobile = mobileInstruments.includes(instrument);
-    this.setState({ mode: &quot;collect&quot;, instrument, mobile });
+    this.setState({ instrument, mobile });
+  }
+
+  /**
+   * handleKickoffSubmit changes the mode to &quot;collect&quot;,
+   * saves initial event info, and if the instrument
+   * is mobile, adds the first collection to state
+   */
+  handleKickoffSubmit = (event) =&gt; {
+    stop(event);
+
+    const event_info = {
+      eventstartday: event.target.eventstartday.value,
+      eventstarttime: event.target.eventstarttime.value
+    }
+
+    if(this.state.mobile) {
+      const initCollection = {...event_info,
+          collectionID: event.target.initID.value,
+          locationLat: event.target.lat.value,
+          locationLong: event.target.long.value
+        };
+      //this.setState({ initID: initCollection.collectionID })
+      this.saveData(initCollection);
+    }
+
+    this.setState({
+      mode: &quot;collect&quot;,
+      eventstartday: event_info.eventstartday,
+      eventstarttime: event_info.eventstarttime
+    });
+
+    console.log(this.state)
   }
 
   /**
@@ -137,19 +165,36 @@ export default class Event extends React.Component {
    *  @return Instrument if mode &quot;begin&quot;, Collection
    *  if mode &quot;collect&quot;, EventSummaryForm if mode is
    *  &quot;summary&quot;, and a Summary if mode is &quot;end&quot;.
-   *
    */
   render() {
     return (
       &lt;div className=&quot;event&quot;&gt;
         {this.state.mode === &quot;begin&quot; ?
-          (&lt;Instrument handleSubmit={this.handleInstrument} /&gt;)
+          ( &lt;div className=&quot;kickoff&quot;&gt;
+              &lt;form onSubmit={this.handleKickoffSubmit}&gt;
+                &lt;input type=&quot;date&quot; name=&quot;eventstartday&quot; min=&quot;2018-01-01&quot;/&gt;
+                &lt;input type=&quot;time&quot; name=&quot;eventstarttime&quot; min=&quot;00:00&quot; max=&quot;23:59&quot; /&gt;
+                &lt;input type=&quot;number&quot; name=&quot;initID&quot; placeholder=&quot;Daily Collection Number&quot;/&gt;
+                &lt;select name=&quot;instrument&quot; onChange={this.handleInstrument}&gt;
+                  &lt;option value=&quot;KOUN&quot;&gt;KOUN&lt;/option&gt;
+                  &lt;option value=&quot;NOXP&quot;&gt;NOXP&lt;/option&gt;
+                &lt;/select&gt;
+                {this.state.mobile &amp;&amp; (
+                  &lt;div&gt;
+                    &lt;input type=&quot;number&quot; name=&quot;lat&quot; placeholder=&quot;lat&quot;/&gt;
+                    &lt;input type=&quot;number&quot; name=&quot;long&quot; placeholder=&quot;long&quot;/&gt;
+                  &lt;/div&gt;
+                )}
+
+                &lt;input type=&quot;submit&quot; /&gt;
+              &lt;/form&gt;
+            &lt;/div&gt;
+          )
           : this.state.mode === &quot;collect&quot;
 
             ? (&lt;Collection
                   saveData={this.saveData}
                   endCollection={this.handleEndCollection}
-                  collectionID={this.state.collectionID}
                   mobile={this.state.mobile} /&gt;)
 
             : this.state.mode === &quot;summary&quot;
