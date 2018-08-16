@@ -5,6 +5,10 @@ import React from 'react';
 //TODO: add a way to edit the data
 //TODO: add esdoc
 
+// TODO: send data to a store
+// TODO: organize data batches to send to db tables
+// TODO: create a json preview to display...
+
 export default class Summary extends React.Component {
   render() {
     return (

@@ -152,3 +152,20 @@ textarea {
   border-bottom: solid lightgray 1px;
   margin: 2px;
 }
+
+
+.checkform {
+  border: solid 1px blue;
+  margin: 10px 0;
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 10px;
+}
+
+.checkform > div {
+  display: flex;
+  height: 100px;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 10px;
+}
