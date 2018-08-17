@@ -6,7 +6,6 @@ import cx from 'classnames';
 //TODO: editable data...
 // have an option to pass props and have form autofilled with Data
 // make sure that if in edit mode, that data overwrites correctly
-
 //TODO: format dates/times with moment
 
 //TODO: fix issue with collection number
@@ -103,36 +102,52 @@ export default class Form extends React.Component {
             </div>
            {this.props.className === "loc" && (
              <div>
+                Location Lattitude:
                 <input type="number" name="lat" placeholder={this.props.lat}/>
+                Location Longitude
                 <input type="number" name="long" placeholder={this.props.long}/>
+                Daily Collection ID:
                 <input type="number" name="newID" placeholder={this.props.collectionID}/>
              </div>
            )}
 
            {this.props.className === "vcp" && (
-             <input type="text" name="vcp" placeholder={this.props.vcp}/>
+             <div>
+                VCP:
+                <input type="text" name="vcp" placeholder={this.props.vcp}/>
+             </div>
            )}
 
            {this.props.className === "sector" && (
              <div>
+                Start Sector:
                 <input type="number" name="sectorStart" placeholder={this.props.sectorStart}/>
+                End Sector:
                 <input type="number" name="sectorEnd" placeholder={this.props.sectorEnd}/>
              </div>
            )}
 
            {this.props.className === "warning" && (
              <div>
+                Warning Counties:
                 <input type="text" name="counties" placeholder="counties..."  />
+                Warning Text:
                 <textarea name="warningText" cols="50" rows="10" placeholder={this.props.warningText}/>
              </div>
            )}
 
            {this.props.className === "report" && (
-             <textarea name="reportText" cols="50" rows="10" placeholder={this.props.reportText}/>
+             <div>
+                Report Text:
+                <textarea name="reportText" cols="50" rows="10" placeholder={this.props.reportText}/>
+             </div>
            )}
 
            {this.props.className === "remark" && (
-             <textarea name="remark" cols="50" rows="10" placeholder={this.props.remarks}/>
+             <div>
+                Remarks:
+                <textarea name="remark" cols="50" rows="10" placeholder={this.props.remarks}/>
+             </div>
            )}
 
            <input type="submit" value="enter data" />

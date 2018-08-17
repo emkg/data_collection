@@ -101,7 +101,7 @@ export default class Event extends React.Component {
    * handleEventSummary stores the summary data and flips mode to "end".
    * sent as function prop to EventSummaryForm
    */
-  handleEventSummary = (finalWeatherEventData) => {
+  handleEventSummarySubmit = (finalWeatherEventData) => {
     const weatherEventData = Object.assign(this.state.weatherEventData, finalWeatherEventData);
     this.setState({weatherEventData, mode: "end" })
   }
@@ -151,7 +151,7 @@ export default class Event extends React.Component {
 
             : this.state.mode === "summary"
 
-              ? (<EventSummaryForm handleSubmit={this.handleEventSummary} />)
+              ? (<EventSummaryForm handleSubmit={this.handleEventSummarySubmit} />)
               : (<Summary eventOver={this.props.eventOver}
                           weatherEventData={this.state.weatherEventData}
                           collections={this.state.collections}/>)

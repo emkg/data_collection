@@ -5,7 +5,7 @@ import Form from './Form';
 // TODO: break tab container into a new component with
 // logic to control startng a new collection
 // TODO:  push buttons should be a separate component too
-
+// TODO: fix issue with collection number
 /**
  * Collection renders the form where data is collected.
  */
