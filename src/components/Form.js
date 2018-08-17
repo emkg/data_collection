@@ -7,6 +7,10 @@ import cx from 'classnames';
 // have an option to pass props and have form autofilled with Data
 // make sure that if in edit mode, that data overwrites correctly
 
+//TODO: format dates/times with moment
+
+//TODO: fix issue with collection number
+
 // prevent default form behavior so app doesn't refresh on submit
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 
@@ -94,41 +98,41 @@ export default class Form extends React.Component {
         <form onSubmit={this.handleSubmit}>
            Start Time:
            <div className="datetime-input">
-              <input type="date" name="startDay" min="2018-01-01"/>
-              <input type="time" name="startTime" min="00:00" max="23:59" />
+              <input type="date" name="startDay" min="2018-01-01" placeholder={this.props.startDay}/>
+              <input type="time" name="startTime" min="00:00" max="23:59" placeholder={this.props.startTime}/>
             </div>
            {this.props.className === "loc" && (
              <div>
-                <input type="number" name="lat" placeholder="lat"/>
-                <input type="number" name="long" placeholder="long"/>
-                <input type="number" name="newID" placeholder="Daily Collection Number"/>
+                <input type="number" name="lat" placeholder={this.props.lat}/>
+                <input type="number" name="long" placeholder={this.props.long}/>
+                <input type="number" name="newID" placeholder={this.props.collectionID}/>
              </div>
            )}
 
            {this.props.className === "vcp" && (
-             <input type="text" name="vcp" placeholder="VCP"/>
+             <input type="text" name="vcp" placeholder={this.props.vcp}/>
            )}
 
            {this.props.className === "sector" && (
              <div>
-                <input type="number" name="sectorStart" placeholder="start sector"/>
-                <input type="number" name="sectorEnd" placeholder="end sector"/>
+                <input type="number" name="sectorStart" placeholder={this.props.sectorStart}/>
+                <input type="number" name="sectorEnd" placeholder={this.props.sectorEnd}/>
              </div>
            )}
 
            {this.props.className === "warning" && (
              <div>
                 <input type="text" name="counties" placeholder="counties..."  />
-                <textarea name="warningText" cols="50" rows="10" placeholder="Warning text"/>
+                <textarea name="warningText" cols="50" rows="10" placeholder={this.props.warningText}/>
              </div>
            )}
 
            {this.props.className === "report" && (
-             <textarea name="reportText" cols="50" rows="10" placeholder="Report text"/>
+             <textarea name="reportText" cols="50" rows="10" placeholder={this.props.reportText}/>
            )}
 
            {this.props.className === "remark" && (
-             <textarea name="remark" cols="50" rows="10" placeholder="remarks..."/>
+             <textarea name="remark" cols="50" rows="10" placeholder={this.props.remarks}/>
            )}
 
            <input type="submit" value="enter data" />
