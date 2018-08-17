@@ -36,12 +36,6 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "ops_coll_front/src/components/radarsignatures.js~radarsignatures",
-    "class/src/components/RadarSignatures.js~RadarSignatures.html",
-    "<span>RadarSignatures</span> <span class=\"search-result-import-path\">ops_coll_front/src/components/RadarSignatures.js</span>",
-    "class"
-  ],
-  [
     "ops_coll_front/src/components/summary.js~summary",
     "class/src/components/Summary.js~Summary.html",
     "<span>Summary</span> <span class=\"search-result-import-path\">ops_coll_front/src/components/Summary.js</span>",
@@ -507,18 +501,6 @@ window.esdocSearchIndex = [
     "src/components/kickoff.js~kickoff#render",
     "class/src/components/Kickoff.js~Kickoff.html#instance-method-render",
     "src/components/Kickoff.js~Kickoff#render",
-    "method"
-  ],
-  [
-    "src/components/radarsignatures.js",
-    "file/src/components/RadarSignatures.js.html",
-    "src/components/RadarSignatures.js",
-    "file"
-  ],
-  [
-    "src/components/radarsignatures.js~radarsignatures#render",
-    "class/src/components/RadarSignatures.js~RadarSignatures.html#instance-method-render",
-    "src/components/RadarSignatures.js~RadarSignatures#render",
     "method"
   ],
   [

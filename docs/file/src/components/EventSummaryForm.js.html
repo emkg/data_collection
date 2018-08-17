@@ -37,7 +37,6 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html">EventSummaryForm</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Form.js~Form.html">Form</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Kickoff.js~Kickoff.html">Kickoff</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/RadarSignatures.js~RadarSignatures.html">RadarSignatures</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Summary.js~Summary.html">Summary</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Tab.js~Tab.html">Tab</a></span></span></li>
 </ul>
@@ -46,7 +45,6 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/components/EventSummaryForm.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
-import RadarSignatures from &apos;./RadarSignatures&apos;;
 
 // TODO: add esdoc
 const stop = (event) =&gt; (event.stopPropagation(), event.preventDefault());
@@ -58,6 +56,7 @@ export default class EventSummaryForm extends React.Component {
     const e = event.target;
     const data = {
       eventType: e.eventType.value,
+      eventRadarSigs: e.radarSig.value,
       eventendday: e.endDay.value,
       eventendtime: e.endTime.value,
       eventDescription: e.summary.value
@@ -70,20 +69,64 @@ export default class EventSummaryForm extends React.Component {
     return (
       &lt;div className=&quot;event-summary&quot;&gt;
         &lt;form onSubmit={this.handleSubmit}&gt;
-          &lt;RadarSignatures /&gt;
-          &lt;div&gt;
-            &lt;input type=&quot;checkbox&quot; id=&quot;tornadic-supercell&quot; name=&quot;eventType&quot; value=&quot;tornadic-supercell&quot; checked /&gt;
-            &lt;label for=&quot;downburst&quot;&gt;Downburst&lt;/label&gt;
+        &lt;div className=&quot;checkform&quot;&gt;
+            &lt;h1&gt;Radar Signatures&lt;/h1&gt;
+            &lt;div&gt;
+            &lt;div&gt;
+              &lt;input type=&quot;checkbox&quot; id=&quot;tornadic-supercell&quot; name=&quot;radarSig&quot; value=&quot;tornadic-supercell&quot; checked /&gt;
+              &lt;label for=&quot;tornadic-supercell&quot;&gt;Tornadic Supercell&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;input type=&quot;checkbox&quot; id=&quot;hail&quot; name=&quot;radarSig&quot; value=&quot;hail&quot; /&gt;
+              &lt;label for=&quot;hail&quot;&gt;Hail&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;input type=&quot;checkbox&quot; id=&quot;claws&quot; name=&quot;radarSig&quot; value=&quot;claws&quot; /&gt;
+              &lt;label for=&quot;claws&quot;&gt;Claws&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;input type=&quot;checkbox&quot; id=&quot;tornadic-supercell&quot; name=&quot;radarSig&quot; value=&quot;tornadic-supercell&quot; checked /&gt;
+              &lt;label for=&quot;tornadic-supercell&quot;&gt;Tornadic Supercell&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;input type=&quot;checkbox&quot; id=&quot;hail&quot; name=&quot;radarSig&quot; value=&quot;hail&quot; /&gt;
+              &lt;label for=&quot;hail&quot;&gt;Hail&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;input type=&quot;checkbox&quot; id=&quot;claws&quot; name=&quot;radarSig&quot; value=&quot;claws&quot; /&gt;
+              &lt;label for=&quot;claws&quot;&gt;Claws&lt;/label&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/div&gt;
+         &lt;div className=&quot;checkform&quot;&gt;
+            &lt;h1&gt;Event Type&lt;/h1&gt;
+            &lt;div&gt;
+            &lt;div&gt;
+              &lt;input type=&quot;checkbox&quot; id=&quot;tornadic-supercell&quot; name=&quot;eventType&quot; value=&quot;tornadic-supercell&quot; checked /&gt;
+              &lt;label for=&quot;downburst&quot;&gt;Downburst&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;input type=&quot;checkbox&quot; id=&quot;hail&quot; name=&quot;eventType&quot; value=&quot;hail&quot; /&gt;
+              &lt;label for=&quot;thunderstorm&quot;&gt;Thunderstorm&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;input type=&quot;checkbox&quot; id=&quot;claws&quot; name=&quot;eventType&quot; value=&quot;claws&quot; /&gt;
+              &lt;label for=&quot;tornado&quot;&gt;Tornado&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;input type=&quot;checkbox&quot; id=&quot;tornadic-supercell&quot; name=&quot;eventType&quot; value=&quot;tornadic-supercell&quot; checked /&gt;
+              &lt;label for=&quot;downburst&quot;&gt;Downburst&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;input type=&quot;checkbox&quot; id=&quot;hail&quot; name=&quot;eventType&quot; value=&quot;hail&quot; /&gt;
+              &lt;label for=&quot;thunderstorm&quot;&gt;Thunderstorm&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;input type=&quot;checkbox&quot; id=&quot;claws&quot; name=&quot;eventType&quot; value=&quot;claws&quot; /&gt;
+              &lt;label for=&quot;tornado&quot;&gt;Tornado&lt;/label&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
           &lt;/div&gt;
-          &lt;div&gt;
-            &lt;input type=&quot;checkbox&quot; id=&quot;hail&quot; name=&quot;eventType&quot; value=&quot;hail&quot; /&gt;
-            &lt;label for=&quot;thunderstorm&quot;&gt;Thunderstorm&lt;/label&gt;
-          &lt;/div&gt;
-          &lt;div&gt;
-            &lt;input type=&quot;checkbox&quot; id=&quot;claws&quot; name=&quot;eventType&quot; value=&quot;claws&quot; /&gt;
-            &lt;label for=&quot;tornado&quot;&gt;Tornado&lt;/label&gt;
-          &lt;/div&gt;
-
           &lt;input type=&quot;date&quot; name=&quot;endDay&quot; min=&quot;2018-01-01&quot;/&gt;
           &lt;input type=&quot;time&quot; name=&quot;endTime&quot; min=&quot;00:00&quot; max=&quot;23:59&quot; /&gt;
           &lt;textarea name=&quot;summary&quot; cols=&quot;50&quot; rows=&quot;10&quot; placeholder=&quot;remarks...&quot;/&gt;

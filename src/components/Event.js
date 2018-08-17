@@ -5,9 +5,6 @@ import Summary from './Summary';
 
 
 // TODO: establish correct event id, validate this
-// TODO: send data to a store
-// TODO: organize data batches to send to db tables
-// TODO: create a json preview to display...
 // TODO: save data in cookies
 
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
@@ -55,7 +52,7 @@ export default class Event extends React.Component {
     stop(event);
     const instrument = event.target.value;
     const mobile = mobileInstruments.includes(instrument);
-    this.setState({ instrument, mobile });
+    this.setState({ weatherEventData: { instrument: instrument }, mobile });
   }
 
   /**
@@ -83,8 +80,10 @@ export default class Event extends React.Component {
 
     this.setState({
       mode: "collect",
-      eventstartday: event_info.eventstartday,
-      eventstarttime: event_info.eventstarttime
+      weatherEventData: {
+        eventstartday: event_info.eventstartday,
+        eventstarttime: event_info.eventstarttime
+      }
     });
 
     console.log(this.state)
@@ -102,17 +101,9 @@ export default class Event extends React.Component {
    * handleEventSummary stores the summary data and flips mode to "end".
    * sent as function prop to EventSummaryForm
    */
-  handleEventSummary = (weatherEventData) => {
-    this.setState({ weatherEventData, mode: "end" })
-  }
-
-  /**
-   *  handleSubmit will send the full state of this weather event
-   *  to storage. Send Thankyou to app. Submits this Event.
-   */
-  handleSubmit = () => {
-    // TODO: send state data to a fetch method
-    this.props.eventOver("Your data has been collected!");
+  handleEventSummary = (finalWeatherEventData) => {
+    const weatherEventData = Object.assign(this.state.weatherEventData, finalWeatherEventData);
+    this.setState({weatherEventData, mode: "end" })
   }
 
   /**
@@ -161,13 +152,7 @@ export default class Event extends React.Component {
             : this.state.mode === "summary"
 
               ? (<EventSummaryForm handleSubmit={this.handleEventSummary} />)
-              : (<div>
-                    <Summary  data={this.state}/>
-                    <div className="new-collection"
-                       onClick={this.handleSubmit}>{"It's ALL GOOD!"}
-                    </div>
-                  </div>
-                )
+              : (<Summary eventOver={this.props.eventOver} weatherEventData={this.state.weatherEventData} collections={this.state.collections}/>)
         }
       </div>
     )

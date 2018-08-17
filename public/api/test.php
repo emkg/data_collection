@@ -1,6 +1,6 @@
 <?php
   $username = "admin";
-  $password = "password";
+  $password = "";
   $hostname = "localhost";
 
   $db = new mysqli($hostname, $username, $password, "radops_test");
