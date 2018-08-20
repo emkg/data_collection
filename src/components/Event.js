@@ -28,6 +28,21 @@ export default class Event extends React.Component {
     collections: [],
   };
 
+  componentDidMount() {
+    try {
+      const savedState = JSON.parse(
+                          decodeURIComponent(
+                            document.cookie.replace(
+                              /(?:(?:^|.*;\s*)eventState\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+                            )
+                          );
+      this.setState(savedState);
+    }
+    catch(err) {
+      console.log("There is no saved state.")
+    }
+  }
+
   /**
    * saveData pushes a new data object into the
    * collections array and saves it to state.
@@ -40,6 +55,11 @@ export default class Event extends React.Component {
     const { collections } = this.state;
     collections.push(data);
     this.setState( { collections } )
+    this.saveState();
+  }
+
+  saveState() {
+    document.cookie = "eventState=" + encodeURIComponent(JSON.stringify(this.state));
   }
 
   /**
@@ -85,8 +105,6 @@ export default class Event extends React.Component {
         eventstarttime: event_info.eventstarttime
       }
     });
-
-    console.log(this.state)
   }
 
   /**
