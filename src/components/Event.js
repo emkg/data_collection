@@ -5,7 +5,6 @@ import Summary from './Summary';
 
 
 // TODO: establish correct event id, validate this
-// TODO: save data in cookies
 
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 // we do want a list of mobile radars because mobile radars need locations

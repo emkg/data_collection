@@ -4,7 +4,7 @@ import Form from './Form';
 
 // TODO: polish the style
 // TODO: add a way to edit the data
-// TODO: send data to a store
+
 // TODO: organize data batches to send to db tables
 
 
@@ -16,7 +16,8 @@ import Form from './Form';
 export default class Summary extends React.Component {
   state = {};
 
-  edit = () => {
+  edit = (index) => {
+    console.log(index);
     this.setState({ editOn: !this.state.editOn })
   }
 
@@ -33,18 +34,26 @@ export default class Summary extends React.Component {
   render() {
     const { weatherEventData } = this.props;
     const { collections } = this.props;
+    const collectionsDisplay = collections.map((c, i) => {
+        let rows = [];
+        for (var property in c) {
+          let rowvalue = `${property}: ${c[property]}`;
+          rows.push(<div>{rowvalue}</div>);
+        }
+        return (
+          <div className="event-summary-row">
+            {rows}
+            <button onClick={this.edit}>EDIT</button>
+          </div>
+        );
+    });
+
     return (
       <div>
         <h3>How does your data look?</h3>
         <ReactJson src={weatherEventData} />
 
-        {collections.map((c, i) => {
-          <div className="event-summary-row">
-            <ReactJson src={c} />
-            <button onClick={this.edit}>EDIT</button>
-          </div>
-          })
-        }
+        {collectionsDisplay}
 
         <div className="event-summary-row">Event Start: {weatherEventData.eventstartday} {weatherEventData.eventstarttime}</div>
         <div className="event-summary-row">Event End: {weatherEventData.eventendday} {weatherEventData.eventendday}</div>
