@@ -18,7 +18,7 @@
     "esdoc-standard-plugin": "^1.0.0",
     "react-json-view": "^1.19.1"
   },
-  "homepage": "/projects/webdev/radops",
+  "proxy": "http://local.radops/public/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

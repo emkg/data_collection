@@ -29,6 +29,19 @@ export default class Summary extends React.Component {
     // TODO: send state data to a fetch method
     document.cookie = "eventState" + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     this.props.eventOver("Your data has been collected!");
+    this.sendDataToDatabase()
+  }
+
+  sendDataToDatabase = () => {
+    fetch("./api/test.php", {
+      method: "POST",
+      mode: "same-origin",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.props.weatherEventData)
+    })
   }
 
   render() {

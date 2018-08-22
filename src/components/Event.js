@@ -61,23 +61,17 @@ export default class Event extends React.Component {
     document.cookie = "eventState=" + encodeURIComponent(JSON.stringify(this.state));
   }
 
-  /**
-   * handleInstrument stores the instrument in state,
-   * determines if we're mobile and therefore controls whether
-   * or not we see location fields rendered for the Event.
-   * @param event - the change event from select option fields
-   */
-  handleInstrument = (event) => {
+  isMobile = (event) => {
     stop(event);
-    const instrument = event.target.value;
-    const mobile = mobileInstruments.includes(instrument);
-    this.setState({ weatherEventData: { instrument: instrument }, mobile });
+    const instrument = event.target.instrument;
+    this.setState({ mobile: mobileInstruments.includes(instrument) });
   }
 
   /**
    * handleKickoffSubmit changes the mode to "collect",
    * saves initial event info, and if the instrument
    * is mobile, adds the first collection to state
+   * @param event - the event from the form submit
    */
   handleKickoffSubmit = (event) => {
     stop(event);
@@ -101,7 +95,8 @@ export default class Event extends React.Component {
       mode: "collect",
       weatherEventData: {
         eventstartday: event_info.eventstartday,
-        eventstarttime: event_info.eventstarttime
+        eventstarttime: event_info.eventstarttime,
+        instrument: event.target.instrument.value
       }
     });
   }
@@ -144,7 +139,7 @@ export default class Event extends React.Component {
                 <input type="number" name="initID" placeholder="Daily Collection Number"/>
 
                 Instrument:
-                <select name="instrument" onChange={this.handleInstrument}>
+                <select name="instrument" onChange={this.isMobile}>
                   <option value="KOUN">KOUN</option>
                   <option value="NOXP">NOXP</option>
                 </select>
