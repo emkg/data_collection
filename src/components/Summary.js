@@ -32,7 +32,13 @@ export default class Summary extends React.Component {
     this.sendDataToDatabase()
   }
 
-  sendDataToDatabase = () => {
+
+  /**
+     
+   * @param jsonPayload an object that will be sent
+   * to the database stringified
+   */
+  sendDataToDatabase = (jsonPayload) => {
     fetch("./api/test.php", {
       method: "POST",
       mode: "same-origin",
@@ -40,7 +46,7 @@ export default class Summary extends React.Component {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(this.props.weatherEventData)
+      body: JSON.stringify(jsonPayload)
     })
   }
 
