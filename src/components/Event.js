@@ -2,6 +2,7 @@ import React from 'react';
 import Collection from './Collection';
 import EventSummaryForm from './EventSummaryForm';
 import Summary from './Summary';
+import uuidv4 from 'uuid/v4';
 
 
 // TODO: establish correct event id, validate this
@@ -25,6 +26,7 @@ export default class Event extends React.Component {
   state = {
     mode: "begin", // "collect" or "end"
     collections: [],
+    eventID: uuidv4()
   };
 
   componentDidMount() {
@@ -61,12 +63,6 @@ export default class Event extends React.Component {
     document.cookie = "eventState=" + encodeURIComponent(JSON.stringify(this.state));
   }
 
-  isMobile = (event) => {
-    stop(event);
-    const instrument = event.target.instrument;
-    this.setState({ mobile: mobileInstruments.includes(instrument) });
-  }
-
   /**
    * handleKickoffSubmit changes the mode to "collect",
    * saves initial event info, and if the instrument
@@ -83,7 +79,7 @@ export default class Event extends React.Component {
 
     if(this.state.mobile) {
       const initCollection = {...event_info,
-          collectionID: event.target.initID.value,
+          //collectionID: event.target.initID.value,
           locationLat: event.target.lat.value,
           locationLong: event.target.long.value
         };
@@ -91,12 +87,16 @@ export default class Event extends React.Component {
       this.saveData(initCollection);
     }
 
+    const instrument = event.target.instrument.value;
+    const mobile = mobileInstruments.includes(instrument);
+
     this.setState({
       mode: "collect",
+      mobile: mobile,
       weatherEventData: {
         eventstartday: event_info.eventstartday,
         eventstarttime: event_info.eventstarttime,
-        instrument: event.target.instrument.value
+        instrument: instrument
       }
     });
   }
@@ -139,7 +139,7 @@ export default class Event extends React.Component {
                 <input type="number" name="initID" placeholder="Daily Collection Number"/>
 
                 Instrument:
-                <select name="instrument" onChange={this.isMobile}>
+                <select name="instrument">
                   <option value="KOUN">KOUN</option>
                   <option value="NOXP">NOXP</option>
                 </select>
@@ -159,7 +159,8 @@ export default class Event extends React.Component {
             ? (<Collection
                   saveData={this.saveData}
                   endCollection={this.handleEndCollection}
-                  mobile={this.state.mobile} />)
+                  mobile={this.state.mobile}
+                  eventID={this.state.eventID} />)
 
             : this.state.mode === "summary"
 

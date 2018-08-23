@@ -28,10 +28,12 @@ export default class Form extends React.Component {
     const e = event.target;
     // data we always need
     const data = {
+      eventID: this.props.eventID,
       collectionID: this.props.collectionID,
       startDay: e.startDay.value,
       startTime: e.startTime.value,
-      collectionType: this.props.className
+      collectionType: this.props.className,
+      dailyCollectionNumber: this.props.dailyCollectionNumber
     }
 
     // clear fields we saved data from
@@ -41,12 +43,12 @@ export default class Form extends React.Component {
     // and saveData.
     if(this.props.className === "loc") {
         const location = {...data,
-          collectionID: e.id.value,
+          collectionID: this.props.handleNewLocation(e.dcn.value),
+          dailyCollectionNumber: e.dcn.value,
           locationLat: e.lat.value,
-          locationLong: e.long.value
+          locationLong: e.long.value,
         };
         e.lat.value = ""; e.long.value = "";
-        this.props.handleLocationSubmit(location.collectionID);
         this.props.saveData(location)
     } else if(this.props.className === "stationaryStart") {
 
@@ -105,7 +107,7 @@ export default class Form extends React.Component {
                 Location Longitude
                 <input type="number" name="long" placeholder={this.props.long}/>
                 Daily Collection ID:
-                <input type="number" name="newID" placeholder={this.props.collectionID}/>
+                <input type="number" name="dcn" placeholder={this.props.dailyCollectionNumber}/>
              </div>
            )}
 

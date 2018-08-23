@@ -1,11 +1,14 @@
 import React from 'react';
 import Tab from './Tab';
 import Form from './Form';
+import uuidv4 from 'uuid/v4';
 
 // TODO: break tab container into a new component with
 // logic to control startng a new collection
 // TODO:  push buttons should be a separate component too
+
 // TODO: fix issue with collection number
+
 /**
  * Collection renders the form where data is collected.
  */
@@ -15,7 +18,8 @@ export default class Collection extends React.Component {
    */
   state = {
     openTab: "vcp",
-    collectionID: 1,
+    dailyCollectionNumber: 1,
+    collectionID: uuidv4()
   }
 
   /**
@@ -30,8 +34,11 @@ export default class Collection extends React.Component {
    * we want to update the collection id. This
    * signals on all new entries that the location is updated.
    */
-  handleLocationSubmit = (newID) => {
-    this.setState({ collectionID: newID });
+  getNewCollectionID = (dcn) => {
+    const collectionID = uuidv4();
+    const dailyCollectionNumber = dcn;
+    this.setState({ collectionID, dailyCollectionNumber });
+    return collectionID;
   }
 
   /**
@@ -62,8 +69,10 @@ export default class Collection extends React.Component {
         </div>
         <Form saveData={this.props.saveData}
               className={this.state.openTab}
+              dailyCollectionNumber={this.state.dailyCollectionNumber}
               collectionID={this.state.collectionID}
-              handleLocationSubmit={this.handleLocationSubmit}
+              handleNewLocation={this.getNewCollectionID}
+              eventID={this.props.eventID}
         />
         <div className="new-collection"
              onClick={this.stop}>
