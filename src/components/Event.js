@@ -29,6 +29,11 @@ export default class Event extends React.Component {
     eventID: uuidv4()
   };
 
+
+  /**
+   * Retreive saved cookie in case data submission was interrupted.
+   *
+   */
   componentDidMount() {
     try {
       const savedState = JSON.parse(
@@ -37,7 +42,7 @@ export default class Event extends React.Component {
                               /(?:(?:^|.*;\s*)eventState\s*\=\s*([^;]*).*$)|^.*$/, "$1")
                             )
                           );
-      this.setState({...savedState, mobile: false});
+      this.setState({...savedState, mode: "begin", mobile: false});
     }
     catch(err) {
       console.log("There is no saved state.")
@@ -99,6 +104,8 @@ export default class Event extends React.Component {
         instrument: instrument
       }
     });
+
+    this.saveState();
   }
 
   /**
@@ -107,6 +114,7 @@ export default class Event extends React.Component {
    */
   handleEndCollection = () => {
     this.setState({ mode: "summary" })
+    this.saveState();
   }
 
   /**
@@ -116,6 +124,7 @@ export default class Event extends React.Component {
   handleEventSummarySubmit = (finalWeatherEventData) => {
     const weatherEventData = Object.assign(this.state.weatherEventData, finalWeatherEventData);
     this.setState({weatherEventData, mode: "end" })
+    this.saveState();
   }
 
   isMobile = (event) => {
@@ -152,8 +161,8 @@ export default class Event extends React.Component {
                 </select>
                 {this.state.mobile && (
                   <div>
-                    <input type="number" name="lat" placeholder="lat"/>
-                    <input type="number" name="long" placeholder="long"/>
+                    <input type="number" name="lat"  placeholder="lat" />
+                    <input type="number" name="long" placeholder="long" />
                   </div>
                 )}
 

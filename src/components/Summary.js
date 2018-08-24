@@ -16,6 +16,13 @@ import ReactJson from 'react-json-view';
 export default class Summary extends React.Component {
   state = {};
 
+  componentDidMount() {
+    const { collections } = this.props;
+    const { weatherEventData } = this.props;
+    this.setState({ collections, weatherEventData });
+
+  }
+
   edit = (index) => {
     console.log(index);
     this.setState({ editOn: !this.state.editOn })
@@ -29,7 +36,10 @@ export default class Summary extends React.Component {
     // TODO: send state data to a fetch method
     document.cookie = "eventState=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     this.props.eventOver("Your data has been collected!");
-    this.sendDataToDatabase(this.state.weatherEventData)
+    this.state.collections.map(c => {
+      this.sendDataToDatabase(c, c.collectionType);
+    })
+
   }
 
 
@@ -37,9 +47,11 @@ export default class Summary extends React.Component {
 
    * @param jsonPayload an object that will be sent
    * to the database stringified
+   * @param type a string that is the collection type
+   * or "event" that corresponds to a php file
    */
-  sendDataToDatabase = (jsonPayload) => {
-    fetch("./api/event.php", {
+  sendDataToDatabase = (jsonPayload, type) => {
+    fetch(`./api/${type}.php`, {
       method: "POST",
       mode: "same-origin",
       credentials: "same-origin",
@@ -51,44 +63,57 @@ export default class Summary extends React.Component {
   }
 
   render() {
-    const { weatherEventData } = this.props;
-    const { collections } = this.props;
-    const collectionsDisplay = collections.map((c, i) => {
-        let rows = [];
-        for (var property in c) {
-          let rowvalue = `${property}: ${c[property]}`;
-          rows.push(<div>{rowvalue}</div>);
-        }
-        return (
+    if(this.state.collections) {
+      const collectionsDisplay = this.state.collections.map((c, i) => {
+          let rows = [];
+          for (var property in c) {
+            let rowvalue = `${property}: ${c[property]}`;
+            rows.push(<div>{rowvalue}</div>);
+          }
+          return (
+            <div className="event-summary-row">
+              {rows}
+              <button onClick={this.edit}>EDIT</button>
+            </div>
+          );
+      });
+      return (
+        <div>
+          <h1>How does your data look?</h1>
+
+          <h3>Event Summary</h3>
           <div className="event-summary-row">
-            {rows}
-            <button onClick={this.edit}>EDIT</button>
+            Event Instrument: {this.state.weatherEventData.instrument}
           </div>
-        );
-    });
+          <div className="event-summary-row">
+            Event Start: {this.state.weatherEventData.eventstartday} {this.state.weatherEventData.eventstarttime}
+          </div>
+          <div className="event-summary-row">
+            Event End: {this.state.weatherEventData.eventendday} {this.state.weatherEventData.eventendtime}
+          </div>
+          <div className="event-summary-row">
+            Event Radar Signatures: {this.state.weatherEventData.eventRadarSigs}
+          </div>
+          <div className="event-summary-row">
+            Event Type: {this.state.weatherEventData.eventType}
+          </div>
+          <div className="event-summary-row">
+            Event Description: {this.state.weatherEventData.eventDescription}
+          </div>
 
-    return (
-      <div>
-        <h1>How does your data look?</h1>
+          <h3>Individual Collections</h3>
 
-        <h3>Event Summary</h3>
-        <div className="event-summary-row">Event Instrument: {weatherEventData.instrument}</div>
-        <div className="event-summary-row">Event Start: {weatherEventData.eventstartday} {weatherEventData.eventstarttime}</div>
-        <div className="event-summary-row">Event End: {weatherEventData.eventendday} {weatherEventData.eventendTime}</div>
-        <div className="event-summary-row">Event Radar Signatures: {weatherEventData.eventRadarSigs}</div>
-        <div className="event-summary-row">Event Type: {weatherEventData.eventType}</div>
-        <div className="event-summary-row">Event Description: {weatherEventData.eventDescription}</div>
-
-        <h3>Individual Collections</h3>
-
-        {collectionsDisplay}
+          {collectionsDisplay}
 
 
 
-        <div className="new-collection"
-           onClick={this.handleSubmit}>{"It's ALL GOOD!"}
+          <div className="new-collection"
+             onClick={this.handleSubmit}>{"It's ALL GOOD!"}
+          </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return ( <div/>)
+    }
   }
 }
