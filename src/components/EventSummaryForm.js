@@ -1,23 +1,39 @@
 import React from 'react';
 
 // TODO: add esdoc
-// TODO: fix the checkforms ...
-//        TODO: the fact that the values are not collected
+
 
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 
 export default class EventSummaryForm extends React.Component {
+  state = {
+    radarSigs: []
+  }
 
-  getCheckBoxes() {
-    return [];
+  collectRadarSigs = (event) => {
+    let { radarSigs } = this.state;
+    event.target.checked ?
+      (
+        radarSigs.push(event.target.value),
+        this.setState({ radarSigs })
+      )
+      :
+      (
+        radarSigs = radarSigs.filter( e => e !== event.target.value),
+        this.setState({ radarSigs })
+      )
+  }
+
+  getEventType = (event) => {
+    this.setState({ eventType : event.target.value })
   }
 
   handleSubmit = (event) => {
     stop(event);
     const e = event.target;
     const data = {
-      eventType: this.getCheckBoxes().toString(),
-      eventRadarSigs: this.getCheckBoxes().toString(),
+      eventType: this.state.eventType,
+      eventRadarSigs: this.state.radarSigs.toString(),
       eventendday: e.endDay.value,
       eventendtime: e.endTime.value,
       eventDescription: e.summary.value
@@ -32,52 +48,39 @@ export default class EventSummaryForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
         <div className="checkform">
             <h1>Radar Signatures</h1>
-            <div>
 
-              <div>
-                <input type="checkbox" id="tornadic-supercell" name="radarSig" value="tornadic-supercell"  />
-                <label htmlFor="tornadic-supercell">tornadic supercell</label>
-              </div>
-              <div>
-                <input type="checkbox" id="hail" name="radarSig" value="hail" />
-                <label htmlFor="hail">hail</label>
-              </div>
-              <div>
-                <input type="checkbox" id="windshear" name="radarSig" value="windshear" />
-                <label htmlFor="windshear">windshear</label>
-              </div>
-              <div>
-                <input type="checkbox" id="gustnado" name="radarSig" value="gustnado" />
-                <label htmlFor="gustnado">gustnado</label>
-              </div>
-              <div>
-                <input type="checkbox" id="flood" name="radarSig" value="flood" />
-                <label htmlFor="flood">flood</label>
-              </div>
+            <input type="checkbox" id="tornadic-supercell" onChange={this.collectRadarSigs} value="tornadic-supercell"  />
+            <label htmlFor="tornadic-supercell">tornadic supercell</label>
 
-          </div>
+            <input type="checkbox" id="hail" onChange={this.collectRadarSigs} value="hail" />
+            <label htmlFor="hail">hail</label>
+
+            <input type="checkbox" id="windshear" onChange={this.collectRadarSigs} value="windshear" />
+            <label htmlFor="windshear">windshear</label>
+
+            <input type="checkbox" id="gustnado" onChange={this.collectRadarSigs} value="gustnado" />
+            <label htmlFor="gustnado">gustnado</label>
+
+            <input type="checkbox" id="flood" onChange={this.collectRadarSigs} value="flood" />
+            <label htmlFor="flood">flood</label>
+
          </div>
 
          <div className="checkform">
             <h1>Event Type</h1>
-            <div>
-            <div>
-              <input type="checkbox" id="downburst" name="eventType" value="downburst" />
+
+              <input type="checkbox" id="downburst" onChange={this.getEventType} value="downburst" />
               <label htmlFor="downburst">downburst</label>
-            </div>
-            <div>
-              <input type="checkbox" id="hail" name="eventType" value="hail" />
+
+              <input type="checkbox" id="hail" onChange={this.getEventType} value="hail" />
               <label htmlFor="hail">hail</label>
-            </div>
-            <div>
-              <input type="checkbox" id="claws" name="eventType" value="claws" />
+
+              <input type="checkbox" id="claws" onChange={this.getEventType} value="claws" />
               <label htmlFor="tornado">tornado</label>
-            </div>
-            <div>
-              <input type="checkbox" id="thunderstorm" name="eventType" value="thunderstorm"  />
+
+              <input type="checkbox" id="thunderstorm" onChange={this.getEventType} value="thunderstorm"  />
               <label htmlFor="thunderstorm">thunderstorm</label>
-            </div>
-            </div>
+
           </div>
           <input type="date" name="endDay" min="2018-01-01" defaultValue={new Date().toJSON().slice(0,10)}/>
           <input type="time" name="endTime" min="00:00" max="23:59" defaultValue={new Date().toJSON().slice(11,16)}/>

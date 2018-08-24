@@ -6,7 +6,7 @@ import uuidv4 from 'uuid/v4';
 // TODO: break tab container into a new component with
 // logic to control startng a new collection
 // TODO:  push buttons should be a separate component too
-
+ // TODO: think of location collection as a collection...
 
 /**
  * Collection renders the form where data is collected.
