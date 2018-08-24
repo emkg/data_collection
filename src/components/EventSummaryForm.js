@@ -1,6 +1,10 @@
 import React from 'react';
 
 // TODO: add esdoc
+// TODO: fix the checkforms ...
+//        TODO: the default checks and
+//        TODO: the fact that the values are not collected
+
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 
 export default class EventSummaryForm extends React.Component {
@@ -81,8 +85,8 @@ export default class EventSummaryForm extends React.Component {
               </div>
             </div>
           </div>
-          <input type="date" name="endDay" min="2018-01-01"/>
-          <input type="time" name="endTime" min="00:00" max="23:59" />
+          <input type="date" name="endDay" min="2018-01-01" value={new Date().toJSON().slice(0,10)}/>
+          <input type="time" name="endTime" min="00:00" max="23:59" value={new Date().toJSON().slice(11,16)}/>
           <textarea name="summary" cols="50" rows="10" placeholder="remarks..."/>
           <input type="submit" />
 

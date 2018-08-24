@@ -97,8 +97,8 @@ export default class Form extends React.Component {
         <form onSubmit={this.handleSubmit}>
            Start Time:
            <div className="datetime-input">
-              <input type="date" name="startDay" min="2018-01-01" placeholder={this.props.startDay}/>
-              <input type="time" name="startTime" min="00:00" max="23:59" placeholder={this.props.startTime}/>
+              <input type="date" name="startDay" min="2018-01-01" value={this.props.startDay || new Date().toJSON().slice(0,10)}/>
+              <input type="time" name="startTime" min="00:00" max="23:59" value={this.props.startTime || new Date().toJSON().slice(11,16)}/>
             </div>
            {this.props.className === "loc" && (
              <div>
