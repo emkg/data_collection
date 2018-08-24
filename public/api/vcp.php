@@ -7,14 +7,13 @@
       $content = trim(file_get_contents("php://input"));
       $decoded = json_decode($content, true);
 
-      //$data = json_decode(file_get_contents('php://input'), true);
-      // create an insert to update this change -- it is approved so it must become an alert now
-      $sql  = "INSERT INTO `VCP`(`instrument`, `eventType`, `event_id`, `eventDescription`, `eventStart`, `eventEnd`)";
-      $sql .= "VALUES('" . $decoded['instrument'] . "', NULL, '1', '" . $decoded['eventDescription'] . "', NULL, NULL)";
-      //. "','" . $data['time'] . "','" . $data['ticketID'] . "','";
-      //$sql .= $data['software'] . "','" . $data['user'] . "','" . $data['email'] . "')";
+      // for vcp we have these attributes
+      $sql  = "INSERT INTO `VCP`(`startTime`, `endTime`, `vcp`, `collectionID`)";
+      $sql .= "VALUES('" . $decoded['startTime'] "', '" . $decoded['endTime'] "', '"
+      $sql .= $decoded['vcp'] . "', '" . $decoded['collectionID']. "')";
+
       echo $sql;
-      // insert updated data to the change, send the lab-wide email, and redirect back home
+      // send data to db
       if ($db->query($sql)) {
       		echo "\nSUCCESS!";
       } else {
