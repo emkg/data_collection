@@ -26,12 +26,15 @@ export default class Form extends React.Component {
   handleSubmit = (event) => {
     stop(event);  // do not let app refresh here
     const e = event.target;
+    const startDay = e.startDay.value;
+    const startTime = e.startTime.value;
     // data we always need
     const data = {
       eventID: this.props.eventID,
       collectionID: this.props.collectionID,
-      startDay: e.startDay.value,
-      startTime: e.startTime.value,
+      startDay: startDay,
+      startTime: startTime,
+      startDate: `${startDay}T${startTime}:00.00Z`,
       collectionType: this.props.className,
       dailyCollectionNumber: this.props.dailyCollectionNumber
     }

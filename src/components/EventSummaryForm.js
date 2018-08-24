@@ -2,19 +2,22 @@ import React from 'react';
 
 // TODO: add esdoc
 // TODO: fix the checkforms ...
-//        TODO: the default checks and
 //        TODO: the fact that the values are not collected
 
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 
 export default class EventSummaryForm extends React.Component {
 
+  getCheckBoxes() {
+    return [];
+  }
+
   handleSubmit = (event) => {
     stop(event);
     const e = event.target;
     const data = {
-      eventType: e.eventType.value,
-      eventRadarSigs: e.radarSig.value,
+      eventType: this.getCheckBoxes().toString(),
+      eventRadarSigs: this.getCheckBoxes().toString(),
       eventendday: e.endDay.value,
       eventendtime: e.endTime.value,
       eventDescription: e.summary.value

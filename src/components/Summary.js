@@ -69,15 +69,19 @@ export default class Summary extends React.Component {
 
     return (
       <div>
-        <h3>How does your data look?</h3>
-        <ReactJson src={weatherEventData} />
+        <h1>How does your data look?</h1>
 
-        {collectionsDisplay}
-
+        <h3>Event Summary</h3>
+        <div className="event-summary-row">Event Instrument: {weatherEventData.instrument}</div>
         <div className="event-summary-row">Event Start: {weatherEventData.eventstartday} {weatherEventData.eventstarttime}</div>
-        <div className="event-summary-row">Event End: {weatherEventData.eventendday} {weatherEventData.eventendday}</div>
+        <div className="event-summary-row">Event End: {weatherEventData.eventendday} {weatherEventData.eventendTime}</div>
+        <div className="event-summary-row">Event Radar Signatures: {weatherEventData.eventRadarSigs}</div>
         <div className="event-summary-row">Event Type: {weatherEventData.eventType}</div>
         <div className="event-summary-row">Event Description: {weatherEventData.eventDescription}</div>
+
+        <h3>Individual Collections</h3>
+
+        {collectionsDisplay}
 
 
 
