@@ -37,7 +37,7 @@ export default class Event extends React.Component {
                               /(?:(?:^|.*;\s*)eventState\s*\=\s*([^;]*).*$)|^.*$/, "$1")
                             )
                           );
-      this.setState(savedState);
+      this.setState({...savedState, mobile: false});
     }
     catch(err) {
       console.log("There is no saved state.")
@@ -79,7 +79,7 @@ export default class Event extends React.Component {
 
     if(this.state.mobile) {
       const initCollection = {...event_info,
-          //collectionID: event.target.initID.value,
+          dailyCollectionNumber: event.target.initID.value,
           locationLat: event.target.lat.value,
           locationLong: event.target.long.value
         };
@@ -118,6 +118,13 @@ export default class Event extends React.Component {
     this.setState({weatherEventData, mode: "end" })
   }
 
+  isMobile = (event) => {
+      stop(event);
+      mobileInstruments.includes(event.target.value)
+      ? this.setState({ mobile : true })
+      : this.setState({ mobile : false })
+  }
+
   /**
    *  Event renders different forms depending on the
    *  mode in state.
@@ -133,13 +140,13 @@ export default class Event extends React.Component {
               <form onSubmit={this.handleKickoffSubmit}>
                 Weather Event Start:
                 <div className="datetime-input">
-                  <input type="date" name="eventstartday" min="2018-01-01"/>
+                  <input type="date" name="eventstartday" min="2018-01-01" placeholder={new Date()}/>
                   <input type="time" name="eventstarttime" min="00:00" max="23:59" />
                 </div>
                 <input type="number" name="initID" placeholder="Daily Collection Number"/>
 
                 Instrument:
-                <select name="instrument">
+                <select name="instrument" onChange={this.isMobile}>
                   <option value="KOUN">KOUN</option>
                   <option value="NOXP">NOXP</option>
                 </select>
