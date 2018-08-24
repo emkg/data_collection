@@ -4,9 +4,6 @@ import EventSummaryForm from './EventSummaryForm';
 import Summary from './Summary';
 import uuidv4 from 'uuid/v4';
 
-
-// TODO: establish correct event id, validate this
-
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 // we do want a list of mobile radars because mobile radars need locations
 const mobileInstruments = ['NOXP'];

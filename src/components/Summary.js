@@ -2,10 +2,7 @@ import React from 'react';
 import ReactJson from 'react-json-view';
 //import Form from './Form';
 
-// TODO: polish the style
 // TODO: add a way to edit the data
-
-// TODO: organize data batches to send to db tables
 
 
 /**
@@ -38,13 +35,13 @@ export default class Summary extends React.Component {
     this.props.eventOver("Your data has been collected!");
     this.state.collections.map(c => {
       this.sendDataToDatabase(c, c.collectionType);
-    })
-
+    });
+    this.sendDataToDatabase(this.state.weatherEventData, "event");
   }
 
 
   /**
-
+   *
    * @param jsonPayload an object that will be sent
    * to the database stringified
    * @param type a string that is the collection type

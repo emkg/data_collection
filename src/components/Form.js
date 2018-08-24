@@ -6,7 +6,6 @@ import cx from 'classnames';
 // make sure that if in edit mode, that data overwrites correctly
 //TODO: format dates/times with moment
 
-//TODO: fix issue with collection number
 
 // prevent default form behavior so app doesn't refresh on submit
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
