@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactJson from 'react-json-view';
-import Form from './Form';
+//import Form from './Form';
 
 // TODO: polish the style
 // TODO: add a way to edit the data
@@ -27,7 +27,7 @@ export default class Summary extends React.Component {
    */
   handleSubmit = () => {
     // TODO: send state data to a fetch method
-    document.cookie = "eventState" + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie = "eventState=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     this.props.eventOver("Your data has been collected!");
     this.sendDataToDatabase(this.state.weatherEventData)
   }

@@ -30,64 +30,55 @@ export default class EventSummaryForm extends React.Component {
         <div className="checkform">
             <h1>Radar Signatures</h1>
             <div>
-            <div>
-              <input type="checkbox" id="tornadic-supercell" name="radarSig" value="tornadic-supercell" checked />
-              <label for="tornadic-supercell">Tornadic Supercell</label>
-            </div>
-            <div>
-              <input type="checkbox" id="hail" name="radarSig" value="hail" />
-              <label for="hail">Hail</label>
-            </div>
-            <div>
-              <input type="checkbox" id="claws" name="radarSig" value="claws" />
-              <label for="claws">Claws</label>
-            </div>
-            <div>
-              <input type="checkbox" id="tornadic-supercell" name="radarSig" value="tornadic-supercell" checked />
-              <label for="tornadic-supercell">Tornadic Supercell</label>
-            </div>
-            <div>
-              <input type="checkbox" id="hail" name="radarSig" value="hail" />
-              <label for="hail">Hail</label>
-            </div>
-            <div>
-              <input type="checkbox" id="claws" name="radarSig" value="claws" />
-              <label for="claws">Claws</label>
+
+              <div>
+                <input type="checkbox" id="tornadic-supercell" name="radarSig" value="tornadic-supercell"  />
+                <label htmlFor="tornadic-supercell">tornadic supercell</label>
               </div>
-            </div>
+              <div>
+                <input type="checkbox" id="hail" name="radarSig" value="hail" />
+                <label htmlFor="hail">hail</label>
+              </div>
+              <div>
+                <input type="checkbox" id="windshear" name="radarSig" value="windshear" />
+                <label htmlFor="windshear">windshear</label>
+              </div>
+              <div>
+                <input type="checkbox" id="gustnado" name="radarSig" value="gustnado" />
+                <label htmlFor="gustnado">gustnado</label>
+              </div>
+              <div>
+                <input type="checkbox" id="flood" name="radarSig" value="flood" />
+                <label htmlFor="flood">flood</label>
+              </div>
+
+          </div>
          </div>
+
          <div className="checkform">
             <h1>Event Type</h1>
             <div>
             <div>
-              <input type="checkbox" id="tornadic-supercell" name="eventType" value="tornadic-supercell" checked />
-              <label for="downburst">Downburst</label>
+              <input type="checkbox" id="downburst" name="eventType" value="downburst" />
+              <label htmlFor="downburst">downburst</label>
             </div>
             <div>
               <input type="checkbox" id="hail" name="eventType" value="hail" />
-              <label for="thunderstorm">Thunderstorm</label>
+              <label htmlFor="hail">hail</label>
             </div>
             <div>
               <input type="checkbox" id="claws" name="eventType" value="claws" />
-              <label for="tornado">Tornado</label>
+              <label htmlFor="tornado">tornado</label>
             </div>
             <div>
-              <input type="checkbox" id="tornadic-supercell" name="eventType" value="tornadic-supercell" checked />
-              <label for="downburst">Downburst</label>
+              <input type="checkbox" id="thunderstorm" name="eventType" value="thunderstorm"  />
+              <label htmlFor="thunderstorm">thunderstorm</label>
             </div>
-            <div>
-              <input type="checkbox" id="hail" name="eventType" value="hail" />
-              <label for="thunderstorm">Thunderstorm</label>
-            </div>
-            <div>
-              <input type="checkbox" id="claws" name="eventType" value="claws" />
-              <label for="tornado">Tornado</label>
-              </div>
             </div>
           </div>
-          <input type="date" name="endDay" min="2018-01-01" value={new Date().toJSON().slice(0,10)}/>
-          <input type="time" name="endTime" min="00:00" max="23:59" value={new Date().toJSON().slice(11,16)}/>
-          <textarea name="summary" cols="50" rows="10" placeholder="remarks..."/>
+          <input type="date" name="endDay" min="2018-01-01" defaultValue={new Date().toJSON().slice(0,10)}/>
+          <input type="time" name="endTime" min="00:00" max="23:59" defaultValue={new Date().toJSON().slice(11,16)}/>
+          <textarea name="summary" cols="50" rows="10" placeholder="event summary..."/>
           <input type="submit" />
 
         </form>
