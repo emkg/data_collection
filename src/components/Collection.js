@@ -66,7 +66,8 @@ export default class Collection extends React.Component {
           <Tab tab="report" clicked={openTab === "report"} handleClick={this.handleClick} />
           <Tab tab="remark" clicked={openTab === "remark"} handleClick={this.handleClick} />
         </div>
-        <Form saveData={this.props.saveData}
+        <Form convertTime={this.props.convertTime}
+              saveData={this.props.saveData}
               className={this.state.openTab}
               dailyCollectionNumber={this.state.dailyCollectionNumber}
               collectionID={this.state.collectionID}

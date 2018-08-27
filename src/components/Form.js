@@ -31,8 +31,7 @@ export default class Form extends React.Component {
     const data = {
       eventID: this.props.eventID,
       collectionID: this.props.collectionID,
-      startDay: startDay,
-      startTime: startTime,
+      collectionStart: this.props.convertTime(startDay, startTime),
       startDate: `${startDay}T${startTime}:00.00Z`,
       collectionType: this.props.className,
       dailyCollectionNumber: this.props.dailyCollectionNumber

@@ -8,8 +8,8 @@
       $decoded = json_decode($content, true);
 
       $sql  = "INSERT INTO `REMARK`(`remark`, `startTime`, `endTime`, `collectionID`)";
-      $sql .= "VALUES('" . $decoded['remark'] . "', '" . $decoded['startTime'] . "', '";
-      $sql .= $decoded['endTime'] . "', '" . $decoded['collectionID'] . "')";
+      $sql .= "VALUES('" . $decoded['remark'] . "', '" . $decoded['startTime'];
+      $sql .= "', '" .$decoded['endTime'] . "', '" . $decoded['collectionID'] . "')";
 
       echo $sql;
       // send data to db

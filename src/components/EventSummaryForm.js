@@ -34,8 +34,7 @@ export default class EventSummaryForm extends React.Component {
     const data = {
       eventType: this.state.eventType,
       eventRadarSigs: this.state.radarSigs.toString(),
-      eventendday: e.endDay.value,
-      eventendtime: e.endTime.value,
+      eventEnd: this.props.convertTime(e.endDay.value, e.endTime.value),
       eventDescription: e.summary.value
     }
 

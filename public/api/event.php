@@ -12,17 +12,21 @@
       $sql  = "INSERT INTO `EVENT`(`instrument`, `eventType`, `event_id`, `eventDescription`, `eventStart`, `eventEnd`)";
       $sql .= "VALUES('" . $decoded['instrument'] . "', '" . $decoded['eventType'] . "', '";
       $sql .= $decoded['eventID'] . "', '"  . $decoded['eventDescription'] . "', '";
-      $sql .= $decoded['eventStart'] . "', '" . $decoded['eventEnd'] . "')";
-      $sql .= "INSERT INTO `RADAR_SIGNATURE`(`event_id`, `radar_sig_value`)";
-      $sql .= "VALUES('" . $decoded['eventID'] . "', '" . $decoded['eventRadarSigs']. "')";
-
-      echo $sql;
+      $sql .= $decoded['eventStart'] . "', '" . $decoded['eventEnd'] . "');";
+      $sql2 = "INSERT INTO `RADAR_SIGNATURE`(`event_id`, `radar_sig_value`)";
+      $sql2 .= "VALUES('" . $decoded['eventID'] . "', '" . $decoded['eventRadarSigs']. "');";
 
       // send data to db
       if ($db->query($sql)) {
       		echo "\nSUCCESS!";
       } else {
           echo "Error: " . $sql . "<br>" . mysqli_error($db);
+      }
+
+      if ($db->query($sql2)) {
+          echo "\nSUCCESS!";
+      } else {
+          echo "Error: " . $sql2 . "<br>" . mysqli_error($db);
       }
 
       $db->close();

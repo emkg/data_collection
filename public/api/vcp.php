@@ -9,8 +9,8 @@
 
       // for vcp we have these attributes
       $sql  = "INSERT INTO `VCP`(`startTime`, `endTime`, `vcp`, `collectionID`)";
-      $sql .= "VALUES('" . $decoded['startTime'] "', '" . $decoded['endTime'] "', '"
-      $sql .= $decoded['vcp'] . "', '" . $decoded['collectionID']. "')";
+      $sql .= "VALUES('" . $decoded['collectionStart'] "', '" . $decoded['collectionStart'];
+      $sql .= "', '" . $decoded['vcp'] . "', '" . $decoded['collectionID']. "')";
 
       echo $sql;
       // send data to db

@@ -3,6 +3,7 @@ import Collection from './Collection';
 import EventSummaryForm from './EventSummaryForm';
 import Summary from './Summary';
 import uuidv4 from 'uuid/v4';
+import moment from 'moment';
 
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 // we do want a list of mobile radars because mobile radars need locations
@@ -65,6 +66,10 @@ export default class Event extends React.Component {
     document.cookie = "eventState=" + encodeURIComponent(JSON.stringify(this.state));
   }
 
+  convertTime = (day, time) => {
+    return moment(`${day} ${time}`).utc().format()
+  }
+
   /**
    * handleKickoffSubmit changes the mode to "collect",
    * saves initial event info, and if the instrument
@@ -75,8 +80,8 @@ export default class Event extends React.Component {
     stop(event);
 
     const event_info = {
-      eventstartday: event.target.eventstartday.value,
-      eventstarttime: event.target.eventstarttime.value
+      eventStart: this.convertTime(event.target.eventstartday.value,
+                                  event.target.eventstarttime.value)
     }
 
     if(this.state.mobile) {
@@ -96,8 +101,7 @@ export default class Event extends React.Component {
       mode: "collect",
       mobile: mobile,
       weatherEventData: {
-        eventstartday: event_info.eventstartday,
-        eventstarttime: event_info.eventstarttime,
+        eventStart: event_info.eventStart,
         instrument: instrument
       }
     });
@@ -119,7 +123,8 @@ export default class Event extends React.Component {
    * sent as function prop to EventSummaryForm
    */
   handleEventSummarySubmit = (finalWeatherEventData) => {
-    const weatherEventData = Object.assign(this.state.weatherEventData, finalWeatherEventData);
+    let weatherEventData = Object.assign(this.state.weatherEventData, finalWeatherEventData);
+    weatherEventData = {...weatherEventData, eventID: this.state.eventID};
     this.setState({weatherEventData, mode: "end" })
     this.saveState();
   }
@@ -147,7 +152,7 @@ export default class Event extends React.Component {
                 Weather Event Start:
                 <div className="datetime-input">
                   <input type="date" name="eventstartday" min="2018-01-01" defaultValue={new Date().toJSON().slice(0,10)}/>
-                  <input type="time" name="eventstarttime" min="00:00" max="23:59" defaultValue={new Date().toJSON().slice(11,16)}/>
+                  <input type="time" name="eventstarttime" min="00:00" max="23:59" defaultValue={new moment().utc().toJSON().slice(11,16)}/>
                 </div>
                 <input type="number" name="initID" placeholder="Daily Collection Number"/>
 
@@ -170,6 +175,7 @@ export default class Event extends React.Component {
           : this.state.mode === "collect"
 
             ? (<Collection
+                  convertTime={this.convertTime}
                   saveData={this.saveData}
                   endCollection={this.handleEndCollection}
                   mobile={this.state.mobile}
@@ -177,7 +183,7 @@ export default class Event extends React.Component {
 
             : this.state.mode === "summary"
 
-              ? (<EventSummaryForm handleSubmit={this.handleEventSummarySubmit} />)
+              ? (<EventSummaryForm convertTime={this.convertTime} handleSubmit={this.handleEventSummarySubmit} />)
               : (<Summary eventOver={this.props.eventOver}
                           weatherEventData={this.state.weatherEventData}
                           collections={this.state.collections}/>)

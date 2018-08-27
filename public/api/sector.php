@@ -10,9 +10,9 @@
 
 
       $sql  = "INSERT INTO `SECTOR`(`startTime`, `endTime`, `sectorStart`, `sectorEnd`, `collectionID`, `id`)";
-      $sql .= "VALUES('" . $decoded['startTime'] "', '" . $decoded['endTime'] "', '";
-      $sql .= $decoded['sectorStart'] "', '" . $decoded['sectorEnd'] "', '";
-      $sql .= $decoded['collectionID'] . "', '" . $decoded['eventID']. "')";
+      $sql .= "VALUES('" . $decoded['collectionStart'] "', '" . $decoded['collectionStart'];
+      $sql .= "', '" . $decoded['sectorStart'] "', '" . $decoded['sectorEnd'];
+      $sql .= "', '" . $decoded['collectionID'] . "')";
 
       echo $sql;
       // send data to db

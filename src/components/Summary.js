@@ -33,10 +33,19 @@ export default class Summary extends React.Component {
     // TODO: send state data to a fetch method
     document.cookie = "eventState=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     this.props.eventOver("Your data has been collected!");
-    this.state.collections.map(c => {
-      this.sendDataToDatabase(c, c.collectionType);
-    });
     this.sendDataToDatabase(this.state.weatherEventData, "event");
+    let cid;
+    this.state.collections.map( (c, i) => {
+      i === 0
+        ? cid = c.collectionID
+        : (c.id !== c.collectionID || c.collectionType === "loc")
+               ? (
+                    cid = c.collectionID,
+                    this.sendDataToDatabase(c, "collection")
+                 )
+                : this.sendDataToDatabase(c, c.collectionType);
+    });
+
   }
 
 
@@ -83,10 +92,10 @@ export default class Summary extends React.Component {
             Event Instrument: {this.state.weatherEventData.instrument}
           </div>
           <div className="event-summary-row">
-            Event Start: {this.state.weatherEventData.eventstartday} {this.state.weatherEventData.eventstarttime}
+            Event Start: {this.state.weatherEventData.eventStart}
           </div>
           <div className="event-summary-row">
-            Event End: {this.state.weatherEventData.eventendday} {this.state.weatherEventData.eventendtime}
+            Event End: {this.state.weatherEventData.eventEnd}
           </div>
           <div className="event-summary-row">
             Event Radar Signatures: {this.state.weatherEventData.eventRadarSigs}
