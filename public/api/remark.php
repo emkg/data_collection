@@ -8,15 +8,15 @@
       $decoded = json_decode($content, true);
 
       $sql  = "INSERT INTO `REMARK`(`remark`, `startTime`, `endTime`, `collectionID`)";
-      $sql .= "VALUES('" . $decoded['remark'] . "', '" . $decoded['startTime'];
-      $sql .= "', '" .$decoded['endTime'] . "', '" . $decoded['collectionID'] . "')";
+      $sql .= "VALUES('" . $decoded['remark'] . "', '" . $decoded['collectionStart'];
+      $sql .= "', '" .$decoded['collectionStart'] . "', '" . $decoded['collectionID'] . "')";
 
       echo $sql;
       // send data to db
       if ($db->query($sql)) {
       		echo "\nSUCCESS!";
       } else {
-          echo "Error: " . $sql . "<br>" . mysqli_error($db);
+          echo "Error: " . $sql . "\n" . mysqli_error($db);
       }
 
       $db->close();

@@ -20,13 +20,13 @@
       if ($db->query($sql)) {
       		echo "\nSUCCESS!";
       } else {
-          echo "Error: " . $sql . "<br>" . mysqli_error($db);
+          echo "Error: " . $sql . "\n" . mysqli_error($db);
       }
 
       if ($db->query($sql2)) {
           echo "\nSUCCESS!";
       } else {
-          echo "Error: " . $sql2 . "<br>" . mysqli_error($db);
+          echo "Error: " . $sql2 . "\n" . mysqli_error($db);
       }
 
       $db->close();

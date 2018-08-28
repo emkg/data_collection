@@ -18,9 +18,9 @@
       if ($db->query($sql)) {
       		echo "\nSUCCESS!";
       } else {
-          echo "Error: " . $sql . "<br>" . mysqli_error($db);
+          echo "Error: " . $sql . "\n" . mysqli_error($db);
       }
-      
+
       $db->close();
   }
 ?>

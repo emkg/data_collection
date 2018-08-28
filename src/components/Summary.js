@@ -30,20 +30,21 @@ export default class Summary extends React.Component {
    *  to storage. Send Thankyou to app. Submits this Event.
    */
   handleSubmit = () => {
-    // TODO: send state data to a fetch method
     document.cookie = "eventState=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     this.props.eventOver("Your data has been collected!");
     this.sendDataToDatabase(this.state.weatherEventData, "event");
     let cid;
     this.state.collections.map( (c, i) => {
-      i === 0
-        ? cid = c.collectionID
-        : (c.id !== c.collectionID || c.collectionType === "loc")
-               ? (
-                    cid = c.collectionID,
-                    this.sendDataToDatabase(c, "collection")
-                 )
-                : this.sendDataToDatabase(c, c.collectionType);
+      if(c.id !== c.collectionID) {
+        cid = c.collectionID;
+      }
+
+      if(c.collectionType === "loc") {
+        console.log(`collection type ${c.collectionType}`);
+        cid = c.collectionID, this.sendDataToDatabase(c, "collection");
+      } else {
+        this.sendDataToDatabase(c, c.collectionType);
+      }
     });
 
   }

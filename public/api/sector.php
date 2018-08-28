@@ -9,9 +9,9 @@
       $decoded = json_decode($content, true);
 
 
-      $sql  = "INSERT INTO `SECTOR`(`startTime`, `endTime`, `sectorStart`, `sectorEnd`, `collectionID`, `id`)";
-      $sql .= "VALUES('" . $decoded['collectionStart'] "', '" . $decoded['collectionStart'];
-      $sql .= "', '" . $decoded['sectorStart'] "', '" . $decoded['sectorEnd'];
+      $sql  = "INSERT INTO `SECTOR`(`startTime`, `endTime`, `sectorStart`, `sectorEnd`, `collectionID`, `id`) ";
+      $sql .= "VALUES('" . $decoded['collectionStart'] . "', '" . $decoded['collectionStart'];
+      $sql .= "', '" . $decoded['sectorStart'] . "', '" . $decoded['sectorEnd'];
       $sql .= "', '" . $decoded['collectionID'] . "')";
 
       echo $sql;
@@ -19,7 +19,7 @@
       if ($db->query($sql)) {
       		echo "\nSUCCESS!";
       } else {
-          echo "Error: " . $sql . "<br>" . mysqli_error($db);
+          echo "Error: " . $sql . "\n" . mysqli_error($db);
       }
 
       $db->close();
