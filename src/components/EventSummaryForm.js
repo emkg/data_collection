@@ -48,37 +48,60 @@ export default class EventSummaryForm extends React.Component {
         <div className="checkform">
             <h1>Radar Signatures</h1>
             <div>
-              <input type="checkbox" id="tornadic-supercell" onChange={this.collectRadarSigs} value="tornadic-supercell"  />
-              <label htmlFor="tornadic-supercell">tornadic supercell</label>
+
+              <input type="checkbox" id="downburst" onChange={this.collectRadarSigs} value="downburst" />
+              <label htmlFor="downburst">downburst</label>
 
               <input type="checkbox" id="hail" onChange={this.collectRadarSigs} value="hail" />
               <label htmlFor="hail">hail</label>
 
-              <input type="checkbox" id="windshear" onChange={this.collectRadarSigs} value="windshear" />
-              <label htmlFor="windshear">windshear</label>
+              <input type="checkbox" id="bow-echo" onChange={this.collectRadarSigs} value="bow echo" />
+              <label htmlFor="bow-echo">bow echo</label>
 
-              <input type="checkbox" id="gustnado" onChange={this.collectRadarSigs} value="gustnado" />
-              <label htmlFor="gustnado">gustnado</label>
+              <input type="checkbox" id="TDS" onChange={this.collectRadarSigs} value="TDS" />
+              <label htmlFor="TDS">TDS</label>
 
-              <input type="checkbox" id="flood" onChange={this.collectRadarSigs} value="flood" />
-              <label htmlFor="flood">flood</label>
+              <input type="checkbox" id="mesocyclone" onChange={this.collectRadarSigs} value="mesocyclone" />
+              <label htmlFor="mesocyclone">mesocyclone</label>
+
+              <input type="checkbox" id="TVS" onChange={this.collectRadarSigs} value="TVS" />
+              <label htmlFor="TVS">TVS</label>
+
+              <input type="checkbox" id="refreezing" onChange={this.collectRadarSigs} value="refreezing" />
+              <label htmlFor="refreezing">refreezing (winter)</label>
+
+              <input type="checkbox" id="other" onChange={this.collectRadarSigs} value="other" />
+              <label htmlFor="other">other</label>
             </div>
          </div>
 
          <div className="checkform">
             <h1>Event Type</h1>
               <div>
-                <input type="checkbox" id="downburst" onChange={this.getEventType} value="downburst" />
-                <label htmlFor="downburst">downburst</label>
+                <input type="checkbox" id="tornadic-supercell" onChange={this.getEventType} value="tornadic-supercell"  />
+                <label htmlFor="tornadic-supercell">tornadic supercell</label>
 
-                <input type="checkbox" id="hail" onChange={this.getEventType} value="hail" />
-                <label htmlFor="hail">hail</label>
+                <input type="checkbox" id="nontornadic-supercell" onChange={this.getEventType} value="nontornadic-supercell"  />
+                <label htmlFor="nontornadic-supercell">nontornadic supercell</label>
 
-                <input type="checkbox" id="claws" onChange={this.getEventType} value="claws" />
-                <label htmlFor="tornado">tornado</label>
+                <input type="checkbox" id="quasi-linear-convextive-system" onChange={this.getEventType} value="quasi-linear convextive system" /><label htmlFor="quasi-linear-convextive-system">quasi-linear convextive system</label>
 
-                <input type="checkbox" id="thunderstorm" onChange={this.getEventType} value="thunderstorm"  />
-                <label htmlFor="thunderstorm">thunderstorm</label>
+                <input type="checkbox" id="mesoscale-convective-system" onChange={this.getEventType} value="mesoscale convective system" /><label htmlFor="mesoscale-convective-system">mesoscale convective system</label>
+
+                <input type="checkbox" id="heavy-rain" onChange={this.getEventType} value="heavy rain/flash flooding"  />
+                <label htmlFor="heavy-rain">heavy rain/flash flooding</label>
+
+                <input type="checkbox" id="mutilcell-storms" onChange={this.getEventType} value="mutilcell storms" />
+                <label htmlFor="mutilcell-storms">mutilcell storms</label>
+
+                <input type="checkbox" id="winter-precipitation" onChange={this.getEventType} value="winter precipitation" />
+                <label htmlFor="winter-precipitation">winter precipitation</label>
+
+                <input type="checkbox" id="convective-initiation" onChange={this.getEventType} value="convective initiation" />
+                <label htmlFor="convective-initiation">convective initiation</label>
+
+                <input type="checkbox" id="other" onChange={this.getEventType} value="other"  />
+                <label htmlFor="other">other</label>
               </div>
           </div>
           <input type="date" name="endDay" min="2018-01-01" defaultValue={new Date().toJSON().slice(0,10)}/>

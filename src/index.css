@@ -156,19 +156,20 @@ textarea {
 .checkform {
   border: solid 1px blue;
   margin: 10px 0;
-  height: 350px;
+  height: 400px;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
   padding: 10px;
   justify-content: center;
 }
 
 h1 {
   text-align: center;
+  width: 100%;
 }
 
 .checkform > div > input, label {
     display: inline-block;
     width: calc(100% * (1/4) - 10px);
-    font-size: 14px;
+    font-size: 16px;
 }
