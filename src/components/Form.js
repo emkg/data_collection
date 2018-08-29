@@ -17,6 +17,16 @@ const stop = (event) => (event.stopPropagation(), event.preventDefault());
  *  className prop.
  */
 export default class Form extends React.Component {
+  state = {
+    submitted: new Map(),
+  }
+
+
+  componentWillUnmount() {
+    for(let [key, val] of this.state.submitted) {
+      this.props.saveData(val);
+    }
+  }
 
   /**
    * handleSubmit collects the data from the
@@ -33,13 +43,26 @@ export default class Form extends React.Component {
       eventID: this.props.eventID,
       collectionID: this.props.collectionID,
       collectionStart: this.props.convertTime(startDay, startTime),
-      startDate: `${startDay}T${startTime}:00.00Z`,
       collectionType: this.props.className,
       dailyCollectionNumber: this.props.dailyCollectionNumber
     }
-
     // clear fields we saved data from
     e.startTime.value = "";
+
+    // what we want is to add the type of the event
+    // to submitted with the submitted map
+    // the start time of the new event of the same type
+    // as one previously saved needs to be the end time
+    // for the last event of that type
+    let { submitted } = this.state;
+
+    if(submitted.get(data.collectionType)) {
+        submitted.get(data.collectionType).endTime = data.collectionStart;
+        this.props.saveData(submitted.get(data.collectionType))
+    } /*else {
+        submitted.set(data.collectionType, data);
+        this.setState({ submitted });
+    }*/
 
     // based on className, store certain fields in object
     // and saveData.
@@ -51,40 +74,46 @@ export default class Form extends React.Component {
           locationLong: e.long.value,
         };
         e.lat.value = ""; e.long.value = "";
-        this.props.saveData(location)
-    } else if(this.props.className === "stationaryStart") {
-
+        //this.props.saveData(location)
+        submitted.set(data.collectionType, location);
+        this.setState({ submitted });
     } else if(this.props.className === "vcp") {
         const vcp = {...data, VCP: e.vcp.value};
-        this.props.saveData(vcp);
-        e.vcp.value = ""
+        e.vcp.value = "";
+        //this.props.saveData(vcp);
+        submitted.set(data.collectionType, vcp);
+        this.setState({ submitted });
     } else if(this.props.className === "sector") {
         const sector = {...data,
           sectorStart: e.sectorStart.value,
           sectorEnd: e.sectorEnd.value
         };
-
         e.sectorStart.value = ""; e.sectorEnd.value = "";
-
-        this.props.saveData(sector)
+        //this.props.saveData(sector);
+        submitted.set(data.collectionType, sector);
+        this.setState({ submitted });
     } else if(this.props.className === "warning") {
         const warning = {...data,
           warningCounties: e.counties.value,
           warningText: e.warningText.value
         };
-
-        e.counties.value = ""; e.warningText.value = "";
-
-        this.props.saveData(warning)
+        //e.counties.value = ""; e.warningText.value = "";
+        //this.props.saveData(warning);
+        submitted.set(data.collectionType, warning);
+        this.setState({ submitted });
     } else if(this.props.className === "report") {
         const report = {...data, reportText: e.reportText.value };
         e.reportText.value = "";
-        this.props.saveData(report)
+        //this.props.saveData(report);
+        submitted.set(data.collectionType, report);
+        this.setState({ submitted });
     } else {
         // remark
         const remark = {...data, remark: e.remark.value};
         e.remark.value = "";
-        this.props.saveData(remark)
+        //this.props.saveData(remark);
+        submitted.set(data.collectionType, remark);
+        this.setState({ submitted });
     }
 
   }
