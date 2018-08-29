@@ -124,9 +124,9 @@ export default class Form extends React.Component {
 
            {this.props.className === "sector" && (
              <div>
-                Start Sector:
+                Start Sector (Left Edge):
                 <input type="number" name="sectorStart" placeholder={this.props.sectorStart}/>
-                End Sector:
+                End Sector (Right Edge):
                 <input type="number" name="sectorEnd" placeholder={this.props.sectorEnd}/>
              </div>
            )}
