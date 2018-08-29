@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import moment from 'moment';
 
 //TODO: editable data...
 // have an option to pass props and have form autofilled with Data
@@ -98,8 +99,10 @@ export default class Form extends React.Component {
         <form onSubmit={this.handleSubmit}>
            Start Time:
            <div className="datetime-input">
-              <input type="date" name="startDay" min="2018-01-01" defaultValue={this.props.startDay || new Date().toJSON().slice(0,10)}/>
-              <input type="time" name="startTime" min="00:00" max="23:59" defaultValue={this.props.startTime || new Date().toJSON().slice(11,16)}/>
+              <input type="date" name="startDay" min="2018-01-01"
+                      defaultValue={this.props.startDay || new Date().toJSON().slice(0,10)}/>
+              <input type="time" name="startTime" min="00:00" max="23:59"
+                      defaultValue={this.props.startTime || new moment().utc().toJSON().slice(11,16)}/>
             </div>
            {this.props.className === "loc" && (
              <div>

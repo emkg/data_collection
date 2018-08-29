@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 // TODO: add esdoc
 
@@ -105,7 +106,7 @@ export default class EventSummaryForm extends React.Component {
               </div>
           </div>
           <input type="date" name="endDay" min="2018-01-01" defaultValue={new Date().toJSON().slice(0,10)}/>
-          <input type="time" name="endTime" min="00:00" max="23:59" defaultValue={new Date().toJSON().slice(11,16)}/>
+          <input type="time" name="endTime" min="00:00" max="23:59" defaultValue={new moment().utc().toJSON().slice(11,16)}/>
           <textarea name="summary" cols="50" rows="10" placeholder="event summary..."/>
           <input type="submit" />
 
