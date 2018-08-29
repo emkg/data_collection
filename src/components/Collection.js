@@ -56,16 +56,23 @@ export default class Collection extends React.Component {
     const { openTab } = this.state;
     return (
       <div className="collection">
-        <div className="tab-container">
-          {this.props.mobile &&
-            (<Tab tab="loc" clicked={openTab === "loc"} handleClick={this.handleClick} />
+          {this.props.mobile && (
+            <div className="tab-container">
+              <Tab tab="loc" clicked={openTab === "loc"} handleClick={this.handleClick} />
+              <Tab tab="vcp" clicked={openTab === "vcp"} handleClick={this.handleClick} />
+              <Tab tab="sector" clicked={openTab === "sector"} handleClick={this.handleClick} />
+              <Tab tab="remark" clicked={openTab === "remark"} handleClick={this.handleClick} />
+            </div>
           )}
-          <Tab tab="vcp" clicked={openTab === "vcp"} handleClick={this.handleClick} />
-          <Tab tab="sector" clicked={openTab === "sector"} handleClick={this.handleClick} />
-          <Tab tab="warning" clicked={openTab === "warning"} handleClick={this.handleClick} />
-          <Tab tab="report" clicked={openTab === "report"} handleClick={this.handleClick} />
-          <Tab tab="remark" clicked={openTab === "remark"} handleClick={this.handleClick} />
-        </div>
+          {!this.props.mobile && (
+            <div className="tab-container">
+              <Tab tab="vcp" clicked={openTab === "vcp"} handleClick={this.handleClick} />
+              <Tab tab="sector" clicked={openTab === "sector"} handleClick={this.handleClick} />
+              <Tab tab="warning" clicked={openTab === "warning"} handleClick={this.handleClick} />
+              <Tab tab="report" clicked={openTab === "report"} handleClick={this.handleClick} />
+              <Tab tab="remark" clicked={openTab === "remark"} handleClick={this.handleClick} />
+            </div>
+          )}
         <Form convertTime={this.props.convertTime}
               saveData={this.props.saveData}
               className={this.state.openTab}
