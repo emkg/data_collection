@@ -40,16 +40,17 @@ export default class EventSummaryForm extends React.Component {
     }
 
     this.props.handleSubmit(data);
+    window.scrollTo(0,0);
   }
 
   render() {
     return (
       <div className="event-summary">
         <form onSubmit={this.handleSubmit}>
-        <h1>Weather Event Summary</h1>
+        <h2>Weather Event Summary</h2>
         <p>Enter the details of the weather event to summarize before submitting the data to storage. </p>
         <div className="checkform">
-            <h2>Radar Signatures</h2>
+            <h3>Radar Signatures</h3>
             <div>
 
               <input type="checkbox" id="downburst" onChange={this.collectRadarSigs} value="downburst" />
@@ -79,7 +80,7 @@ export default class EventSummaryForm extends React.Component {
          </div>
 
          <div className="checkform">
-            <h2>Event Type</h2>
+            <h3>Event Type</h3>
               <div>
                 <input type="checkbox" id="tornadic-supercell" onChange={this.getEventType} value="tornadic-supercell"  />
                 <label htmlFor="tornadic-supercell">tornadic supercell</label>

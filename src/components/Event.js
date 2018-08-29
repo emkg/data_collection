@@ -107,6 +107,7 @@ export default class Event extends React.Component {
     });
 
     this.saveState();
+    window.scrollTo(0,0);
   }
 
   /**
@@ -116,6 +117,7 @@ export default class Event extends React.Component {
   handleEndCollection = () => {
     this.setState({ mode: "summary" })
     this.saveState();
+    window.scrollTo(0,0);
   }
 
   /**
@@ -127,6 +129,7 @@ export default class Event extends React.Component {
     weatherEventData = {...weatherEventData, eventID: this.state.eventID};
     this.setState({weatherEventData, mode: "end" })
     this.saveState();
+    window.scrollTo(0,0);
   }
 
   isMobile = (event) => {
