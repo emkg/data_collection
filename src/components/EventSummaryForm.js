@@ -46,8 +46,10 @@ export default class EventSummaryForm extends React.Component {
     return (
       <div className="event-summary">
         <form onSubmit={this.handleSubmit}>
+        <h1>Weather Event Summary</h1>
+        <p>Enter the details of the weather event to summarize before submitting the data to storage. </p>
         <div className="checkform">
-            <h1>Radar Signatures</h1>
+            <h2>Radar Signatures</h2>
             <div>
 
               <input type="checkbox" id="downburst" onChange={this.collectRadarSigs} value="downburst" />
@@ -77,7 +79,7 @@ export default class EventSummaryForm extends React.Component {
          </div>
 
          <div className="checkform">
-            <h1>Event Type</h1>
+            <h2>Event Type</h2>
               <div>
                 <input type="checkbox" id="tornadic-supercell" onChange={this.getEventType} value="tornadic-supercell"  />
                 <label htmlFor="tornadic-supercell">tornadic supercell</label>
@@ -105,9 +107,14 @@ export default class EventSummaryForm extends React.Component {
                 <label htmlFor="other">other</label>
               </div>
           </div>
-          <input type="date" name="endDay" min="2018-01-01" defaultValue={new Date().toJSON().slice(0,10)}/>
-          <input type="time" name="endTime" min="00:00" max="23:59" defaultValue={new moment().utc().toJSON().slice(11,16)}/>
-          <textarea name="summary" cols="50" rows="10" placeholder="event summary..."/>
+
+          <p>Weather Event End time:</p>
+          <div className="datetime-input">
+            <input type="date" name="endDay" min="2018-01-01" defaultValue={new Date().toJSON().slice(0,10)}/>
+            <input type="time" name="endTime" min="00:00" max="23:59" defaultValue={new moment().utc().toJSON().slice(11,16)}/>
+          </div>
+          <p>Weather Event Summary:</p>
+          <textarea name="summary" cols="50" rows="10" />
           <input type="submit" />
 
         </form>
