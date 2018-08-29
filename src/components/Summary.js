@@ -86,7 +86,7 @@ export default class Summary extends React.Component {
       });
       return (
         <div>
-          <h1>How does your data look?</h1>
+          <h2>How does your data look?</h2>
 
           <h3>Event Summary</h3>
           <div className="event-summary-row">
