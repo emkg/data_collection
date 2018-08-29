@@ -168,3 +168,7 @@ textarea {
     width: calc(100% * (1/4) - 10px);
     font-size: 16px;
 }
+
+.noedit {
+  display: none;
+}

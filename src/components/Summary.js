@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactJson from 'react-json-view';
-//import Form from './Form';
+import CollectionSummaryRow from './CollectionSummaryRow';
 
 // TODO: add a way to edit the data
 
@@ -74,13 +74,14 @@ export default class Summary extends React.Component {
       const collectionsDisplay = this.state.collections.map((c, i) => {
           let rows = [];
           for (var property in c) {
-            let rowvalue = `${property}: ${c[property]}`;
-            rows.push(<div>{rowvalue}</div>);
+            //let rowvalue = `${property}: ${c[property]}`;
+            //rows.push(<div>{rowvalue}</div>);
+            rows.push(<CollectionSummaryRow attr={property} value={c[property]}/>);
           }
           return (
             <div className="event-summary-row">
               {rows}
-              <button onClick={this.edit}>EDIT</button>
+              //<button onClick={this.edit}>EDIT</button>
             </div>
           );
       });
