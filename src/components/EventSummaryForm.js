@@ -40,7 +40,6 @@ export default class EventSummaryForm extends React.Component {
     }
 
     this.props.handleSubmit(data);
-    window.scrollTo(0,0);
   }
 
   render() {
@@ -111,8 +110,10 @@ export default class EventSummaryForm extends React.Component {
 
           <p>Weather Event End time:</p>
           <div className="datetime-input">
-            <input type="date" name="endDay" min="2018-01-01" defaultValue={new Date().toJSON().slice(0,10)}/>
-            <input type="time" name="endTime" min="00:00" max="23:59" defaultValue={new moment().utc().toJSON().slice(11,16)}/>
+            <input type="date" name="endDay" min="2018-01-01"
+                  defaultValue={new Date().toJSON().slice(0,10)}/>
+            <input type="time" name="endTime" min="00:00" max="23:59" required
+                  defaultValue={new moment().utc().toJSON().slice(11,16)}/>
           </div>
           <p>Weather Event Summary:</p>
           <textarea name="summary" cols="50" rows="10" />

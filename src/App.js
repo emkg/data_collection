@@ -19,6 +19,7 @@ export default class App extends React.Component {
    */
   startEvent = (thankyou) => {
     this.setState({ weatherEvent: !this.state.weatherEvent, thankyou })
+    window.scrollTo(0,0);
   }
 
   /**

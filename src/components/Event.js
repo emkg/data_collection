@@ -154,8 +154,10 @@ export default class Event extends React.Component {
               <form onSubmit={this.handleKickoffSubmit}>
                 Weather Event Start:
                 <div className="datetime-input">
-                  <input type="date" name="eventstartday" min="2018-01-01" defaultValue={new Date().toJSON().slice(0,10)}/>
-                  <input type="time" name="eventstarttime" min="00:00" max="23:59" defaultValue={new moment().utc().toJSON().slice(11,16)}/>
+                  <input type="date" name="eventstartday" min="2018-01-01"
+                              defaultValue={new Date().toJSON().slice(0,10)}/>
+                  <input type="time" name="eventstarttime" min="00:00" max="23:59" required
+                              defaultValue={new moment().utc().toJSON().slice(11,16)}/>
                 </div>
                 <input type="number" name="initID" placeholder="Daily Collection Number"/>
 

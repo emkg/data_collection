@@ -24,7 +24,8 @@ export default class Form extends React.Component {
 
   componentWillUnmount() {
     for(let [key, val] of this.state.submitted) {
-      this.props.saveData(val);
+      this.props.saveData({...val, collectionEnd: new moment().utc().format()});
+      //default end time is now since they didn't overwrite it
     }
   }
 
@@ -57,12 +58,9 @@ export default class Form extends React.Component {
     let { submitted } = this.state;
 
     if(submitted.get(data.collectionType)) {
-        submitted.get(data.collectionType).endTime = data.collectionStart;
+        submitted.get(data.collectionType).collectionEnd = data.collectionStart;
         this.props.saveData(submitted.get(data.collectionType))
-    } /*else {
-        submitted.set(data.collectionType, data);
-        this.setState({ submitted });
-    }*/
+    } // we have to submit this collection or else we'll overwrite it
 
     // based on className, store certain fields in object
     // and saveData.
@@ -126,59 +124,59 @@ export default class Form extends React.Component {
     return (
       <div className={cx(this.props.className)}>
         <form onSubmit={this.handleSubmit}>
-           Start Time:
+           <p>Start Time:</p>
            <div className="datetime-input">
               <input type="date" name="startDay" min="2018-01-01"
-                      defaultValue={this.props.startDay || new Date().toJSON().slice(0,10)}/>
-              <input type="time" name="startTime" min="00:00" max="23:59"
-                      defaultValue={this.props.startTime || new moment().utc().toJSON().slice(11,16)}/>
+                      defaultValue={new Date().toJSON().slice(0,10)}/>
+              <input type="time" name="startTime" min="00:00" max="23:59" required
+                      defaultValue={new moment().utc().toJSON().slice(11,16)}/>
             </div>
            {this.props.className === "loc" && (
              <div>
-                Location Lattitude:
-                <input type="number" name="lat" placeholder={this.props.lat}/>
-                Location Longitude
-                <input type="number" name="long" placeholder={this.props.long}/>
-                Daily Collection ID:
-                <input type="number" name="dcn" placeholder={this.props.dailyCollectionNumber}/>
+                <p>Location Lattitude:</p>
+                <input type="number" name="lat" />
+                <p>Location Longitude</p>
+                <input type="number" name="long" />
+                <p>Daily Collection ID:</p>
+                <input type="number" name="dcn" />
              </div>
            )}
 
            {this.props.className === "vcp" && (
              <div>
-                VCP:
-                <input type="text" name="vcp" placeholder={this.props.vcp}/>
+                <p>VCP:</p>
+                <input type="text" name="vcp" />
              </div>
            )}
 
            {this.props.className === "sector" && (
              <div>
-                Start Sector (Left Edge):
+                <p>Start Sector (Left Edge):</p>
                 <input type="number" name="sectorStart" placeholder={this.props.sectorStart}/>
-                End Sector (Right Edge):
+                <p>End Sector (Right Edge):</p>
                 <input type="number" name="sectorEnd" placeholder={this.props.sectorEnd}/>
              </div>
            )}
 
            {this.props.className === "warning" && (
              <div>
-                Warning Counties:
+                <p>Warning Counties:</p>
                 <input type="text" name="counties" placeholder="counties..."  />
-                Warning Text:
+                <p>Warning Text:</p>
                 <textarea name="warningText" cols="50" rows="10" placeholder={this.props.warningText}/>
              </div>
            )}
 
            {this.props.className === "report" && (
              <div>
-                Report Text:
+                <p>Report Text:</p>
                 <textarea name="reportText" cols="50" rows="10" placeholder={this.props.reportText}/>
              </div>
            )}
 
            {this.props.className === "remark" && (
              <div>
-                Remarks:
+                <p>Remarks:</p>
                 <textarea name="remark" cols="50" rows="10" placeholder={this.props.remarks}/>
              </div>
            )}
