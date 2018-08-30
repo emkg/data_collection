@@ -173,7 +173,7 @@ export default class Event extends React.Component {
                   </div>
                 )}
 
-                <input type="submit" />
+                <input className="form-enter-data" value="GO!" type="submit" />
               </form>
             </div>
           )

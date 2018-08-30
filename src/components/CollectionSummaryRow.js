@@ -3,20 +3,30 @@ import cx from 'classnames';
 
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 export default class CollectionSummaryRow extends React.Component {
-    state = { noedit: false };
+
+    state = { noedit: false, value: this.props.value, editButton: "EDIT" };
 
     edit = (event) => {
       stop(event);
-      this.setState({ noedit: !this.state.noedit });
+      const value = event.target.value;
+      const editButton = this.state.noedit ? "EDIT" : "ENTER";
+      this.setState({ noedit: !this.state.noedit, value, editButton });
+
     }
 
     render() {
       const { noedit } = this.state;
       return (
         <div className="event-summary-row">
-          <span>{this.props.attr}</span> <span className={cx({ noedit } )}>{this.props.value}</span>
-          <input className={cx({ noedit : !noedit })} type="text" />
-          <button onClick={this.edit}>EDIT</button>
+          <div>
+            <span>{this.props.attr}</span>
+            <span className={cx({ noedit } )}>{this.state.value}</span>
+          </div>
+
+          <form className="edit-preview" onSubmit={this.edit}>
+            <input type="text" className={cx({ noedit : !noedit })}  />
+            <input type="submit" value={this.state.editButton}/>
+          </form>
         </div>
       )
     }

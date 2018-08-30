@@ -181,7 +181,7 @@ export default class Form extends React.Component {
              </div>
            )}
 
-           <input type="submit" value="enter data" />
+           <input className="form-enter-data" type="submit" value="enter data" />
         </form>
       </div>
     )

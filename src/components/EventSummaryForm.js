@@ -117,7 +117,7 @@ export default class EventSummaryForm extends React.Component {
           </div>
           <p>Weather Event Summary:</p>
           <textarea name="summary" cols="50" rows="10" />
-          <input type="submit" />
+          <input type="submit" className="form-enter-data" value="enter data" />
 
         </form>
       </div>

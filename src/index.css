@@ -17,6 +17,12 @@ body {
   flex-flow: column nowrap;
 }
 
+select, input {
+  width: 100%;
+  font-size: 16px;
+  margin: 5% 0;
+}
+
 form {
   display: flex;
   flex-flow: column nowrap;
@@ -26,10 +32,15 @@ form {
   padding: 10%;
 }
 
-select, input {
-  width: 100%;
-  font-size: 16px;
-  margin: 5% 0;
+.form-enter-data {
+  margin-top: 30%;
+  padding: 2%;
+  font-size: 14px;
+  font-family: monospace;
+  min-width: 150px;
+  max-width: 33%;
+  align-self: center;
+  background: lightgray;
 }
 
 .datetime-input {
@@ -44,17 +55,6 @@ input[type="date"], input[type="time"] {
 input[type="checkbox"] {
   width: unset;
   margin-right: 2px;
-}
-
-input[type="submit"] {
-  margin-top: 30%;
-  padding: 2%;
-  font-size: 14px;
-  font-family: monospace;
-  min-width: 150px;
-  max-width: 33%;
-  align-self: center;
-  background: lightgray;
 }
 
 textarea {
@@ -150,11 +150,40 @@ textarea {
   outline: 0;
 }
 
+.collections-summary {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 100%;
+  overflow-y: scroll;
+
+}
+
 .event-summary-row {
   border-bottom: solid lightgray 1px;
   margin: 2px;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+
 }
 
+.event-summary-row > form {
+  align-self: flex-end;
+}
+
+.event-summary-row > div {
+  align-self: flex-start;
+  display: flex;
+  justify-content: space-around;
+}
+
+.edit-preview {
+  border: none;
+  padding: unset;
+  margin: unset;
+}
 
 .checkform {
   display: flex;

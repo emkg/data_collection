@@ -112,9 +112,9 @@ export default class Summary extends React.Component {
           <div className="event-summary-row"/>
 
           <h3>Individual Collections</h3>
-
-          {collectionsDisplay}
-
+          <div className="collections-summary" >
+            {collectionsDisplay}
+          </div>
           <div className="new-collection"
              onClick={this.handleSubmit}>{"It's ALL GOOD!"}
           </div>

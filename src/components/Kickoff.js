@@ -24,7 +24,7 @@ export default class Kickoff extends React.Component {
               <input type="number" placeholder="long"/>
             </div>
           )}
-          <input type="submit" />
+          <input className="form-enter-data" type="submit" value="GO!"/>
         </form>
       </div>
     )
