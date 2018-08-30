@@ -8,7 +8,7 @@
       $decoded = json_decode($content, true);
 
       $colStart = $decoded['collectionStart'];
-      $vcp = $decoded['vcp'];
+      $vcp = $decoded['VCP'];
       $colID = $decoded['collectionID'];
 
       // for vcp we have these attributes

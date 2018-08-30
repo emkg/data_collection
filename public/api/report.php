@@ -10,7 +10,7 @@
 
       $sql  = "INSERT INTO `REPORT`(`collectionID`, `startTime`, `reportText`) ";
       $sql .= "VALUES('" . $decoded['collectionID'];
-      $sql .= "', '" . $decoded['startTime'] . "', '" . $decoded['reportText'] . "')";
+      $sql .= "', '" . $decoded['collectionStart'] . "', '" . $decoded['reportText'] . "')";
 
       echo $sql;
       // send data to db

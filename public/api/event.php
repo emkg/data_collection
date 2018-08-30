@@ -8,13 +8,19 @@
       $content = trim(file_get_contents("php://input"));
       $decoded = json_decode($content, true);
 
+
+
       // when we have an event we need to also add each radar sig
       $sql  = "INSERT INTO `EVENT`(`instrument`, `eventType`, `event_id`, `eventDescription`, `eventStart`, `eventEnd`)";
       $sql .= "VALUES('" . $decoded['instrument'] . "', '" . $decoded['eventType'] . "', '";
       $sql .= $decoded['eventID'] . "', '"  . $decoded['eventDescription'] . "', '";
       $sql .= $decoded['eventStart'] . "', '" . $decoded['eventEnd'] . "');";
+
       $sql2 = "INSERT INTO `RADAR_SIGNATURE`(`event_id`, `radar_sig_value`)";
       $sql2 .= "VALUES('" . $decoded['eventID'] . "', '" . $decoded['eventRadarSigs']. "');";
+
+      echo $sql;
+      echo $sql2;
 
       // send data to db
       if ($db->query($sql)) {

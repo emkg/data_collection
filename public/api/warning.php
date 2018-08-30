@@ -12,7 +12,7 @@
       $warnText = $decoded['warningText'];
 
       $sql  = "INSERT INTO `WARNING`(`startTime`, `collectionID`, `warningText`)";
-      $sql .= "VALUES('" . $colStart . "', '" . $colID . "', '" . $warnTexts . "')";
+      $sql .= "VALUES('" . $colStart . "', '" . $colID . "', '" . $warnText . "')";
 
       echo $sql;
       // send data to db
