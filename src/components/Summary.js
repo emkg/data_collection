@@ -79,7 +79,7 @@ export default class Summary extends React.Component {
             rows.push(<CollectionSummaryRow attr={property} value={c[property]}/>);
           }
           return (
-            <div className="event-summary-row">
+            <div >
               {rows}
               //<button onClick={this.edit}>EDIT</button>
             </div>
