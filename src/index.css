@@ -154,8 +154,6 @@ textarea {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  height: 100%;
-  overflow-y: scroll;
 
 }
 
@@ -165,18 +163,21 @@ textarea {
   width: 100%;
   height: 30px;
   display: flex;
-
+  overflow-x: hidden;
   justify-content: space-between;
-  align-items: baseline;
-
 }
 
-
-
 .edit-preview {
+  display: block;
   border: none;
   padding: unset;
   margin: unset;
+}
+
+.edit-preview > input {
+  width: unset;
+  margin: unset;
+  border: dotted 1px lightgray;
 }
 
 .checkform {

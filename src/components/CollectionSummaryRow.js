@@ -8,24 +8,27 @@ export default class CollectionSummaryRow extends React.Component {
 
     edit = (event) => {
       stop(event);
-      const value = event.target.value;
-      const editButton = this.state.noedit ? "EDIT" : "ENTER";
-      this.setState({ noedit: !this.state.noedit, value, editButton });
+      const value = event.target.newValue.value;
+      //const editButton = this.state.noedit ? "EDIT" : "ENTER";
+      this.setState({ noedit: false, value: value });
+    }
 
+    showHideInput = () => {
+      this.setState({ noedit: !this.state.noedit })
     }
 
     render() {
       const { noedit } = this.state;
       return (
-        <div className="event-summary-row">
+        <div className="event-summary-row" >
 
-            <span>{this.props.attr}</span>
-            <span className={cx({ noedit }, "middle")}>{this.state.value}</span>
+            <span onClick={this.showHideInput}>{this.props.attr}</span>
+            <span onClick={this.showHideInput} className={cx({ noedit }, "middle")}>{this.state.value}</span>
 
 
-          <form className="edit-preview" onSubmit={this.edit}>
-            <input type="text" className={cx({ noedit : !noedit }, "middle")}  />
-            <input type="submit" value={this.state.editButton}/>
+          <form className={cx({ noedit : !noedit }, "edit-preview")} onSubmit={this.edit}>
+            <input type="text" name="newValue" />
+
           </form>
         </div>
       )

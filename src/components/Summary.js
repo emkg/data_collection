@@ -74,14 +74,13 @@ export default class Summary extends React.Component {
       const collectionsDisplay = this.state.collections.map((c, i) => {
           let rows = [];
           for (var property in c) {
-            //let rowvalue = `${property}: ${c[property]}`;
-            //rows.push(<div>{rowvalue}</div>);
-            rows.push(<CollectionSummaryRow attr={property} value={c[property]}/>);
+            if (property.slice(-2) !== "ID" && property !== "" && property !== "//") {
+              rows.push(<CollectionSummaryRow attr={property} value={c[property]}/>);
+            }
           }
           return (
             <div >
               {rows}
-              //<button onClick={this.edit}>EDIT</button>
             </div>
           );
       });
