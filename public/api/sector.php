@@ -9,7 +9,7 @@
       $decoded = json_decode($content, true);
 
 
-      $sql  = "INSERT INTO `SECTOR`(`startTime`, `endTime`, `sectorStart`, `sectorEnd`, `collectionID`, `id`) ";
+      $sql  = "INSERT INTO `SECTOR`(`startTime`, `endTime`, `sectorStart`, `sectorEnd`, `collectionID`) ";
       $sql .= "VALUES('" . $decoded['collectionStart'] . "', '" . $decoded['collectionStart'];
       $sql .= "', '" . $decoded['sectorStart'] . "', '" . $decoded['sectorEnd'];
       $sql .= "', '" . $decoded['collectionID'] . "')";
