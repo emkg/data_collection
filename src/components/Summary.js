@@ -94,13 +94,6 @@ export default class Summary extends React.Component {
           let rows = [];
           rows.push(<h4>{c["collectionType"]}</h4>);
           rows = this.getCollectionSummaryRows(c, rows);
-          /*for (var cprop in c) {
-            if (cprop.slice(-2) !== "ID" && cprop !== "" && cprop !== "//") {
-              rows.push(<CollectionSummaryRow
-                          attr={this.removeCamelCase(cprop)}
-                          value={c[cprop]}/>);
-            }
-          }*/
           return (
             <div>
               {rows}
@@ -108,15 +101,6 @@ export default class Summary extends React.Component {
           );
       });
       const eventDisplay = this.getCollectionSummaryRows(this.state.weatherEventData);
-      /*for (var eprop in this.state.weatherEventData) {
-          if (eprop.slice(-2) !== "ID" && eprop !== "" && eprop !== "//") {
-            eventDisplay.push(
-              <CollectionSummaryRow
-                    attr={this.removeCamelCase(eprop)}
-                    value={this.state.weatherEventData[eprop]} />
-            );
-          }
-      }*/
       return (
         <div>
           <h2>How does your data look?</h2>
