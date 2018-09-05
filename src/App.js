@@ -12,6 +12,9 @@ import './App.css';
 export default class App extends React.Component {
   state = { weatherEvent: false }
 
+  componentDidMount() {
+    window.scrollTo(0,0);
+  }
   /**
    * When startEvent is triggered, the weatherEvent in state
    *   is flipped on or off. A thankyou message can be supplied,
