@@ -73,40 +73,33 @@ export default class Summary extends React.Component {
     if(this.state.collections) {
       const collectionsDisplay = this.state.collections.map((c, i) => {
           let rows = [];
-          for (var property in c) {
-            if (property.slice(-2) !== "ID" && property !== "" && property !== "//") {
-              rows.push(<CollectionSummaryRow attr={property} value={c[property]}/>);
+          for (var cprop in c) {
+            if (cprop.slice(-2) !== "ID" && cprop !== "" && cprop !== "//") {
+              rows.push(<CollectionSummaryRow attr={cprop} value={c[cprop]}/>);
             }
           }
           return (
-            <div >
+            <div>
               {rows}
             </div>
           );
       });
+      const eventDisplay = [];
+      for (var eprop in this.state.weatherEventData) {
+          if (eprop.slice(-2) !== "ID" && eprop !== "" && eprop !== "//") {
+            eventDisplay.push(
+              <CollectionSummaryRow attr={eprop} value={this.state.weatherEventData[eprop]} />
+            );
+          }
+      }
       return (
         <div>
           <h2>How does your data look?</h2>
 
           <h3>Event Summary</h3>
-          <div className="event-summary-row">
-            Event Instrument: {this.state.weatherEventData.instrument}
-          </div>
-          <div className="event-summary-row">
-            Event Start: {this.state.weatherEventData.eventStart}
-          </div>
-          <div className="event-summary-row">
-            Event End: {this.state.weatherEventData.eventEnd}
-          </div>
-          <div className="event-summary-row">
-            Event Radar Signatures: {this.state.weatherEventData.eventRadarSigs}
-          </div>
-          <div className="event-summary-row">
-            Event Type: {this.state.weatherEventData.eventType}
-          </div>
-          <div className="event-summary-row">
-            Event Description: {this.state.weatherEventData.eventDescription}
-          </div>
+
+            {eventDisplay}
+      
 
           <div className="event-summary-row"/>
 

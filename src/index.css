@@ -183,8 +183,10 @@ textarea {
 .checkform {
   display: flex;
   flex-flow: column nowrap;
-  padding: 10px;
-  justify-content: center;
+}
+
+.checkform > div {
+  justify-content: space-between;
 }
 
 .checkform > div > input, label {
@@ -203,5 +205,5 @@ textarea {
 }
 
 .full-width-a-tag {
-  width: 100%;
+  width: 50%;
 }

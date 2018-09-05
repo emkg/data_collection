@@ -8,7 +8,9 @@ export default class CollectionSummaryRow extends React.Component {
 
     edit = (event) => {
       stop(event);
-      const value = event.target.newValue.value;
+      const value = event.target.newValue.value === ""
+                      ? this.state.value
+                      : event.target.newValue.value;
       //const editButton = this.state.noedit ? "EDIT" : "ENTER";
       this.setState({ noedit: false, value: value });
     }
@@ -27,7 +29,7 @@ export default class CollectionSummaryRow extends React.Component {
 
 
           <form className={cx({ noedit : !noedit }, "edit-preview")} onSubmit={this.edit}>
-            <input type="text" name="newValue" value={this.state.value}/>
+            <input type="text" name="newValue" placeholder={this.state.value}/>
 
           </form>
         </div>
