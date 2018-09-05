@@ -22,8 +22,8 @@ export default class CollectionSummaryRow extends React.Component {
       return (
         <div className="event-summary-row" >
 
-            <span onClick={this.showHideInput}>{this.props.attr}</span>
-            <span onClick={this.showHideInput} className={cx({ noedit }, "middle")}>{this.state.value}</span>
+            <a href="#link" className="full-width-a-tag" onClick={this.showHideInput}>{this.props.attr}</a>
+            <a href="#link" onClick={this.showHideInput} className={cx({ noedit }, "middle")}>{this.state.value}</a>
 
 
           <form className={cx({ noedit : !noedit }, "edit-preview")} onSubmit={this.edit}>

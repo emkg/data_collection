@@ -196,3 +196,12 @@ textarea {
 .noedit {
   display: none;
 }
+
+.event-summary-row > a {
+  text-decoration: none;
+  color: black;
+}
+
+.full-width-a-tag {
+  width: 100%;
+}
