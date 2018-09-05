@@ -22,10 +22,10 @@ export default class CollectionSummaryRow extends React.Component {
     render() {
       const { noedit } = this.state;
       return (
-        <div className="event-summary-row" >
+        <div id={this.props.id} className="event-summary-row" >
 
-            <a href="#link" className="full-width-a-tag" onClick={this.showHideInput}>{this.props.attr}</a>
-            <a href="#link" onClick={this.showHideInput} className={cx({ noedit }, "middle")}>{this.state.value}</a>
+            <a href={`#${this.props.id}`} className="full-width-a-tag" onClick={this.showHideInput}>{this.props.attr}</a>
+            <a href={`#${this.props.id}`} onClick={this.showHideInput} className={cx({ noedit }, "middle")}>{this.state.value}</a>
 
 
           <form className={cx({ noedit : !noedit }, "edit-preview")} onSubmit={this.edit}>

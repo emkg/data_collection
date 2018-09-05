@@ -34,18 +34,18 @@ export default class Summary extends React.Component {
     this.props.eventOver("Your data has been collected!");
     this.sendDataToDatabase(this.state.weatherEventData, "event");
     let cid;
+
     this.state.collections.map( (c, i) => {
       if(c.id !== c.collectionID) {
         cid = c.collectionID;
       }
-
       if(c.collectionType === "loc") {
-        console.log(`collection type ${c.collectionType}`);
         cid = c.collectionID, this.sendDataToDatabase(c, "collection");
       } else {
         this.sendDataToDatabase(c, c.collectionType);
       }
     });
+    window.scrollTo(0,0);
   }
 
   removeCamelCase(stringInCamelCase) {
@@ -80,6 +80,7 @@ export default class Summary extends React.Component {
     for (var property in object) {
       if (property.slice(-2) !== "ID" && property !== "" && property !== "//") {
         newArray.push(<CollectionSummaryRow
+                    id={`${object[property]}${Math.floor(Math.random() * 101)}`}
                     attr={this.removeCamelCase(property)}
                     value={object[property]}/>);
       }
@@ -106,16 +107,16 @@ export default class Summary extends React.Component {
           <h2>How does your data look?</h2>
 
           <h3>Event Summary</h3>
+          {eventDisplay}
 
-            {eventDisplay}
-
-
-          <br/><br/>
+          <br/>
+          <br/>
 
           <h3>Individual Collections</h3>
           <div className="collections-summary" >
             {collectionsDisplay}
           </div>
+
           <div className="new-collection"
              onClick={this.handleSubmit}>{"It's ALL GOOD!"}
           </div>
