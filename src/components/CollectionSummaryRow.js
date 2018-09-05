@@ -27,7 +27,7 @@ export default class CollectionSummaryRow extends React.Component {
 
 
           <form className={cx({ noedit : !noedit }, "edit-preview")} onSubmit={this.edit}>
-            <input type="text" name="newValue" />
+            <input type="text" name="newValue" value={this.state.value}/>
 
           </form>
         </div>
