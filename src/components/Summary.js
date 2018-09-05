@@ -46,9 +46,15 @@ export default class Summary extends React.Component {
         this.sendDataToDatabase(c, c.collectionType);
       }
     });
-
   }
 
+  removeCamelCase(stringInCamelCase) {
+    return stringInCamelCase.replace(
+      /[a-z][A-Z]/g, (letters, i) => (
+        letters[0] + " " + letters[1].toLowerCase()
+      )
+    );
+  }
 
   /**
    *
@@ -69,29 +75,48 @@ export default class Summary extends React.Component {
     })
   }
 
+  getCollectionSummaryRows(object, array) {
+    let newArray = array || [];
+    for (var property in object) {
+      if (property.slice(-2) !== "ID" && property !== "" && property !== "//") {
+        newArray.push(<CollectionSummaryRow
+                    attr={this.removeCamelCase(property)}
+                    value={object[property]}/>);
+      }
+    }
+
+    return newArray;
+  }
+
   render() {
     if(this.state.collections) {
       const collectionsDisplay = this.state.collections.map((c, i) => {
           let rows = [];
-          for (var cprop in c) {
+          rows.push(<h4>{c["collectionType"]}</h4>);
+          rows = this.getCollectionSummaryRows(c, rows);
+          /*for (var cprop in c) {
             if (cprop.slice(-2) !== "ID" && cprop !== "" && cprop !== "//") {
-              rows.push(<CollectionSummaryRow attr={cprop} value={c[cprop]}/>);
+              rows.push(<CollectionSummaryRow
+                          attr={this.removeCamelCase(cprop)}
+                          value={c[cprop]}/>);
             }
-          }
+          }*/
           return (
             <div>
               {rows}
             </div>
           );
       });
-      const eventDisplay = [];
-      for (var eprop in this.state.weatherEventData) {
+      const eventDisplay = this.getCollectionSummaryRows(this.state.weatherEventData);
+      /*for (var eprop in this.state.weatherEventData) {
           if (eprop.slice(-2) !== "ID" && eprop !== "" && eprop !== "//") {
             eventDisplay.push(
-              <CollectionSummaryRow attr={eprop} value={this.state.weatherEventData[eprop]} />
+              <CollectionSummaryRow
+                    attr={this.removeCamelCase(eprop)}
+                    value={this.state.weatherEventData[eprop]} />
             );
           }
-      }
+      }*/
       return (
         <div>
           <h2>How does your data look?</h2>
@@ -99,9 +124,9 @@ export default class Summary extends React.Component {
           <h3>Event Summary</h3>
 
             {eventDisplay}
-      
 
-          <div className="event-summary-row"/>
+
+          <br/><br/>
 
           <h3>Individual Collections</h3>
           <div className="collections-summary" >
