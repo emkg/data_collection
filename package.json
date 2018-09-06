@@ -8,8 +8,7 @@
     "moment": "^2.22.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4",
-    "react-select": "^2.0.0"
+    "react-scripts": "1.1.4"
   },
   "devDependencies": {
     "esdoc": "^1.1.0",
@@ -19,6 +18,7 @@
     "esdoc-standard-plugin": "^1.0.0",
     "react-json-view": "^1.19.1"
   },
+  "proxy": "http://local.radops/public/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

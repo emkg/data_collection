@@ -185,7 +185,7 @@ export default class Form extends React.Component {
         e.warningText.value = "";
         //this.props.saveData(warning);
         submitted.set(data.collectionType, warning);
-        this.setState({ submitted });
+        this.setState({ submitted, selectedOption: null });
     } else if(this.props.className === "report") {
         const report = {...data, reportText: e.reportText.value };
         e.reportText.value = "";
