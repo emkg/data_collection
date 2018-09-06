@@ -82,6 +82,8 @@ const options = [
   { value: 'Woodward', label: 'Woodward' }
 ]
 
+// TODO: accessibility
+
 
 // prevent default form behavior so app doesn't refresh on submit
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
@@ -94,6 +96,7 @@ const stop = (event) => (event.stopPropagation(), event.preventDefault());
 export default class Form extends React.Component {
   state = {
     submitted: new Map(),
+    selectedOption: null
   }
 
 
@@ -102,6 +105,15 @@ export default class Form extends React.Component {
       this.props.saveData({...val, collectionEnd: new moment().utc().format()});
       //default end time is now since they didn't overwrite it
     }
+  }
+
+  selectOnChange = (selectedOption) => {
+    this.setState({ selectedOption })
+    // this is an array of options in json with label and value
+  }
+
+  getSelectedCounties() {
+    return this.state.selectedOption.map( option => ( option.value )).toString();
   }
 
   /**
@@ -167,10 +179,10 @@ export default class Form extends React.Component {
         this.setState({ submitted });
     } else if(this.props.className === "warning") {
         const warning = {...data,
-          warningCounties: e.counties.value,
+          warningCounties: this.getSelectedCounties(),
           warningText: e.warningText.value
         };
-        //e.counties.value = ""; e.warningText.value = "";
+        e.warningText.value = "";
         //this.props.saveData(warning);
         submitted.set(data.collectionType, warning);
         this.setState({ submitted });
@@ -196,6 +208,8 @@ export default class Form extends React.Component {
    * @return only the fields appropriate for the className
    */
   render() {
+    const { selectedOption } = this.state;
+
     return (
       <div className={cx(this.props.className)}>
         <form onSubmit={this.handleSubmit}>
@@ -236,7 +250,7 @@ export default class Form extends React.Component {
            {this.props.className === "warning" && (
              <div>
                 <p>Warning Counties:</p>
-                <Select options={options} isMulti={true}  />
+                <Select options={options} isMulti={true} onChange={this.selectOnChange} value={selectedOption}  />
                 <p>Warning Text:</p>
                 <textarea name="warningText" cols="50" rows="10" placeholder={this.props.warningText}/>
              </div>
