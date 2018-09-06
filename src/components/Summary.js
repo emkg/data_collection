@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactJson from 'react-json-view';
 import CollectionSummaryRow from './CollectionSummaryRow';
 
@@ -80,7 +80,6 @@ export default class Summary extends React.Component {
     for (var property in object) {
       if (property.slice(-2) !== "ID" && property !== "" && property !== "//") {
         newArray.push(<CollectionSummaryRow
-                    id={`${object[property]}${Math.floor(Math.random() * 101)}`}
                     attr={this.removeCamelCase(property)}
                     value={object[property]}/>);
       }
@@ -96,9 +95,9 @@ export default class Summary extends React.Component {
           rows.push(<h4>{c["collectionType"]}</h4>);
           rows = this.getCollectionSummaryRows(c, rows);
           return (
-            <div>
+            <Fragment>
               {rows}
-            </div>
+            </Fragment>
           );
       });
       const eventDisplay = this.getCollectionSummaryRows(this.state.weatherEventData);

@@ -2,8 +2,6 @@ import React from 'react';
 import Event from './components/Event';
 import './App.css';
 
-
-
 /**
  *  App houses the data collection mechanism and model
  *  for the Radar Operations.
@@ -32,6 +30,7 @@ export default class App extends React.Component {
    * exists.
    */
   render() {
+    window.scrollTo(0,0);
     return (
       <div className="app">
       <h1>Radar Operations Data Collection</h1>
