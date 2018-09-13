@@ -259,6 +259,13 @@ export default class Form extends React.Component {
 
            {this.props.className === "warning" && (
              <div>
+               <div className="external-link">
+                 <a href="https://www.weather.gov"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                   {"Lookup Warnings"}
+                 </a>
+               </div>
                 <p>Warning Counties:</p>
                 <Select aria-label="select counties for warning"
                         aria-required="true"
@@ -275,6 +282,13 @@ export default class Form extends React.Component {
 
            {this.props.className === "report" && (
              <div>
+                <div className="external-link">
+                  <a href="https://www.spc.noaa.gov/climo/reports/today.html"
+                     target="_blank"
+                     rel="noopener noreferrer">
+                    {"Search Today's Reports"}
+                  </a>
+                </div>
                 <label htmlFor="reportText">Report Text:</label>
                 <textarea name="reportText" cols="50" rows="10" placeholder={this.props.reportText}/>
              </div>

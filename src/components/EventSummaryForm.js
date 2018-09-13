@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import cx from 'classnames';
 
 // TODO: add esdoc
 
@@ -73,8 +74,10 @@ export default class EventSummaryForm extends React.Component {
               <input type="checkbox" id="refreezing" onChange={this.collectRadarSigs} value="refreezing" />
               <label htmlFor="refreezing">refreezing (winter)</label>
 
-              <input type="checkbox" id="other" onChange={this.collectRadarSigs} value="other" />
+              <input type="checkbox" id="radSigOther" onChange={this.collectRadarSigs} value={this.state.radarSigsotherVaue} />
+              <input className="radSigOther" type="text" name="radSigOtherValue" />
               <label htmlFor="other">other</label>
+
             </div>
          </div>
 
@@ -105,7 +108,7 @@ export default class EventSummaryForm extends React.Component {
                 <input type="checkbox" id="convective-initiation" onChange={this.getEventType} value="convective initiation" />
                 <label htmlFor="convective-initiation">convective initiation</label>
 
-                <input type="checkbox" id="other" onChange={this.getEventType} value="other"  />
+                <input type="checkbox" id="eventTypeOther" onChange={this.getEventType} value="other"  />
                 <label htmlFor="other">other</label>
               </div>
           </div>

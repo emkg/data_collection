@@ -19,10 +19,23 @@ body {
 
 a {
   color: black;
+  text-decoration: none;
 }
 
 a:visited {
   color: black;
+}
+
+.external-link {
+  padding: 0 0 20px 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.external-link > a {
+  background: lightblue;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 select, input {
@@ -223,4 +236,12 @@ a.tab:focused {
 
 .full-width-a-tag {
   width: 50%;
+}
+
+.radSigOther {
+  display: none;
+}
+
+#radSigOther:checked + .radSigOther {
+  display: block;
 }
