@@ -84,7 +84,7 @@ export default class EventSummaryForm extends React.Component {
               <input type="checkbox" id="radSigOther" onChange={this.collectRadarSigs} value={this.state.radarSigsotherVaue} />
               <label htmlFor="other">other</label>
               {this.state.radSigOtherChecked &&
-                (<input className="radSigOther" onChange={} type="text" name="radSigOtherValue" />) }
+                (<input className="radSigOther" type="text" name="radSigOtherValue" />) }
 
 
             </div>
