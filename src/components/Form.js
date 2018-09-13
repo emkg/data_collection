@@ -211,36 +211,48 @@ export default class Form extends React.Component {
     return (
       <div className={cx(this.props.className)}>
         <form onSubmit={this.handleSubmit}>
-           <p>Start Time:</p>
+           <p>{`Start Time for ${this.props.className}`}</p>
            <div className="datetime-input">
-              <input type="date" name="startDay" min="2018-01-01"
-                      defaultValue={this.props.today}/>
-              <input type="time" name="startTime" min="00:00" max="23:59" required
-                      defaultValue={this.props.timeNow}/>
+              <input type="date"
+                     aria-label={"weather event start day"}
+                     aria-required="true"
+                     name="startDay"
+                     min="2018-01-01"
+                     defaultValue={this.props.today}
+              />
+              <input type="time"
+                     aria-label={`start time for ${this.props.className}`}
+                     aria-required="true"
+                     name="startTime"
+                     min="00:00"
+                     max="23:59"
+                     required
+                     defaultValue={this.props.timeNow}
+              />
             </div>
            {this.props.className === "loc" && (
              <div>
-                <p>Location Lattitude:</p>
+                <label htmlFor="">Location Lattitude:</label>
                 <input type="number" name="lat" />
-                <p>Location Longitude</p>
+                <label htmlFor="">Location Longitude</label>
                 <input type="number" name="long" />
-                <p>Daily Collection ID:</p>
+                <label htmlFor="">Daily Collection ID:</label>
                 <input type="number" name="dcn" />
              </div>
            )}
 
            {this.props.className === "vcp" && (
              <div>
-                <p>VCP:</p>
+                <label htmlFor="vcp">VCP:</label>
                 <input type="text" name="vcp" />
              </div>
            )}
 
            {this.props.className === "sector" && (
              <div>
-                <p>Start Sector (Left Edge):</p>
+                <label htmlFor="sectorStart">Start Sector (Left Edge):</label>
                 <input type="number" name="sectorStart" placeholder={this.props.sectorStart}/>
-                <p>End Sector (Right Edge):</p>
+                <label htmlFor="sectorEnd">End Sector (Right Edge):</label>
                 <input type="number" name="sectorEnd" placeholder={this.props.sectorEnd}/>
              </div>
            )}
@@ -248,22 +260,29 @@ export default class Form extends React.Component {
            {this.props.className === "warning" && (
              <div>
                 <p>Warning Counties:</p>
-                <Select options={options} isMulti={true} onChange={this.selectOnChange} value={selectedOption}  />
-                <p>Warning Text:</p>
+                <Select aria-label="select counties for warning"
+                        aria-required="true"
+                        options={options}
+                        isMulti={true}
+                        onChange={this.selectOnChange} value={selectedOption}
+                />
+                <br/>
+                <br/>
+                <label htmlFor="warningText">Warning Text:</label>
                 <textarea name="warningText" cols="50" rows="10" placeholder={this.props.warningText}/>
              </div>
            )}
 
            {this.props.className === "report" && (
              <div>
-                <p>Report Text:</p>
+                <label htmlFor="reportText">Report Text:</label>
                 <textarea name="reportText" cols="50" rows="10" placeholder={this.props.reportText}/>
              </div>
            )}
 
            {this.props.className === "remark" && (
              <div>
-                <p>Remarks:</p>
+                <label htmlFor="remark">Remarks:</label>
                 <textarea name="remark" cols="50" rows="10" placeholder={this.props.remarks}/>
              </div>
            )}

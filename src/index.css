@@ -206,7 +206,7 @@ a.tab:focused {
   justify-content: space-between;
 }
 
-.checkform > div > input, label {
+.checkform > div > input, .checkform > div > label {
     display: inline-block;
     width: calc(100% * (1/4) - 10px);
     font-size: 16px;

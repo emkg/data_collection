@@ -87,9 +87,11 @@ export default class EventSummaryForm extends React.Component {
                 <input type="checkbox" id="nontornadic-supercell" onChange={this.getEventType} value="nontornadic-supercell"  />
                 <label htmlFor="nontornadic-supercell">nontornadic supercell</label>
 
-                <input type="checkbox" id="quasi-linear-convextive-system" onChange={this.getEventType} value="quasi-linear convextive system" /><label htmlFor="quasi-linear-convextive-system">quasi-linear convextive system</label>
+                <input type="checkbox" id="quasi-linear-convextive-system" onChange={this.getEventType} value="quasi-linear convextive system" />
+                <label htmlFor="quasi-linear-convextive-system">quasi-linear convextive system</label>
 
-                <input type="checkbox" id="mesoscale-convective-system" onChange={this.getEventType} value="mesoscale convective system" /><label htmlFor="mesoscale-convective-system">mesoscale convective system</label>
+                <input type="checkbox" id="mesoscale-convective-system" onChange={this.getEventType} value="mesoscale convective system" />
+                <label htmlFor="mesoscale-convective-system">mesoscale convective system</label>
 
                 <input type="checkbox" id="heavy-rain" onChange={this.getEventType} value="heavy rain/flash flooding"  />
                 <label htmlFor="heavy-rain">heavy rain/flash flooding</label>
@@ -108,17 +110,32 @@ export default class EventSummaryForm extends React.Component {
               </div>
           </div>
 
-          <p>Weather Event End time:</p>
+          <p>Weather Event End Day and Time:</p>
           <div className="datetime-input">
-            <input type="date" name="endDay" min="2018-01-01"
-                  defaultValue={this.props.today}/>
-            <input type="time" name="endTime" min="00:00" max="23:59" required
-                  defaultValue={this.props.timeNow}/>
+            <input type="date"
+                   aria-label={"weather event end day"}
+                   aria-required="true"
+                   name="endDay"
+                   min="2018-01-01"
+                   required
+                   defaultValue={this.props.today}
+            />
+            <input type="time"
+                   aria-label={"weather event end time"}
+                   aria-required="true"
+                   name="endTime"
+                   min="00:00"
+                   max="23:59"
+                   required
+                   defaultValue={this.props.timeNow}
+              />
           </div>
-          <p>Weather Event Summary:</p>
-          <textarea name="summary" cols="50" rows="10" />
+          <label htmlFor="summary">Weather Event Summary:</label>
+          <textarea name="summary"
+                    cols="50"
+                    rows="10"
+          />
           <input type="submit" className="form-enter-data" value="enter data" />
-
         </form>
       </div>
     )

@@ -159,22 +159,47 @@ export default class Event extends React.Component {
               <form onSubmit={this.handleKickoffSubmit}>
                 Weather Event Start:
                 <div className="datetime-input">
-                  <input type="date" name="eventstartday" min="2018-01-01"
-                              defaultValue={this.state.today}/>
-                  <input type="time" name="eventstarttime" min="00:00" max="23:59" required
-                              defaultValue={this.getTimeNow()}/>
+                  <input type="date"
+                         aria-label={"weather event start day"}
+                         aria-required="true"
+                         name="eventstartday"
+                         min="2018-01-01"
+                         required
+                         defaultValue={this.state.today}
+                  />
+                  <input type="time"
+                         aria-label={"weather event start time"}
+                         aria-required="true"
+                         name="eventstarttime"
+                         min="00:00"
+                         max="23:59"
+                         required
+                         defaultValue={this.getTimeNow()}
+                  />
                 </div>
-                <input type="number" name="initID" placeholder="Daily Collection Number"/>
 
-                Instrument:
-                <select name="instrument" onChange={this.isMobile}>
+                <label htmlFor="initID">Daily Collection Number:</label>
+                <input type="number" name="initID" placeholder="1"/>
+
+                <label htmlFor="instrument">Instrument:</label>
+                <select aria-label={"select an instrument"}
+                        name="instrument"
+                        onChange={this.isMobile}>
                   <option value="KOUN">KOUN</option>
                   <option value="NOXP">NOXP</option>
                 </select>
                 {this.state.mobile && (
                   <div>
-                    <input type="number" name="lat"  placeholder="lat" />
-                    <input type="number" name="long" placeholder="long" />
+                    <input aria-label={"lattitude"}
+                           aria-required="true"
+                           type="number"
+                           name="lat"
+                           placeholder="lat" />
+                    <input type="number"
+                           aria-label={"longitude"}
+                           aria-required="true"
+                           name="long"
+                           placeholder="long" />
                   </div>
                 )}
 
