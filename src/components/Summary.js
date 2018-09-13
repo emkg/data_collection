@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import ReactJson from 'react-json-view';
 import CollectionSummaryRow from './CollectionSummaryRow';
+import BigYellowButton from './BigYellowButton';
 
 // TODO: add a way to edit the data
 
@@ -116,9 +117,9 @@ export default class Summary extends React.Component {
             {collectionsDisplay}
           </div>
 
-          <div className="new-collection"
-             onClick={this.handleSubmit}><a href="#">{"It's ALL GOOD!"}</a>
-          </div>
+          <BigYellowButton
+              handleButtonPress={this.handleSubmit}
+              buttonText="It's ALL GOOD!" />
         </div>
       )
     } else {

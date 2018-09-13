@@ -1,5 +1,6 @@
 import React from 'react';
 import Event from './components/Event';
+import BigYellowButton from './components/BigYellowButton';
 import './App.css';
 
 /**
@@ -40,9 +41,9 @@ export default class App extends React.Component {
           {this.state.thankyou}
           <p>Press go to collect data
           when weather events are in progress.</p>
-
-          <div className="new-collection"
-                 onClick={this.startEvent}>GO</div>
+          <BigYellowButton
+              handleButtonPress={this.startEvent}
+              buttonText="GO" />
         </div>)}
 
       {this.state.weatherEvent && (<Event eventOver={this.startEvent} />)}

@@ -120,14 +120,13 @@ textarea {
 
 .tab.clicked {
   color: red;
-
 }
 
 a.tab:focused {
   outline: red;
 }
 
-.new-collection {
+.big-yellow-button {
   text-align: center;
   min-width: 100px;
   width: 33%;
@@ -143,14 +142,18 @@ a.tab:focused {
   border-radius: 2%;
 }
 
-.new-collection:hover {
+.big-yellow-button > a {
+  text-decoration: none;
+}
+
+.big-yellow-button:hover {
   -moz-box-shadow:    0px 1px 1px 0px #000;
   -webkit-box-shadow: 0px 1px 1px 0px #000;
   box-shadow:         0px 1px 1px 0px #000;
   top: 1px;
 }
 
-.new-collection:active {
+.big-yellow-button:active {
   -moz-box-shadow:    0px 0px 0px 0px #000;
   -webkit-box-shadow: 0px 0px 0px 0px #000;
   box-shadow:         0px 0px 0px 0px #000;
@@ -160,7 +163,7 @@ a.tab:focused {
   border: solid lightgray 1px;
 }
 
-.new-collection:focus {
+.big-yellow-button:focus {
   outline: 0;
 }
 

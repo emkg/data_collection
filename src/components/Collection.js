@@ -1,11 +1,10 @@
 import React from 'react';
 import Tab from './Tab';
+import BigYellowButton from './BigYellowButton';
 import Form from './Form';
 import uuidv4 from 'uuid/v4';
 
-// TODO: break tab container into a new component with
-// logic to control startng a new collection
-// TODO:  push buttons should be a separate component too
+
  // TODO: think of location collection as a collection...
 
 /**
@@ -81,10 +80,9 @@ export default class Collection extends React.Component {
               handleNewLocation={this.getNewCollectionID}
               eventID={this.props.eventID}
         />
-        <div className="new-collection"
-             onClick={this.stop}>
-            COLLECTION COMPLETE
-        </div>
+        <BigYellowButton
+            handleButtonPress={this.stop}
+            buttonText="COLLECTION COMPLETE" />
       </div>
     )
   }
