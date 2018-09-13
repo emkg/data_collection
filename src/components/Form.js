@@ -134,8 +134,6 @@ export default class Form extends React.Component {
       collectionType: this.props.className,
       dailyCollectionNumber: this.props.dailyCollectionNumber
     }
-    // clear fields we saved data from
-    e.startTime.value = "";
 
     // what we want is to add the type of the event
     // to submitted with the submitted map
@@ -216,9 +214,9 @@ export default class Form extends React.Component {
            <p>Start Time:</p>
            <div className="datetime-input">
               <input type="date" name="startDay" min="2018-01-01"
-                      defaultValue={new Date().toJSON().slice(0,10)}/>
+                      defaultValue={this.props.today}/>
               <input type="time" name="startTime" min="00:00" max="23:59" required
-                      defaultValue={new moment().utc().toJSON().slice(11,16)}/>
+                      defaultValue={this.props.timeNow}/>
             </div>
            {this.props.className === "loc" && (
              <div>

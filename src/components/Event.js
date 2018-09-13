@@ -24,7 +24,9 @@ export default class Event extends React.Component {
   state = {
     mode: "begin", // "collect" or "end"
     collections: [],
-    eventID: uuidv4()
+    eventID: uuidv4(),
+    timeNow: new moment().utc().toJSON().slice(11,16),
+    today: new Date().toJSON().slice(0,10)
   };
 
 
@@ -155,9 +157,9 @@ export default class Event extends React.Component {
                 Weather Event Start:
                 <div className="datetime-input">
                   <input type="date" name="eventstartday" min="2018-01-01"
-                              defaultValue={new Date().toJSON().slice(0,10)}/>
+                              defaultValue={this.state.today}/>
                   <input type="time" name="eventstarttime" min="00:00" max="23:59" required
-                              defaultValue={new moment().utc().toJSON().slice(11,16)}/>
+                              defaultValue={this.state.timeNow}/>
                 </div>
                 <input type="number" name="initID" placeholder="Daily Collection Number"/>
 
@@ -184,11 +186,17 @@ export default class Event extends React.Component {
                   saveData={this.saveData}
                   endCollection={this.handleEndCollection}
                   mobile={this.state.mobile}
-                  eventID={this.state.eventID} />)
+                  eventID={this.state.eventID}
+                  timeNow={this.state.timeNow}
+                  today={this.state.today} />)
 
             : this.state.mode === "summary"
 
-              ? (<EventSummaryForm convertTime={this.convertTime} handleSubmit={this.handleEventSummarySubmit} />)
+              ? (<EventSummaryForm
+                          convertTime={this.convertTime}
+                          handleSubmit={this.handleEventSummarySubmit}
+                          timeNow={this.state.timeNow}
+                          today={this.state.today} />)
               : (<Summary eventOver={this.props.eventOver}
                           weatherEventData={this.state.weatherEventData}
                           collections={this.state.collections}/>)

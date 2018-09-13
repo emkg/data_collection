@@ -111,9 +111,9 @@ export default class EventSummaryForm extends React.Component {
           <p>Weather Event End time:</p>
           <div className="datetime-input">
             <input type="date" name="endDay" min="2018-01-01"
-                  defaultValue={new Date().toJSON().slice(0,10)}/>
+                  defaultValue={this.props.today}/>
             <input type="time" name="endTime" min="00:00" max="23:59" required
-                  defaultValue={new moment().utc().toJSON().slice(11,16)}/>
+                  defaultValue={this.props.timeNow}/>
           </div>
           <p>Weather Event Summary:</p>
           <textarea name="summary" cols="50" rows="10" />

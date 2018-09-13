@@ -79,6 +79,8 @@ export default class Collection extends React.Component {
               collectionID={this.state.collectionID}
               handleNewLocation={this.getNewCollectionID}
               eventID={this.props.eventID}
+              timeNow={this.props.timeNow}
+              today={this.props.today}
         />
         <BigYellowButton
             handleButtonPress={this.stop}
