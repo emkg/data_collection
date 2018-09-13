@@ -13,7 +13,7 @@ export default class Tab extends React.Component {
     const { clicked } = this.props;
     return (
       <a href="#" className={cx("tab", { clicked })} onClick={this.handleClick}>
-        {this.props.tab.toUpperCase()}
+        {this.props.tab}
       </a>
     )
   }

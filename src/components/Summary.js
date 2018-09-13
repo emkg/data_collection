@@ -117,7 +117,7 @@ export default class Summary extends React.Component {
           </div>
 
           <div className="new-collection"
-             onClick={this.handleSubmit}>{"It's ALL GOOD!"}
+             onClick={this.handleSubmit}><a href="#">{"It's ALL GOOD!"}</a>
           </div>
         </div>
       )

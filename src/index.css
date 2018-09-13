@@ -115,10 +115,16 @@ textarea {
 
 .tab {
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 .tab.clicked {
   color: red;
+
+}
+
+a.tab:focused {
+  outline: red;
 }
 
 .new-collection {
