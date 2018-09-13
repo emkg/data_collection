@@ -9,8 +9,13 @@ const stop = (event) => (event.stopPropagation(), event.preventDefault());
 
 export default class EventSummaryForm extends React.Component {
   state = {
-    radarSigs: []
+    radarSigs: [],
+    radSigOtherChecked: false,
+    eventTypeOtherChecked: false
   }
+
+
+
 
   collectRadarSigs = (event) => {
     let { radarSigs } = this.state;
@@ -25,6 +30,8 @@ export default class EventSummaryForm extends React.Component {
         this.setState({ radarSigs })
       )
   }
+
+
 
   getEventType = (event) => {
     this.setState({ eventType : event.target.value })
@@ -75,8 +82,10 @@ export default class EventSummaryForm extends React.Component {
               <label htmlFor="refreezing">refreezing (winter)</label>
 
               <input type="checkbox" id="radSigOther" onChange={this.collectRadarSigs} value={this.state.radarSigsotherVaue} />
-              <input className="radSigOther" type="text" name="radSigOtherValue" />
               <label htmlFor="other">other</label>
+              {this.state.radSigOtherChecked &&
+                (<input className="radSigOther" onChange={} type="text" name="radSigOtherValue" />) }
+
 
             </div>
          </div>
