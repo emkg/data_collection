@@ -25,7 +25,6 @@ export default class Event extends React.Component {
     mode: "begin", // "collect" or "end"
     collections: [],
     eventID: uuidv4(),
-    timeNow: new moment().utc().toJSON().slice(11,16),
     today: new Date().toJSON().slice(0,10)
   };
 
@@ -141,6 +140,10 @@ export default class Event extends React.Component {
       : this.setState({ mobile : false })
   }
 
+  getTimeNow = () => {
+    return new moment().utc().toJSON().slice(11,16);
+  }
+
   /**
    *  Event renders different forms depending on the
    *  mode in state.
@@ -159,7 +162,7 @@ export default class Event extends React.Component {
                   <input type="date" name="eventstartday" min="2018-01-01"
                               defaultValue={this.state.today}/>
                   <input type="time" name="eventstarttime" min="00:00" max="23:59" required
-                              defaultValue={this.state.timeNow}/>
+                              defaultValue={this.getTimeNow()}/>
                 </div>
                 <input type="number" name="initID" placeholder="Daily Collection Number"/>
 
@@ -187,7 +190,7 @@ export default class Event extends React.Component {
                   endCollection={this.handleEndCollection}
                   mobile={this.state.mobile}
                   eventID={this.state.eventID}
-                  timeNow={this.state.timeNow}
+                  timeNow={this.getTimeNow()}
                   today={this.state.today} />)
 
             : this.state.mode === "summary"
@@ -195,7 +198,7 @@ export default class Event extends React.Component {
               ? (<EventSummaryForm
                           convertTime={this.convertTime}
                           handleSubmit={this.handleEventSummarySubmit}
-                          timeNow={this.state.timeNow}
+                          timeNow={this.getTimeNow()}
                           today={this.state.today} />)
               : (<Summary eventOver={this.props.eventOver}
                           weatherEventData={this.state.weatherEventData}
