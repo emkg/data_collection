@@ -10,23 +10,30 @@ const stop = (event) => (event.stopPropagation(), event.preventDefault());
 export default class EventSummaryForm extends React.Component {
   state = {
     radarSigs: [],
+    eventTypes: [],
     radSigOtherChecked: false,
     eventTypeOtherChecked: false
   }
 
+  /** DRY this up!!! **/
   handleChecks = (event) => {
     const target = event.target;
     let { radarSigs } = this.state;
     target.checked ?
-      (
-        radarSigs.push(target.value),
-        this.setState({ radarSigs })
-      )
-      :
-      (
-        radarSigs = radarSigs.filter( e => e !== target.value),
-        this.setState({ radarSigs })
-      )
+      ( radarSigs.push(target.value) ) :
+      ( radarSigs = radarSigs.filter( e => e !== target.value))
+    this.setState({ radarSigs });
+  }
+
+  /** DRY this up!!! **/
+  getEventType = (event) => {
+    const target = event.target;
+    let { eventTypes } = this.state;
+    target.checked ?
+      ( eventTypes.push(target.value) ) :
+      ( eventTypes = eventTypes.filter( e => e !== target.value))
+
+    this.setState({ eventTypes });
   }
 
   handleOtherChecks = (event) => {
@@ -39,15 +46,11 @@ export default class EventSummaryForm extends React.Component {
     this.setState({ [event.target.name] : event.target.value })
   }
 
-  getEventType = (event) => {
-    this.setState({ eventType : event.target.value })
-  }
-
   getOtherValues() {
-    let { radarSigs } = this.state;
+    let { radarSigs, eventTypes } = this.state;
     this.state.radSigOtherValue && radarSigs.push(this.state.radSigOtherValue);
-    const eventType = this.state.eventTypeOtherValue && this.state.eventTypeOtherValue;
-    this.setState({ radarSigs, eventType })
+    this.state.eventTypeOtherValue && eventTypes.push(this.state.eventTypeOtherValue);
+    this.setState({ radarSigs, eventTypes })
   }
 
   handleSubmit = (event) => {
@@ -55,7 +58,7 @@ export default class EventSummaryForm extends React.Component {
     const e = event.target;
     this.getOtherValues();
     const data = {
-      eventType: this.state.eventType,
+      eventType: this.state.eventTypes.toString(),
       eventRadarSigs: this.state.radarSigs.toString(),
       eventEnd: this.props.convertTime(e.endDay.value, e.endTime.value),
       eventDescription: e.summary.value
