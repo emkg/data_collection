@@ -14,32 +14,46 @@ export default class EventSummaryForm extends React.Component {
     eventTypeOtherChecked: false
   }
 
-
-
-
-  collectRadarSigs = (event) => {
+  handleChecks = (event) => {
+    const target = event.target;
     let { radarSigs } = this.state;
-    event.target.checked ?
+    target.checked ?
       (
-        radarSigs.push(event.target.value),
+        radarSigs.push(target.value),
         this.setState({ radarSigs })
       )
       :
       (
-        radarSigs = radarSigs.filter( e => e !== event.target.value),
+        radarSigs = radarSigs.filter( e => e !== target.value),
         this.setState({ radarSigs })
       )
   }
 
+  handleOtherChecks = (event) => {
+    const target = event.target;
+    const name = target.name;
+    this.setState({ [name] : target.checked });
+  }
 
+  handleOtherInput = (event) => {
+    this.setState({ [event.target.name] : event.target.value })
+  }
 
   getEventType = (event) => {
     this.setState({ eventType : event.target.value })
   }
 
+  getOtherValues() {
+    let { radarSigs } = this.state;
+    this.state.radSigOtherValue && radarSigs.push(this.state.radSigOtherValue);
+    const eventType = this.state.eventTypeOtherValue && this.state.eventTypeOtherValue;
+    this.setState({ radarSigs, eventType })
+  }
+
   handleSubmit = (event) => {
     stop(event);
     const e = event.target;
+    this.getOtherValues();
     const data = {
       eventType: this.state.eventType,
       eventRadarSigs: this.state.radarSigs.toString(),
@@ -60,43 +74,43 @@ export default class EventSummaryForm extends React.Component {
             <h3>Radar Signatures</h3>
             <div>
               <label htmlFor="downburst">
-                <input type="checkbox" id="downburst" onChange={this.collectRadarSigs} value="downburst" />
+                <input type="checkbox" id="downburst" onChange={this.handleChecks} value="downburst" />
                 downburst
               </label>
 
               <label htmlFor="hail">
-                <input type="checkbox" id="hail" onChange={this.collectRadarSigs} value="hail" />
+                <input type="checkbox" id="hail" onChange={this.handleChecks} value="hail" />
                 hail
               </label>
 
               <label htmlFor="bow-echo">
-                <input type="checkbox" id="bow-echo" onChange={this.collectRadarSigs} value="bow echo" />
+                <input type="checkbox" id="bow-echo" onChange={this.handleChecks} value="bow echo" />
                 bow echo
               </label>
 
               <label htmlFor="TDS">
-                <input type="checkbox" id="TDS" onChange={this.collectRadarSigs} value="TDS" />
+                <input type="checkbox" id="TDS" onChange={this.handleChecks} value="TDS" />
                 TDS
               </label>
 
               <label htmlFor="mesocyclone">
-                <input type="checkbox" id="mesocyclone" onChange={this.collectRadarSigs} value="mesocyclone" />
+                <input type="checkbox" id="mesocyclone" onChange={this.handleChecks} value="mesocyclone" />
                 mesocyclone
               </label>
 
               <label htmlFor="TVS">
-                <input type="checkbox" id="TVS" onChange={this.collectRadarSigs} value="TVS" />
+                <input type="checkbox" id="TVS" onChange={this.handleChecks} value="TVS" />
                 TVS
               </label>
 
               <label htmlFor="refreezing">
-                <input type="checkbox" id="refreezing" onChange={this.collectRadarSigs} value="refreezing" />
+                <input type="checkbox" id="refreezing" onChange={this.handleChecks} value="refreezing" />
                 refreezing (winter)
               </label>
-              <label htmlFor="radSigOtherValue">
-                <input type="checkbox" id="radSigOther" name="radSigOtherValue" onChange={this.collectRadarSigs} value={this.state.radarSigsOtherValue} />
+              <label htmlFor="radSigOtherChecked">
+                <input type="checkbox" id="radSigOther" name="radSigOtherChecked" onChange={this.handleOtherChecks} value={this.state.radarSigsOtherValue} />
                 {this.state.radSigOtherChecked
-                  ?  (<input className="other-input" type="text" name="radSigOtherValue" />)
+                  ?  (<input className="other-input" type="text" name="radSigOtherValue" onChange={this.handleOtherInput}/>)
                   :  (<React.Fragment>other</React.Fragment>)
                 }
               </label>
@@ -156,10 +170,10 @@ export default class EventSummaryForm extends React.Component {
                   convective initiation
                 </label>
 
-                <label htmlFor="eventTypeOtherValue">
-                  <input type="checkbox" id="radSigOther" name="eventTypeOtherValue" onChange={this.collectRadarSigs} value={this.state.eventTypeOtherValue} />
+                <label htmlFor="eventTypeOtherChecked">
+                  <input type="checkbox" id="radSigOther" name="eventTypeOtherChecked" onChange={this.handleOtherChecks} value={this.state.eventTypeOtherValue} />
                   {this.state.eventTypeOtherChecked
-                    ?  (<input className="other-input" type="text" name="eventTypeOtherValue" />)
+                    ?  (<input className="other-input" type="text" name="eventTypeOtherValue" onChange={this.handleOtherInput}/>)
                     :  (<React.Fragment>other</React.Fragment>)
                   }
                 </label>
