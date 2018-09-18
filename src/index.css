@@ -218,6 +218,7 @@ a.tab:focused {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  min-height: 200px;
 }
 
 .checkform > div > label {
@@ -225,9 +226,11 @@ a.tab:focused {
     margin: 5px;
     width: calc(50% - 40px);
     font-size: 16px;
+    max-height: 39px;
+    height: 39px;
 }
 
-.checkform > div > input {
+.checkform > div > input[type="text"] {
 
 }
 

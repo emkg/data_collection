@@ -43,6 +43,7 @@ export default class EventSummaryForm extends React.Component {
   }
 
   handleOtherInput = (event) => {
+    stop(event);
     this.setState({ [event.target.name] : event.target.value })
   }
 
