@@ -93,12 +93,15 @@ export default class EventSummaryForm extends React.Component {
                 <input type="checkbox" id="refreezing" onChange={this.collectRadarSigs} value="refreezing" />
                 refreezing (winter)
               </label>
-              <label htmlFor="other">
-                <input type="checkbox" id="radSigOther" onChange={this.collectRadarSigs} value={this.state.radarSigsotherVaue} />
-                other
+              <label htmlFor="radSigOtherValue">
+                <input type="checkbox" id="radSigOther" name="radSigOtherValue" onChange={this.collectRadarSigs} value={this.state.radarSigsOtherValue} />
+                {this.state.radSigOtherChecked
+                  ?  (<input className="other-input" type="text" name="radSigOtherValue" />)
+                  :  (<React.Fragment>other</React.Fragment>)
+                }
               </label>
-              {this.state.radSigOtherChecked &&
-                (<input className="radSigOther" type="text" name="radSigOtherValue" />) }
+
+
 
 
             </div>
@@ -153,9 +156,12 @@ export default class EventSummaryForm extends React.Component {
                   convective initiation
                 </label>
 
-                <label htmlFor="other">
-                  <input type="checkbox" id="eventTypeOther" onChange={this.getEventType} value="other"  />
-                  other
+                <label htmlFor="eventTypeOtherValue">
+                  <input type="checkbox" id="radSigOther" name="eventTypeOtherValue" onChange={this.collectRadarSigs} value={this.state.eventTypeOtherValue} />
+                  {this.state.eventTypeOtherChecked
+                    ?  (<input className="other-input" type="text" name="eventTypeOtherValue" />)
+                    :  (<React.Fragment>other</React.Fragment>)
+                  }
                 </label>
               </div>
           </div>

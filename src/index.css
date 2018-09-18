@@ -244,10 +244,7 @@ a.tab:focused {
   width: 50%;
 }
 
-.radSigOther {
-  display: none;
-}
-
-#radSigOther:checked + .radSigOther {
-  display: block;
+.other-input {
+  width: 80%;
+  margin-left: 5px
 }

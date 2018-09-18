@@ -24,7 +24,7 @@ export default class BigYellowButton extends React.Component {
   render() {
     return (
       <div className="big-yellow-button"
-         onClick={this.handleButtonPress}><a href="#">{this.props.buttonText || "PRESS ME"}</a>
+         onClick={this.handleButtonPress}><a href="javascript:;">{this.props.buttonText || "PRESS ME"}</a>
       </div>
     );
 
