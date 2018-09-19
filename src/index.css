@@ -62,6 +62,8 @@ textarea {
   min-height: 60px;
 }
 
+
+
 form {
   display: flex;
   flex-flow: column nowrap;
@@ -204,27 +206,12 @@ a.tab:focused {
 
 }
 
-.event-summary-row {
-  border-bottom: solid lightgray 1px;
-  margin: 2px;
-  width: 100%;
-  height: 30px;
-  display: flex;
-  overflow-x: hidden;
-  justify-content: space-between;
-}
 
 .edit-preview {
   display: block;
   border: none;
   padding: unset;
   margin: unset;
-}
-
-.edit-preview > input {
-  width: unset;
-  margin: unset;
-  border: dotted 1px lightgray;
 }
 
 .checkform {
@@ -248,7 +235,13 @@ a.tab:focused {
     height: 39px;
 }
 
-.checkform > div > input[type="text"] {
+input.edit-preview-input {
+  min-height: unset;
+
+  width: unset;
+  margin: 0;
+  border: dotted 1px lightgray;
+  align-self: center;
 
 }
 
@@ -256,9 +249,21 @@ a.tab:focused {
   display: none;
 }
 
+
+.event-summary-row {
+  border-bottom: solid lightgray 1px;
+  margin: 2px;
+  width: 100%;
+  min-height: 24px;
+  display: flex;
+  overflow-x: hidden;
+  justify-content: space-between;
+}
+
 .event-summary-row > a {
   text-decoration: none;
   color: black;
+  align-self: center;
 }
 
 .full-width-a-tag {
