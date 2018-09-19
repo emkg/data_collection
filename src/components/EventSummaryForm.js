@@ -1,6 +1,9 @@
 import React from 'react';
 import moment from 'moment';
 import cx from 'classnames';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import SaveIcon from '@material-ui/icons/Save';
 
 // TODO: add esdoc
 
@@ -209,7 +212,9 @@ export default class EventSummaryForm extends React.Component {
                     cols="50"
                     rows="10"
           />
-          <input type="submit" className="form-enter-data" value="enter data" />
+          <Button variant="contained" size="small" type="submit" aria-label="Save Data" aria-required="true">
+            <SaveIcon  /> Save
+          </Button>
         </form>
       </div>
     )

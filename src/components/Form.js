@@ -2,6 +2,10 @@ import React from 'react';
 import cx from 'classnames';
 import moment from 'moment';
 import Select from 'react-select';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import SaveIcon from '@material-ui/icons/Save';
+
 
 const options = [
   { value: 'Alfalfa', label: 'Alfalfa' },
@@ -301,7 +305,10 @@ export default class Form extends React.Component {
              </div>
            )}
 
-           <input className="form-enter-data" type="submit" value="enter data" />
+            <Button variant="contained" size="small" type="submit" aria-label="Save Data" aria-required="true">
+              <SaveIcon  /> Save
+            </Button>
+
         </form>
       </div>
     )
