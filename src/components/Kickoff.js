@@ -13,7 +13,7 @@ export default class Kickoff extends React.Component {
       <div>
         <form>
           <DayPickerInput />
-          <select name="instrument" onChange={this.handleInstrument}>
+          <select className="custom-select" name="instrument" onChange={this.handleInstrument}>
             <option value="KOUN">KOUN</option>
             <option value="NOXP">NOXP</option>
           </select>

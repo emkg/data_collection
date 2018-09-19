@@ -4,10 +4,12 @@ import EventSummaryForm from './EventSummaryForm';
 import Summary from './Summary';
 import uuidv4 from 'uuid/v4';
 import moment from 'moment';
+import Select from 'react-select';
 
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 // we do want a list of mobile radars because mobile radars need locations
 const mobileInstruments = ['NOXP'];
+const options = [ { value: 'KOUN', label: "KOUN" }, { value: 'NOXP' , label: 'NOXP' }];
 
 /**
  * An Event is the object that stores data collections.
@@ -25,7 +27,8 @@ export default class Event extends React.Component {
     mode: "begin", // "collect" or "end"
     collections: [],
     eventID: uuidv4(),
-    today: new Date().toJSON().slice(0,10)
+    today: new Date().toJSON().slice(0,10),
+    selectedOption: null
   };
 
 
@@ -95,7 +98,7 @@ export default class Event extends React.Component {
       this.saveData(initCollection);
     }
 
-    const instrument = event.target.instrument.value;
+    const instrument = this.state.selectedOption.value;
     const mobile = mobileInstruments.includes(instrument);
 
     this.setState({
@@ -133,11 +136,10 @@ export default class Event extends React.Component {
     window.scrollTo(0,0);
   }
 
-  isMobile = (event) => {
-      stop(event);
-      mobileInstruments.includes(event.target.value)
-      ? this.setState({ mobile : true })
-      : this.setState({ mobile : false })
+  isMobile = (selectedOption) => {
+      mobileInstruments.includes(selectedOption.value)
+      ? this.setState({ mobile : true, selectedOption })
+      : this.setState({ mobile : false, selectedOption })
   }
 
   getTimeNow = () => {
@@ -152,6 +154,7 @@ export default class Event extends React.Component {
    *  "summary", and a Summary if mode is "end".
    */
   render() {
+    const { selectedOption } = this.state;
     return (
       <div className="event">
         {this.state.mode === "begin" ?
@@ -181,13 +184,11 @@ export default class Event extends React.Component {
                 <label htmlFor="initID">Daily Collection Number:</label>
                 <input type="number" name="initID" placeholder="1"/>
 
-                <label htmlFor="instrument">Instrument:</label>
-                <select aria-label={"select an instrument"}
-                        name="instrument"
-                        onChange={this.isMobile}>
-                  <option value="KOUN">KOUN</option>
-                  <option value="NOXP">NOXP</option>
-                </select>
+                <p>Instrument:</p>
+                <Select aria-label="Select an instrument"
+                        aria-required="true"
+                        onChange={this.isMobile}
+                        options={options} value={selectedOption}/>
                 {this.state.mobile && (
                   <div>
                     <input aria-label={"lattitude"}
