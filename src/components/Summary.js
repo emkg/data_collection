@@ -12,7 +12,7 @@ import BigYellowButton from './BigYellowButton';
  *
  */
 export default class Summary extends React.Component {
-  state = {};
+  state = { editing: 0 };
 
   componentDidMount() {
     const { collections } = this.props;
@@ -21,9 +21,10 @@ export default class Summary extends React.Component {
 
   }
 
-  edit = (index) => {
-    console.log(index);
-    this.setState({ editOn: !this.state.editOn })
+  isEditing = (bool) => {
+    let { editing } = this.state;
+    bool ? editing++ : editing--;
+    this.setState({ editing })
   }
 
   /**
@@ -31,22 +32,27 @@ export default class Summary extends React.Component {
    *  to storage. Send Thankyou to app. Submits this Event.
    */
   handleSubmit = () => {
-    document.cookie = "eventState=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    this.props.eventOver("Your data has been collected!");
-    this.sendDataToDatabase(this.state.weatherEventData, "event");
-    let cid;
+    if(this.state.editing) {
+      alert("Press enter on the open text field so your data gets saved before submitting again.");
+    } else {
 
-    this.state.collections.map( (c, i) => {
-      if(c.id !== c.collectionID) {
-        cid = c.collectionID;
-      }
-      if(c.collectionType === "loc") {
-        cid = c.collectionID, this.sendDataToDatabase(c, "collection");
-      } else {
-        this.sendDataToDatabase(c, c.collectionType);
-      }
-    });
-    window.scrollTo(0,0);
+      document.cookie = "eventState=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      this.props.eventOver("Your data has been collected!");
+      this.sendDataToDatabase(this.state.weatherEventData, "event");
+      let cid;
+
+      this.state.collections.map( (c, i) => {
+        if(c.id !== c.collectionID) {
+          cid = c.collectionID;
+        }
+        if(c.collectionType === "loc") {
+          cid = c.collectionID, this.sendDataToDatabase(c, "collection");
+        } else {
+          this.sendDataToDatabase(c, c.collectionType);
+        }
+      });
+      window.scrollTo(0,0);
+    }
   }
 
   removeCamelCase(stringInCamelCase) {
@@ -76,11 +82,12 @@ export default class Summary extends React.Component {
     })
   }
 
-  getCollectionSummaryRows(object, array) {
+  getCollectionSummaryRows = (object, array) => {
     let newArray = array || [];
     for (var property in object) {
       if (property.slice(-2) !== "ID" && property !== "" && property !== "//") {
         newArray.push(<CollectionSummaryRow
+                    fn={this.isEditing}
                     attr={this.removeCamelCase(property)}
                     value={object[property]}/>);
       }
