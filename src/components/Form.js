@@ -202,7 +202,7 @@ export default class Form extends React.Component {
         submitted.set(data.collectionType, remark);
         this.setState({ submitted });
     }
-
+    this.props.snackbar()
   }
 
   /**

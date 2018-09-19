@@ -81,6 +81,7 @@ export default class Collection extends React.Component {
               eventID={this.props.eventID}
               timeNow={this.props.timeNow}
               today={this.props.today}
+              snackbar={this.props.snackbar}
         />
         <BigYellowButton
             handleButtonPress={this.stop}

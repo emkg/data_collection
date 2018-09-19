@@ -217,7 +217,8 @@ export default class Event extends React.Component {
                   mobile={this.state.mobile}
                   eventID={this.state.eventID}
                   timeNow={this.getTimeNow()}
-                  today={this.state.today} />)
+                  today={this.state.today}
+                  snackbar={this.props.snackbar}/>)
 
             : this.state.mode === "summary"
 
