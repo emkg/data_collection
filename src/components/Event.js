@@ -226,10 +226,13 @@ export default class Event extends React.Component {
                           convertTime={this.convertTime}
                           handleSubmit={this.handleEventSummarySubmit}
                           timeNow={this.getTimeNow()}
-                          today={this.state.today} />)
+                          today={this.state.today}
+                 />)
               : (<Summary eventOver={this.props.eventOver}
                           weatherEventData={this.state.weatherEventData}
-                          collections={this.state.collections}/>)
+                          collections={this.state.collections}
+                          snackbar={this.props.snackbar}
+                 />)
         }
       </div>
     )

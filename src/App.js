@@ -34,7 +34,7 @@ const snackbarStyles = {
   },
   iconVariant: {
     opacity: 0.9,
-    //marginRight: theme.spacing.unit,
+    marginRight: '8px',
   },
   message: {
     display: 'flex',
@@ -50,24 +50,24 @@ const snackbarStyles = {
  *
  */
 export default class App extends React.Component {
-  state = { weatherEvent: false, snackbarOpen: false }
+  state = {
+    weatherEvent: false,
+    snackbarOpen: false,
+    snackbarVariant: 'success',
+    snackbarMessage: ''
+  }
 
   componentDidMount() {
     window.scrollTo(0,0);
   }
 
-  snackbar = () => {
-   this.setState({ snackbarOpen: true });
+  snackbar = (snackbarVariant, snackbarMessage) => {
+   this.setState({ snackbarOpen: true, snackbarVariant, snackbarMessage });
   };
 
   handleClose = (event, reason) => {
-   /*if (reason === 'clickaway') {
-     return;
-   }*/
-
    this.setState({ snackbarOpen: false });
  };
-
 
   /**
    * When startEvent is triggered, the weatherEvent in state
@@ -86,9 +86,8 @@ export default class App extends React.Component {
    * exists.
    */
   render() {
-    window.scrollTo(0,0);
-    const variant = "success";
-    const Icon = variantIcon[variant];
+    const { snackbarVariant } = this.state;
+    const Icon = variantIcon[snackbarVariant];
     return (
       <div className="app">
       <h1>Radar Operations Data Collection</h1>
@@ -119,10 +118,10 @@ export default class App extends React.Component {
           }}
         >
           <SnackbarContent
-            style={snackbarStyles[variant]}
+            style={snackbarStyles[snackbarVariant]}
             message={<span id="message-id" style={snackbarStyles.message}>
                       <Icon style={snackbarStyles.icon, snackbarStyles.iconVariant}/>
-                          Data Saved
+                          {this.state.snackbarMessage}
                       </span>}
             action={[
               <IconButton

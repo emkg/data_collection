@@ -15,6 +15,7 @@ body {
   padding: 10%;
   display: flex;
   flex-flow: column nowrap;
+  overflow-x: scroll;
 }
 
 a {

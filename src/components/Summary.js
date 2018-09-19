@@ -33,7 +33,7 @@ export default class Summary extends React.Component {
    */
   handleSubmit = () => {
     if(this.state.editing) {
-      alert("Press enter on the open text field so your data gets saved before submitting again.");
+      this.props.snackbar('warning', 'Press enter on the open text field so your data gets saved before submitting again.');
     } else {
 
       document.cookie = "eventState=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
