@@ -3,6 +3,7 @@ import cx from 'classnames';
 import moment from 'moment';
 import Select from 'react-select';
 import Button from '@material-ui/core/Button';
+import EventSummaryForm from './EventSummaryForm';
 import { withStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
 
@@ -211,106 +212,116 @@ export default class Form extends React.Component {
    */
   render() {
     const { selectedOption } = this.state;
-
-    return (
-      <div className={cx(this.props.className)}>
-        <form onSubmit={this.handleSubmit}>
-           <p>{`Start Time for ${this.props.className}`}</p>
-           <div className="datetime-input">
-              <input type="date"
-                     aria-label={"weather event start day"}
-                     aria-required="true"
-                     name="startDay"
-                     min="2018-01-01"
-                     defaultValue={this.props.today}
-              />
-              <input type="time"
-                     aria-label={`start time for ${this.props.className}`}
-                     aria-required="true"
-                     name="startTime"
-                     min="00:00"
-                     max="23:59"
-                     required
-                     defaultValue={this.props.timeNow}
-              />
-            </div>
-           {this.props.className === "loc" && (
-             <div>
-                <label htmlFor="">Location Lattitude:</label>
-                <input type="number" name="lat" />
-                <label htmlFor="">Location Longitude</label>
-                <input type="number" name="long" />
-                <label htmlFor="">Daily Collection ID:</label>
-                <input type="number" name="dcn" />
-             </div>
-           )}
-
-           {this.props.className === "vcp" && (
-             <div>
-                <label htmlFor="vcp">VCP:</label>
-                <input type="text" name="vcp" />
-             </div>
-           )}
-
-           {this.props.className === "sector" && (
-             <div>
-                <label htmlFor="sectorStart">Start Sector (Left Edge):</label>
-                <input type="number" name="sectorStart" placeholder={this.props.sectorStart}/>
-                <label htmlFor="sectorEnd">End Sector (Right Edge):</label>
-                <input type="number" name="sectorEnd" placeholder={this.props.sectorEnd}/>
-             </div>
-           )}
-
-           {this.props.className === "warning" && (
-             <div>
-               <div className="external-link">
-                 <a href="https://www.weather.gov"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                   {"Lookup Warnings"}
-                 </a>
-               </div>
-                <p>Warning Counties:</p>
-                <Select aria-label="select counties for warning"
-                        aria-required="true"
-                        options={options}
-                        isMulti={true}
-                        onChange={this.selectOnChange} value={selectedOption}
+    if(this.props.className !== "eventSummary") {
+      return (
+        <div className={cx(this.props.className)}>
+          <form onSubmit={this.handleSubmit}>
+             <p>{`Start Time for ${this.props.className}`}</p>
+             <div className="datetime-input">
+                <input type="date"
+                       aria-label={"weather event start day"}
+                       aria-required="true"
+                       name="startDay"
+                       min="2018-01-01"
+                       defaultValue={this.props.today}
                 />
-                <br/>
-                <br/>
-                <label htmlFor="warningText">Warning Text:</label>
-                <textarea name="warningText" cols="50" rows="10" placeholder={this.props.warningText}/>
-             </div>
-           )}
+                <input type="time"
+                       aria-label={`start time for ${this.props.className}`}
+                       aria-required="true"
+                       name="startTime"
+                       min="00:00"
+                       max="23:59"
+                       required
+                       defaultValue={this.props.timeNow}
+                />
+              </div>
+             {this.props.className === "loc" && (
+               <div>
+                  <label htmlFor="">Location Lattitude:</label>
+                  <input type="number" name="lat" />
+                  <label htmlFor="">Location Longitude</label>
+                  <input type="number" name="long" />
+                  <label htmlFor="">Daily Collection ID:</label>
+                  <input type="number" name="dcn" />
+               </div>
+             )}
 
-           {this.props.className === "report" && (
-             <div>
-                <div className="external-link">
-                  <a href="https://www.spc.noaa.gov/climo/reports/today.html"
-                     target="_blank"
-                     rel="noopener noreferrer">
-                    {"Search Today's Reports"}
-                  </a>
-                </div>
-                <label htmlFor="reportText">Report Text:</label>
-                <textarea name="reportText" cols="50" rows="10" placeholder={this.props.reportText}/>
-             </div>
-           )}
+             {this.props.className === "vcp" && (
+               <div>
+                  <label htmlFor="vcp">VCP:</label>
+                  <input type="text" name="vcp" />
+               </div>
+             )}
 
-           {this.props.className === "remark" && (
-             <div>
-                <label htmlFor="remark">Remarks:</label>
-                <textarea name="remark" cols="50" rows="10" placeholder={this.props.remarks}/>
-             </div>
-           )}
+             {this.props.className === "sector" && (
+               <div>
+                  <label htmlFor="sectorStart">Start Sector (Left Edge):</label>
+                  <input type="number" name="sectorStart" placeholder={this.props.sectorStart}/>
+                  <label htmlFor="sectorEnd">End Sector (Right Edge):</label>
+                  <input type="number" name="sectorEnd" placeholder={this.props.sectorEnd}/>
+               </div>
+             )}
 
-            <Button variant="contained" size="small" type="submit" aria-label="Save Data" aria-required="true">
-              <SaveIcon  /> Save
-            </Button>
+             {this.props.className === "warning" && (
+               <div>
+                 <div className="external-link">
+                   <a href="https://www.weather.gov"
+                      target="_blank"
+                      rel="noopener noreferrer">
+                     {"Lookup Warnings"}
+                   </a>
+                 </div>
+                  <p>Warning Counties:</p>
+                  <Select aria-label="select counties for warning"
+                          aria-required="true"
+                          options={options}
+                          isMulti={true}
+                          onChange={this.selectOnChange} value={selectedOption}
+                  />
+                  <br/>
+                  <br/>
+                  <label htmlFor="warningText">Warning Text:</label>
+                  <textarea name="warningText" cols="50" rows="10" placeholder={this.props.warningText}/>
+               </div>
+             )}
 
-        </form>
-      </div>
-    )
+             {this.props.className === "report" && (
+               <div>
+                  <div className="external-link">
+                    <a href="https://www.spc.noaa.gov/climo/reports/today.html"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                      {"Search Today's Reports"}
+                    </a>
+                  </div>
+                  <label htmlFor="reportText">Report Text:</label>
+                  <textarea name="reportText" cols="50" rows="10" placeholder={this.props.reportText}/>
+               </div>
+             )}
+
+             {this.props.className === "remark" && (
+               <div>
+                  <label htmlFor="remark">Remarks:</label>
+                  <textarea name="remark" cols="50" rows="10" placeholder={this.props.remarks}/>
+               </div>
+             )}
+
+              <Button variant="contained" size="small" type="submit" aria-label="Save Data" aria-required="true">
+                <SaveIcon  /> Save
+              </Button>
+
+          </form>
+        </div>
+      )
+    } else {
+      return(
+        <EventSummaryForm
+            convertTime={this.props.convertTime}
+            handleSubmit={this.props.handleSubmit}
+            timeNow={this.props.timeNow}
+            today={this.props.today}
+        />
+      )
+    }
   }
  }

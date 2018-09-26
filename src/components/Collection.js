@@ -61,6 +61,7 @@ export default class Collection extends React.Component {
               <Tab tab="vcp" clicked={openTab === "vcp"} handleClick={this.handleClick} />
               <Tab tab="sector" clicked={openTab === "sector"} handleClick={this.handleClick} />
               <Tab tab="remark" clicked={openTab === "remark"} handleClick={this.handleClick} />
+              <Tab tab="eventSummary" clicked={openTab === "eventSummary"} handleClick={this.handleClick} />
             </div>
           )}
           {!this.props.mobile && (
@@ -70,6 +71,7 @@ export default class Collection extends React.Component {
               <Tab tab="warning" clicked={openTab === "warning"} handleClick={this.handleClick} />
               <Tab tab="report" clicked={openTab === "report"} handleClick={this.handleClick} />
               <Tab tab="remark" clicked={openTab === "remark"} handleClick={this.handleClick} />
+              <Tab tab="eventSummary" clicked={openTab === "eventSummary"} handleClick={this.handleClick} />
             </div>
           )}
         <Form convertTime={this.props.convertTime}
@@ -82,6 +84,8 @@ export default class Collection extends React.Component {
               timeNow={this.props.timeNow}
               today={this.props.today}
               snackbar={this.props.snackbar}
+              convertTime={this.props.convertTime}
+              handleSubmit={this.props.handleSubmit}
         />
         <BigYellowButton
             handleButtonPress={this.stop}

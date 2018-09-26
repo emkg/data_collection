@@ -225,7 +225,10 @@ export default class Event extends React.Component {
                   eventID={this.state.eventID}
                   timeNow={this.getTimeNow()}
                   today={this.state.today}
-                  snackbar={this.props.snackbar}/>)
+                  snackbar={this.props.snackbar}
+                  convertTime={this.convertTime}
+                  handleSubmit={this.handleEventSummarySubmit}
+                />)
 
             : this.state.mode === "summary"
 
