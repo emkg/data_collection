@@ -275,7 +275,7 @@ export default class Form extends React.Component {
 
              {this.props.className === "rhi" && (
                <div>
-                  <label htmlFor="rhiStart">Start Edge(Top):</label>
+                  <label htmlFor="rhiStart">Start Edge (Top):</label>
                   <input type="number" name="rhiStart" placeholder={this.props.rhiStart}/>
                   <label htmlFor="rhiEnd">End Edge (Bottom):</label>
                   <input type="number" name="rhiEnd" placeholder={this.props.rhiEnd}/>

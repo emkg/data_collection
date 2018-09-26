@@ -55,16 +55,7 @@ textarea, .custom-select {
   border-radius: 4px;
   min-height: 38px;
   width: 99%
-}*/
-
-textarea {
-  max-width: 100%;
-  min-width: 100%;
-  width: 100%;
-  min-height: 60px;
 }
-
-
 
 form {
   display: flex;
@@ -275,4 +266,11 @@ input.edit-preview-input {
 .other-input {
   width: 80%;
   margin-left: 5px
+}
+
+textarea {
+  max-width: 100%;
+  min-width: 100%;
+  width: 100%;
+  min-height: 60px;
 }
