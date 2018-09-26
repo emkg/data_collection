@@ -59,18 +59,20 @@ export default class Collection extends React.Component {
               <Tab tab="loc" clicked={openTab === "loc"} handleClick={this.handleClick} />
               <Tab tab="vcp" clicked={openTab === "vcp"} handleClick={this.handleClick} />
               <Tab tab="sector" clicked={openTab === "sector"} handleClick={this.handleClick} />
+              <Tab tab="rhi" clicked={openTab === "rhi"} handleClick={this.handleClick} />
               <Tab tab="remark" clicked={openTab === "remark"} handleClick={this.handleClick} />
-              <Tab tab="eventSummary" clicked={openTab === "eventSummary"} handleClick={this.handleClick} />
+              <Tab tab="eventEnd" clicked={openTab === "eventEnd"} handleClick={this.handleClick} />
             </div>
           )}
           {!this.props.mobile && (
             <div className="tab-container">
               <Tab tab="vcp" clicked={openTab === "vcp"} handleClick={this.handleClick} />
               <Tab tab="sector" clicked={openTab === "sector"} handleClick={this.handleClick} />
+              <Tab tab="rhi" clicked={openTab === "rhi"} handleClick={this.handleClick} />
               <Tab tab="warning" clicked={openTab === "warning"} handleClick={this.handleClick} />
               <Tab tab="report" clicked={openTab === "report"} handleClick={this.handleClick} />
               <Tab tab="remark" clicked={openTab === "remark"} handleClick={this.handleClick} />
-              <Tab tab="eventSummary" clicked={openTab === "eventSummary"} handleClick={this.handleClick} />
+              <Tab tab="eventEnd" clicked={openTab === "eventEnd"} handleClick={this.handleClick} />
             </div>
           )}
         <Form convertTime={this.props.convertTime}

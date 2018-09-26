@@ -262,6 +262,19 @@ export default class Form extends React.Component {
                </div>
              )}
 
+             {this.props.className === "rhi" && (
+               <div>
+                  <label htmlFor="rhiStart">Start Edge(Top):</label>
+                  <input type="number" name="rhiStart" placeholder={this.props.rhiStart}/>
+                  <label htmlFor="rhiEnd">End Edge (Bottom):</label>
+                  <input type="number" name="rhiEnd" placeholder={this.props.rhiEnd}/>
+                  <label htmlFor="azimuth">Azimuth:</label>
+                  <input type="text" name="azimuth" />
+                  <label htmlFor="rhiRemark">Remarks:</label>
+                  <textarea  cols="20" rows="10" name="rhiRemark" />
+               </div>
+             )}
+
              {this.props.className === "warning" && (
                <div>
                  <div className="external-link">
