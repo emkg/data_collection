@@ -1,6 +1,5 @@
 import React from 'react';
 import Tab from './Tab';
-import BigYellowButton from './BigYellowButton';
 import Form from './Form';
 import uuidv4 from 'uuid/v4';
 
@@ -87,9 +86,6 @@ export default class Collection extends React.Component {
               convertTime={this.props.convertTime}
               handleSubmit={this.props.handleSubmit}
         />
-        <BigYellowButton
-            handleButtonPress={this.stop}
-            buttonText="COLLECTION COMPLETE" />
       </div>
     )
   }

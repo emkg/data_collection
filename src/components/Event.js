@@ -230,15 +230,7 @@ export default class Event extends React.Component {
                   handleSubmit={this.handleEventSummarySubmit}
                 />)
 
-            : this.state.mode === "summary"
-
-              ? (<EventSummaryForm
-                          convertTime={this.convertTime}
-                          handleSubmit={this.handleEventSummarySubmit}
-                          timeNow={this.getTimeNow()}
-                          today={this.state.today}
-                 />)
-              : (<Summary eventOver={this.props.eventOver}
+            : (<Summary eventOver={this.props.eventOver}
                           weatherEventData={this.state.weatherEventData}
                           collections={this.state.collections}
                           snackbar={this.props.snackbar}
