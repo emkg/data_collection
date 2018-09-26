@@ -180,6 +180,15 @@ export default class Form extends React.Component {
         //this.props.saveData(sector);
         submitted.set(data.collectionType, sector);
         this.setState({ submitted });
+    } else if (this.props.className === "rhi") {
+        const rhi = {...data,
+          rhiStart: e.rhiStart.value,
+          rhiEnd: e.rhiEnd.value,
+          azimuth: e.azimuth.value,
+          rhiRemark: e.rhiRemark.value
+        };
+        submitted.set(data.collectionType, rhi);
+        this.setState({ submitted });
     } else if(this.props.className === "warning") {
         const warning = {...data,
           warningCounties: this.getSelectedCounties(),
@@ -212,7 +221,7 @@ export default class Form extends React.Component {
    */
   render() {
     const { selectedOption } = this.state;
-    if(this.props.className !== "eventSummary") {
+    if(this.props.className !== "eventEnd") {
       return (
         <div className={cx(this.props.className)}>
           <form onSubmit={this.handleSubmit}>
