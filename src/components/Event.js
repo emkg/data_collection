@@ -106,7 +106,9 @@ export default class Event extends React.Component {
       mobile: mobile,
       weatherEventData: {
         eventStart: event_info.eventStart,
-        instrument: instrument
+        instrument: instrument,
+        collector: event.target.collector.value,
+        collectorEmail: event.target.collectorEmail.value
       }
     });
 
@@ -160,7 +162,12 @@ export default class Event extends React.Component {
         {this.state.mode === "begin" ?
           ( <div className="kickoff">
               <form onSubmit={this.handleKickoffSubmit}>
-                Weather Event Start:
+
+                <label htmlFor="collector">Your name:</label>
+                <input type="text" name="collector" placeholder="Jane Doe"/>
+                <label htmlFor="collectorEmail">A good contact email:</label>
+                <input type="email" name="collectorEmail" placeholder="jane.doe@noaa.gov"/>
+                <p>  Weather Event Start:</p>
                 <div className="datetime-input">
                   <input type="date"
                          aria-label={"weather event start day"}
