@@ -191,9 +191,11 @@ export default class Form extends React.Component {
         this.setState({ submitted });
     } else if(this.props.className === "warning") {
         const warning = {...data,
+          warningType: e.warningType.value,
           warningCounties: this.getSelectedCounties(),
           warningText: e.warningText.value
         };
+        e.warningType.value = "";
         e.warningText.value = "";
         //this.props.saveData(warning);
         submitted.set(data.collectionType, warning);
@@ -293,6 +295,8 @@ export default class Form extends React.Component {
                      {"Lookup Warnings"}
                    </a>
                  </div>
+                 <label htmlFor="warningType">Warning Type:</label>
+                 <input name="warningType" type="text" placeholder="tornado? severe thunderstorm?" />
                   <p>Warning Counties:</p>
                   <Select aria-label="select counties for warning"
                           aria-required="true"
