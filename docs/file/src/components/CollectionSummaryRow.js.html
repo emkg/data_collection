@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/components/index.js | ops_coll_front</title>
+  <title data-ice="title">src/components/CollectionSummaryRow.js | ops_coll_front</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -44,10 +44,47 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/components/index.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">export Collection from &apos;./Collection&apos;;
-export Event from &apos;./Event&apos;;
-export EventSummary from &apos;./EventSummary&apos;;
+<div class="content" data-ice="content"><h1 data-ice="title">src/components/CollectionSummaryRow.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
+import cx from &apos;classnames&apos;;
+
+const stop = (event) =&gt; (event.stopPropagation(), event.preventDefault());
+export default class CollectionSummaryRow extends React.Component {
+
+    state = { edit: false, value: this.props.value, editButton: &quot;EDIT&quot; };
+
+    edit = (event) =&gt; {
+      stop(event);
+      const value = event.target.newValue.value === &quot;&quot;
+                      ? this.state.value
+                      : event.target.newValue.value;
+      this.props.fn(false);
+      this.setState({ edit: false, value: value });
+    }
+
+    showHideInput = () =&gt; {
+      const edit = !this.state.edit;
+      this.props.fn(edit);
+      this.setState({ edit });
+    }
+
+    render() {
+      const { edit } = this.state;
+      return (
+        &lt;div className=&quot;event-summary-row&quot; &gt;
+
+            &lt;a tabindex={0} href=&quot;javascript:;&quot; className=&quot;full-width-a-tag&quot; onClick={this.showHideInput}&gt;{this.props.attr}&lt;/a&gt;
+            &lt;a tabindex={0} href=&quot;javascript:;&quot; onClick={this.showHideInput} className={cx({ edit }, &quot;middle&quot;)}&gt;{this.state.value}&lt;/a&gt;
+
+
+          &lt;form className={cx({ edit : !edit }, &quot;edit-preview&quot;)} onSubmit={this.edit}&gt;
+            &lt;input type=&quot;text&quot; className=&quot;edit-preview-input&quot; name=&quot;newValue&quot; placeholder={this.state.value}/&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+      )
+    }
+
+}
 </code></pre>
 
 </div>

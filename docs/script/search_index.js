@@ -6,9 +6,21 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "ops_coll_front/src/components/bigyellowbutton.js~bigyellowbutton",
+    "class/src/components/BigYellowButton.js~BigYellowButton.html",
+    "<span>BigYellowButton</span> <span class=\"search-result-import-path\">ops_coll_front/src/components/BigYellowButton.js</span>",
+    "class"
+  ],
+  [
     "ops_coll_front/src/components/collection.js~collection",
     "class/src/components/Collection.js~Collection.html",
     "<span>Collection</span> <span class=\"search-result-import-path\">ops_coll_front/src/components/Collection.js</span>",
+    "class"
+  ],
+  [
+    "ops_coll_front/src/components/collectionsummaryrow.js~collectionsummaryrow",
+    "class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html",
+    "<span>CollectionSummaryRow</span> <span class=\"search-result-import-path\">ops_coll_front/src/components/CollectionSummaryRow.js</span>",
     "class"
   ],
   [
@@ -27,12 +39,6 @@ window.esdocSearchIndex = [
     "ops_coll_front/src/components/form.js~form",
     "class/src/components/Form.js~Form.html",
     "<span>Form</span> <span class=\"search-result-import-path\">ops_coll_front/src/components/Form.js</span>",
-    "class"
-  ],
-  [
-    "ops_coll_front/src/components/kickoff.js~kickoff",
-    "class/src/components/Kickoff.js~Kickoff.html",
-    "<span>Kickoff</span> <span class=\"search-result-import-path\">ops_coll_front/src/components/Kickoff.js</span>",
     "class"
   ],
   [
@@ -348,6 +354,24 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/app.js~app#closesnackbar",
+    "class/src/App.js~App.html#instance-member-closeSnackbar",
+    "src/App.js~App#closeSnackbar",
+    "member"
+  ],
+  [
+    "src/app.js~app#componentdidmount",
+    "class/src/App.js~App.html#instance-method-componentDidMount",
+    "src/App.js~App#componentDidMount",
+    "method"
+  ],
+  [
+    "src/app.js~app#opensnackbar",
+    "class/src/App.js~App.html#instance-member-openSnackbar",
+    "src/App.js~App#openSnackbar",
+    "member"
+  ],
+  [
     "src/app.js~app#render",
     "class/src/App.js~App.html#instance-method-render",
     "src/App.js~App#render",
@@ -366,21 +390,39 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/components/bigyellowbutton.js",
+    "file/src/components/BigYellowButton.js.html",
+    "src/components/BigYellowButton.js",
+    "file"
+  ],
+  [
+    "src/components/bigyellowbutton.js~bigyellowbutton#handlebuttonpress",
+    "class/src/components/BigYellowButton.js~BigYellowButton.html#instance-member-handleButtonPress",
+    "src/components/BigYellowButton.js~BigYellowButton#handleButtonPress",
+    "member"
+  ],
+  [
+    "src/components/bigyellowbutton.js~bigyellowbutton#render",
+    "class/src/components/BigYellowButton.js~BigYellowButton.html#instance-method-render",
+    "src/components/BigYellowButton.js~BigYellowButton#render",
+    "method"
+  ],
+  [
     "src/components/collection.js",
     "file/src/components/Collection.js.html",
     "src/components/Collection.js",
     "file"
   ],
   [
-    "src/components/collection.js~collection#handleclick",
-    "class/src/components/Collection.js~Collection.html#instance-member-handleClick",
-    "src/components/Collection.js~Collection#handleClick",
+    "src/components/collection.js~collection#getnewcollectionid",
+    "class/src/components/Collection.js~Collection.html#instance-member-getNewCollectionID",
+    "src/components/Collection.js~Collection#getNewCollectionID",
     "member"
   ],
   [
-    "src/components/collection.js~collection#handlelocationsubmit",
-    "class/src/components/Collection.js~Collection.html#instance-member-handleLocationSubmit",
-    "src/components/Collection.js~Collection#handleLocationSubmit",
+    "src/components/collection.js~collection#handleclick",
+    "class/src/components/Collection.js~Collection.html#instance-member-handleClick",
+    "src/components/Collection.js~Collection#handleClick",
     "member"
   ],
   [
@@ -402,27 +444,63 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/components/collectionsummaryrow.js",
+    "file/src/components/CollectionSummaryRow.js.html",
+    "src/components/CollectionSummaryRow.js",
+    "file"
+  ],
+  [
+    "src/components/collectionsummaryrow.js~collectionsummaryrow#edit",
+    "class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html#instance-member-edit",
+    "src/components/CollectionSummaryRow.js~CollectionSummaryRow#edit",
+    "member"
+  ],
+  [
+    "src/components/collectionsummaryrow.js~collectionsummaryrow#render",
+    "class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html#instance-method-render",
+    "src/components/CollectionSummaryRow.js~CollectionSummaryRow#render",
+    "method"
+  ],
+  [
+    "src/components/collectionsummaryrow.js~collectionsummaryrow#showhideinput",
+    "class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html#instance-member-showHideInput",
+    "src/components/CollectionSummaryRow.js~CollectionSummaryRow#showHideInput",
+    "member"
+  ],
+  [
+    "src/components/collectionsummaryrow.js~collectionsummaryrow#state",
+    "class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html#instance-member-state",
+    "src/components/CollectionSummaryRow.js~CollectionSummaryRow#state",
+    "member"
+  ],
+  [
     "src/components/event.js",
     "file/src/components/Event.js.html",
     "src/components/Event.js",
     "file"
   ],
   [
-    "src/components/event.js~event#handleendcollection",
-    "class/src/components/Event.js~Event.html#instance-member-handleEndCollection",
-    "src/components/Event.js~Event#handleEndCollection",
+    "src/components/event.js~event#componentdidmount",
+    "class/src/components/Event.js~Event.html#instance-method-componentDidMount",
+    "src/components/Event.js~Event#componentDidMount",
+    "method"
+  ],
+  [
+    "src/components/event.js~event#converttime",
+    "class/src/components/Event.js~Event.html#instance-member-convertTime",
+    "src/components/Event.js~Event#convertTime",
     "member"
   ],
   [
-    "src/components/event.js~event#handleeventsummary",
-    "class/src/components/Event.js~Event.html#instance-member-handleEventSummary",
-    "src/components/Event.js~Event#handleEventSummary",
+    "src/components/event.js~event#gettimenow",
+    "class/src/components/Event.js~Event.html#instance-member-getTimeNow",
+    "src/components/Event.js~Event#getTimeNow",
     "member"
   ],
   [
-    "src/components/event.js~event#handleinstrument",
-    "class/src/components/Event.js~Event.html#instance-member-handleInstrument",
-    "src/components/Event.js~Event#handleInstrument",
+    "src/components/event.js~event#handleeventsummarysubmit",
+    "class/src/components/Event.js~Event.html#instance-member-handleEventSummarySubmit",
+    "src/components/Event.js~Event#handleEventSummarySubmit",
     "member"
   ],
   [
@@ -432,9 +510,9 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/components/event.js~event#handlesubmit",
-    "class/src/components/Event.js~Event.html#instance-member-handleSubmit",
-    "src/components/Event.js~Event#handleSubmit",
+    "src/components/event.js~event#ismobile",
+    "class/src/components/Event.js~Event.html#instance-member-isMobile",
+    "src/components/Event.js~Event#isMobile",
     "member"
   ],
   [
@@ -450,6 +528,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/components/event.js~event#savestate",
+    "class/src/components/Event.js~Event.html#instance-method-saveState",
+    "src/components/Event.js~Event#saveState",
+    "method"
+  ],
+  [
     "src/components/event.js~event#state",
     "class/src/components/Event.js~Event.html#instance-member-state",
     "src/components/Event.js~Event#state",
@@ -460,6 +544,36 @@ window.esdocSearchIndex = [
     "file/src/components/EventSummaryForm.js.html",
     "src/components/EventSummaryForm.js",
     "file"
+  ],
+  [
+    "src/components/eventsummaryform.js~eventsummaryform#geteventtype",
+    "class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-getEventType",
+    "src/components/EventSummaryForm.js~EventSummaryForm#getEventType",
+    "member"
+  ],
+  [
+    "src/components/eventsummaryform.js~eventsummaryform#getothervalues",
+    "class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-method-getOtherValues",
+    "src/components/EventSummaryForm.js~EventSummaryForm#getOtherValues",
+    "method"
+  ],
+  [
+    "src/components/eventsummaryform.js~eventsummaryform#handlechecks",
+    "class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-handleChecks",
+    "src/components/EventSummaryForm.js~EventSummaryForm#handleChecks",
+    "member"
+  ],
+  [
+    "src/components/eventsummaryform.js~eventsummaryform#handleotherchecks",
+    "class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-handleOtherChecks",
+    "src/components/EventSummaryForm.js~EventSummaryForm#handleOtherChecks",
+    "member"
+  ],
+  [
+    "src/components/eventsummaryform.js~eventsummaryform#handleotherinput",
+    "class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-handleOtherInput",
+    "src/components/EventSummaryForm.js~EventSummaryForm#handleOtherInput",
+    "member"
   ],
   [
     "src/components/eventsummaryform.js~eventsummaryform#handlesubmit",
@@ -474,10 +588,28 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/components/eventsummaryform.js~eventsummaryform#state",
+    "class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-state",
+    "src/components/EventSummaryForm.js~EventSummaryForm#state",
+    "member"
+  ],
+  [
     "src/components/form.js",
     "file/src/components/Form.js.html",
     "src/components/Form.js",
     "file"
+  ],
+  [
+    "src/components/form.js~form#componentwillunmount",
+    "class/src/components/Form.js~Form.html#instance-method-componentWillUnmount",
+    "src/components/Form.js~Form#componentWillUnmount",
+    "method"
+  ],
+  [
+    "src/components/form.js~form#getselectedcounties",
+    "class/src/components/Form.js~Form.html#instance-method-getSelectedCounties",
+    "src/components/Form.js~Form#getSelectedCounties",
+    "method"
   ],
   [
     "src/components/form.js~form#handlesubmit",
@@ -492,16 +624,16 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/components/kickoff.js",
-    "file/src/components/Kickoff.js.html",
-    "src/components/Kickoff.js",
-    "file"
+    "src/components/form.js~form#selectonchange",
+    "class/src/components/Form.js~Form.html#instance-member-selectOnChange",
+    "src/components/Form.js~Form#selectOnChange",
+    "member"
   ],
   [
-    "src/components/kickoff.js~kickoff#render",
-    "class/src/components/Kickoff.js~Kickoff.html#instance-method-render",
-    "src/components/Kickoff.js~Kickoff#render",
-    "method"
+    "src/components/form.js~form#state",
+    "class/src/components/Form.js~Form.html#instance-member-state",
+    "src/components/Form.js~Form#state",
+    "member"
   ],
   [
     "src/components/summary.js",
@@ -510,10 +642,52 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/components/summary.js~summary#componentdidmount",
+    "class/src/components/Summary.js~Summary.html#instance-method-componentDidMount",
+    "src/components/Summary.js~Summary#componentDidMount",
+    "method"
+  ],
+  [
+    "src/components/summary.js~summary#getcollectionsummaryrows",
+    "class/src/components/Summary.js~Summary.html#instance-member-getCollectionSummaryRows",
+    "src/components/Summary.js~Summary#getCollectionSummaryRows",
+    "member"
+  ],
+  [
+    "src/components/summary.js~summary#handlesubmit",
+    "class/src/components/Summary.js~Summary.html#instance-member-handleSubmit",
+    "src/components/Summary.js~Summary#handleSubmit",
+    "member"
+  ],
+  [
+    "src/components/summary.js~summary#isediting",
+    "class/src/components/Summary.js~Summary.html#instance-member-isEditing",
+    "src/components/Summary.js~Summary#isEditing",
+    "member"
+  ],
+  [
+    "src/components/summary.js~summary#removecamelcase",
+    "class/src/components/Summary.js~Summary.html#instance-method-removeCamelCase",
+    "src/components/Summary.js~Summary#removeCamelCase",
+    "method"
+  ],
+  [
     "src/components/summary.js~summary#render",
     "class/src/components/Summary.js~Summary.html#instance-method-render",
     "src/components/Summary.js~Summary#render",
     "method"
+  ],
+  [
+    "src/components/summary.js~summary#senddatatodatabase",
+    "class/src/components/Summary.js~Summary.html#instance-member-sendDataToDatabase",
+    "src/components/Summary.js~Summary#sendDataToDatabase",
+    "member"
+  ],
+  [
+    "src/components/summary.js~summary#state",
+    "class/src/components/Summary.js~Summary.html#instance-member-state",
+    "src/components/Summary.js~Summary#state",
+    "member"
   ],
   [
     "src/components/tab.js",

@@ -7,7 +7,8 @@ import EventSummaryForm from './EventSummaryForm';
 import { withStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
 
-
+// a json list of all the counties in Oklahoma.
+// Required format for options in react-select component
 const options = [
   { value: 'Alfalfa', label: 'Alfalfa' },
   { value: 'Atoka', label: 'Atoka' },
@@ -87,9 +88,6 @@ const options = [
   { value: 'Woodward', label: 'Woodward' }
 ]
 
-// TODO: accessibility
-
-
 // prevent default form behavior so app doesn't refresh on submit
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 
@@ -99,24 +97,44 @@ const stop = (event) => (event.stopPropagation(), event.preventDefault());
  *  className prop.
  */
 export default class Form extends React.Component {
+  /**
+   * state stores a Map of collection json objects and a
+   * selectedOption string for the sake of the react-select Component
+   * (especially important for the multi select option presented in Form)
+   */
   state = {
     submitted: new Map(),
     selectedOption: null
   }
 
-
+  /**
+   * When Component unmounts, we need to save all of the data we
+   * stored in this.state.submitted, the map of json objects
+   * made by each collection "submit"
+   */
   componentWillUnmount() {
+    // we tack a collectionEnd property onto the end of each object in submitted Map
+    // and we set that value to now ... this will likely be a problem based on the timing
+    // of this operation
     for(let [key, val] of this.state.submitted) {
       this.props.saveData({...val, collectionEnd: new moment().utc().format()});
-      //default end time is now since they didn't overwrite it
     }
   }
 
+  /**
+   * updates the array of options saved to state based on what is
+   * chosen by the user on the react-select component
+   * @param selectedOption - an array json with label and value sent
+   *   from react-select multi component
+   */
   selectOnChange = (selectedOption) => {
     this.setState({ selectedOption })
-    // this is an array of options in json with label and value
   }
 
+  /**
+   * converts the array of json to a list in String format (what our DB requires)
+   * @return a String - flat list / array to string
+   */
   getSelectedCounties() {
     return this.state.selectedOption.map( option => ( option.value )).toString();
   }
@@ -125,35 +143,43 @@ export default class Form extends React.Component {
    * handleSubmit collects the data from the
    *  form based on the className and sends it
    *  up to parent. Also clears form.
+   * @param event - the default event from the submit button
    */
   handleSubmit = (event) => {
-    stop(event);  // do not let app refresh here
+    // prevent page refresh
+    stop(event);
+    // shorten this bc it will be repeated a lot
     const e = event.target;
+
+    // we need start day and time for all collections
     const startDay = e.startDay.value;
     const startTime = e.startTime.value;
-    // data we always need
+
+    // data we'll append to for each collection type
     const data = {
       eventID: this.props.eventID,
       collectionID: this.props.collectionID,
-      collectionStart: this.props.convertTime(startDay, startTime),
+      collectionStart: this.props.convertTime(startDay, startTime), // combine for one utc time stamp
       collectionType: this.props.className,
       dailyCollectionNumber: this.props.dailyCollectionNumber
     }
 
-    // what we want is to add the type of the event
-    // to submitted with the submitted map
-    // the start time of the new event of the same type
-    // as one previously saved needs to be the end time
-    // for the last event of that type
+    /* what we want is to add the type of the event
+    // to the "submitted" map in state.
+    // Let the start time of the new collection of the same type
+    // that was previously saved be the end time for the older collection
+    // of this type. There can only be one one collection of a kind
+    // in the map, so we save it to Event as soon as we need to replace it.
+    */
     let { submitted } = this.state;
 
     if(submitted.get(data.collectionType)) {
         submitted.get(data.collectionType).collectionEnd = data.collectionStart;
         this.props.saveData(submitted.get(data.collectionType))
-    } // we have to submit this collection or else we'll overwrite it
+    } // we have to save this collection or else we'll overwrite it
 
-    // based on className, store certain fields in object
-    // and saveData.
+    // based on className, store specific fields in object and saveData.
+    // not very DRY, is goal to condense this code if possible
     if(this.props.className === "loc") {
         const location = {...data,
           collectionID: this.props.handleNewLocation(e.dcn.value),
@@ -162,13 +188,11 @@ export default class Form extends React.Component {
           locationLong: e.long.value,
         };
         e.lat.value = ""; e.long.value = "";
-        //this.props.saveData(location)
         submitted.set(data.collectionType, location);
         this.setState({ submitted });
     } else if(this.props.className === "vcp") {
         const vcp = {...data, VCP: e.vcp.value};
         e.vcp.value = "";
-        //this.props.saveData(vcp);
         submitted.set(data.collectionType, vcp);
         this.setState({ submitted });
     } else if(this.props.className === "sector") {
@@ -177,7 +201,6 @@ export default class Form extends React.Component {
           sectorEnd: e.sectorEnd.value
         };
         e.sectorStart.value = ""; e.sectorEnd.value = "";
-        //this.props.saveData(sector);
         submitted.set(data.collectionType, sector);
         this.setState({ submitted });
     } else if (this.props.className === "rhi") {
@@ -197,28 +220,27 @@ export default class Form extends React.Component {
         };
         e.warningType.value = "";
         e.warningText.value = "";
-        //this.props.saveData(warning);
         submitted.set(data.collectionType, warning);
         this.setState({ submitted, selectedOption: null });
     } else if(this.props.className === "report") {
         const report = {...data, reportText: e.reportText.value };
         e.reportText.value = "";
-        //this.props.saveData(report);
         submitted.set(data.collectionType, report);
         this.setState({ submitted });
     } else {
         // remark
         const remark = {...data, remark: e.remark.value};
         e.remark.value = "";
-        //this.props.saveData(remark);
         submitted.set(data.collectionType, remark);
         this.setState({ submitted });
     }
+    // w00t: show a green snackbar that says 'Data saved!'
     this.props.snackbar('success', 'Data saved!');
   }
 
+  //TODO: condense forms into components?
   /**
-   * renders the form elements based on className prop.
+   * renders the form elements based on className prop (based on openTab from Collection)
    * @return only the fields appropriate for the className
    */
   render() {

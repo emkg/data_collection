@@ -13,15 +13,17 @@ import ErrorIcon from '@material-ui/icons/Error';
 import green from '@material-ui/core/colors/green';
 import amber from '@material-ui/core/colors/amber';
 import WarningIcon from '@material-ui/icons/Warning';
-
 import './App.css';
 
+// get icons we imported from material-ui for snackbars
 const variantIcon = {
   success: CheckCircleIcon,
   warning: WarningIcon,
   error: ErrorIcon
 };
 
+// suggested styles from material-ui for snackbars
+// I chose to keep success and warning
 const snackbarStyles = {
   success: {
     backgroundColor: green[600],
@@ -50,6 +52,13 @@ const snackbarStyles = {
  *
  */
 export default class App extends React.Component {
+  /**
+   * App state keeps track of whether an event is active, and
+   * whether or not we want to see a snackbar. Likewise,
+   * App state stores the snackbar message and variant (success -- green
+   * is for signaling saved information, while warning -- amber/yellow
+   * comes up for validation messages on the final submit page)
+   */
   state = {
     weatherEvent: false,
     snackbarOpen: false,
@@ -57,22 +66,36 @@ export default class App extends React.Component {
     snackbarMessage: ''
   }
 
+  /**
+   * scrolls the window to the top of the page.
+   */
   componentDidMount() {
     window.scrollTo(0,0);
   }
 
-  snackbar = (snackbarVariant, snackbarMessage) => {
+  /**
+   * Opens a snackbar
+   * @param snackbarVariant - a string, either "warning" or "success"
+   * @param snackbarMessage - a string, what the message should say
+   **/
+  openSnackbar = (snackbarVariant, snackbarMessage) => {
    this.setState({ snackbarOpen: true, snackbarVariant, snackbarMessage });
   };
 
-  handleClose = (event, reason) => {
+
+  /**
+   * Closes a snackbar.
+   * @param event - borrowed from material-ui
+   * @param reason - borrowed from material-ui
+   */
+  closeSnackbar = (event, reason) => {
    this.setState({ snackbarOpen: false });
  };
 
   /**
-   * When startEvent is triggered, the weatherEvent in state
-   *   is flipped on or off. A thankyou message can be supplied,
-   *   which will be displayed when the event is flipped to false.
+   * Flips weatherEvent in state on if off, off if on.
+   * @param thankyou - a string, optional message
+   *   to be displayed when weatherEvent is false.
    */
   startEvent = (thankyou) => {
     this.setState({ weatherEvent: !this.state.weatherEvent, thankyou })
@@ -80,9 +103,10 @@ export default class App extends React.Component {
   }
 
   /**
-   * Render the app.
-   * @return In a weather event, an Event will be rendered.
-   * Otherwise, we will see the GO button, and a thankyou message if it
+   * Render the app. The GO button will set weatherEvent to
+   * true and data collection can begin. 
+   * @return If weatherEvent is true, an Event will be rendered.
+   * Otherwise, the GO button, and a thankyou message if it
    * exists.
    */
   render() {
@@ -92,22 +116,25 @@ export default class App extends React.Component {
       <div className="app">
       <h1>Radar Operations Data Collection</h1>
 
-      {!this.state.weatherEvent && (
-        <div>
-          {this.state.thankyou}
-          <p>Press go to collect data
-          when weather events are in progress.</p>
-          <BigYellowButton
-              handleButtonPress={this.startEvent}
-              buttonText="GO" />
-        </div>)}
+        {!this.state.weatherEvent && (
+          <div>
+            {this.state.thankyou}
+            <p>Press go to collect data
+            when weather events are in progress.</p>
+            <BigYellowButton
+                handleButtonPress={this.startEvent}
+                buttonText="GO" />
+          </div>
+        )}
 
-        {this.state.weatherEvent && (<Event eventOver={this.startEvent} snackbar={this.snackbar} />)}
+        {this.state.weatherEvent && (
+          <Event eventOver={this.startEvent} snackbar={this.openSnackbar} />
+        )}
 
         <Snackbar
           open={this.state.snackbarOpen}
           autoHideDuration={6000}
-          onClose={this.handleClose}
+          onClose={this.closeSnackbar}
 
           anchorOrigin={{
             vertical: 'top',
@@ -129,7 +156,7 @@ export default class App extends React.Component {
                 aria-label="close"
                 color="inherit"
                 style={snackbarStyles.close}
-                onClick={this.handleClose}
+                onClick={this.closeSnackbar}
               >
               <CloseIcon style={snackbarStyles.icon}/>
               </IconButton>,

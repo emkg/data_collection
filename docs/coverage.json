@@ -1,15 +1,21 @@
 {
-  "coverage": "47.61%",
-  "expectCount": 42,
-  "actualCount": 20,
+  "coverage": "58.1%",
+  "expectCount": 74,
+  "actualCount": 43,
   "files": {
     "src/App.js": {
-      "expectCount": 4,
-      "actualCount": 2,
+      "expectCount": 9,
+      "actualCount": 6,
       "undocumentLines": [
-        13,
-        20
+        19,
+        27,
+        72
       ]
+    },
+    "src/components/BigYellowButton.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
     },
     "src/components/Collection.js": {
       "expectCount": 6,
@@ -18,54 +24,61 @@
         24
       ]
     },
-    "src/components/Event.js": {
-      "expectCount": 11,
-      "actualCount": 9,
-      "undocumentLines": [
-        10,
-        12
-      ]
-    },
-    "src/components/EventSummaryForm.js": {
-      "expectCount": 4,
+    "src/components/CollectionSummaryRow.js": {
+      "expectCount": 6,
       "actualCount": 0,
       "undocumentLines": [
         4,
-        6,
-        8,
-        22
+        5,
+        7,
+        9,
+        18,
+        24
+      ]
+    },
+    "src/components/Event.js": {
+      "expectCount": 14,
+      "actualCount": 11,
+      "undocumentLines": [
+        10,
+        12,
+        14
+      ]
+    },
+    "src/components/EventSummaryForm.js": {
+      "expectCount": 10,
+      "actualCount": 1,
+      "undocumentLines": [
+        11,
+        13,
+        14,
+        25,
+        45,
+        51,
+        56,
+        63,
+        77
       ]
     },
     "src/components/Form.js": {
-      "expectCount": 4,
-      "actualCount": 3,
+      "expectCount": 9,
+      "actualCount": 6,
       "undocumentLines": [
-        11
-      ]
-    },
-    "src/components/Kickoff.js": {
-      "expectCount": 3,
-      "actualCount": 0,
-      "undocumentLines": [
-        8,
-        10,
-        11
+        12,
+        92,
+        115
       ]
     },
     "src/components/Summary.js": {
-      "expectCount": 2,
-      "actualCount": 1,
-      "undocumentLines": [
-        19
-      ]
+      "expectCount": 9,
+      "actualCount": 9,
+      "undocumentLines": []
     },
     "src/components/Tab.js": {
       "expectCount": 3,
-      "actualCount": 0,
+      "actualCount": 2,
       "undocumentLines": [
-        6,
-        8,
-        12
+        5
       ]
     },
     "src/registerServiceWorker.js": {

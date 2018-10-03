@@ -32,11 +32,12 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/App.js~App.html">App</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-register">register</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-unregister">unregister</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Collection.js~Collection.html">Collection</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/BigYellowButton.js~BigYellowButton.html">BigYellowButton</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Collection.js~Collection.html">Collection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html">CollectionSummaryRow</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Event.js~Event.html">Event</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html">EventSummaryForm</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Form.js~Form.html">Form</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Kickoff.js~Kickoff.html">Kickoff</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Summary.js~Summary.html">Summary</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Tab.js~Tab.html">Tab</a></span></span></li>
 </ul>
@@ -45,20 +46,75 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/components/EventSummaryForm.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
+import moment from &apos;moment&apos;;
+import cx from &apos;classnames&apos;;
+import Button from &apos;@material-ui/core/Button&apos;;
+import { withStyles } from &apos;@material-ui/core/styles&apos;;
+import SaveIcon from &apos;@material-ui/icons/Save&apos;;
 
-// TODO: add esdoc
+
+
+// prevent page from refreshing when form is submitted.
 const stop = (event) =&gt; (event.stopPropagation(), event.preventDefault());
 
 export default class EventSummaryForm extends React.Component {
+  state = {
+    radarSigs: [],
+    eventTypes: [],
+    radSigOtherChecked: false,
+    eventTypeOtherChecked: false
+  }
+
+  /**
+   *
+   *
+   */
+  handleChecks = (event) =&gt; {
+    const target = event.target;
+    let { radarSigs } = this.state;
+    target.checked ?
+      ( radarSigs.push(target.value) ) :
+      ( radarSigs = radarSigs.filter( e =&gt; e !== target.value))
+    this.setState({ radarSigs });
+  }
+
+  /** DRY this up!!! **/
+  getEventType = (event) =&gt; {
+    const target = event.target;
+    let { eventTypes } = this.state;
+    target.checked ?
+      ( eventTypes.push(target.value) ) :
+      ( eventTypes = eventTypes.filter( e =&gt; e !== target.value))
+
+    this.setState({ eventTypes });
+  }
+
+  handleOtherChecks = (event) =&gt; {
+    const target = event.target;
+    const name = target.name;
+    this.setState({ [name] : target.checked });
+  }
+
+  handleOtherInput = (event) =&gt; {
+    stop(event);
+    this.setState({ [event.target.name] : event.target.value })
+  }
+
+  getOtherValues() {
+    let { radarSigs, eventTypes } = this.state;
+    this.state.radSigOtherValue &amp;&amp; radarSigs.push(this.state.radSigOtherValue);
+    this.state.eventTypeOtherValue &amp;&amp; eventTypes.push(this.state.eventTypeOtherValue);
+    this.setState({ radarSigs, eventTypes })
+  }
 
   handleSubmit = (event) =&gt; {
     stop(event);
     const e = event.target;
+    this.getOtherValues();
     const data = {
-      eventType: e.eventType.value,
-      eventRadarSigs: e.radarSig.value,
-      eventendday: e.endDay.value,
-      eventendtime: e.endTime.value,
+      eventType: this.state.eventTypes.toString(),
+      eventRadarSigs: this.state.radarSigs.toString(),
+      eventEnd: this.props.convertTime(e.endDay.value, e.endTime.value),
       eventDescription: e.summary.value
     }
 
@@ -69,69 +125,146 @@ export default class EventSummaryForm extends React.Component {
     return (
       &lt;div className=&quot;event-summary&quot;&gt;
         &lt;form onSubmit={this.handleSubmit}&gt;
+        &lt;h2&gt;Weather Event Summary&lt;/h2&gt;
+        &lt;p&gt;Enter the details of the weather event to summarize before submitting the data to storage. &lt;/p&gt;
         &lt;div className=&quot;checkform&quot;&gt;
-            &lt;h1&gt;Radar Signatures&lt;/h1&gt;
+            &lt;h3&gt;Radar Signatures&lt;/h3&gt;
             &lt;div&gt;
-            &lt;div&gt;
-              &lt;input type=&quot;checkbox&quot; id=&quot;tornadic-supercell&quot; name=&quot;radarSig&quot; value=&quot;tornadic-supercell&quot; checked /&gt;
-              &lt;label for=&quot;tornadic-supercell&quot;&gt;Tornadic Supercell&lt;/label&gt;
-            &lt;/div&gt;
-            &lt;div&gt;
-              &lt;input type=&quot;checkbox&quot; id=&quot;hail&quot; name=&quot;radarSig&quot; value=&quot;hail&quot; /&gt;
-              &lt;label for=&quot;hail&quot;&gt;Hail&lt;/label&gt;
-            &lt;/div&gt;
-            &lt;div&gt;
-              &lt;input type=&quot;checkbox&quot; id=&quot;claws&quot; name=&quot;radarSig&quot; value=&quot;claws&quot; /&gt;
-              &lt;label for=&quot;claws&quot;&gt;Claws&lt;/label&gt;
-            &lt;/div&gt;
-            &lt;div&gt;
-              &lt;input type=&quot;checkbox&quot; id=&quot;tornadic-supercell&quot; name=&quot;radarSig&quot; value=&quot;tornadic-supercell&quot; checked /&gt;
-              &lt;label for=&quot;tornadic-supercell&quot;&gt;Tornadic Supercell&lt;/label&gt;
-            &lt;/div&gt;
-            &lt;div&gt;
-              &lt;input type=&quot;checkbox&quot; id=&quot;hail&quot; name=&quot;radarSig&quot; value=&quot;hail&quot; /&gt;
-              &lt;label for=&quot;hail&quot;&gt;Hail&lt;/label&gt;
-            &lt;/div&gt;
-            &lt;div&gt;
-              &lt;input type=&quot;checkbox&quot; id=&quot;claws&quot; name=&quot;radarSig&quot; value=&quot;claws&quot; /&gt;
-              &lt;label for=&quot;claws&quot;&gt;Claws&lt;/label&gt;
-              &lt;/div&gt;
+              &lt;label htmlFor=&quot;downburst&quot;&gt;
+                &lt;input type=&quot;checkbox&quot; id=&quot;downburst&quot; onChange={this.handleChecks} value=&quot;downburst&quot; /&gt;
+                downburst
+              &lt;/label&gt;
+
+              &lt;label htmlFor=&quot;hail&quot;&gt;
+                &lt;input type=&quot;checkbox&quot; id=&quot;hail&quot; onChange={this.handleChecks} value=&quot;hail&quot; /&gt;
+                hail
+              &lt;/label&gt;
+
+              &lt;label htmlFor=&quot;bow-echo&quot;&gt;
+                &lt;input type=&quot;checkbox&quot; id=&quot;bow-echo&quot; onChange={this.handleChecks} value=&quot;bow echo&quot; /&gt;
+                bow echo
+              &lt;/label&gt;
+
+              &lt;label htmlFor=&quot;TDS&quot;&gt;
+                &lt;input type=&quot;checkbox&quot; id=&quot;TDS&quot; onChange={this.handleChecks} value=&quot;TDS&quot; /&gt;
+                TDS
+              &lt;/label&gt;
+
+              &lt;label htmlFor=&quot;mesocyclone&quot;&gt;
+                &lt;input type=&quot;checkbox&quot; id=&quot;mesocyclone&quot; onChange={this.handleChecks} value=&quot;mesocyclone&quot; /&gt;
+                mesocyclone
+              &lt;/label&gt;
+
+              &lt;label htmlFor=&quot;TVS&quot;&gt;
+                &lt;input type=&quot;checkbox&quot; id=&quot;TVS&quot; onChange={this.handleChecks} value=&quot;TVS&quot; /&gt;
+                TVS
+              &lt;/label&gt;
+
+              &lt;label htmlFor=&quot;refreezing&quot;&gt;
+                &lt;input type=&quot;checkbox&quot; id=&quot;refreezing&quot; onChange={this.handleChecks} value=&quot;refreezing&quot; /&gt;
+                refreezing (winter)
+              &lt;/label&gt;
+              &lt;label htmlFor=&quot;radSigOtherChecked&quot;&gt;
+                &lt;input type=&quot;checkbox&quot; id=&quot;radSigOther&quot; name=&quot;radSigOtherChecked&quot; onChange={this.handleOtherChecks} value={this.state.radarSigsOtherValue} /&gt;
+                {this.state.radSigOtherChecked
+                  ?  (&lt;input className=&quot;other-input&quot; type=&quot;text&quot; name=&quot;radSigOtherValue&quot; onChange={this.handleOtherInput}/&gt;)
+                  :  (&lt;React.Fragment&gt;other&lt;/React.Fragment&gt;)
+                }
+              &lt;/label&gt;
+
+
+
+
             &lt;/div&gt;
          &lt;/div&gt;
-         &lt;div className=&quot;checkform&quot;&gt;
-            &lt;h1&gt;Event Type&lt;/h1&gt;
-            &lt;div&gt;
-            &lt;div&gt;
-              &lt;input type=&quot;checkbox&quot; id=&quot;tornadic-supercell&quot; name=&quot;eventType&quot; value=&quot;tornadic-supercell&quot; checked /&gt;
-              &lt;label for=&quot;downburst&quot;&gt;Downburst&lt;/label&gt;
-            &lt;/div&gt;
-            &lt;div&gt;
-              &lt;input type=&quot;checkbox&quot; id=&quot;hail&quot; name=&quot;eventType&quot; value=&quot;hail&quot; /&gt;
-              &lt;label for=&quot;thunderstorm&quot;&gt;Thunderstorm&lt;/label&gt;
-            &lt;/div&gt;
-            &lt;div&gt;
-              &lt;input type=&quot;checkbox&quot; id=&quot;claws&quot; name=&quot;eventType&quot; value=&quot;claws&quot; /&gt;
-              &lt;label for=&quot;tornado&quot;&gt;Tornado&lt;/label&gt;
-            &lt;/div&gt;
-            &lt;div&gt;
-              &lt;input type=&quot;checkbox&quot; id=&quot;tornadic-supercell&quot; name=&quot;eventType&quot; value=&quot;tornadic-supercell&quot; checked /&gt;
-              &lt;label for=&quot;downburst&quot;&gt;Downburst&lt;/label&gt;
-            &lt;/div&gt;
-            &lt;div&gt;
-              &lt;input type=&quot;checkbox&quot; id=&quot;hail&quot; name=&quot;eventType&quot; value=&quot;hail&quot; /&gt;
-              &lt;label for=&quot;thunderstorm&quot;&gt;Thunderstorm&lt;/label&gt;
-            &lt;/div&gt;
-            &lt;div&gt;
-              &lt;input type=&quot;checkbox&quot; id=&quot;claws&quot; name=&quot;eventType&quot; value=&quot;claws&quot; /&gt;
-              &lt;label for=&quot;tornado&quot;&gt;Tornado&lt;/label&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-          &lt;input type=&quot;date&quot; name=&quot;endDay&quot; min=&quot;2018-01-01&quot;/&gt;
-          &lt;input type=&quot;time&quot; name=&quot;endTime&quot; min=&quot;00:00&quot; max=&quot;23:59&quot; /&gt;
-          &lt;textarea name=&quot;summary&quot; cols=&quot;50&quot; rows=&quot;10&quot; placeholder=&quot;remarks...&quot;/&gt;
-          &lt;input type=&quot;submit&quot; /&gt;
 
+         &lt;div className=&quot;checkform&quot;&gt;
+            &lt;h3&gt;Event Type&lt;/h3&gt;
+              &lt;div&gt;
+                &lt;label htmlFor=&quot;tornadic-supercell&quot;&gt;
+                  &lt;input type=&quot;checkbox&quot; id=&quot;tornadic-supercell&quot; onChange={this.getEventType} value=&quot;tornadic-supercell&quot;  /&gt;
+                  tornadic supercell
+                &lt;/label&gt;
+
+                &lt;label htmlFor=&quot;nontornadic-supercell&quot;&gt;
+                  &lt;input type=&quot;checkbox&quot; id=&quot;nontornadic-supercell&quot; onChange={this.getEventType} value=&quot;nontornadic-supercell&quot;  /&gt;
+                  nontornadic supercell
+                &lt;/label&gt;
+
+                &lt;label htmlFor=&quot;quasi-linear-convextive-system&quot;&gt;
+                  &lt;input type=&quot;checkbox&quot;
+                         id=&quot;quasi-linear-convextive-system&quot;
+                         onChange={this.getEventType}
+                         value=&quot;quasi-linear convextive system&quot;
+                   /&gt;
+                  quasi-linear convextive system
+                &lt;/label&gt;
+
+                &lt;label htmlFor=&quot;mutilcell-storms&quot;&gt;
+                  &lt;input type=&quot;checkbox&quot; id=&quot;mutilcell-storms&quot; onChange={this.getEventType} value=&quot;mutilcell storms&quot; /&gt;
+                  mutilcell storms
+                &lt;/label&gt;
+
+                &lt;label htmlFor=&quot;mesoscale-convective-system&quot;&gt;
+                  &lt;input type=&quot;checkbox&quot; id=&quot;mesoscale-convective-system&quot; onChange={this.getEventType} value=&quot;mesoscale convective system&quot; /&gt;
+                  mesoscale convective system
+                &lt;/label&gt;
+
+                &lt;label htmlFor=&quot;heavy-rain&quot;&gt;
+                  &lt;input type=&quot;checkbox&quot; id=&quot;heavy-rain&quot; onChange={this.getEventType} value=&quot;heavy rain/flash flooding&quot;  /&gt;
+                  heavy rain/flash flooding
+                &lt;/label&gt;
+
+
+
+                &lt;label htmlFor=&quot;winter-precipitation&quot;&gt;
+                  &lt;input type=&quot;checkbox&quot; id=&quot;winter-precipitation&quot; onChange={this.getEventType} value=&quot;winter precipitation&quot; /&gt;
+                  winter precipitation
+                &lt;/label&gt;
+
+                &lt;label htmlFor=&quot;convective-initiation&quot;&gt;
+                  &lt;input type=&quot;checkbox&quot; id=&quot;convective-initiation&quot; onChange={this.getEventType} value=&quot;convective initiation&quot; /&gt;
+                  convective initiation
+                &lt;/label&gt;
+
+                &lt;label htmlFor=&quot;eventTypeOtherChecked&quot;&gt;
+                  &lt;input type=&quot;checkbox&quot; id=&quot;radSigOther&quot; name=&quot;eventTypeOtherChecked&quot; onChange={this.handleOtherChecks} value={this.state.eventTypeOtherValue} /&gt;
+                  {this.state.eventTypeOtherChecked
+                    ?  (&lt;input className=&quot;other-input&quot; type=&quot;text&quot; name=&quot;eventTypeOtherValue&quot; onChange={this.handleOtherInput}/&gt;)
+                    :  (&lt;React.Fragment&gt;other&lt;/React.Fragment&gt;)
+                  }
+                &lt;/label&gt;
+              &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;p&gt;Weather Event End Day and Time:&lt;/p&gt;
+          &lt;div className=&quot;datetime-input&quot;&gt;
+            &lt;input type=&quot;date&quot;
+                   aria-label={&quot;weather event end day&quot;}
+                   aria-required=&quot;true&quot;
+                   name=&quot;endDay&quot;
+                   min=&quot;2018-01-01&quot;
+                   required
+                   defaultValue={this.props.today}
+            /&gt;
+            &lt;input type=&quot;time&quot;
+                   aria-label={&quot;weather event end time&quot;}
+                   aria-required=&quot;true&quot;
+                   name=&quot;endTime&quot;
+                   min=&quot;00:00&quot;
+                   max=&quot;23:59&quot;
+                   required
+                   defaultValue={this.props.timeNow}
+              /&gt;
+          &lt;/div&gt;
+          &lt;label htmlFor=&quot;summary&quot;&gt;Weather Event Summary:&lt;/label&gt;
+          &lt;textarea name=&quot;summary&quot;
+                    cols=&quot;50&quot;
+                    rows=&quot;10&quot;
+          /&gt;
+          &lt;Button variant=&quot;contained&quot; size=&quot;small&quot; type=&quot;submit&quot; aria-label=&quot;Save Data&quot; aria-required=&quot;true&quot;&gt;
+            &lt;SaveIcon  /&gt; Save
+          &lt;/Button&gt;
         &lt;/form&gt;
       &lt;/div&gt;
     )

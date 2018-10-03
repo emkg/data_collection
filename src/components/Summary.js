@@ -9,11 +9,18 @@ import BigYellowButton from './BigYellowButton';
 /**
  * Summary is a way to see the saved data submitted,
  * edit it, and submit it.
- *
  */
 export default class Summary extends React.Component {
+  /**
+   * state stores a count of open CollectionSummaryRows as editing, a number
+   * as well as the collections prop object and weatherEventData prop object
+   */
   state = { editing: 0 };
 
+  /**
+   * when component mounts, put collection and weather event data
+   * in state.
+   */
   componentDidMount() {
     const { collections } = this.props;
     const { weatherEventData } = this.props;
@@ -21,6 +28,12 @@ export default class Summary extends React.Component {
 
   }
 
+  /**
+   * Keeps track of how many CollectionSummaryRows are open
+   * for editing. True increases count, false lowers count.
+   * @param bool - a True or False value - true if CollectionSummaryRows are
+   *  opened for editing, false if they are closed
+   */
   isEditing = (bool) => {
     let { editing } = this.state;
     bool ? editing++ : editing--;
@@ -30,6 +43,10 @@ export default class Summary extends React.Component {
   /**
    *  handleSubmit will send the full state of this weather event
    *  to storage. Send Thankyou to app. Submits this Event.
+   *
+   *  If editable fields are open, a yellow snackbar will appear
+   *  with a helpful message to the user instead of submitting incomplete
+   *   information to the DB.
    */
   handleSubmit = () => {
     if(this.state.editing) {
@@ -55,6 +72,12 @@ export default class Summary extends React.Component {
     }
   }
 
+  /**
+   * @param stringInCamelCase - a string with uppercase letters
+   *   adjacent to lowercase letters
+   * @return a string - the value of stringInCamelCase in all lowercase
+   *   and spaces between words as indicated by camel cases
+   */
   removeCamelCase(stringInCamelCase) {
     return stringInCamelCase.replace(
       /[a-z][A-Z]/g, (letters, i) => (
@@ -64,7 +87,7 @@ export default class Summary extends React.Component {
   }
 
   /**
-   *
+   * Sends information to permanent storage.
    * @param jsonPayload an object that will be sent
    * to the database stringified
    * @param type a string that is the collection type
@@ -82,6 +105,14 @@ export default class Summary extends React.Component {
     })
   }
 
+  /**
+   * Creates an array of renderable components based on data passed to this
+   * component via props that will allow users to edit data before submitting.
+   *
+   * @param object - a json object we iterate to create CollectionSummaryRows
+   * @param array - an optional array of components we can append to, else start from scratch
+   * @return an array of CollectionSummaryRow components
+   */
   getCollectionSummaryRows = (object, array) => {
     let newArray = array || [];
     for (var property in object) {
@@ -92,10 +123,14 @@ export default class Summary extends React.Component {
                     value={object[property]}/>);
       }
     }
-
     return newArray;
   }
 
+  /**
+   * @return a stylish, editable table presenting the event data and
+   * collection data ready to be submitted to permanent storage featuring
+   * a BigYellowButton signaling the user to submit when ready.
+   */
   render() {
     if(this.state.collections) {
       const collectionsDisplay = this.state.collections.map((c, i) => {

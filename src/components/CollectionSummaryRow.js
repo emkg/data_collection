@@ -1,10 +1,15 @@
 import React from 'react';
 import cx from 'classnames';
 
+// prvent page refresh
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
-export default class CollectionSummaryRow extends React.Component {
 
-    state = { edit: false, value: this.props.value, editButton: "EDIT" };
+export default class CollectionSummaryRow extends React.Component {
+    state = {
+      edit: false,
+      value: this.props.value,
+      editButton: "EDIT"
+    };
 
     edit = (event) => {
       stop(event);

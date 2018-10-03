@@ -1,14 +1,21 @@
 import React from 'react';
 import cx from 'classnames';
 
-//TODO: add esdoc
 
 export default class Tab extends React.Component {
 
+  /**
+   * passes the value of this tabs prop back up to the parent container
+   * via the handleClick fn prop
+   */
   handleClick = () => {
     this.props.handleClick(this.props.tab);
   }
 
+  /**
+   * @return an a tag (accessible) that when clicked changes in appearance
+   * and has an effect with respect to the handleClick fn passed as props
+   */
   render() {
     const { clicked } = this.props;
     return (

@@ -32,11 +32,12 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/App.js~App.html">App</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-register">register</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-unregister">unregister</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Collection.js~Collection.html">Collection</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/BigYellowButton.js~BigYellowButton.html">BigYellowButton</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Collection.js~Collection.html">Collection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html">CollectionSummaryRow</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Event.js~Event.html">Event</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html">EventSummaryForm</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Form.js~Form.html">Form</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Kickoff.js~Kickoff.html">Kickoff</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Summary.js~Summary.html">Summary</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Tab.js~Tab.html">Tab</a></span></span></li>
 </ul>
@@ -46,7 +47,49 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/App.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
 import Event from &apos;./components/Event&apos;;
+import BigYellowButton from &apos;./components/BigYellowButton&apos;;
+import cx from &apos;classnames&apos;;
+import { withStyles } from &apos;@material-ui/core/styles&apos;;
+import Button from &apos;@material-ui/core/Button&apos;;
+import Snackbar from &apos;@material-ui/core/Snackbar&apos;;
+import SnackbarContent from &apos;@material-ui/core/SnackbarContent&apos;;
+import IconButton from &apos;@material-ui/core/IconButton&apos;;
+import CloseIcon from &apos;@material-ui/icons/Close&apos;;
+import CheckCircleIcon from &apos;@material-ui/icons/CheckCircle&apos;;
+import ErrorIcon from &apos;@material-ui/icons/Error&apos;;
+import green from &apos;@material-ui/core/colors/green&apos;;
+import amber from &apos;@material-ui/core/colors/amber&apos;;
+import WarningIcon from &apos;@material-ui/icons/Warning&apos;;
 import &apos;./App.css&apos;;
+
+// get icons we imported from material-ui for snackbars
+const variantIcon = {
+  success: CheckCircleIcon,
+  warning: WarningIcon,
+  error: ErrorIcon
+};
+
+// suggested styles from material-ui for snackbars
+// I chose to keep success and warning
+const snackbarStyles = {
+  success: {
+    backgroundColor: green[600],
+  },
+  warning: {
+    backgroundColor: amber[700],
+  },
+  icon: {
+    fontSize: 20,
+  },
+  iconVariant: {
+    opacity: 0.9,
+    marginRight: &apos;8px&apos;,
+  },
+  message: {
+    display: &apos;flex&apos;,
+    alignItems: &apos;center&apos;,
+  }
+};
 
 
 
@@ -56,40 +99,117 @@ import &apos;./App.css&apos;;
  *
  */
 export default class App extends React.Component {
-  state = { weatherEvent: false }
-
   /**
-   * When startEvent is triggered, the weatherEvent in state
-   *   is flipped on or off. A thankyou message can be supplied,
-   *   which will be displayed when the event is flipped to false.
+   * App state keeps track of whether an event is active, and
+   * whether or not we want to see a snackbar. Likewise,
+   * App state stores the snackbar message and variant (success -- green
+   * is for signaling saved information, while warning -- amber/yellow
+   * comes up for validation messages on the final submit page)
    */
-  startEvent = (thankyou) =&gt; {
-    this.setState({ weatherEvent: !this.state.weatherEvent, thankyou })
+  state = {
+    weatherEvent: false,
+    snackbarOpen: false,
+    snackbarVariant: &apos;success&apos;,
+    snackbarMessage: &apos;&apos;
   }
 
   /**
-   * Render the app.
-   * @return In a weather event, an Event will be rendered.
-   * Otherwise, we will see the GO button, and a thankyou message if it
+   * scrolls the window to the top of the page.
+   */
+  componentDidMount() {
+    window.scrollTo(0,0);
+  }
+
+  /**
+   * Opens a snackbar
+   * @param snackbarVariant - a string, either &quot;warning&quot; or &quot;success&quot;
+   * @param snackbarMessage - a string, what the message should say
+   **/
+  openSnackbar = (snackbarVariant, snackbarMessage) =&gt; {
+   this.setState({ snackbarOpen: true, snackbarVariant, snackbarMessage });
+  };
+
+
+  /**
+   * Closes a snackbar.
+   * @param event - borrowed from material-ui
+   * @param reason - borrowed from material-ui
+   */
+  closeSnackbar = (event, reason) =&gt; {
+   this.setState({ snackbarOpen: false });
+ };
+
+  /**
+   * Flips weatherEvent in state on if off, off if on.
+   * @param thankyou - a string, optional message
+   *   to be displayed when weatherEvent is false.
+   */
+  startEvent = (thankyou) =&gt; {
+    this.setState({ weatherEvent: !this.state.weatherEvent, thankyou })
+    window.scrollTo(0,0);
+  }
+
+  /**
+   * Render the app. The GO button will set weatherEvent to
+   * true and data collection can begin. 
+   * @return If weatherEvent is true, an Event will be rendered.
+   * Otherwise, the GO button, and a thankyou message if it
    * exists.
    */
   render() {
+    const { snackbarVariant } = this.state;
+    const Icon = variantIcon[snackbarVariant];
     return (
       &lt;div className=&quot;app&quot;&gt;
       &lt;h1&gt;Radar Operations Data Collection&lt;/h1&gt;
 
-      {!this.state.weatherEvent &amp;&amp; (
-        &lt;div&gt;
-          {this.state.thankyou}
-          &lt;p&gt;Press go to collect data
-          when weather events are in progress.&lt;/p&gt;
+        {!this.state.weatherEvent &amp;&amp; (
+          &lt;div&gt;
+            {this.state.thankyou}
+            &lt;p&gt;Press go to collect data
+            when weather events are in progress.&lt;/p&gt;
+            &lt;BigYellowButton
+                handleButtonPress={this.startEvent}
+                buttonText=&quot;GO&quot; /&gt;
+          &lt;/div&gt;
+        )}
 
-          &lt;div className=&quot;new-collection&quot;
-                 onClick={this.startEvent}&gt;GO&lt;/div&gt;
-        &lt;/div&gt;)}
+        {this.state.weatherEvent &amp;&amp; (
+          &lt;Event eventOver={this.startEvent} snackbar={this.openSnackbar} /&gt;
+        )}
 
-      {this.state.weatherEvent &amp;&amp; (&lt;Event eventOver={this.startEvent} /&gt;)}
+        &lt;Snackbar
+          open={this.state.snackbarOpen}
+          autoHideDuration={6000}
+          onClose={this.closeSnackbar}
 
+          anchorOrigin={{
+            vertical: &apos;top&apos;,
+            horizontal: &apos;center&apos;,
+          }}
+          ContentProps={{
+            &apos;aria-describedby&apos;: &apos;message-id&apos;,
+          }}
+        &gt;
+          &lt;SnackbarContent
+            style={snackbarStyles[snackbarVariant]}
+            message={&lt;span id=&quot;message-id&quot; style={snackbarStyles.message}&gt;
+                      &lt;Icon style={snackbarStyles.icon, snackbarStyles.iconVariant}/&gt;
+                          {this.state.snackbarMessage}
+                      &lt;/span&gt;}
+            action={[
+              &lt;IconButton
+                key=&quot;close&quot;
+                aria-label=&quot;close&quot;
+                color=&quot;inherit&quot;
+                style={snackbarStyles.close}
+                onClick={this.closeSnackbar}
+              &gt;
+              &lt;CloseIcon style={snackbarStyles.icon}/&gt;
+              &lt;/IconButton&gt;,
+            ]}
+          /&gt;
+        &lt;/Snackbar&gt;
       &lt;/div&gt;
     );
   }

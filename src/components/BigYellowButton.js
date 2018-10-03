@@ -6,7 +6,7 @@ import React from 'react';
  * style. With a drop shadow and transforms, this
  * component has a dramatic push down effect.
  * It requires a handleButtonPress function, and buttonText
- * props. It is tab accessible.
+ * props. It is keyboard/tab accessible.
  */
 export default class BigYellowButton extends React.Component {
 

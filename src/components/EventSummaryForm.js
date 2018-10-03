@@ -5,9 +5,9 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
 
-// TODO: add esdoc
 
 
+// prevent page from refreshing when form is submitted.
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 
 export default class EventSummaryForm extends React.Component {
@@ -18,7 +18,10 @@ export default class EventSummaryForm extends React.Component {
     eventTypeOtherChecked: false
   }
 
-  /** DRY this up!!! **/
+  /**
+   *
+   *
+   */
   handleChecks = (event) => {
     const target = event.target;
     let { radarSigs } = this.state;

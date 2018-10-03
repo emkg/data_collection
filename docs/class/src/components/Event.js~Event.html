@@ -32,11 +32,12 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/App.js~App.html">App</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-register">register</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-unregister">unregister</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Collection.js~Collection.html">Collection</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/BigYellowButton.js~BigYellowButton.html">BigYellowButton</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Collection.js~Collection.html">Collection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html">CollectionSummaryRow</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Event.js~Event.html">Event</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html">EventSummaryForm</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Form.js~Form.html">Form</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Kickoff.js~Kickoff.html">Kickoff</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Summary.js~Summary.html">Summary</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Tab.js~Tab.html">Tab</a></span></span></li>
 </ul>
@@ -44,13 +45,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Event from &apos;<span><a href="file/src/components/Event.js.html#lineNumber21">ops_coll_front/src/components/Event.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Event from &apos;<span><a href="file/src/components/Event.js.html#lineNumber23">ops_coll_front/src/components/Event.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/components/Event.js.html#lineNumber21">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/components/Event.js.html#lineNumber23">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -70,7 +71,7 @@
 
   
   
-  <div class="description" data-ice="description"><p>An Event is the object that stores data collections.
+  <div class="description" data-ice="description"><p>An Event is home to the collections.
 If an instrument is stationary, an Event will have
 one collectionID for its collections.
 If an instrument is mobile, then the event will
@@ -108,13 +109,13 @@ have a new collectionID for every location update.</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-handleEndCollection">handleEndCollection</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-convertTime">convertTime</a></span></span><span class="code" data-ice="signature">: <span>*</span>: <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>handleEndCollection changes the mode to &quot;summary&quot;.</p>
+        <div data-ice="description"><p>given @param day - string, @param time - string,</p>
 </div>
       </div>
     </td>
@@ -137,13 +138,41 @@ have a new collectionID for every location update.</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-handleEventSummary">handleEventSummary</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-getTimeNow">getTimeNow</a></span></span><span class="code" data-ice="signature">: <span>*</span>: <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>handleEventSummary stores the summary data and flips mode to &quot;end&quot;.</p>
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-handleEventSummarySubmit">handleEventSummarySubmit</a></span></span><span class="code" data-ice="signature">(finalWeatherEventData: <span>*</span>): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>stores the summary data and flips mode to &quot;end&quot;.</p>
 </div>
       </div>
     </td>
@@ -166,44 +195,13 @@ have a new collectionID for every location update.</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-handleInstrument">handleInstrument</a></span></span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-handleKickoffSubmit">handleKickoffSubmit</a></span></span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>handleInstrument stores the instrument in state,
-determines if we&apos;re mobile and therefore controls whether
-or not we see location fields rendered for the Event.</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-handleKickoffSubmit">handleKickoffSubmit</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>handleKickoffSubmit changes the mode to &quot;collect&quot;,
+        <div data-ice="description"><p>changes the mode to &quot;collect&quot;,
 saves initial event info, and if the instrument
 is mobile, adds the first collection to state</p>
 </div>
@@ -228,14 +226,14 @@ is mobile, adds the first collection to state</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-handleSubmit">handleSubmit</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-isMobile">isMobile</a></span></span><span class="code" data-ice="signature">(selectedOption: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p> handleSubmit will send the full state of this weather event
- to storage.</p>
+        <div data-ice="description"><p>Determines if the selectedOption is a mobile instrument
+based on the global list of mobile instruments.</p>
 </div>
       </div>
     </td>
@@ -294,8 +292,11 @@ collections array and saves it to state.</p>
       <div>
         
         
-        <div data-ice="description"><p>String mode, Array collections
-String instrument, boolean mobile, Object weatherEventData</p>
+        <div data-ice="description"><p>Event state stores the mode, a string, either &quot;begin&quot;, &quot;collect&quot;, or &quot;end&quot;
+ an Array of collections (json objects), an unique eventID generated by uuidv4,
+today, the string for today&apos;s date, selectedOption for react-select component,
+mobile - a boolean, true if the instrument is mobile, and an Object
+weatherEventData which stores metadata about the Event itself</p>
 </div>
       </div>
     </td>
@@ -325,14 +326,73 @@ String instrument, boolean mobile, Object weatherEventData</p>
           
           
           
+          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-method-componentDidMount">componentDidMount</a></span></span><span class="code" data-ice="signature">()</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Retreive saved cookie in case data submission was interrupted.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
           <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-method-render">render</a></span></span><span class="code" data-ice="signature">(): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p> Event renders different forms depending on the
- mode in state.</p>
+        <div data-ice="description"><p> Event renders different data collection forms depending on the
+ saved mode in state.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-method-saveState">saveState</a></span></span><span class="code" data-ice="signature">()</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>saveState saves the current state to a browser cookie as
+an encodedURIComponent under eventState.</p>
 </div>
       </div>
     </td>
@@ -353,26 +413,25 @@ String instrument, boolean mobile, Object weatherEventData</p>
 <div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-handleEndCollection">
+  <h3 data-ice="anchor" id="instance-member-convertTime">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">handleEndCollection</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">convertTime</span><span class="code" data-ice="signature">: <span>*</span>: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber94">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber85">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>handleEndCollection changes the mode to &quot;summary&quot;.
-passed as function prop to Collection.</p>
+  <div data-ice="description"><p>given @param day - string, @param time - string,</p>
 </div>
 
   
@@ -380,7 +439,20 @@ passed as function prop to Collection.</p>
   <div data-ice="properties">
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>a utc time stamp</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -398,72 +470,83 @@ passed as function prop to Collection.</p>
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-handleEventSummary">
+  <h3 data-ice="anchor" id="instance-member-getTimeNow">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">handleEventSummary</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">getTimeNow</span><span class="code" data-ice="signature">: <span>*</span>: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber102">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber159">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>handleEventSummary stores the summary data and flips mode to &quot;end&quot;.
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>the UTC time now in a format that time input can
+  display</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-handleEventSummarySubmit">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">handleEventSummarySubmit</span><span class="code" data-ice="signature">(finalWeatherEventData: <span>*</span>): <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber136">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>stores the summary data and flips mode to &quot;end&quot;.
 sent as function prop to EventSummaryForm</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-handleInstrument">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">handleInstrument</span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber51">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>handleInstrument stores the instrument in state,
-determines if we&apos;re mobile and therefore controls whether
-or not we see location fields rendered for the Event.</p>
 </div>
 
   
@@ -496,18 +579,18 @@ or not we see location fields rendered for the Event.</p>
     
     
     
-    <span class="code" data-ice="name">handleKickoffSubmit</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">handleKickoffSubmit</span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber63">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber95">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>handleKickoffSubmit changes the mode to &quot;collect&quot;,
+  <div data-ice="description"><p>changes the mode to &quot;collect&quot;,
 saves initial event info, and if the instrument
 is mobile, adds the first collection to state</p>
 </div>
@@ -535,26 +618,26 @@ is mobile, adds the first collection to state</p>
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-handleSubmit">
+  <h3 data-ice="anchor" id="instance-member-isMobile">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">handleSubmit</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">isMobile</span><span class="code" data-ice="signature">(selectedOption: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber110">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber149">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p> handleSubmit will send the full state of this weather event
- to storage. Send Thankyou to app. Submits this Event.</p>
+  <div data-ice="description"><p>Determines if the selectedOption is a mobile instrument
+based on the global list of mobile instruments.</p>
 </div>
 
   
@@ -591,7 +674,7 @@ is mobile, adds the first collection to state</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber39">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber66">source</a></span></span>
     </span>
   </h3>
 
@@ -638,15 +721,18 @@ a specific state of the Form in Collection.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber26">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber31">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>String mode, Array collections
-String instrument, boolean mobile, Object weatherEventData</p>
+  <div data-ice="description"><p>Event state stores the mode, a string, either &quot;begin&quot;, &quot;collect&quot;, or &quot;end&quot;
+ an Array of collections (json objects), an unique eventID generated by uuidv4,
+today, the string for today&apos;s date, selectedOption for react-select component,
+mobile - a boolean, true if the instrument is mobile, and an Object
+weatherEventData which stores metadata about the Event itself</p>
 </div>
 
   
@@ -675,6 +761,50 @@ String instrument, boolean mobile, Object weatherEventData</p>
 <div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
 
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-componentDidMount">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">componentDidMount</span><span class="code" data-ice="signature">()</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber43">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Retreive saved cookie in case data submission was interrupted.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-render">
     <span class="access" data-ice="access">public</span>
     
@@ -686,15 +816,15 @@ String instrument, boolean mobile, Object weatherEventData</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber122">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber169">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p> Event renders different forms depending on the
- mode in state.</p>
+  <div data-ice="description"><p> Event renders different data collection forms depending on the
+ saved mode in state.</p>
 </div>
 
   
@@ -709,8 +839,7 @@ String instrument, boolean mobile, Object weatherEventData</p>
         <tr>
           <td class="return-type code" data-ice="returnType"><span>*</span></td>
           <td class="return-desc" data-ice="returnDescription"><p>Instrument if mode &quot;begin&quot;, Collection
- if mode &quot;collect&quot;, EventSummaryForm if mode is
- &quot;summary&quot;, and a Summary if mode is &quot;end&quot;.</p>
+ if mode &quot;collect&quot;, and a Summary if mode is &quot;end&quot;.</p>
 </td>
         </tr>
       </tbody>
@@ -718,6 +847,51 @@ String instrument, boolean mobile, Object weatherEventData</p>
     <div data-ice="returnProperties">
 </div>
   </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-saveState">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">saveState</span><span class="code" data-ice="signature">()</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber77">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>saveState saves the current state to a browser cookie as
+an encodedURIComponent under eventState.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
 
   
 

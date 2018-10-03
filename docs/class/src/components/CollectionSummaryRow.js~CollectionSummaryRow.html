@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">Form | ops_coll_front</title>
+  <title data-ice="title">CollectionSummaryRow | ops_coll_front</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -45,23 +45,23 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Form from &apos;<span><a href="file/src/components/Form.js.html#lineNumber99">ops_coll_front/src/components/Form.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import CollectionSummaryRow from &apos;<span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber5">ops_coll_front/src/components/CollectionSummaryRow.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/components/Form.js.html#lineNumber99">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber5">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
-  <h1 data-ice="name">Form</h1>
+  <h1 data-ice="name">CollectionSummaryRow</h1>
 
   
 
   
   
-  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span>react~React.Component</span> &#x2192; Form</div></div>
+  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span>react~React.Component</span> &#x2192; CollectionSummaryRow</div></div>
   
   
   
@@ -71,10 +71,7 @@
 
   
   
-  <div class="description" data-ice="description"><p>Form is the master form where all the data is input.
-Form renders only the fields needed based on the
- className prop.</p>
-</div>
+  
   
 
   
@@ -107,16 +104,13 @@ Form renders only the fields needed based on the
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/Form.js~Form.html#instance-member-handleSubmit">handleSubmit</a></span></span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html#instance-member-edit">edit</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>handleSubmit collects the data from the
- form based on the className and sends it
- up to parent.</p>
-</div>
+        
       </div>
     </td>
     <td>
@@ -138,15 +132,13 @@ Form renders only the fields needed based on the
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/Form.js~Form.html#instance-member-selectOnChange">selectOnChange</a></span></span><span class="code" data-ice="signature">(selectedOption: <span>*</span>): <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html#instance-member-showHideInput">showHideInput</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>updates the array of options saved to state based on what is
-chosen by the user on the react-select component</p>
-</div>
+        
       </div>
     </td>
     <td>
@@ -168,16 +160,13 @@ chosen by the user on the react-select component</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/Form.js~Form.html#instance-member-state">state</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html#instance-member-state">state</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>state stores a Map of collection json objects and a
-selectedOption string for the sake of the react-select Component
-(especially important for the multi select option presented in Form)</p>
-</div>
+        
       </div>
     </td>
     <td>
@@ -206,71 +195,13 @@ selectedOption string for the sake of the react-select Component
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/Form.js~Form.html#instance-method-componentWillUnmount">componentWillUnmount</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html#instance-method-render">render</a></span></span><span class="code" data-ice="signature">(): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
         
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/components/Form.js~Form.html#instance-method-getSelectedCounties">getSelectedCounties</a></span></span><span class="code" data-ice="signature">(): <span>*</span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>converts the array of json to a list in String format (what our DB requires)</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/components/Form.js~Form.html#instance-method-render">render</a></span></span><span class="code" data-ice="signature">(): <span>*</span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>renders the form elements based on className prop (based on openTab from Collection)</p>
-</div>
       </div>
     </td>
     <td>
@@ -290,28 +221,25 @@ selectedOption string for the sake of the react-select Component
 <div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-handleSubmit">
+  <h3 data-ice="anchor" id="instance-member-edit">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">handleSubmit</span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
+    <span class="code" data-ice="name">edit</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Form.js.html#lineNumber148">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber9">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>handleSubmit collects the data from the
- form based on the className and sends it
- up to parent. Also clears form.</p>
-</div>
+  
 
   
 
@@ -336,27 +264,25 @@ selectedOption string for the sake of the react-select Component
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-selectOnChange">
+  <h3 data-ice="anchor" id="instance-member-showHideInput">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">selectOnChange</span><span class="code" data-ice="signature">(selectedOption: <span>*</span>): <span>*</span></span>
+    <span class="code" data-ice="name">showHideInput</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Form.js.html#lineNumber130">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber18">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>updates the array of options saved to state based on what is
-chosen by the user on the react-select component</p>
-</div>
+  
 
   
 
@@ -392,17 +318,14 @@ chosen by the user on the react-select component</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Form.js.html#lineNumber105">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber7">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>state stores a Map of collection json objects and a
-selectedOption string for the sake of the react-select Component
-(especially important for the multi select option presented in Form)</p>
-</div>
+  
 
   
 
@@ -430,106 +353,6 @@ selectedOption string for the sake of the react-select Component
 <div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-componentWillUnmount">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">componentWillUnmount</span><span class="code" data-ice="signature">()</span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/components/Form.js.html#lineNumber115">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-getSelectedCounties">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">getSelectedCounties</span><span class="code" data-ice="signature">(): <span>*</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/components/Form.js.html#lineNumber138">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>converts the array of json to a list in String format (what our DB requires)</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  <div class="return-params" data-ice="returnParams">
-    <h4>Return:</h4>
-    <table>
-      <tbody>
-        <tr>
-          <td class="return-type code" data-ice="returnType"><span>*</span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>a String - flat list / array to string</p>
-</td>
-        </tr>
-      </tbody>
-    </table>
-    <div data-ice="returnProperties">
-</div>
-  </div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-render">
     <span class="access" data-ice="access">public</span>
     
@@ -541,15 +364,14 @@ selectedOption string for the sake of the react-select Component
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Form.js.html#lineNumber246">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber24">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>renders the form elements based on className prop (based on openTab from Collection)</p>
-</div>
+  
 
   
 
@@ -562,8 +384,7 @@ selectedOption string for the sake of the react-select Component
       <tbody>
         <tr>
           <td class="return-type code" data-ice="returnType"><span>*</span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>only the fields appropriate for the className</p>
-</td>
+          
         </tr>
       </tbody>
     </table>

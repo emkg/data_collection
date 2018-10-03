@@ -32,11 +32,12 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/App.js~App.html">App</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-register">register</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-unregister">unregister</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Collection.js~Collection.html">Collection</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/BigYellowButton.js~BigYellowButton.html">BigYellowButton</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Collection.js~Collection.html">Collection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html">CollectionSummaryRow</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Event.js~Event.html">Event</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html">EventSummaryForm</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Form.js~Form.html">Form</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Kickoff.js~Kickoff.html">Kickoff</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Summary.js~Summary.html">Summary</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Tab.js~Tab.html">Tab</a></span></span></li>
 </ul>
@@ -45,13 +46,94 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/components/Form.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
-import DayPickerInput from &apos;react-day-picker&apos;;
-import &apos;react-day-picker/lib/style.css&apos;;
 import cx from &apos;classnames&apos;;
+import moment from &apos;moment&apos;;
+import Select from &apos;react-select&apos;;
+import Button from &apos;@material-ui/core/Button&apos;;
+import EventSummaryForm from &apos;./EventSummaryForm&apos;;
+import { withStyles } from &apos;@material-ui/core/styles&apos;;
+import SaveIcon from &apos;@material-ui/icons/Save&apos;;
 
-//TODO: editable data...
-// have an option to pass props and have form autofilled with Data
-// make sure that if in edit mode, that data overwrites correctly
+// a json list of all the counties in Oklahoma.
+// Required format for options in react-select component
+const options = [
+  { value: &apos;Alfalfa&apos;, label: &apos;Alfalfa&apos; },
+  { value: &apos;Atoka&apos;, label: &apos;Atoka&apos; },
+  { value: &apos;Beaver&apos;, label: &apos;Beaver&apos; },
+  { value: &apos;Beckham&apos;, label: &apos;Beckham&apos; },
+  { value: &apos;Blaine&apos;, label: &apos;Blaine&apos; },
+  { value: &apos;Bryan&apos;, label: &apos;Bryan&apos; },
+  { value: &apos;Caddo&apos;, label: &apos;Caddo&apos; },
+  { value: &apos;Canadian&apos;, label: &apos;Canadian&apos; },
+  { value: &apos;Carter&apos;, label: &apos;Carter&apos; },
+  { value: &apos;Cherokee&apos;, label: &apos;Cherokee&apos; },
+  { value: &apos;Choctaw&apos;, label: &apos;Choctaw&apos; },
+  { value: &apos;Cimarron&apos;, label: &apos;Cimarron&apos; },
+  { value: &apos;Cleveland&apos;, label: &apos;Cleveland&apos; },
+  { value: &apos;Coal&apos;, label: &apos;Coal&apos; },
+  { value: &apos;Comanche&apos;, label: &apos;Comanche&apos; },
+  { value: &apos;Cotton&apos;, label: &apos;Cotton&apos; },
+  { value: &apos;Craig&apos;, label: &apos;Craig&apos; },
+  { value: &apos;Creek&apos;, label: &apos;Creek&apos; },
+  { value: &apos;Custer&apos;, label: &apos;Custer&apos; },
+  { value: &apos;Delaware&apos;, label: &apos;Delaware&apos; },
+  { value: &apos;Dewey&apos;, label: &apos;Dewey&apos; },
+  { value: &apos;Ellis&apos;, label: &apos;Ellis&apos; },
+  { value: &apos;Garfield&apos;, label: &apos;Garfield&apos; },
+  { value: &apos;Garvin&apos;, label: &apos;Garvin&apos; },
+  { value: &apos;Grady&apos;, label: &apos;Grady&apos; },
+  { value: &apos;Grant&apos;, label: &apos;Grant&apos; },
+  { value: &apos;Greer&apos;, label: &apos;Greer&apos; },
+  { value: &apos;Harmon&apos;, label: &apos;Harmon&apos; },
+  { value: &apos;Harper&apos;, label: &apos;Harper&apos; },
+  { value: &apos;Haskell&apos;, label: &apos;Haskell&apos; },
+  { value: &apos;Hughes&apos;, label: &apos;Hughes&apos; },
+  { value: &apos;Jackson&apos;, label: &apos;Jackson&apos; },
+  { value: &apos;Jefferson&apos;, label: &apos;Jefferson&apos; },
+  { value: &apos;Johnston&apos;, label: &apos;Johnston&apos; },
+  { value: &apos;Kay&apos;, label: &apos;Kay&apos; },
+  { value: &apos;Kingfisher&apos;, label: &apos;Kingfisher&apos; },
+  { value: &apos;Kiowa&apos;, label: &apos;Kiowa&apos; },
+  { value: &apos;Latimer&apos;, label: &apos;Latimer&apos; },
+  { value: &apos;Le Flore&apos;, label: &apos;Le&apos; },
+  { value: &apos;Lincoln&apos;, label: &apos;Lincoln&apos; },
+  { value: &apos;Logan&apos;, label: &apos;Logan&apos; },
+  { value: &apos;Love&apos;, label: &apos;Love&apos; },
+  { value: &apos;Major&apos;, label: &apos;Major&apos; },
+  { value: &apos;Marshall&apos;, label: &apos;Marshall&apos; },
+  { value: &apos;Mayes&apos;, label: &apos;Mayes&apos; },
+  { value: &apos;McClain&apos;, label: &apos;McClain&apos; },
+  { value: &apos;McCurtain&apos;, label: &apos;McCurtain&apos; },
+  { value: &apos;McIntosh&apos;, label: &apos;McIntosh&apos; },
+  { value: &apos;Murray&apos;, label: &apos;Murray&apos; },
+  { value: &apos;Muskogee&apos;, label: &apos;Muskogee&apos; },
+  { value: &apos;Noble&apos;, label: &apos;Noble&apos; },
+  { value: &apos;Nowata&apos;, label: &apos;Nowata&apos; },
+  { value: &apos;Okfuskee&apos;, label: &apos;Okfuskee&apos; },
+  { value: &apos;Oklahoma&apos;, label: &apos;Oklahoma&apos; },
+  { value: &apos;Okmulgee&apos;, label: &apos;Okmulgee&apos; },
+  { value: &apos;Osage&apos;, label: &apos;Osage&apos; },
+  { value: &apos;Ottawa&apos;, label: &apos;Ottawa&apos; },
+  { value: &apos;Pawnee&apos;, label: &apos;Pawnee&apos; },
+  { value: &apos;Payne&apos;, label: &apos;Payne&apos; },
+  { value: &apos;Pittsburg&apos;, label: &apos;Pittsburg&apos; },
+  { value: &apos;Pontotoc&apos;, label: &apos;Pontotoc&apos; },
+  { value: &apos;Pottawatomie&apos;, label: &apos;Pottawatomie&apos; },
+  { value: &apos;Pushmataha&apos;, label: &apos;Pushmataha&apos; },
+  { value: &apos;Roger Mills&apos;, label: &apos;Roger&apos; },
+  { value: &apos;Rogers&apos;, label: &apos;Rogers&apos; },
+  { value: &apos;Seminole&apos;, label: &apos;Seminole&apos; },
+  { value: &apos;Sequoyah&apos;, label: &apos;Sequoyah&apos; },
+  { value: &apos;Stephens&apos;, label: &apos;Stephens&apos; },
+  { value: &apos;Texas&apos;, label: &apos;Texas&apos; },
+  { value: &apos;Tillman&apos;, label: &apos;Tillman&apos; },
+  { value: &apos;Tulsa&apos;, label: &apos;Tulsa&apos; },
+  { value: &apos;Wagoner&apos;, label: &apos;Wagoner&apos; },
+  { value: &apos;Washington&apos;, label: &apos;Washington&apos; },
+  { value: &apos;Washita&apos;, label: &apos;Washita&apos; },
+  { value: &apos;Woods&apos;, label: &apos;Woods&apos; },
+  { value: &apos;Woodward&apos;, label: &apos;Woodward&apos; }
+]
 
 // prevent default form behavior so app doesn&apos;t refresh on submit
 const stop = (event) =&gt; (event.stopPropagation(), event.preventDefault());
@@ -62,125 +144,280 @@ const stop = (event) =&gt; (event.stopPropagation(), event.preventDefault());
  *  className prop.
  */
 export default class Form extends React.Component {
+  /**
+   * state stores a Map of collection json objects and a
+   * selectedOption string for the sake of the react-select Component
+   * (especially important for the multi select option presented in Form)
+   */
+  state = {
+    submitted: new Map(),
+    selectedOption: null
+  }
+
+  /**
+   * When Component unmounts, we need to save all of the data we
+   * stored in this.state.submitted, the map of json objects
+   * made by each collection &quot;submit&quot;
+   */
+  componentWillUnmount() {
+    // we tack a collectionEnd property onto the end of each object in submitted Map
+    // and we set that value to now ... this will likely be a problem based on the timing
+    // of this operation
+    for(let [key, val] of this.state.submitted) {
+      this.props.saveData({...val, collectionEnd: new moment().utc().format()});
+    }
+  }
+
+  /**
+   * updates the array of options saved to state based on what is
+   * chosen by the user on the react-select component
+   * @param selectedOption - an array json with label and value sent
+   *   from react-select multi component
+   */
+  selectOnChange = (selectedOption) =&gt; {
+    this.setState({ selectedOption })
+  }
+
+  /**
+   * converts the array of json to a list in String format (what our DB requires)
+   * @return a String - flat list / array to string
+   */
+  getSelectedCounties() {
+    return this.state.selectedOption.map( option =&gt; ( option.value )).toString();
+  }
 
   /**
    * handleSubmit collects the data from the
    *  form based on the className and sends it
    *  up to parent. Also clears form.
+   * @param event - the default event from the submit button
    */
   handleSubmit = (event) =&gt; {
-    stop(event);  // do not let app refresh here
+    // prevent page refresh
+    stop(event);
+    // shorten this bc it will be repeated a lot
     const e = event.target;
-    // data we always need
+
+    // we need start day and time for all collections
+    const startDay = e.startDay.value;
+    const startTime = e.startTime.value;
+
+    // data we&apos;ll append to for each collection type
     const data = {
+      eventID: this.props.eventID,
       collectionID: this.props.collectionID,
-      startDay: e.startDay.value,
-      startTime: e.startTime.value,
-      collectionType: this.props.className
+      collectionStart: this.props.convertTime(startDay, startTime), // combine for one utc time stamp
+      collectionType: this.props.className,
+      dailyCollectionNumber: this.props.dailyCollectionNumber
     }
 
-    // clear fields we saved data from
-    e.startTime.value = &quot;&quot;;
+    /* what we want is to add the type of the event
+    // to the &quot;submitted&quot; map in state.
+    // Let the start time of the new collection of the same type
+    // that was previously saved be the end time for the older collection
+    // of this type. There can only be one one collection of a kind
+    // in the map, so we save it to Event as soon as we need to replace it.
+    */
+    let { submitted } = this.state;
 
-    // based on className, store certain fields in object
-    // and saveData.
+    if(submitted.get(data.collectionType)) {
+        submitted.get(data.collectionType).collectionEnd = data.collectionStart;
+        this.props.saveData(submitted.get(data.collectionType))
+    } // we have to save this collection or else we&apos;ll overwrite it
+
+    // based on className, store specific fields in object and saveData.
+    // not very DRY, is goal to condense this code if possible
     if(this.props.className === &quot;loc&quot;) {
         const location = {...data,
-          collectionID: e.id.value,
+          collectionID: this.props.handleNewLocation(e.dcn.value),
+          dailyCollectionNumber: e.dcn.value,
           locationLat: e.lat.value,
-          locationLong: e.long.value
+          locationLong: e.long.value,
         };
         e.lat.value = &quot;&quot;; e.long.value = &quot;&quot;;
-        this.props.handleLocationSubmit(location.collectionID);
-        this.props.saveData(location)
-    } else if(this.props.className === &quot;stationaryStart&quot;) {
-
+        submitted.set(data.collectionType, location);
+        this.setState({ submitted });
     } else if(this.props.className === &quot;vcp&quot;) {
         const vcp = {...data, VCP: e.vcp.value};
-        this.props.saveData(vcp);
-        e.vcp.value = &quot;&quot;
+        e.vcp.value = &quot;&quot;;
+        submitted.set(data.collectionType, vcp);
+        this.setState({ submitted });
     } else if(this.props.className === &quot;sector&quot;) {
         const sector = {...data,
           sectorStart: e.sectorStart.value,
           sectorEnd: e.sectorEnd.value
         };
-
         e.sectorStart.value = &quot;&quot;; e.sectorEnd.value = &quot;&quot;;
-
-        this.props.saveData(sector)
+        submitted.set(data.collectionType, sector);
+        this.setState({ submitted });
+    } else if (this.props.className === &quot;rhi&quot;) {
+        const rhi = {...data,
+          rhiStart: e.rhiStart.value,
+          rhiEnd: e.rhiEnd.value,
+          azimuth: e.azimuth.value,
+          rhiRemark: e.rhiRemark.value
+        };
+        submitted.set(data.collectionType, rhi);
+        this.setState({ submitted });
     } else if(this.props.className === &quot;warning&quot;) {
         const warning = {...data,
-          warningCounties: e.counties.value,
+          warningType: e.warningType.value,
+          warningCounties: this.getSelectedCounties(),
           warningText: e.warningText.value
         };
-
-        e.counties.value = &quot;&quot;; e.warningText.value = &quot;&quot;;
-
-        this.props.saveData(warning)
+        e.warningType.value = &quot;&quot;;
+        e.warningText.value = &quot;&quot;;
+        submitted.set(data.collectionType, warning);
+        this.setState({ submitted, selectedOption: null });
     } else if(this.props.className === &quot;report&quot;) {
         const report = {...data, reportText: e.reportText.value };
         e.reportText.value = &quot;&quot;;
-        this.props.saveData(report)
+        submitted.set(data.collectionType, report);
+        this.setState({ submitted });
     } else {
         // remark
         const remark = {...data, remark: e.remark.value};
         e.remark.value = &quot;&quot;;
-        this.props.saveData(remark)
+        submitted.set(data.collectionType, remark);
+        this.setState({ submitted });
     }
-
+    // w00t: show a green snackbar that says &apos;Data saved!&apos;
+    this.props.snackbar(&apos;success&apos;, &apos;Data saved!&apos;);
   }
 
+  //TODO: condense forms into components?
   /**
-   * renders the form elements based on className prop.
+   * renders the form elements based on className prop (based on openTab from Collection)
    * @return only the fields appropriate for the className
    */
   render() {
-    return (
-      &lt;div className={cx(this.props.className)}&gt;
-        &lt;form onSubmit={this.handleSubmit}&gt;
-           Start Time:
-           &lt;div className=&quot;datetime-input&quot;&gt;
-              &lt;input type=&quot;date&quot; name=&quot;startDay&quot; min=&quot;2018-01-01&quot;/&gt;
-              &lt;input type=&quot;time&quot; name=&quot;startTime&quot; min=&quot;00:00&quot; max=&quot;23:59&quot; /&gt;
-            &lt;/div&gt;
-           {this.props.className === &quot;loc&quot; &amp;&amp; (
-             &lt;div&gt;
-                &lt;input type=&quot;number&quot; name=&quot;lat&quot; placeholder=&quot;lat&quot;/&gt;
-                &lt;input type=&quot;number&quot; name=&quot;long&quot; placeholder=&quot;long&quot;/&gt;
-                &lt;input type=&quot;number&quot; name=&quot;newID&quot; placeholder=&quot;Daily Collection Number&quot;/&gt;
-             &lt;/div&gt;
-           )}
+    const { selectedOption } = this.state;
+    if(this.props.className !== &quot;eventEnd&quot;) {
+      return (
+        &lt;div className={cx(this.props.className)}&gt;
+          &lt;form onSubmit={this.handleSubmit}&gt;
+             &lt;p&gt;{`Start Time for ${this.props.className}`}&lt;/p&gt;
+             &lt;div className=&quot;datetime-input&quot;&gt;
+                &lt;input type=&quot;date&quot;
+                       aria-label={&quot;weather event start day&quot;}
+                       aria-required=&quot;true&quot;
+                       name=&quot;startDay&quot;
+                       min=&quot;2018-01-01&quot;
+                       defaultValue={this.props.today}
+                /&gt;
+                &lt;input type=&quot;time&quot;
+                       aria-label={`start time for ${this.props.className}`}
+                       aria-required=&quot;true&quot;
+                       name=&quot;startTime&quot;
+                       min=&quot;00:00&quot;
+                       max=&quot;23:59&quot;
+                       required
+                       defaultValue={this.props.timeNow}
+                /&gt;
+              &lt;/div&gt;
+             {this.props.className === &quot;loc&quot; &amp;&amp; (
+               &lt;div&gt;
+                  &lt;label htmlFor=&quot;&quot;&gt;Location Lattitude:&lt;/label&gt;
+                  &lt;input type=&quot;number&quot; name=&quot;lat&quot; /&gt;
+                  &lt;label htmlFor=&quot;&quot;&gt;Location Longitude&lt;/label&gt;
+                  &lt;input type=&quot;number&quot; name=&quot;long&quot; /&gt;
+                  &lt;label htmlFor=&quot;&quot;&gt;Daily Collection ID:&lt;/label&gt;
+                  &lt;input type=&quot;number&quot; name=&quot;dcn&quot; /&gt;
+               &lt;/div&gt;
+             )}
 
-           {this.props.className === &quot;vcp&quot; &amp;&amp; (
-             &lt;input type=&quot;text&quot; name=&quot;vcp&quot; placeholder=&quot;VCP&quot;/&gt;
-           )}
+             {this.props.className === &quot;vcp&quot; &amp;&amp; (
+               &lt;div&gt;
+                  &lt;label htmlFor=&quot;vcp&quot;&gt;VCP:&lt;/label&gt;
+                  &lt;input type=&quot;text&quot; name=&quot;vcp&quot; /&gt;
+               &lt;/div&gt;
+             )}
 
-           {this.props.className === &quot;sector&quot; &amp;&amp; (
-             &lt;div&gt;
-                &lt;input type=&quot;number&quot; name=&quot;sectorStart&quot; placeholder=&quot;start sector&quot;/&gt;
-                &lt;input type=&quot;number&quot; name=&quot;sectorEnd&quot; placeholder=&quot;end sector&quot;/&gt;
-             &lt;/div&gt;
-           )}
+             {this.props.className === &quot;sector&quot; &amp;&amp; (
+               &lt;div&gt;
+                  &lt;label htmlFor=&quot;sectorStart&quot;&gt;Start Sector (Left Edge):&lt;/label&gt;
+                  &lt;input type=&quot;number&quot; name=&quot;sectorStart&quot; placeholder={this.props.sectorStart}/&gt;
+                  &lt;label htmlFor=&quot;sectorEnd&quot;&gt;End Sector (Right Edge):&lt;/label&gt;
+                  &lt;input type=&quot;number&quot; name=&quot;sectorEnd&quot; placeholder={this.props.sectorEnd}/&gt;
+               &lt;/div&gt;
+             )}
 
-           {this.props.className === &quot;warning&quot; &amp;&amp; (
-             &lt;div&gt;
-                &lt;input type=&quot;text&quot; name=&quot;counties&quot; placeholder=&quot;counties...&quot;  /&gt;
-                &lt;textarea name=&quot;warningText&quot; cols=&quot;50&quot; rows=&quot;10&quot; placeholder=&quot;Warning text&quot;/&gt;
-             &lt;/div&gt;
-           )}
+             {this.props.className === &quot;rhi&quot; &amp;&amp; (
+               &lt;div&gt;
+                  &lt;label htmlFor=&quot;rhiStart&quot;&gt;Start Edge (Top):&lt;/label&gt;
+                  &lt;input type=&quot;number&quot; name=&quot;rhiStart&quot; placeholder={this.props.rhiStart}/&gt;
+                  &lt;label htmlFor=&quot;rhiEnd&quot;&gt;End Edge (Bottom):&lt;/label&gt;
+                  &lt;input type=&quot;number&quot; name=&quot;rhiEnd&quot; placeholder={this.props.rhiEnd}/&gt;
+                  &lt;label htmlFor=&quot;azimuth&quot;&gt;Azimuth:&lt;/label&gt;
+                  &lt;input type=&quot;text&quot; name=&quot;azimuth&quot; /&gt;
+                  &lt;label htmlFor=&quot;rhiRemark&quot;&gt;Remarks:&lt;/label&gt;
+                  &lt;textarea  cols=&quot;20&quot; rows=&quot;10&quot; name=&quot;rhiRemark&quot; /&gt;
+               &lt;/div&gt;
+             )}
 
-           {this.props.className === &quot;report&quot; &amp;&amp; (
-             &lt;textarea name=&quot;reportText&quot; cols=&quot;50&quot; rows=&quot;10&quot; placeholder=&quot;Report text&quot;/&gt;
-           )}
+             {this.props.className === &quot;warning&quot; &amp;&amp; (
+               &lt;div&gt;
+                 &lt;div className=&quot;external-link&quot;&gt;
+                   &lt;a href=&quot;https://www.weather.gov&quot;
+                      target=&quot;_blank&quot;
+                      rel=&quot;noopener noreferrer&quot;&gt;
+                     {&quot;Lookup Warnings&quot;}
+                   &lt;/a&gt;
+                 &lt;/div&gt;
+                 &lt;label htmlFor=&quot;warningType&quot;&gt;Warning Type:&lt;/label&gt;
+                 &lt;input name=&quot;warningType&quot; type=&quot;text&quot; placeholder=&quot;tornado? severe thunderstorm?&quot; /&gt;
+                  &lt;p&gt;Warning Counties:&lt;/p&gt;
+                  &lt;Select aria-label=&quot;select counties for warning&quot;
+                          aria-required=&quot;true&quot;
+                          options={options}
+                          isMulti={true}
+                          onChange={this.selectOnChange} value={selectedOption}
+                  /&gt;
+                  &lt;br/&gt;
+                  &lt;br/&gt;
+                  &lt;label htmlFor=&quot;warningText&quot;&gt;Warning Text:&lt;/label&gt;
+                  &lt;textarea name=&quot;warningText&quot; cols=&quot;50&quot; rows=&quot;10&quot; placeholder={this.props.warningText}/&gt;
+               &lt;/div&gt;
+             )}
 
-           {this.props.className === &quot;remark&quot; &amp;&amp; (
-             &lt;textarea name=&quot;remark&quot; cols=&quot;50&quot; rows=&quot;10&quot; placeholder=&quot;remarks...&quot;/&gt;
-           )}
+             {this.props.className === &quot;report&quot; &amp;&amp; (
+               &lt;div&gt;
+                  &lt;div className=&quot;external-link&quot;&gt;
+                    &lt;a href=&quot;https://www.spc.noaa.gov/climo/reports/today.html&quot;
+                       target=&quot;_blank&quot;
+                       rel=&quot;noopener noreferrer&quot;&gt;
+                      {&quot;Search Today&apos;s Reports&quot;}
+                    &lt;/a&gt;
+                  &lt;/div&gt;
+                  &lt;label htmlFor=&quot;reportText&quot;&gt;Report Text:&lt;/label&gt;
+                  &lt;textarea name=&quot;reportText&quot; cols=&quot;50&quot; rows=&quot;10&quot; placeholder={this.props.reportText}/&gt;
+               &lt;/div&gt;
+             )}
 
-           &lt;input type=&quot;submit&quot; value=&quot;enter data&quot; /&gt;
-        &lt;/form&gt;
-      &lt;/div&gt;
-    )
+             {this.props.className === &quot;remark&quot; &amp;&amp; (
+               &lt;div&gt;
+                  &lt;label htmlFor=&quot;remark&quot;&gt;Remarks:&lt;/label&gt;
+                  &lt;textarea name=&quot;remark&quot; cols=&quot;50&quot; rows=&quot;10&quot; placeholder={this.props.remarks}/&gt;
+               &lt;/div&gt;
+             )}
+
+              &lt;Button variant=&quot;contained&quot; size=&quot;small&quot; type=&quot;submit&quot; aria-label=&quot;Save Data&quot; aria-required=&quot;true&quot;&gt;
+                &lt;SaveIcon  /&gt; Save
+              &lt;/Button&gt;
+
+          &lt;/form&gt;
+        &lt;/div&gt;
+      )
+    } else {
+      return(
+        &lt;EventSummaryForm
+            convertTime={this.props.convertTime}
+            handleSubmit={this.props.handleSubmit}
+            timeNow={this.props.timeNow}
+            today={this.props.today}
+        /&gt;
+      )
+    }
   }
  }
 </code></pre>

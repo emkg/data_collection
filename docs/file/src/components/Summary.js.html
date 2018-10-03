@@ -32,11 +32,12 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/App.js~App.html">App</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-register">register</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-unregister">unregister</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Collection.js~Collection.html">Collection</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/BigYellowButton.js~BigYellowButton.html">BigYellowButton</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Collection.js~Collection.html">Collection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html">CollectionSummaryRow</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Event.js~Event.html">Event</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html">EventSummaryForm</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Form.js~Form.html">Form</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Kickoff.js~Kickoff.html">Kickoff</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Summary.js~Summary.html">Summary</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Tab.js~Tab.html">Tab</a></span></span></li>
 </ul>
@@ -44,46 +45,175 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/components/Summary.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React, { Fragment } from &apos;react&apos;;
+import ReactJson from &apos;react-json-view&apos;;
+import CollectionSummaryRow from &apos;./CollectionSummaryRow&apos;;
+import BigYellowButton from &apos;./BigYellowButton&apos;;
 
-//TODO: organize collection data
-//TODO: polish the style
-//TODO: add a way to edit the data
-//TODO: add esdoc
-
-// TODO: send data to a store
-// TODO: organize data batches to send to db tables
-// TODO: create a json preview to display...
+// TODO: add a way to edit the data
 
 
 /**
  * Summary is a way to see the saved data submitted,
  * edit it, and submit it.
- *
  */
 export default class Summary extends React.Component {
-  render() {
-    return (
-      &lt;div&gt;
-        &lt;h3&gt;How does your data look?&lt;/h3&gt;
-        &lt;div className=&quot;event-summary-row&quot;&gt;Event Start: {this.props.data.eventstartday}&lt;/div&gt;
-        &lt;div className=&quot;event-summary-row&quot;&gt;{this.props.data.eventstarttime}&lt;/div&gt;
-        &lt;div className=&quot;event-summary-row&quot;&gt;Event End: {this.props.data.weatherEventData.eventendday}&lt;/div&gt;
-        &lt;div className=&quot;event-summary-row&quot;&gt;{this.props.data.weatherEventData.eventendday}&lt;/div&gt;
-        &lt;div className=&quot;event-summary-row&quot;&gt;Event Type: {this.props.data.weatherEventData.eventType}&lt;/div&gt;
-        &lt;div className=&quot;event-summary-row&quot;&gt;Event Description: {this.props.data.weatherEventData.eventDescription}&lt;/div&gt;
-        {this.props.data.collections.map(c =&gt; {
-          return(
-            &lt;div className=&quot;event-summary-row&quot;&gt;
-              &lt;div&gt;{c.startDay}&lt;/div&gt;
-              &lt;div&gt;{c.startTime}&lt;/div&gt;
-            &lt;/div&gt;
-          )
-        })
+  /**
+   * state stores a count of open CollectionSummaryRows as editing, a number
+   * as well as the collections prop object and weatherEventData prop object
+   */
+  state = { editing: 0 };
 
+  /**
+   * when component mounts, put collection and weather event data
+   * in state.
+   */
+  componentDidMount() {
+    const { collections } = this.props;
+    const { weatherEventData } = this.props;
+    this.setState({ collections, weatherEventData });
+
+  }
+
+  /**
+   * Keeps track of how many CollectionSummaryRows are open
+   * for editing. True increases count, false lowers count.
+   * @param bool - a True or False value - true if CollectionSummaryRows are
+   *  opened for editing, false if they are closed
+   */
+  isEditing = (bool) =&gt; {
+    let { editing } = this.state;
+    bool ? editing++ : editing--;
+    this.setState({ editing })
+  }
+
+  /**
+   *  handleSubmit will send the full state of this weather event
+   *  to storage. Send Thankyou to app. Submits this Event.
+   *
+   *  If editable fields are open, a yellow snackbar will appear
+   *  with a helpful message to the user instead of submitting incomplete
+   *   information to the DB.
+   */
+  handleSubmit = () =&gt; {
+    if(this.state.editing) {
+      this.props.snackbar(&apos;warning&apos;, &apos;Press enter on the open text field so your data gets saved before submitting again.&apos;);
+    } else {
+
+      document.cookie = &quot;eventState=;expires=Thu, 01 Jan 1970 00:00:00 GMT&quot;;
+      this.props.eventOver(&quot;Your data has been collected!&quot;);
+      this.sendDataToDatabase(this.state.weatherEventData, &quot;event&quot;);
+      let cid;
+
+      this.state.collections.map( (c, i) =&gt; {
+        if(c.id !== c.collectionID) {
+          cid = c.collectionID;
         }
-      &lt;/div&gt;
-    )
+        if(c.collectionType === &quot;loc&quot;) {
+          cid = c.collectionID, this.sendDataToDatabase(c, &quot;collection&quot;);
+        } else {
+          this.sendDataToDatabase(c, c.collectionType);
+        }
+      });
+      window.scrollTo(0,0);
+    }
+  }
+
+  /**
+   * @param stringInCamelCase - a string with uppercase letters
+   *   adjacent to lowercase letters
+   * @return a string - the value of stringInCamelCase in all lowercase
+   *   and spaces between words as indicated by camel cases
+   */
+  removeCamelCase(stringInCamelCase) {
+    return stringInCamelCase.replace(
+      /[a-z][A-Z]/g, (letters, i) =&gt; (
+        letters[0] + &quot; &quot; + letters[1].toLowerCase()
+      )
+    );
+  }
+
+  /**
+   * Sends information to permanent storage.
+   * @param jsonPayload an object that will be sent
+   * to the database stringified
+   * @param type a string that is the collection type
+   * or &quot;event&quot; that corresponds to a php file
+   */
+  sendDataToDatabase = (jsonPayload, type) =&gt; {
+    fetch(`./api/${type}.php`, {
+      method: &quot;POST&quot;,
+      mode: &quot;same-origin&quot;,
+      credentials: &quot;same-origin&quot;,
+      headers: {
+        &quot;Content-Type&quot;: &quot;application/json&quot;
+      },
+      body: JSON.stringify(jsonPayload)
+    })
+  }
+
+  /**
+   * Creates an array of renderable components based on data passed to this
+   * component via props that will allow users to edit data before submitting.
+   *
+   * @param object - a json object we iterate to create CollectionSummaryRows
+   * @param array - an optional array of components we can append to, else start from scratch
+   * @return an array of CollectionSummaryRow components
+   */
+  getCollectionSummaryRows = (object, array) =&gt; {
+    let newArray = array || [];
+    for (var property in object) {
+      if (property.slice(-2) !== &quot;ID&quot; &amp;&amp; property !== &quot;&quot; &amp;&amp; property !== &quot;//&quot;) {
+        newArray.push(&lt;CollectionSummaryRow
+                    fn={this.isEditing}
+                    attr={this.removeCamelCase(property)}
+                    value={object[property]}/&gt;);
+      }
+    }
+    return newArray;
+  }
+
+  /**
+   * @return a stylish, editable table presenting the event data and
+   * collection data ready to be submitted to permanent storage featuring
+   * a BigYellowButton signaling the user to submit when ready.
+   */
+  render() {
+    if(this.state.collections) {
+      const collectionsDisplay = this.state.collections.map((c, i) =&gt; {
+          let rows = [];
+          rows.push(&lt;h4&gt;{c[&quot;collectionType&quot;]}&lt;/h4&gt;);
+          rows = this.getCollectionSummaryRows(c, rows);
+          return (
+            &lt;Fragment&gt;
+              {rows}
+            &lt;/Fragment&gt;
+          );
+      });
+      const eventDisplay = this.getCollectionSummaryRows(this.state.weatherEventData);
+      return (
+        &lt;div&gt;
+          &lt;h2&gt;How does your data look?&lt;/h2&gt;
+
+          &lt;h3&gt;Event Summary&lt;/h3&gt;
+          {eventDisplay}
+
+          &lt;br/&gt;
+          &lt;br/&gt;
+
+          &lt;h3&gt;Individual Collections&lt;/h3&gt;
+          &lt;div className=&quot;collections-summary&quot; &gt;
+            {collectionsDisplay}
+          &lt;/div&gt;
+
+          &lt;BigYellowButton
+              handleButtonPress={this.handleSubmit}
+              buttonText=&quot;It&apos;s ALL GOOD!&quot; /&gt;
+        &lt;/div&gt;
+      )
+    } else {
+      return ( &lt;div/&gt;)
+    }
   }
 }
 </code></pre>
