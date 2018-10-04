@@ -10,7 +10,17 @@ import SaveIcon from '@material-ui/icons/Save';
 // prevent page from refreshing when form is submitted.
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 
+/**
+ * EventSummaryForm stores the form elements necessary to
+ *  summarize a weather event. It is the last step in the
+ * data collection process before the preview in Summary.
+ */
 export default class EventSummaryForm extends React.Component {
+  /**
+   * state stores the checked radar signatures and event types
+   * (both arrays) and the strings typed in the "other" input when
+   * that option gets checked
+   */
   state = {
     radarSigs: [],
     eventTypes: [],
@@ -19,10 +29,12 @@ export default class EventSummaryForm extends React.Component {
   }
 
   /**
-   *
-   *
+   * collects the checks from the radar signatures check form
+   *   is essentially identical to getEventType
+   *  @param event - the event from the input elements
    */
-  handleChecks = (event) => {
+  getRadarSigs = (event) => {
+    // DRY this up! needs to be modularized
     const target = event.target;
     let { radarSigs } = this.state;
     target.checked ?
@@ -31,8 +43,13 @@ export default class EventSummaryForm extends React.Component {
     this.setState({ radarSigs });
   }
 
-  /** DRY this up!!! **/
+  /**
+   * collects the checks from the event types check form
+   *    is essentially identical to getRadarSigs
+   * @param event - the event from the input elements
+   */
   getEventType = (event) => {
+    // DRY this up! needs to be modularized
     const target = event.target;
     let { eventTypes } = this.state;
     target.checked ?
@@ -42,17 +59,32 @@ export default class EventSummaryForm extends React.Component {
     this.setState({ eventTypes });
   }
 
+  /**
+   * Updates the state of the other option in
+   *  all check forms
+   * @param event - the event from the input element
+   */
   handleOtherChecks = (event) => {
     const target = event.target;
     const name = target.name;
     this.setState({ [name] : target.checked });
   }
 
+  /**
+   * stores the value of the new text input element that appears
+   * when the other option is checked on either checkform in state
+   *
+   * @param event - the event from the input element
+   */
   handleOtherInput = (event) => {
     stop(event);
     this.setState({ [event.target.name] : event.target.value })
   }
 
+  /**
+   * gathers values put in the "other" text input if they exist
+   *  and appends them to existing arrays for radarSigs and eventTypes
+   */
   getOtherValues() {
     let { radarSigs, eventTypes } = this.state;
     this.state.radSigOtherValue && radarSigs.push(this.state.radSigOtherValue);
@@ -60,6 +92,10 @@ export default class EventSummaryForm extends React.Component {
     this.setState({ radarSigs, eventTypes })
   }
 
+  /**
+   * saves weather event summary data to the Event
+   *  @param event - the event from the input element
+   */
   handleSubmit = (event) => {
     stop(event);
     const e = event.target;
@@ -70,10 +106,14 @@ export default class EventSummaryForm extends React.Component {
       eventEnd: this.props.convertTime(e.endDay.value, e.endTime.value),
       eventDescription: e.summary.value
     }
-
     this.props.handleSubmit(data);
   }
 
+  /**
+   * @return a fully accessible form including two checkforms,
+   *  date, time, and a text field for summary information.
+   *
+   */
   render() {
     return (
       <div className="event-summary">
@@ -84,37 +124,37 @@ export default class EventSummaryForm extends React.Component {
             <h3>Radar Signatures</h3>
             <div>
               <label htmlFor="downburst">
-                <input type="checkbox" id="downburst" onChange={this.handleChecks} value="downburst" />
+                <input type="checkbox" id="downburst" onChange={this.getRadarSigs} value="downburst" />
                 downburst
               </label>
 
               <label htmlFor="hail">
-                <input type="checkbox" id="hail" onChange={this.handleChecks} value="hail" />
+                <input type="checkbox" id="hail" onChange={this.getRadarSigs} value="hail" />
                 hail
               </label>
 
               <label htmlFor="bow-echo">
-                <input type="checkbox" id="bow-echo" onChange={this.handleChecks} value="bow echo" />
+                <input type="checkbox" id="bow-echo" onChange={this.getRadarSigs} value="bow echo" />
                 bow echo
               </label>
 
               <label htmlFor="TDS">
-                <input type="checkbox" id="TDS" onChange={this.handleChecks} value="TDS" />
+                <input type="checkbox" id="TDS" onChange={this.getRadarSigs} value="TDS" />
                 TDS
               </label>
 
               <label htmlFor="mesocyclone">
-                <input type="checkbox" id="mesocyclone" onChange={this.handleChecks} value="mesocyclone" />
+                <input type="checkbox" id="mesocyclone" onChange={this.getRadarSigs} value="mesocyclone" />
                 mesocyclone
               </label>
 
               <label htmlFor="TVS">
-                <input type="checkbox" id="TVS" onChange={this.handleChecks} value="TVS" />
+                <input type="checkbox" id="TVS" onChange={this.getRadarSigs} value="TVS" />
                 TVS
               </label>
 
               <label htmlFor="refreezing">
-                <input type="checkbox" id="refreezing" onChange={this.handleChecks} value="refreezing" />
+                <input type="checkbox" id="refreezing" onChange={this.getRadarSigs} value="refreezing" />
                 refreezing (winter)
               </label>
               <label htmlFor="radSigOtherChecked">
@@ -124,9 +164,6 @@ export default class EventSummaryForm extends React.Component {
                   :  (<React.Fragment>other</React.Fragment>)
                 }
               </label>
-
-
-
 
             </div>
          </div>

@@ -30,8 +30,6 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/App.js~App.html">App</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-register">register</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-unregister">unregister</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/BigYellowButton.js~BigYellowButton.html">BigYellowButton</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Collection.js~Collection.html">Collection</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html">CollectionSummaryRow</a></span></span></li>
@@ -45,13 +43,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import CollectionSummaryRow from &apos;<span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber5">ops_coll_front/src/components/CollectionSummaryRow.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import CollectionSummaryRow from &apos;<span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber12">ops_coll_front/src/components/CollectionSummaryRow.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber5">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber12">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -71,7 +69,10 @@
 
   
   
-  
+  <div class="description" data-ice="description"><p>CollectionSummaryRow is a single row of information with a label
+and a value. Clicking the label or the value makes the value
+become a text input field so that the value is editable.</p>
+</div>
   
 
   
@@ -104,13 +105,15 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html#instance-member-edit">edit</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html#instance-member-edit">edit</a></span></span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        
+        <div data-ice="description"><p> stores the value of the event fired (submit) and sets the
+ state of the edit boolean to false</p>
+</div>
       </div>
     </td>
     <td>
@@ -138,7 +141,9 @@
       <div>
         
         
-        
+        <div data-ice="description"><p>turns the state of the edit boolean
+to true if false and false if true</p>
+</div>
       </div>
     </td>
     <td>
@@ -166,7 +171,9 @@
       <div>
         
         
-        
+        <div data-ice="description"><p>state stores the value of the Row (String), whether the
+editable input field should be open (boolean)</p>
+</div>
       </div>
     </td>
     <td>
@@ -228,18 +235,20 @@
     
     
     
-    <span class="code" data-ice="name">edit</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">edit</span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber9">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber27">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  
+  <div data-ice="description"><p> stores the value of the event fired (submit) and sets the
+ state of the edit boolean to false</p>
+</div>
 
   
 
@@ -275,14 +284,16 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber18">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber40">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  
+  <div data-ice="description"><p>turns the state of the edit boolean
+to true if false and false if true</p>
+</div>
 
   
 
@@ -318,14 +329,16 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber7">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber17">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  
+  <div data-ice="description"><p>state stores the value of the Row (String), whether the
+editable input field should be open (boolean)</p>
+</div>
 
   
 
@@ -364,7 +377,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber24">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/CollectionSummaryRow.js.html#lineNumber51">source</a></span></span>
     </span>
   </h3>
 
@@ -384,7 +397,9 @@
       <tbody>
         <tr>
           <td class="return-type code" data-ice="returnType"><span>*</span></td>
-          
+          <td class="return-desc" data-ice="returnDescription"><p>a fully accessible &quot;row&quot; of labelled data with
+ the ability to become editable on a click event</p>
+</td>
         </tr>
       </tbody>
     </table>

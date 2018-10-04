@@ -1,7 +1,7 @@
 {
-  "coverage": "58.1%",
-  "expectCount": 74,
-  "actualCount": 43,
+  "coverage": "79.71%",
+  "expectCount": 69,
+  "actualCount": 55,
   "files": {
     "src/App.js": {
       "expectCount": 9,
@@ -26,14 +26,9 @@
     },
     "src/components/CollectionSummaryRow.js": {
       "expectCount": 6,
-      "actualCount": 0,
+      "actualCount": 5,
       "undocumentLines": [
-        4,
-        5,
-        7,
-        9,
-        18,
-        24
+        5
       ]
     },
     "src/components/Event.js": {
@@ -47,17 +42,10 @@
     },
     "src/components/EventSummaryForm.js": {
       "expectCount": 10,
-      "actualCount": 1,
+      "actualCount": 8,
       "undocumentLines": [
         11,
-        13,
-        14,
-        25,
-        45,
-        51,
-        56,
-        63,
-        77
+        36
       ]
     },
     "src/components/Form.js": {
@@ -79,17 +67,6 @@
       "actualCount": 2,
       "undocumentLines": [
         5
-      ]
-    },
-    "src/registerServiceWorker.js": {
-      "expectCount": 5,
-      "actualCount": 0,
-      "undocumentLines": [
-        11,
-        21,
-        55,
-        84,
-        111
       ]
     }
   }

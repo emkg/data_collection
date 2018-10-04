@@ -999,7 +999,7 @@
     "__docId__": 69,
     "kind": "file",
     "name": "src/components/CollectionSummaryRow.js",
-    "content": "import React from 'react';\nimport cx from 'classnames';\n\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\nexport default class CollectionSummaryRow extends React.Component {\n\n    state = { edit: false, value: this.props.value, editButton: \"EDIT\" };\n\n    edit = (event) => {\n      stop(event);\n      const value = event.target.newValue.value === \"\"\n                      ? this.state.value\n                      : event.target.newValue.value;\n      this.props.fn(false);\n      this.setState({ edit: false, value: value });\n    }\n\n    showHideInput = () => {\n      const edit = !this.state.edit;\n      this.props.fn(edit);\n      this.setState({ edit });\n    }\n\n    render() {\n      const { edit } = this.state;\n      return (\n        <div className=\"event-summary-row\" >\n\n            <a tabindex={0} href=\"javascript:;\" className=\"full-width-a-tag\" onClick={this.showHideInput}>{this.props.attr}</a>\n            <a tabindex={0} href=\"javascript:;\" onClick={this.showHideInput} className={cx({ edit }, \"middle\")}>{this.state.value}</a>\n\n\n          <form className={cx({ edit : !edit }, \"edit-preview\")} onSubmit={this.edit}>\n            <input type=\"text\" className=\"edit-preview-input\" name=\"newValue\" placeholder={this.state.value}/>\n          </form>\n        </div>\n      )\n    }\n\n}\n",
+    "content": "import React from 'react';\nimport cx from 'classnames';\n\n// prvent page refresh\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n\n/**\n * CollectionSummaryRow is a single row of information with a label\n * and a value. Clicking the label or the value makes the value\n * become a text input field so that the value is editable.\n */\nexport default class CollectionSummaryRow extends React.Component {\n    /**\n     * state stores the value of the Row (String), whether the\n     * editable input field should be open (boolean)\n     */\n    state = {\n      edit: false,\n      value: this.props.value\n    };\n\n    /**\n     *  stores the value of the event fired (submit) and sets the\n     *  state of the edit boolean to false\n     * @param event - the event from the input element\n     */\n    edit = (event) => {\n      stop(event);\n      const value = event.target.newValue.value === \"\"\n                      ? this.state.value\n                      : event.target.newValue.value;\n      this.props.fn(false);\n      this.setState({ edit: false, value: value });\n    }\n\n    /**\n     * turns the state of the edit boolean\n     * to true if false and false if true\n     */\n    showHideInput = () => {\n      const edit = !this.state.edit;\n      this.props.fn(edit);\n      this.setState({ edit });\n    }\n\n    /**\n     * @return a fully accessible \"row\" of labelled data with\n     *  the ability to become editable on a click event\n     * \n     */\n    render() {\n      const { edit } = this.state;\n      return (\n        <div className=\"event-summary-row\" >\n\n            <a tabindex={0} href=\"javascript:;\" className=\"full-width-a-tag\" onClick={this.showHideInput}>{this.props.attr}</a>\n            <a tabindex={0} href=\"javascript:;\" onClick={this.showHideInput} className={cx({ edit }, \"middle\")}>{this.state.value}</a>\n\n\n          <form className={cx({ edit : !edit }, \"edit-preview\")} onSubmit={this.edit}>\n            <input type=\"text\" className=\"edit-preview-input\" name=\"newValue\" placeholder={this.state.value}/>\n          </form>\n        </div>\n      )\n    }\n\n}\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/CollectionSummaryRow.js",
     "access": "public",
@@ -1020,7 +1020,7 @@
     "importPath": "ops_coll_front/src/components/CollectionSummaryRow.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 4,
+    "lineNumber": 5,
     "undocument": true,
     "params": [
       {
@@ -1044,9 +1044,8 @@
     "export": true,
     "importPath": "ops_coll_front/src/components/CollectionSummaryRow.js",
     "importStyle": "CollectionSummaryRow",
-    "description": null,
-    "lineNumber": 5,
-    "undocument": true,
+    "description": "CollectionSummaryRow is a single row of information with a label\nand a value. Clicking the label or the value makes the value\nbecome a text input field so that the value is editable.",
+    "lineNumber": 12,
     "interface": false,
     "extends": [
       "react~React.Component"
@@ -1060,9 +1059,8 @@
     "static": false,
     "longname": "src/components/CollectionSummaryRow.js~CollectionSummaryRow#state",
     "access": "public",
-    "description": null,
-    "lineNumber": 7,
-    "undocument": true,
+    "description": "state stores the value of the Row (String), whether the\neditable input field should be open (boolean)",
+    "lineNumber": 17,
     "type": {
       "types": [
         "*"
@@ -1077,9 +1075,20 @@
     "static": false,
     "longname": "src/components/CollectionSummaryRow.js~CollectionSummaryRow#edit",
     "access": "public",
-    "description": null,
-    "lineNumber": 9,
-    "undocument": true,
+    "description": " stores the value of the event fired (submit) and sets the\n state of the edit boolean to false",
+    "lineNumber": 27,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "event",
+        "description": "the event from the input element"
+      }
+    ],
     "type": {
       "types": [
         "*"
@@ -1094,9 +1103,8 @@
     "static": false,
     "longname": "src/components/CollectionSummaryRow.js~CollectionSummaryRow#showHideInput",
     "access": "public",
-    "description": null,
-    "lineNumber": 18,
-    "undocument": true,
+    "description": "turns the state of the edit boolean\nto true if false and false if true",
+    "lineNumber": 40,
     "type": {
       "types": [
         "*"
@@ -1113,15 +1121,17 @@
     "static": false,
     "longname": "src/components/CollectionSummaryRow.js~CollectionSummaryRow#render",
     "access": "public",
-    "description": null,
-    "lineNumber": 24,
-    "undocument": true,
-    "params": [],
+    "description": "",
+    "lineNumber": 51,
     "return": {
+      "nullable": null,
       "types": [
         "*"
-      ]
-    }
+      ],
+      "spread": false,
+      "description": "a fully accessible \"row\" of labelled data with\n the ability to become editable on a click event"
+    },
+    "params": []
   },
   {
     "__docId__": 76,
@@ -1453,7 +1463,7 @@
     "__docId__": 91,
     "kind": "file",
     "name": "src/components/EventSummaryForm.js",
-    "content": "import React from 'react';\nimport moment from 'moment';\nimport cx from 'classnames';\nimport Button from '@material-ui/core/Button';\nimport { withStyles } from '@material-ui/core/styles';\nimport SaveIcon from '@material-ui/icons/Save';\n\n\n\n// prevent page from refreshing when form is submitted.\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n\nexport default class EventSummaryForm extends React.Component {\n  state = {\n    radarSigs: [],\n    eventTypes: [],\n    radSigOtherChecked: false,\n    eventTypeOtherChecked: false\n  }\n\n  /**\n   *\n   *\n   */\n  handleChecks = (event) => {\n    const target = event.target;\n    let { radarSigs } = this.state;\n    target.checked ?\n      ( radarSigs.push(target.value) ) :\n      ( radarSigs = radarSigs.filter( e => e !== target.value))\n    this.setState({ radarSigs });\n  }\n\n  /** DRY this up!!! **/\n  getEventType = (event) => {\n    const target = event.target;\n    let { eventTypes } = this.state;\n    target.checked ?\n      ( eventTypes.push(target.value) ) :\n      ( eventTypes = eventTypes.filter( e => e !== target.value))\n\n    this.setState({ eventTypes });\n  }\n\n  handleOtherChecks = (event) => {\n    const target = event.target;\n    const name = target.name;\n    this.setState({ [name] : target.checked });\n  }\n\n  handleOtherInput = (event) => {\n    stop(event);\n    this.setState({ [event.target.name] : event.target.value })\n  }\n\n  getOtherValues() {\n    let { radarSigs, eventTypes } = this.state;\n    this.state.radSigOtherValue && radarSigs.push(this.state.radSigOtherValue);\n    this.state.eventTypeOtherValue && eventTypes.push(this.state.eventTypeOtherValue);\n    this.setState({ radarSigs, eventTypes })\n  }\n\n  handleSubmit = (event) => {\n    stop(event);\n    const e = event.target;\n    this.getOtherValues();\n    const data = {\n      eventType: this.state.eventTypes.toString(),\n      eventRadarSigs: this.state.radarSigs.toString(),\n      eventEnd: this.props.convertTime(e.endDay.value, e.endTime.value),\n      eventDescription: e.summary.value\n    }\n\n    this.props.handleSubmit(data);\n  }\n\n  render() {\n    return (\n      <div className=\"event-summary\">\n        <form onSubmit={this.handleSubmit}>\n        <h2>Weather Event Summary</h2>\n        <p>Enter the details of the weather event to summarize before submitting the data to storage. </p>\n        <div className=\"checkform\">\n            <h3>Radar Signatures</h3>\n            <div>\n              <label htmlFor=\"downburst\">\n                <input type=\"checkbox\" id=\"downburst\" onChange={this.handleChecks} value=\"downburst\" />\n                downburst\n              </label>\n\n              <label htmlFor=\"hail\">\n                <input type=\"checkbox\" id=\"hail\" onChange={this.handleChecks} value=\"hail\" />\n                hail\n              </label>\n\n              <label htmlFor=\"bow-echo\">\n                <input type=\"checkbox\" id=\"bow-echo\" onChange={this.handleChecks} value=\"bow echo\" />\n                bow echo\n              </label>\n\n              <label htmlFor=\"TDS\">\n                <input type=\"checkbox\" id=\"TDS\" onChange={this.handleChecks} value=\"TDS\" />\n                TDS\n              </label>\n\n              <label htmlFor=\"mesocyclone\">\n                <input type=\"checkbox\" id=\"mesocyclone\" onChange={this.handleChecks} value=\"mesocyclone\" />\n                mesocyclone\n              </label>\n\n              <label htmlFor=\"TVS\">\n                <input type=\"checkbox\" id=\"TVS\" onChange={this.handleChecks} value=\"TVS\" />\n                TVS\n              </label>\n\n              <label htmlFor=\"refreezing\">\n                <input type=\"checkbox\" id=\"refreezing\" onChange={this.handleChecks} value=\"refreezing\" />\n                refreezing (winter)\n              </label>\n              <label htmlFor=\"radSigOtherChecked\">\n                <input type=\"checkbox\" id=\"radSigOther\" name=\"radSigOtherChecked\" onChange={this.handleOtherChecks} value={this.state.radarSigsOtherValue} />\n                {this.state.radSigOtherChecked\n                  ?  (<input className=\"other-input\" type=\"text\" name=\"radSigOtherValue\" onChange={this.handleOtherInput}/>)\n                  :  (<React.Fragment>other</React.Fragment>)\n                }\n              </label>\n\n\n\n\n            </div>\n         </div>\n\n         <div className=\"checkform\">\n            <h3>Event Type</h3>\n              <div>\n                <label htmlFor=\"tornadic-supercell\">\n                  <input type=\"checkbox\" id=\"tornadic-supercell\" onChange={this.getEventType} value=\"tornadic-supercell\"  />\n                  tornadic supercell\n                </label>\n\n                <label htmlFor=\"nontornadic-supercell\">\n                  <input type=\"checkbox\" id=\"nontornadic-supercell\" onChange={this.getEventType} value=\"nontornadic-supercell\"  />\n                  nontornadic supercell\n                </label>\n\n                <label htmlFor=\"quasi-linear-convextive-system\">\n                  <input type=\"checkbox\"\n                         id=\"quasi-linear-convextive-system\"\n                         onChange={this.getEventType}\n                         value=\"quasi-linear convextive system\"\n                   />\n                  quasi-linear convextive system\n                </label>\n\n                <label htmlFor=\"mutilcell-storms\">\n                  <input type=\"checkbox\" id=\"mutilcell-storms\" onChange={this.getEventType} value=\"mutilcell storms\" />\n                  mutilcell storms\n                </label>\n\n                <label htmlFor=\"mesoscale-convective-system\">\n                  <input type=\"checkbox\" id=\"mesoscale-convective-system\" onChange={this.getEventType} value=\"mesoscale convective system\" />\n                  mesoscale convective system\n                </label>\n\n                <label htmlFor=\"heavy-rain\">\n                  <input type=\"checkbox\" id=\"heavy-rain\" onChange={this.getEventType} value=\"heavy rain/flash flooding\"  />\n                  heavy rain/flash flooding\n                </label>\n\n\n\n                <label htmlFor=\"winter-precipitation\">\n                  <input type=\"checkbox\" id=\"winter-precipitation\" onChange={this.getEventType} value=\"winter precipitation\" />\n                  winter precipitation\n                </label>\n\n                <label htmlFor=\"convective-initiation\">\n                  <input type=\"checkbox\" id=\"convective-initiation\" onChange={this.getEventType} value=\"convective initiation\" />\n                  convective initiation\n                </label>\n\n                <label htmlFor=\"eventTypeOtherChecked\">\n                  <input type=\"checkbox\" id=\"radSigOther\" name=\"eventTypeOtherChecked\" onChange={this.handleOtherChecks} value={this.state.eventTypeOtherValue} />\n                  {this.state.eventTypeOtherChecked\n                    ?  (<input className=\"other-input\" type=\"text\" name=\"eventTypeOtherValue\" onChange={this.handleOtherInput}/>)\n                    :  (<React.Fragment>other</React.Fragment>)\n                  }\n                </label>\n              </div>\n          </div>\n\n          <p>Weather Event End Day and Time:</p>\n          <div className=\"datetime-input\">\n            <input type=\"date\"\n                   aria-label={\"weather event end day\"}\n                   aria-required=\"true\"\n                   name=\"endDay\"\n                   min=\"2018-01-01\"\n                   required\n                   defaultValue={this.props.today}\n            />\n            <input type=\"time\"\n                   aria-label={\"weather event end time\"}\n                   aria-required=\"true\"\n                   name=\"endTime\"\n                   min=\"00:00\"\n                   max=\"23:59\"\n                   required\n                   defaultValue={this.props.timeNow}\n              />\n          </div>\n          <label htmlFor=\"summary\">Weather Event Summary:</label>\n          <textarea name=\"summary\"\n                    cols=\"50\"\n                    rows=\"10\"\n          />\n          <Button variant=\"contained\" size=\"small\" type=\"submit\" aria-label=\"Save Data\" aria-required=\"true\">\n            <SaveIcon  /> Save\n          </Button>\n        </form>\n      </div>\n    )\n  }\n }\n",
+    "content": "import React from 'react';\nimport moment from 'moment';\nimport cx from 'classnames';\nimport Button from '@material-ui/core/Button';\nimport { withStyles } from '@material-ui/core/styles';\nimport SaveIcon from '@material-ui/icons/Save';\n\n\n\n// prevent page from refreshing when form is submitted.\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n\n/**\n * EventSummaryForm stores the form elements necessary to\n *  summarize a weather event. It is the last step in the\n * data collection process before the preview in Summary.\n */\nexport default class EventSummaryForm extends React.Component {\n  /**\n   * state stores the checked radar signatures and event types\n   * (both arrays) and the strings typed in the \"other\" input when\n   * that option gets checked\n   */\n  state = {\n    radarSigs: [],\n    eventTypes: [],\n    radSigOtherChecked: false,\n    eventTypeOtherChecked: false\n  }\n\n  /**\n   * collects the checks from the radar signatures check form\n   *   is essentially identical to getEventType\n   *  @param event - the event from the input elements\n   */\n  getRadarSigs = (event) => {\n    // DRY this up! needs to be modularized\n    const target = event.target;\n    let { radarSigs } = this.state;\n    target.checked ?\n      ( radarSigs.push(target.value) ) :\n      ( radarSigs = radarSigs.filter( e => e !== target.value))\n    this.setState({ radarSigs });\n  }\n\n  /**\n   * collects the checks from the event types check form\n   *    is essentially identical to getRadarSigs\n   * @param event - the event from the input elements\n   */\n  getEventType = (event) => {\n    // DRY this up! needs to be modularized\n    const target = event.target;\n    let { eventTypes } = this.state;\n    target.checked ?\n      ( eventTypes.push(target.value) ) :\n      ( eventTypes = eventTypes.filter( e => e !== target.value))\n\n    this.setState({ eventTypes });\n  }\n\n  /**\n   * Updates the state of the other option in\n   *  all check forms\n   * @param event - the event from the input element\n   */\n  handleOtherChecks = (event) => {\n    const target = event.target;\n    const name = target.name;\n    this.setState({ [name] : target.checked });\n  }\n\n  /**\n   * stores the value of the new text input element that appears\n   * when the other option is checked on either checkform in state\n   *\n   * @param event - the event from the input element\n   */\n  handleOtherInput = (event) => {\n    stop(event);\n    this.setState({ [event.target.name] : event.target.value })\n  }\n\n  /**\n   * gathers values put in the \"other\" text input if they exist\n   *  and appends them to existing arrays for radarSigs and eventTypes\n   */\n  getOtherValues() {\n    let { radarSigs, eventTypes } = this.state;\n    this.state.radSigOtherValue && radarSigs.push(this.state.radSigOtherValue);\n    this.state.eventTypeOtherValue && eventTypes.push(this.state.eventTypeOtherValue);\n    this.setState({ radarSigs, eventTypes })\n  }\n\n  /**\n   * saves weather event summary data to the Event\n   *  @param event - the event from the input element\n   */\n  handleSubmit = (event) => {\n    stop(event);\n    const e = event.target;\n    this.getOtherValues();\n    const data = {\n      eventType: this.state.eventTypes.toString(),\n      eventRadarSigs: this.state.radarSigs.toString(),\n      eventEnd: this.props.convertTime(e.endDay.value, e.endTime.value),\n      eventDescription: e.summary.value\n    }\n    this.props.handleSubmit(data);\n  }\n\n  /**\n   * @return a fully accessible form including two checkforms,\n   *  date, time, and a text field for summary information.\n   *\n   */\n  render() {\n    return (\n      <div className=\"event-summary\">\n        <form onSubmit={this.handleSubmit}>\n        <h2>Weather Event Summary</h2>\n        <p>Enter the details of the weather event to summarize before submitting the data to storage. </p>\n        <div className=\"checkform\">\n            <h3>Radar Signatures</h3>\n            <div>\n              <label htmlFor=\"downburst\">\n                <input type=\"checkbox\" id=\"downburst\" onChange={this.getRadarSigs} value=\"downburst\" />\n                downburst\n              </label>\n\n              <label htmlFor=\"hail\">\n                <input type=\"checkbox\" id=\"hail\" onChange={this.getRadarSigs} value=\"hail\" />\n                hail\n              </label>\n\n              <label htmlFor=\"bow-echo\">\n                <input type=\"checkbox\" id=\"bow-echo\" onChange={this.getRadarSigs} value=\"bow echo\" />\n                bow echo\n              </label>\n\n              <label htmlFor=\"TDS\">\n                <input type=\"checkbox\" id=\"TDS\" onChange={this.getRadarSigs} value=\"TDS\" />\n                TDS\n              </label>\n\n              <label htmlFor=\"mesocyclone\">\n                <input type=\"checkbox\" id=\"mesocyclone\" onChange={this.getRadarSigs} value=\"mesocyclone\" />\n                mesocyclone\n              </label>\n\n              <label htmlFor=\"TVS\">\n                <input type=\"checkbox\" id=\"TVS\" onChange={this.getRadarSigs} value=\"TVS\" />\n                TVS\n              </label>\n\n              <label htmlFor=\"refreezing\">\n                <input type=\"checkbox\" id=\"refreezing\" onChange={this.getRadarSigs} value=\"refreezing\" />\n                refreezing (winter)\n              </label>\n              <label htmlFor=\"radSigOtherChecked\">\n                <input type=\"checkbox\" id=\"radSigOther\" name=\"radSigOtherChecked\" onChange={this.handleOtherChecks} value={this.state.radarSigsOtherValue} />\n                {this.state.radSigOtherChecked\n                  ?  (<input className=\"other-input\" type=\"text\" name=\"radSigOtherValue\" onChange={this.handleOtherInput}/>)\n                  :  (<React.Fragment>other</React.Fragment>)\n                }\n              </label>\n\n            </div>\n         </div>\n\n         <div className=\"checkform\">\n            <h3>Event Type</h3>\n              <div>\n                <label htmlFor=\"tornadic-supercell\">\n                  <input type=\"checkbox\" id=\"tornadic-supercell\" onChange={this.getEventType} value=\"tornadic-supercell\"  />\n                  tornadic supercell\n                </label>\n\n                <label htmlFor=\"nontornadic-supercell\">\n                  <input type=\"checkbox\" id=\"nontornadic-supercell\" onChange={this.getEventType} value=\"nontornadic-supercell\"  />\n                  nontornadic supercell\n                </label>\n\n                <label htmlFor=\"quasi-linear-convextive-system\">\n                  <input type=\"checkbox\"\n                         id=\"quasi-linear-convextive-system\"\n                         onChange={this.getEventType}\n                         value=\"quasi-linear convextive system\"\n                   />\n                  quasi-linear convextive system\n                </label>\n\n                <label htmlFor=\"mutilcell-storms\">\n                  <input type=\"checkbox\" id=\"mutilcell-storms\" onChange={this.getEventType} value=\"mutilcell storms\" />\n                  mutilcell storms\n                </label>\n\n                <label htmlFor=\"mesoscale-convective-system\">\n                  <input type=\"checkbox\" id=\"mesoscale-convective-system\" onChange={this.getEventType} value=\"mesoscale convective system\" />\n                  mesoscale convective system\n                </label>\n\n                <label htmlFor=\"heavy-rain\">\n                  <input type=\"checkbox\" id=\"heavy-rain\" onChange={this.getEventType} value=\"heavy rain/flash flooding\"  />\n                  heavy rain/flash flooding\n                </label>\n\n\n\n                <label htmlFor=\"winter-precipitation\">\n                  <input type=\"checkbox\" id=\"winter-precipitation\" onChange={this.getEventType} value=\"winter precipitation\" />\n                  winter precipitation\n                </label>\n\n                <label htmlFor=\"convective-initiation\">\n                  <input type=\"checkbox\" id=\"convective-initiation\" onChange={this.getEventType} value=\"convective initiation\" />\n                  convective initiation\n                </label>\n\n                <label htmlFor=\"eventTypeOtherChecked\">\n                  <input type=\"checkbox\" id=\"radSigOther\" name=\"eventTypeOtherChecked\" onChange={this.handleOtherChecks} value={this.state.eventTypeOtherValue} />\n                  {this.state.eventTypeOtherChecked\n                    ?  (<input className=\"other-input\" type=\"text\" name=\"eventTypeOtherValue\" onChange={this.handleOtherInput}/>)\n                    :  (<React.Fragment>other</React.Fragment>)\n                  }\n                </label>\n              </div>\n          </div>\n\n          <p>Weather Event End Day and Time:</p>\n          <div className=\"datetime-input\">\n            <input type=\"date\"\n                   aria-label={\"weather event end day\"}\n                   aria-required=\"true\"\n                   name=\"endDay\"\n                   min=\"2018-01-01\"\n                   required\n                   defaultValue={this.props.today}\n            />\n            <input type=\"time\"\n                   aria-label={\"weather event end time\"}\n                   aria-required=\"true\"\n                   name=\"endTime\"\n                   min=\"00:00\"\n                   max=\"23:59\"\n                   required\n                   defaultValue={this.props.timeNow}\n              />\n          </div>\n          <label htmlFor=\"summary\">Weather Event Summary:</label>\n          <textarea name=\"summary\"\n                    cols=\"50\"\n                    rows=\"10\"\n          />\n          <Button variant=\"contained\" size=\"small\" type=\"submit\" aria-label=\"Save Data\" aria-required=\"true\">\n            <SaveIcon  /> Save\n          </Button>\n        </form>\n      </div>\n    )\n  }\n }\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/EventSummaryForm.js",
     "access": "public",
@@ -1498,9 +1508,8 @@
     "export": true,
     "importPath": "ops_coll_front/src/components/EventSummaryForm.js",
     "importStyle": "EventSummaryForm",
-    "description": null,
-    "lineNumber": 13,
-    "undocument": true,
+    "description": "EventSummaryForm stores the form elements necessary to\n summarize a weather event. It is the last step in the\ndata collection process before the preview in Summary.",
+    "lineNumber": 18,
     "interface": false,
     "extends": [
       "react~React.Component"
@@ -1514,9 +1523,8 @@
     "static": false,
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#state",
     "access": "public",
-    "description": null,
-    "lineNumber": 14,
-    "undocument": true,
+    "description": "state stores the checked radar signatures and event types\n(both arrays) and the strings typed in the \"other\" input when\nthat option gets checked",
+    "lineNumber": 24,
     "type": {
       "types": [
         "*"
@@ -1526,13 +1534,13 @@
   {
     "__docId__": 95,
     "kind": "member",
-    "name": "handleChecks",
+    "name": "getRadarSigs",
     "memberof": "src/components/EventSummaryForm.js~EventSummaryForm",
     "static": false,
-    "longname": "src/components/EventSummaryForm.js~EventSummaryForm#handleChecks",
+    "longname": "src/components/EventSummaryForm.js~EventSummaryForm#getRadarSigs",
     "access": "public",
     "description": null,
-    "lineNumber": 25,
+    "lineNumber": 36,
     "undocument": true,
     "type": {
       "types": [
@@ -1548,8 +1556,20 @@
     "static": false,
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#getEventType",
     "access": "public",
-    "description": "DRY this up!!! *",
-    "lineNumber": 35,
+    "description": "collects the checks from the event types check form\n   is essentially identical to getRadarSigs",
+    "lineNumber": 51,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "event",
+        "description": "the event from the input elements"
+      }
+    ],
     "type": {
       "types": [
         "*"
@@ -1564,9 +1584,20 @@
     "static": false,
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#handleOtherChecks",
     "access": "public",
-    "description": null,
-    "lineNumber": 45,
-    "undocument": true,
+    "description": "Updates the state of the other option in\n all check forms",
+    "lineNumber": 67,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "event",
+        "description": "the event from the input element"
+      }
+    ],
     "type": {
       "types": [
         "*"
@@ -1581,9 +1612,20 @@
     "static": false,
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#handleOtherInput",
     "access": "public",
-    "description": null,
-    "lineNumber": 51,
-    "undocument": true,
+    "description": "stores the value of the new text input element that appears\nwhen the other option is checked on either checkform in state",
+    "lineNumber": 79,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "event",
+        "description": "the event from the input element"
+      }
+    ],
     "type": {
       "types": [
         "*"
@@ -1600,9 +1642,8 @@
     "static": false,
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#getOtherValues",
     "access": "public",
-    "description": null,
-    "lineNumber": 56,
-    "undocument": true,
+    "description": "gathers values put in the \"other\" text input if they exist\n and appends them to existing arrays for radarSigs and eventTypes",
+    "lineNumber": 88,
     "params": [],
     "return": null
   },
@@ -1614,9 +1655,20 @@
     "static": false,
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#handleSubmit",
     "access": "public",
-    "description": null,
-    "lineNumber": 63,
-    "undocument": true,
+    "description": "saves weather event summary data to the Event",
+    "lineNumber": 99,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "event",
+        "description": "the event from the input element"
+      }
+    ],
     "type": {
       "types": [
         "*"
@@ -1633,15 +1685,17 @@
     "static": false,
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#render",
     "access": "public",
-    "description": null,
-    "lineNumber": 77,
-    "undocument": true,
-    "params": [],
+    "description": "",
+    "lineNumber": 117,
     "return": {
+      "nullable": null,
       "types": [
         "*"
-      ]
-    }
+      ],
+      "spread": false,
+      "description": "a fully accessible form including two checkforms,\n date, time, and a text field for summary information."
+    },
+    "params": []
   },
   {
     "__docId__": 102,
@@ -2178,136 +2232,12 @@
     "__docId__": 127,
     "kind": "file",
     "name": "src/index.js",
-    "content": "import React from 'react';\nimport ReactDOM from 'react-dom';\nimport './index.css';\nimport App from './App';\nimport registerServiceWorker from './registerServiceWorker';\n\nReactDOM.render(<App />, document.getElementById('root'));\nregisterServiceWorker();\n",
+    "content": "import React from 'react';\nimport ReactDOM from 'react-dom';\nimport './index.css';\nimport App from './App';\n\nReactDOM.render(<App />, document.getElementById('root'));\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/index.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
-  },
-  {
-    "__docId__": 128,
-    "kind": "file",
-    "name": "src/registerServiceWorker.js",
-    "content": "// In production, we register a service worker to serve assets from local cache.\n\n// This lets the app load faster on subsequent visits in production, and gives\n// it offline capabilities. However, it also means that developers (and users)\n// will only see deployed updates on the \"N+1\" visit to a page, since previously\n// cached resources are updated in the background.\n\n// To learn more about the benefits of this model, read https://goo.gl/KwvDNy.\n// This link also includes instructions on opting out of this behavior.\n\nconst isLocalhost = Boolean(\n  window.location.hostname === 'localhost' ||\n    // [::1] is the IPv6 localhost address.\n    window.location.hostname === '[::1]' ||\n    // 127.0.0.1/8 is considered localhost for IPv4.\n    window.location.hostname.match(\n      /^127(?:\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/\n    )\n);\n\nexport default function register() {\n  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {\n    // The URL constructor is available in all browsers that support SW.\n    const publicUrl = new URL(process.env.PUBLIC_URL, window.location);\n    if (publicUrl.origin !== window.location.origin) {\n      // Our service worker won't work if PUBLIC_URL is on a different origin\n      // from what our page is served on. This might happen if a CDN is used to\n      // serve assets; see https://github.com/facebookincubator/create-react-app/issues/2374\n      return;\n    }\n\n    window.addEventListener('load', () => {\n      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;\n\n      if (isLocalhost) {\n        // This is running on localhost. Lets check if a service worker still exists or not.\n        checkValidServiceWorker(swUrl);\n\n        // Add some additional logging to localhost, pointing developers to the\n        // service worker/PWA documentation.\n        navigator.serviceWorker.ready.then(() => {\n          console.log(\n            'This web app is being served cache-first by a service ' +\n              'worker. To learn more, visit https://goo.gl/SC7cgQ'\n          );\n        });\n      } else {\n        // Is not local host. Just register service worker\n        registerValidSW(swUrl);\n      }\n    });\n  }\n}\n\nfunction registerValidSW(swUrl) {\n  navigator.serviceWorker\n    .register(swUrl)\n    .then(registration => {\n      registration.onupdatefound = () => {\n        const installingWorker = registration.installing;\n        installingWorker.onstatechange = () => {\n          if (installingWorker.state === 'installed') {\n            if (navigator.serviceWorker.controller) {\n              // At this point, the old content will have been purged and\n              // the fresh content will have been added to the cache.\n              // It's the perfect time to display a \"New content is\n              // available; please refresh.\" message in your web app.\n              console.log('New content is available; please refresh.');\n            } else {\n              // At this point, everything has been precached.\n              // It's the perfect time to display a\n              // \"Content is cached for offline use.\" message.\n              console.log('Content is cached for offline use.');\n            }\n          }\n        };\n      };\n    })\n    .catch(error => {\n      console.error('Error during service worker registration:', error);\n    });\n}\n\nfunction checkValidServiceWorker(swUrl) {\n  // Check if the service worker can be found. If it can't reload the page.\n  fetch(swUrl)\n    .then(response => {\n      // Ensure service worker exists, and that we really are getting a JS file.\n      if (\n        response.status === 404 ||\n        response.headers.get('content-type').indexOf('javascript') === -1\n      ) {\n        // No service worker found. Probably a different app. Reload the page.\n        navigator.serviceWorker.ready.then(registration => {\n          registration.unregister().then(() => {\n            window.location.reload();\n          });\n        });\n      } else {\n        // Service worker found. Proceed as normal.\n        registerValidSW(swUrl);\n      }\n    })\n    .catch(() => {\n      console.log(\n        'No internet connection found. App is running in offline mode.'\n      );\n    });\n}\n\nexport function unregister() {\n  if ('serviceWorker' in navigator) {\n    navigator.serviceWorker.ready.then(registration => {\n      registration.unregister();\n    });\n  }\n}\n",
-    "static": true,
-    "longname": "/Users/emily.grimes/Desktop/data_collection/src/registerServiceWorker.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 129,
-    "kind": "variable",
-    "name": "isLocalhost",
-    "memberof": "src/registerServiceWorker.js",
-    "static": true,
-    "longname": "src/registerServiceWorker.js~isLocalhost",
-    "access": "public",
-    "export": false,
-    "importPath": "ops_coll_front/src/registerServiceWorker.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 11,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 130,
-    "kind": "function",
-    "name": "register",
-    "memberof": "src/registerServiceWorker.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/registerServiceWorker.js~register",
-    "access": "public",
-    "export": true,
-    "importPath": "ops_coll_front/src/registerServiceWorker.js",
-    "importStyle": "register",
-    "description": null,
-    "lineNumber": 21,
-    "undocument": true,
-    "params": [],
-    "return": null
-  },
-  {
-    "__docId__": 131,
-    "kind": "function",
-    "name": "registerValidSW",
-    "memberof": "src/registerServiceWorker.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/registerServiceWorker.js~registerValidSW",
-    "access": "public",
-    "export": false,
-    "importPath": "ops_coll_front/src/registerServiceWorker.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 55,
-    "undocument": true,
-    "params": [
-      {
-        "name": "swUrl",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null,
-    "ignore": true
-  },
-  {
-    "__docId__": 132,
-    "kind": "function",
-    "name": "checkValidServiceWorker",
-    "memberof": "src/registerServiceWorker.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/registerServiceWorker.js~checkValidServiceWorker",
-    "access": "public",
-    "export": false,
-    "importPath": "ops_coll_front/src/registerServiceWorker.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 84,
-    "undocument": true,
-    "params": [
-      {
-        "name": "swUrl",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null,
-    "ignore": true
-  },
-  {
-    "__docId__": 133,
-    "kind": "function",
-    "name": "unregister",
-    "memberof": "src/registerServiceWorker.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/registerServiceWorker.js~unregister",
-    "access": "public",
-    "export": true,
-    "importPath": "ops_coll_front/src/registerServiceWorker.js",
-    "importStyle": "{unregister}",
-    "description": null,
-    "lineNumber": 111,
-    "undocument": true,
-    "params": [],
-    "return": null
   },
   {
     "kind": "index",

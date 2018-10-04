@@ -30,8 +30,6 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/App.js~App.html">App</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-register">register</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-unregister">unregister</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/BigYellowButton.js~BigYellowButton.html">BigYellowButton</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Collection.js~Collection.html">Collection</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html">CollectionSummaryRow</a></span></span></li>
@@ -45,13 +43,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import EventSummaryForm from &apos;<span><a href="file/src/components/EventSummaryForm.js.html#lineNumber13">ops_coll_front/src/components/EventSummaryForm.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import EventSummaryForm from &apos;<span><a href="file/src/components/EventSummaryForm.js.html#lineNumber18">ops_coll_front/src/components/EventSummaryForm.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/components/EventSummaryForm.js.html#lineNumber13">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/components/EventSummaryForm.js.html#lineNumber18">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -71,7 +69,10 @@
 
   
   
-  
+  <div class="description" data-ice="description"><p>EventSummaryForm stores the form elements necessary to
+ summarize a weather event. It is the last step in the
+data collection process before the preview in Summary.</p>
+</div>
   
 
   
@@ -104,13 +105,14 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-getEventType">getEventType</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-getEventType">getEventType</a></span></span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>DRY this up!!! *</p>
+        <div data-ice="description"><p>collects the checks from the event types check form
+   is essentially identical to getRadarSigs</p>
 </div>
       </div>
     </td>
@@ -133,7 +135,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-handleChecks">handleChecks</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-getRadarSigs">getRadarSigs</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -161,13 +163,15 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-handleOtherChecks">handleOtherChecks</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-handleOtherChecks">handleOtherChecks</a></span></span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        
+        <div data-ice="description"><p>Updates the state of the other option in
+ all check forms</p>
+</div>
       </div>
     </td>
     <td>
@@ -189,13 +193,15 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-handleOtherInput">handleOtherInput</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-handleOtherInput">handleOtherInput</a></span></span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        
+        <div data-ice="description"><p>stores the value of the new text input element that appears
+when the other option is checked on either checkform in state</p>
+</div>
       </div>
     </td>
     <td>
@@ -217,13 +223,14 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-handleSubmit">handleSubmit</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-handleSubmit">handleSubmit</a></span></span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        
+        <div data-ice="description"><p>saves weather event summary data to the Event</p>
+</div>
       </div>
     </td>
     <td>
@@ -251,7 +258,10 @@
       <div>
         
         
-        
+        <div data-ice="description"><p>state stores the checked radar signatures and event types
+(both arrays) and the strings typed in the &quot;other&quot; input when
+that option gets checked</p>
+</div>
       </div>
     </td>
     <td>
@@ -286,7 +296,9 @@
       <div>
         
         
-        
+        <div data-ice="description"><p>gathers values put in the &quot;other&quot; text input if they exist
+ and appends them to existing arrays for radarSigs and eventTypes</p>
+</div>
       </div>
     </td>
     <td>
@@ -341,18 +353,19 @@
     
     
     
-    <span class="code" data-ice="name">getEventType</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">getEventType</span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber35">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber51">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>DRY this up!!! *</p>
+  <div data-ice="description"><p>collects the checks from the event types check form
+   is essentially identical to getRadarSigs</p>
 </div>
 
   
@@ -378,18 +391,18 @@
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-handleChecks">
+  <h3 data-ice="anchor" id="instance-member-getRadarSigs">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">handleChecks</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">getRadarSigs</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber25">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber36">source</a></span></span>
     </span>
   </h3>
 
@@ -428,18 +441,20 @@
     
     
     
-    <span class="code" data-ice="name">handleOtherChecks</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">handleOtherChecks</span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber45">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber67">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  
+  <div data-ice="description"><p>Updates the state of the other option in
+ all check forms</p>
+</div>
 
   
 
@@ -471,18 +486,20 @@
     
     
     
-    <span class="code" data-ice="name">handleOtherInput</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">handleOtherInput</span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber51">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber79">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  
+  <div data-ice="description"><p>stores the value of the new text input element that appears
+when the other option is checked on either checkform in state</p>
+</div>
 
   
 
@@ -514,18 +531,19 @@
     
     
     
-    <span class="code" data-ice="name">handleSubmit</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">handleSubmit</span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber63">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber99">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  
+  <div data-ice="description"><p>saves weather event summary data to the Event</p>
+</div>
 
   
 
@@ -561,14 +579,17 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber14">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber24">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  
+  <div data-ice="description"><p>state stores the checked radar signatures and event types
+(both arrays) and the strings typed in the &quot;other&quot; input when
+that option gets checked</p>
+</div>
 
   
 
@@ -607,14 +628,16 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber56">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber88">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  
+  <div data-ice="description"><p>gathers values put in the &quot;other&quot; text input if they exist
+ and appends them to existing arrays for radarSigs and eventTypes</p>
+</div>
 
   
 
@@ -650,7 +673,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber77">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/EventSummaryForm.js.html#lineNumber117">source</a></span></span>
     </span>
   </h3>
 
@@ -670,7 +693,9 @@
       <tbody>
         <tr>
           <td class="return-type code" data-ice="returnType"><span>*</span></td>
-          
+          <td class="return-desc" data-ice="returnDescription"><p>a fully accessible form including two checkforms,
+ date, time, and a text field for summary information.</p>
+</td>
         </tr>
       </tbody>
     </table>

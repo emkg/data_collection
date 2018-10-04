@@ -30,8 +30,6 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/App.js~App.html">App</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-register">register</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-unregister">unregister</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/BigYellowButton.js~BigYellowButton.html">BigYellowButton</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Collection.js~Collection.html">Collection</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/CollectionSummaryRow.js~CollectionSummaryRow.html">CollectionSummaryRow</a></span></span></li>
@@ -57,7 +55,17 @@ import SaveIcon from &apos;@material-ui/icons/Save&apos;;
 // prevent page from refreshing when form is submitted.
 const stop = (event) =&gt; (event.stopPropagation(), event.preventDefault());
 
+/**
+ * EventSummaryForm stores the form elements necessary to
+ *  summarize a weather event. It is the last step in the
+ * data collection process before the preview in Summary.
+ */
 export default class EventSummaryForm extends React.Component {
+  /**
+   * state stores the checked radar signatures and event types
+   * (both arrays) and the strings typed in the &quot;other&quot; input when
+   * that option gets checked
+   */
   state = {
     radarSigs: [],
     eventTypes: [],
@@ -66,10 +74,12 @@ export default class EventSummaryForm extends React.Component {
   }
 
   /**
-   *
-   *
+   * collects the checks from the radar signatures check form
+   *   is essentially identical to getEventType
+   *  @param event - the event from the input elements
    */
-  handleChecks = (event) =&gt; {
+  getRadarSigs = (event) =&gt; {
+    // DRY this up! needs to be modularized
     const target = event.target;
     let { radarSigs } = this.state;
     target.checked ?
@@ -78,8 +88,13 @@ export default class EventSummaryForm extends React.Component {
     this.setState({ radarSigs });
   }
 
-  /** DRY this up!!! **/
+  /**
+   * collects the checks from the event types check form
+   *    is essentially identical to getRadarSigs
+   * @param event - the event from the input elements
+   */
   getEventType = (event) =&gt; {
+    // DRY this up! needs to be modularized
     const target = event.target;
     let { eventTypes } = this.state;
     target.checked ?
@@ -89,17 +104,32 @@ export default class EventSummaryForm extends React.Component {
     this.setState({ eventTypes });
   }
 
+  /**
+   * Updates the state of the other option in
+   *  all check forms
+   * @param event - the event from the input element
+   */
   handleOtherChecks = (event) =&gt; {
     const target = event.target;
     const name = target.name;
     this.setState({ [name] : target.checked });
   }
 
+  /**
+   * stores the value of the new text input element that appears
+   * when the other option is checked on either checkform in state
+   *
+   * @param event - the event from the input element
+   */
   handleOtherInput = (event) =&gt; {
     stop(event);
     this.setState({ [event.target.name] : event.target.value })
   }
 
+  /**
+   * gathers values put in the &quot;other&quot; text input if they exist
+   *  and appends them to existing arrays for radarSigs and eventTypes
+   */
   getOtherValues() {
     let { radarSigs, eventTypes } = this.state;
     this.state.radSigOtherValue &amp;&amp; radarSigs.push(this.state.radSigOtherValue);
@@ -107,6 +137,10 @@ export default class EventSummaryForm extends React.Component {
     this.setState({ radarSigs, eventTypes })
   }
 
+  /**
+   * saves weather event summary data to the Event
+   *  @param event - the event from the input element
+   */
   handleSubmit = (event) =&gt; {
     stop(event);
     const e = event.target;
@@ -117,10 +151,14 @@ export default class EventSummaryForm extends React.Component {
       eventEnd: this.props.convertTime(e.endDay.value, e.endTime.value),
       eventDescription: e.summary.value
     }
-
     this.props.handleSubmit(data);
   }
 
+  /**
+   * @return a fully accessible form including two checkforms,
+   *  date, time, and a text field for summary information.
+   *
+   */
   render() {
     return (
       &lt;div className=&quot;event-summary&quot;&gt;
@@ -131,37 +169,37 @@ export default class EventSummaryForm extends React.Component {
             &lt;h3&gt;Radar Signatures&lt;/h3&gt;
             &lt;div&gt;
               &lt;label htmlFor=&quot;downburst&quot;&gt;
-                &lt;input type=&quot;checkbox&quot; id=&quot;downburst&quot; onChange={this.handleChecks} value=&quot;downburst&quot; /&gt;
+                &lt;input type=&quot;checkbox&quot; id=&quot;downburst&quot; onChange={this.getRadarSigs} value=&quot;downburst&quot; /&gt;
                 downburst
               &lt;/label&gt;
 
               &lt;label htmlFor=&quot;hail&quot;&gt;
-                &lt;input type=&quot;checkbox&quot; id=&quot;hail&quot; onChange={this.handleChecks} value=&quot;hail&quot; /&gt;
+                &lt;input type=&quot;checkbox&quot; id=&quot;hail&quot; onChange={this.getRadarSigs} value=&quot;hail&quot; /&gt;
                 hail
               &lt;/label&gt;
 
               &lt;label htmlFor=&quot;bow-echo&quot;&gt;
-                &lt;input type=&quot;checkbox&quot; id=&quot;bow-echo&quot; onChange={this.handleChecks} value=&quot;bow echo&quot; /&gt;
+                &lt;input type=&quot;checkbox&quot; id=&quot;bow-echo&quot; onChange={this.getRadarSigs} value=&quot;bow echo&quot; /&gt;
                 bow echo
               &lt;/label&gt;
 
               &lt;label htmlFor=&quot;TDS&quot;&gt;
-                &lt;input type=&quot;checkbox&quot; id=&quot;TDS&quot; onChange={this.handleChecks} value=&quot;TDS&quot; /&gt;
+                &lt;input type=&quot;checkbox&quot; id=&quot;TDS&quot; onChange={this.getRadarSigs} value=&quot;TDS&quot; /&gt;
                 TDS
               &lt;/label&gt;
 
               &lt;label htmlFor=&quot;mesocyclone&quot;&gt;
-                &lt;input type=&quot;checkbox&quot; id=&quot;mesocyclone&quot; onChange={this.handleChecks} value=&quot;mesocyclone&quot; /&gt;
+                &lt;input type=&quot;checkbox&quot; id=&quot;mesocyclone&quot; onChange={this.getRadarSigs} value=&quot;mesocyclone&quot; /&gt;
                 mesocyclone
               &lt;/label&gt;
 
               &lt;label htmlFor=&quot;TVS&quot;&gt;
-                &lt;input type=&quot;checkbox&quot; id=&quot;TVS&quot; onChange={this.handleChecks} value=&quot;TVS&quot; /&gt;
+                &lt;input type=&quot;checkbox&quot; id=&quot;TVS&quot; onChange={this.getRadarSigs} value=&quot;TVS&quot; /&gt;
                 TVS
               &lt;/label&gt;
 
               &lt;label htmlFor=&quot;refreezing&quot;&gt;
-                &lt;input type=&quot;checkbox&quot; id=&quot;refreezing&quot; onChange={this.handleChecks} value=&quot;refreezing&quot; /&gt;
+                &lt;input type=&quot;checkbox&quot; id=&quot;refreezing&quot; onChange={this.getRadarSigs} value=&quot;refreezing&quot; /&gt;
                 refreezing (winter)
               &lt;/label&gt;
               &lt;label htmlFor=&quot;radSigOtherChecked&quot;&gt;
@@ -171,9 +209,6 @@ export default class EventSummaryForm extends React.Component {
                   :  (&lt;React.Fragment&gt;other&lt;/React.Fragment&gt;)
                 }
               &lt;/label&gt;
-
-
-
 
             &lt;/div&gt;
          &lt;/div&gt;

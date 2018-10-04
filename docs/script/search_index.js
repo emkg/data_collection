@@ -54,18 +54,6 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "ops_coll_front/src/registerserviceworker.js~register",
-    "function/index.html#static-function-register",
-    "<span>register</span> <span class=\"search-result-import-path\">ops_coll_front/src/registerServiceWorker.js</span>",
-    "function"
-  ],
-  [
-    "ops_coll_front/src/registerserviceworker.js~unregister",
-    "function/index.html#static-function-unregister",
-    "<span>unregister</span> <span class=\"search-result-import-path\">ops_coll_front/src/registerServiceWorker.js</span>",
-    "function"
-  ],
-  [
     "src/.external-ecmascript.js~array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     "src/.external-ecmascript.js~Array",
@@ -558,9 +546,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/components/eventsummaryform.js~eventsummaryform#handlechecks",
-    "class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-handleChecks",
-    "src/components/EventSummaryForm.js~EventSummaryForm#handleChecks",
+    "src/components/eventsummaryform.js~eventsummaryform#getradarsigs",
+    "class/src/components/EventSummaryForm.js~EventSummaryForm.html#instance-member-getRadarSigs",
+    "src/components/EventSummaryForm.js~EventSummaryForm#getRadarSigs",
     "member"
   ],
   [
@@ -717,12 +705,6 @@ window.esdocSearchIndex = [
     "src/index.js",
     "file/src/index.js.html",
     "src/index.js",
-    "file"
-  ],
-  [
-    "src/registerserviceworker.js",
-    "file/src/registerServiceWorker.js.html",
-    "src/registerServiceWorker.js",
     "file"
   ]
 ]
