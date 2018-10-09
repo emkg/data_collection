@@ -3,15 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^3.1.0",
-    "@material-ui/icons": "^3.0.1",
     "classnames": "^2.2.6",
     "date-fns": "^1.29.0",
     "moment": "^2.22.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
-    "react-select": "^2.0.0"
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "esdoc": "^1.1.0",
@@ -21,7 +19,7 @@
     "esdoc-standard-plugin": "^1.0.0",
     "react-json-view": "^1.19.1"
   },
-  "proxy": "http://local.radops/public/",
+  "homepage": "/projects/webdev/radops",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

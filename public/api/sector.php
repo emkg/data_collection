@@ -8,11 +8,20 @@
       $content = trim(file_get_contents("php://input"));
       $decoded = json_decode($content, true);
 
-
-      $sql  = "INSERT INTO `SECTOR`(`startTime`, `endTime`, `sectorStart`, `sectorEnd`, `collectionID`) ";
-      $sql .= "VALUES('" . $decoded['collectionStart'] . "', '" . $decoded['collectionStart'];
-      $sql .= "', '" . $decoded['sectorStart'] . "', '" . $decoded['sectorEnd'];
-      $sql .= "', '" . $decoded['collectionID'] . "')";
+      $sql  = "INSERT INTO `SECTOR`(`startTime`, `endTime`, `leftEdge`, `rightEdge`, `eventId`, `dailycollectionnumber`) ";
+      $sql .= "VALUES('";
+      $sql .= $decoded['collectionStart'];
+      $sql .= "', '";
+      $sql .= $decoded['collectionEnd'];
+      $sql .=  "', '";
+      $sql .= $decoded['sectorStart'];
+      $sql .= "', '";
+      $sql .= $decoded['sectorEnd'];
+      $sql .=  "', '";
+      $sql .= $decoded['eventID'];
+      $sql .=  "', '";
+      $sql .= $decoded['dailyCollectionNumber'];
+      $sql .= "')";
 
       echo $sql;
       // send data to db

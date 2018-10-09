@@ -10,9 +10,21 @@
 
       // when we have an event we need to also add each radar sig
       $sql  = "INSERT INTO `COLLECTION`(`collectionStart`, `collectionEnd`, `event_id`, `location_lat`, `location_long`, `collection_id`, `dailyCollectionNumber`)";
-      $sql .= "VALUES('" . $decoded['collectionStart'] . "', '" . $decoded['collectionStart'] . "', '";
-      $sql .= $decoded['eventID'] . "', '"  . $decoded['locationLat'] . "', '";
-      $sql .= $decoded['locationLong'] . "', '" . $decoded['collectionID'] . "', '" . $decoded['dailyCollectionNumber'] ."');";
+      $sql .= "VALUES('";
+      $sql .= $decoded['collectionStart'];
+      $sql .= "', '";
+      $sql .= $decoded['collectionStart'];
+      $sql .= "', '";
+      $sql .= $decoded['eventID'];
+      $sql .= "', '" ;
+      $sql .= $decoded['locationLat'];
+      $sql .= "', '";
+      $sql .= $decoded['locationLong'];
+      $sql .= "', '";
+      $sql .= $decoded['collectionID'];
+      $sql .= "', '";
+      $sql .= $decoded['dailyCollectionNumber'];
+      $sql .="');";
 
       // send data to db
       if ($db->query($sql)) {

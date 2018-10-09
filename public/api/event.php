@@ -8,31 +8,36 @@
       $content = trim(file_get_contents("php://input"));
       $decoded = json_decode($content, true);
 
+      $sql  = "INSERT INTO `event` (`eventStart`, `eventEnd`, `instrument`, `collector`, `collectorContact`, `eventType`, `radarSigs`, `eventDescr`, `eventID`) ";
+      $sql .= "VALUES ('";
+      $sql .= $decoded['eventStart'];
+      $sql .= "', '";
+      $sql .= $decoded['eventEnd'];
+      $sql .= "', '";
+      $sql .= $decoded['instrument'];
+      $sql .= "', '";
+      $sql .= $decoded['collector'];
+      $sql .= "', '";
+      $sql .= $decoded['collectorEmail'];
+      $sql .= "', '";
+      $sql .= $decoded['eventType'];
+      $sql .= "', '";
+      $sql .= $decoded['eventRadarSigs'];
+      $sql .= "', '";
+      $sql .= $decoded['eventDescription'];
+      $sql .= "', '";
+      $sql .= $decoded['eventID'];
+      $sql .= "');";
 
-
-      // when we have an event we need to also add each radar sig
-      $sql  = "INSERT INTO `EVENT`(`instrument`, `eventType`, `event_id`, `eventDescription`, `eventStart`, `eventEnd`)";
-      $sql .= "VALUES('" . $decoded['instrument'] . "', '" . $decoded['eventType'] . "', '";
-      $sql .= $decoded['eventID'] . "', '"  . $decoded['eventDescription'] . "', '";
-      $sql .= $decoded['eventStart'] . "', '" . $decoded['eventEnd'] . "');";
-
-      $sql2 = "INSERT INTO `RADAR_SIGNATURE`(`event_id`, `radar_sig_value`)";
-      $sql2 .= "VALUES('" . $decoded['eventID'] . "', '" . $decoded['eventRadarSigs']. "');";
 
       echo $sql;
-      echo $sql2;
+
 
       // send data to db
       if ($db->query($sql)) {
       		echo "\nSUCCESS!";
       } else {
           echo "Error: " . $sql . "\n" . mysqli_error($db);
-      }
-
-      if ($db->query($sql2)) {
-          echo "\nSUCCESS!";
-      } else {
-          echo "Error: " . $sql2 . "\n" . mysqli_error($db);
       }
 
       $db->close();

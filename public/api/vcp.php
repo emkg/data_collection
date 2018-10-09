@@ -7,13 +7,19 @@
       $content = trim(file_get_contents("php://input"));
       $decoded = json_decode($content, true);
 
-      $colStart = $decoded['collectionStart'];
-      $vcp = $decoded['VCP'];
-      $colID = $decoded['collectionID'];
-
       // for vcp we have these attributes
-      $sql  = "INSERT INTO `VCP`(`startTime`, `endTime`, `vcp`, `collectionID`)";
-      $sql .= "VALUES('" . $colStart . "', '" . $colStart . "', '" . $vcp . "', '" . $colID . "')";
+      $sql  = "INSERT INTO `vcp`(`startTime`, `endTime`, `vcp`, `eventId`, `dailycollectionnumber`)";
+      $sql .= "VALUES('";
+      $sql .= $decoded['collectionStart'];
+      $sql .= "', '";
+      $sql .= $decoded['collectionEnd'];
+      $sql .= "', '";
+      $sql .= $decoded['VCP'];
+      $sql .= "', '";
+      $sql .= $decoded['eventID'];
+      $sql .= "', '";
+      $sql .= $decoded['dailyCollectionNumber'];
+      $sql .= "')";
 
       echo $sql;
       // send data to db
