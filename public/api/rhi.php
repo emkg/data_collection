@@ -7,17 +7,24 @@
       $content = trim(file_get_contents("php://input"));
       $decoded = json_decode($content, true);
 
-      $colStart = $decoded['collectionStart'];
-      $rhiStart = $decoded['rhiStart'];
-      $rhiEnd = $decoded['rhiEnd'];
-      $azimuth = $decoded['azimuth'];
-      $rhiRemark = $decoded['rhiRemark'];
-      $colID = $decoded['collectionID'];
-
-      // for vcp we have these attributes
-      $sql  = "INSERT INTO `RHI`(`startTime`, `endTime`, `top`, `bottom`, `azimuth`, `rhiRemark`, `collectionID`)";
-      $sql .= "VALUES('" . $colStart . "', '" . $colStart . "', '" . $rhiStart . "', '"
-      $sql .=  $rhiEnd . "', '" . $azimuth . "', '" . $rhiRemark . "', '" . $colID . "')";
+      $sql  = "INSERT INTO `rhi`(`startTime`, `endTime`, `topEdge`, `bottomEdge`, `azimuth`, `remarks`,`eventId`, `dailycollectionnumber`) ";
+      $sql .= "VALUES('";
+      $sql .= $decoded['collectionStart'];
+      $sql .= "', '";
+      $sql .= $decoded['collectionEnd'];
+      $sql .=  "', '";
+      $sql .= $decoded['rhiStart'];
+      $sql .= "', '";
+      $sql .= $decoded['rhiEnd'];
+      $sql .=  "', '";
+      $sql .= $decoded['azimuth'];
+      $sql .=  "', '";
+      $sql .= $decoded['rhiRemark'];
+      $sql .=  "', '";
+      $sql .= $decoded['eventID'];
+      $sql .=  "', '";
+      $sql .= $decoded['dailyCollectionNumber'];
+      $sql .= "')";
 
       echo $sql;
       // send data to db

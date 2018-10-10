@@ -7,10 +7,19 @@
       $content = trim(file_get_contents("php://input"));
       $decoded = json_decode($content, true);
 
-
-      $sql  = "INSERT INTO `REPORT`(`collectionID`, `startTime`, `reportText`) ";
-      $sql .= "VALUES('" . $decoded['collectionID'];
-      $sql .= "', '" . $decoded['collectionStart'] . "', '" . $decoded['reportText'] . "')";
+      // for report we have these attributes
+      $sql  = "INSERT INTO `report`(`startTime`, `endTime`, `reportText`, `eventId`, `dailycollectionnumber`)";
+      $sql .= "VALUES('";
+      $sql .= $decoded['collectionStart'];
+      $sql .= "', '";
+      $sql .= $decoded['collectionEnd'];
+      $sql .= "', '";
+      $sql .= $decoded['reportText'];
+      $sql .= "', '";
+      $sql .= $decoded['eventID'];
+      $sql .= "', '";
+      $sql .= $decoded['dailyCollectionNumber'];
+      $sql .= "')";
 
       echo $sql;
       // send data to db

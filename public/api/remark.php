@@ -7,9 +7,19 @@
       $content = trim(file_get_contents("php://input"));
       $decoded = json_decode($content, true);
 
-      $sql  = "INSERT INTO `REMARK`(`remark`, `startTime`, `endTime`, `collectionID`)";
-      $sql .= "VALUES('" . $decoded['remark'] . "', '" . $decoded['collectionStart'];
-      $sql .= "', '" .$decoded['collectionStart'] . "', '" . $decoded['collectionID'] . "')";
+      // for remark we have these attributes
+      $sql  = "INSERT INTO `remark`(`startTime`, `endTime`, `remark`, `eventId`, `dailycollectionnumber`)";
+      $sql .= "VALUES('";
+      $sql .= $decoded['collectionStart'];
+      $sql .= "', '";
+      $sql .= $decoded['collectionEnd'];
+      $sql .= "', '";
+      $sql .= $decoded['remark'];
+      $sql .= "', '";
+      $sql .= $decoded['eventID'];
+      $sql .= "', '";
+      $sql .= $decoded['dailyCollectionNumber'];
+      $sql .= "')";
 
       echo $sql;
       // send data to db

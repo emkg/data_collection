@@ -9,12 +9,22 @@
       $content = trim(file_get_contents("php://input"));
       $decoded = json_decode($content, true);
 
-      $colStart = $decoded['collectionStart'];
-      $colID = $decoded['collectionID'];
-      $warnText = $decoded['warningText'];
-
-      $sql  = "INSERT INTO `WARNING`(`startTime`, `collectionID`, `warningText`)";
-      $sql .= "VALUES('" . $colStart . "', '" . $colID . "', '" . $warnText . "')";
+      $sql  = "INSERT INTO `warning`(`startTime`, `endTime`, `warningType`, `warningCounties`, `warningText`, `eventId`, `dailycollectionnumber`) ";
+      $sql .= "VALUES('";
+      $sql .= $decoded['collectionStart'];
+      $sql .= "', '";
+      $sql .= $decoded['collectionEnd'];
+      $sql .=  "', '";
+      $sql .= $decoded['warningType'];
+      $sql .= "', '";
+      $sql .= $decoded['warningCounties'];
+      $sql .=  "', '";
+      $sql .= $decoded['warningText'];
+      $sql .=  "', '";
+      $sql .= $decoded['eventID'];
+      $sql .=  "', '";
+      $sql .= $decoded['dailyCollectionNumber'];
+      $sql .= "')";
 
       echo $sql;
       // send data to db
