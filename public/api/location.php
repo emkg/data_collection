@@ -9,19 +9,15 @@
       $decoded = json_decode($content, true);
 
       // when we have an event we need to also add each radar sig
-      $sql  = "INSERT INTO `COLLECTION`(`collectionStart`, `collectionEnd`, `event_id`, `location_lat`, `location_long`, `collection_id`, `dailyCollectionNumber`)";
+      $sql  = "INSERT INTO `location`(`startTime`, `lat`, `long`, `eventId`, `dailycollectionnumber`)";
       $sql .= "VALUES('";
       $sql .= $decoded['collectionStart'];
-      $sql .= "', '";
-      $sql .= $decoded['collectionStart'];
-      $sql .= "', '";
-      $sql .= $decoded['eventID'];
       $sql .= "', '" ;
       $sql .= $decoded['locationLat'];
       $sql .= "', '";
       $sql .= $decoded['locationLong'];
       $sql .= "', '";
-      $sql .= $decoded['collectionID'];
+      $sql .= $decoded['eventID'];
       $sql .= "', '";
       $sql .= $decoded['dailyCollectionNumber'];
       $sql .="');";

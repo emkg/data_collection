@@ -8,7 +8,7 @@
       $content = trim(file_get_contents("php://input"));
       $decoded = json_decode($content, true);
 
-      $sql  = "INSERT INTO `SECTOR`(`startTime`, `endTime`, `leftEdge`, `rightEdge`, `eventId`, `dailycollectionnumber`) ";
+      $sql  = "INSERT INTO `sector`(`startTime`, `endTime`, `leftEdge`, `rightEdge`, `eventId`, `dailycollectionnumber`) ";
       $sql .= "VALUES('";
       $sql .= $decoded['collectionStart'];
       $sql .= "', '";

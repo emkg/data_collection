@@ -63,7 +63,7 @@ export default class Summary extends React.Component {
           cid = c.collectionID;
         }
         if(c.collectionType === "loc") {
-          cid = c.collectionID, this.sendDataToDatabase(c, "collection");
+          cid = c.collectionID, this.sendDataToDatabase(c, "location");
         } else {
           this.sendDataToDatabase(c, c.collectionType);
         }

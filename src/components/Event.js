@@ -95,16 +95,17 @@ export default class Event extends React.Component {
   handleKickoffSubmit = (event) => {
     stop(event);
 
-    const event_info = {
-      eventStart: this.convertTime(event.target.eventstartday.value,
-                                  event.target.eventstarttime.value)
-    }
-
+    const start = this.convertTime(event.target.eventstartday.value,
+                                  event.target.eventstarttime.value);
     if(this.state.mobile) {
-      const initCollection = {...event_info,
+      const initCollection = {
+          collectionStart: start,
+          eventID: this.state.eventID,
           dailyCollectionNumber: event.target.initID.value,
           locationLat: event.target.lat.value,
-          locationLong: event.target.long.value
+          locationLong: event.target.long.value,
+          dailyCollectionNumber: 1,
+          collectionType: "loc"
         };
       //this.setState({ initID: initCollection.collectionID })
       this.saveData(initCollection);
@@ -117,7 +118,7 @@ export default class Event extends React.Component {
       mode: "collect",
       mobile: mobile,
       weatherEventData: {
-        eventStart: event_info.eventStart,
+        eventStart: start,
         instrument: instrument,
         collector: event.target.collector.value,
         collectorEmail: event.target.collectorEmail.value
