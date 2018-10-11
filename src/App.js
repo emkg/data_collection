@@ -1,6 +1,7 @@
 import React from 'react';
 import Event from './components/Event';
 import BigYellowButton from './components/BigYellowButton';
+import ViewSavedData from './components/ViewSavedData';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -104,7 +105,7 @@ export default class App extends React.Component {
 
   /**
    * Render the app. The GO button will set weatherEvent to
-   * true and data collection can begin. 
+   * true and data collection can begin.
    * @return If weatherEvent is true, an Event will be rendered.
    * Otherwise, the GO button, and a thankyou message if it
    * exists.
@@ -124,6 +125,7 @@ export default class App extends React.Component {
             <BigYellowButton
                 handleButtonPress={this.startEvent}
                 buttonText="GO" />
+            <ViewSavedData />
           </div>
         )}
 
