@@ -19,7 +19,7 @@
   if ($result->num_rows >0) {
       while($row[] = $result->fetch_assoc()) {
       $item = $row;
-      $json = json_encode($Item);
+      $json = json_encode($item);
     }
 
   } else {
