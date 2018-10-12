@@ -125,6 +125,7 @@ export default class App extends React.Component {
             <BigYellowButton
                 handleButtonPress={this.startEvent}
                 buttonText="GO" />
+            <br/>
             <ViewSavedData />
           </div>
         )}
