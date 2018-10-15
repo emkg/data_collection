@@ -1,5 +1,6 @@
 import React from 'react';
 import './css/ViewSavedData.css';
+import TableCellWithClick from './TableCellWithClick';
 
 const style = {
   "margin" : "10px 0px"
@@ -34,14 +35,51 @@ export default class ViewSavedData extends React.Component {
   componentDidMount() {
     fetch("./api/fetch.php")
       .then(response => response.json() )
-      .then(data => this.setState({ data }) )
+      .then(data => this.prepareTable(data))
       .catch((error) => {
         console.error();
       });
+
+      //this.prepareTable(this.state.data);
+  }
+
+  prepareTable = (data) => {
+    const table = data.map(
+      (row, i) => (
+        <tr>
+          <td>{i}</td>
+          <TableCellWithClick ID={row.eventID} handleClick={this.fetchRow} label={row.eventStart}  />
+          <td>{row.instrument}</td>
+          <td>{row.collector}</td>
+          <td>{row.collectorContact}</td>
+        </tr>
+    ));
+
+    this.setState({ table });
+  }
+
+  /**
+   *
+   */
+  fetchRow = (eventID) => {
+    fetch(`./api/fetchSpecific.php`, {
+      method: "POST",
+      mode: "same-origin",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: eventID
+    })
+    .then(response => response.text() )
+    .then(data => console.log(data) )
+    .catch((error) => {
+      console.error();
+    });
   }
 
   render() {
-    const { data = [] } = this.state;
+    const { table = [] } = this.state;
     return (
         <table>
           <thead>
@@ -54,16 +92,7 @@ export default class ViewSavedData extends React.Component {
             </tr>
           </thead>
             <tbody>
-            {data.map(
-              (row, i) => (
-                <tr>
-                  <td>{i}</td>
-                  <td>{row.eventStart}</td>
-                  <td>{row.instrument}</td>
-                  <td>{row.collector}</td>
-                  <td>{row.collectorContact}</td>
-                </tr>
-            ))}
+              {table}
           </tbody>
         </table>
     );
