@@ -43,7 +43,7 @@ export default class ViewSavedData extends React.Component {
       //this.prepareTable(this.state.data);
   }
 
-  prepareTable = (data) => {
+  prepareTable = (data, tableType) => {
     const table = data.map(
       (row, i) => (
         <tr>
@@ -71,8 +71,8 @@ export default class ViewSavedData extends React.Component {
       },
       body: eventID
     })
-    .then(response => response.text() )
-    .then(data => console.log(data) )
+    .then(response => response.json() )
+    .then(data => this.prepareTable(data) )
     .catch((error) => {
       console.error();
     });
