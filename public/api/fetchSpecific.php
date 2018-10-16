@@ -3,31 +3,41 @@
 
   $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
   $json = '';
+  $result = Array();
   if ($contentType === "application/json") {
-      //Receive the RAW post data.
-      // Getting the received JSON into $json variable.
-      //$content = trim(file_get_contents("php://input"));
+      //Receive the RAW post data string.
       $ID = file_get_contents("php://input");
-      // decoding the received JSON and store into $obj variable.
-      //$obj= json_decode($content, true);
-      // Populate ID from JSON $obj array and store into $ID.
-      //$ID = $obj['eventID'];
 
-      //Fetching the selected record.
-      $sql = "SELECT * from location, remark, report, rhi, sector, vcp, warning ";
-      $sql .= "WHERE location.eventId = '$ID' OR remark.eventId = '$ID' OR report.eventId = '$ID' ";
-      $sql .= "OR rhi.eventId = '$ID' ";
-      $sql .= "OR sector.eventId = '$ID' ";
-      $sql .= "OR vcp.eventId = '$ID' ";
-      $sql .= "OR warning.eventId = '$ID';";
+      $sql = "SELECT * FROM `vcp` ";
+      $sql .= "WHERE vcp.eventId = '$ID';";
+      array_push($result, $db->query($sql));
+      $sql = "SELECT * FROM `sector` ";
+      $sql .= "WHERE eventId = '$ID';";
+      array_push($result, $db->query($sql));
+      $sql = "SELECT * FROM `rhi` ";
+      $sql .= "WHERE eventId = '$ID';";
+      array_push($result, $db->query($sql));
+      $sql = "SELECT * FROM `report` ";
+      $sql .= "WHERE eventId = '$ID';";
+      array_push($result, $db->query($sql));
+      $sql = "SELECT * FROM `warning` ";
+      $sql .= "WHERE eventId = '$ID';";
+      array_push($result, $db->query($sql));
+      $sql = "SELECT * FROM `remark` ";
+      $sql .= "WHERE eventId = '$ID';";
+      array_push($result, $db->query($sql));
+      $sql = "SELECT * FROM `location` ";
+      $sql .= "WHERE eventId = '$ID';";
+      array_push($result, $db->query($sql));
 
-      $result = $db->query($sql);
-      if ($result->num_rows >0) {
-          while($row[] = $result->fetch_assoc()) {
-          $item = $row;
-          $json = json_encode($item);
+      //$result = $db->query($sql);
+      if (count($result) >0) {
+          foreach($result as $row) {
+            while($row_entry[] = $row->fetch_assoc()) {
+                $item = $row_entry;
+                $json = json_encode($item);
+           }
         }
-
       } else {
 
         echo "Result is empty set.";

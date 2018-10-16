@@ -33,27 +33,28 @@ export default class ViewSavedData extends React.Component {
   };
 
   componentDidMount() {
-    fetch("./api/fetch.php")
+   fetch("./api/fetch.php")
       .then(response => response.json() )
       .then(data => this.prepareTable(data))
       .catch((error) => {
         console.error();
       });
 
-      //this.prepareTable(this.state.data);
+    //  this.prepareTable(this.state.data);
   }
 
-  prepareTable = (data, tableType) => {
+  prepareTable = (data) => {
+    console.log(data);
+    // try filter? for each might be better.
     const table = data.map(
-      (row, i) => (
+      (row, i) => (row !== null && (
         <tr>
-          <td>{i}</td>
           <TableCellWithClick ID={row.eventID} handleClick={this.fetchRow} label={row.eventStart}  />
           <td>{row.instrument}</td>
           <td>{row.collector}</td>
           <td>{row.collectorContact}</td>
         </tr>
-    ));
+    )));
 
     this.setState({ table });
   }
@@ -70,36 +71,66 @@ export default class ViewSavedData extends React.Component {
         "Content-Type": "application/json"
       },
       body: eventID
-    })
-    .then(response => response.json() )
-    .then(data => this.prepareTable(data) )
+    }).then(response => {
+      if(response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Something went wrong with the server response.")
+      }
+    }).then(data => this.prepareTable(data) )
     .catch((error) => {
-      console.error();
+      console.error(error);
     });
+
   }
 
   render() {
     const { table = [] } = this.state;
     return (
-        <table>
-          <thead>
-            <tr>
-              <td></td>
-              <td>Date</td>
-              <td>Instrument</td>
-              <td>Collector</td>
-              <td>Collector Email</td>
-            </tr>
-          </thead>
-            <tbody>
-              {table}
-          </tbody>
-        </table>
+      <table>
+        {table}
+      </table>
     );
   }
 }
 
 
 /*
+
+SELECT * FROM `vcp`
+LEFT JOIN sector ON vcp.eventId = sector.eventId
+LEFT JOIN rhi ON sector.eventId = rhi.eventId
+LEFT JOIN report ON rhi.eventId = report.eventId
+LEFT JOIN warning ON report.eventId = warning.eventId
+LEFT JOIN remark ON warning.eventId = remark.eventId
+LEFT JOIN location ON remark.eventId = location.eventId
+WHERE vcp.eventId = 'fbe53d4d-fd38-42c6-b2a4-34f5fc3d5269'
+
+<thead>
+    <tr>
+      <td>Date</td>
+      <td>Instrument</td>
+      <td>Collector</td>
+      <td>Collector Email</td>
+    </tr>
+  </thead>
+  <tbody>
+    {tablebody}
+  </tbody>
+
+SELECT * FROM `vcp`
+WHERE vcp.eventId = 'fbe53d4d-fd38-42c6-b2a4-34f5fc3d5269';
+SELECT * FROM `sector`
+WHERE eventId = 'fbe53d4d-fd38-42c6-b2a4-34f5fc3d5269';
+SELECT * FROM `rhi`
+WHERE eventId = 'fbe53d4d-fd38-42c6-b2a4-34f5fc3d5269';
+SELECT * FROM `report`
+WHERE eventId = 'fbe53d4d-fd38-42c6-b2a4-34f5fc3d5269';
+SELECT * FROM `warning`
+WHERE eventId = 'fbe53d4d-fd38-42c6-b2a4-34f5fc3d5269';
+SELECT * FROM `remark`
+WHERE eventId = 'fbe53d4d-fd38-42c6-b2a4-34f5fc3d5269';
+SELECT * FROM `location`
+WHERE eventId = 'fbe53d4d-fd38-42c6-b2a4-34f5fc3d5269';
 
 */

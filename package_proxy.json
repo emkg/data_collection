@@ -31,8 +31,7 @@
   "esdoc": {
     "source": "./src",
     "destination": "./docs",
-    "plugins": [
-      {
+    "plugins": [{
         "name": "esdoc-react-plugin"
       },
       {
