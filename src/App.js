@@ -1,7 +1,6 @@
 import React from 'react';
 import Event from './components/Event';
 import BigYellowButton from './components/BigYellowButton';
-import ViewSavedData from './components/ViewSavedData';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -126,7 +125,6 @@ export default class App extends React.Component {
                 handleButtonPress={this.startEvent}
                 buttonText="GO" />
             <br/>
-            <ViewSavedData />
           </div>
         )}
 
