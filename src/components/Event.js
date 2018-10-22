@@ -9,9 +9,10 @@ import Select from 'react-select';
 // stop the default event behavior on rendered form elements
 const stop = (event) => (event.stopPropagation(), event.preventDefault());
 // we do want a list of mobile radars because mobile radars need locations
-const mobileInstruments = ['NOXP'];
+const mobileInstruments = ['NOXP', 'TPD'];
 // options is required for the react-select component
-const options = [ { value: 'KOUN', label: "KOUN" }, { value: 'NOXP' , label: 'NOXP' }];
+const options = [ { value: 'KOUN', label: "KOUN" }, { value: 'NOXP' , label: 'NOXP' },
+                  { value: 'ATD' , label: 'ATD' }, { value: 'TPD' , label: 'TDP' }];
 
 /**
  * An Event is home to the collections.

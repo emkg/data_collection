@@ -52,19 +52,16 @@ export default class Summary extends React.Component {
     if(this.state.editing) {
       this.props.snackbar('warning', 'Press enter on the open text field so your data gets saved before submitting again.');
     } else {
-
       document.cookie = "eventState=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
       this.props.eventOver("Your data has been collected!");
       this.sendDataToDatabase(this.state.weatherEventData, "event");
-      let cid;
-
       this.state.collections.map( (c, i) => {
-        if(c.id !== c.collectionID) {
-          cid = c.collectionID;
-        }
+        debugger;
         if(c.collectionType === "loc") {
-          cid = c.collectionID, this.sendDataToDatabase(c, "location");
+          debugger;
+          this.sendDataToDatabase(c, "location");
         } else {
+          debugger;
           this.sendDataToDatabase(c, c.collectionType);
         }
       });
