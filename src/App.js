@@ -114,7 +114,7 @@ export default class App extends React.Component {
     const Icon = variantIcon[snackbarVariant];
     return (
       <div className="app">
-      <h1>Radar Operations Data Collection</h1>
+      <h1>R2D2 Data Collection</h1>
 
         {!this.state.weatherEvent && (
           <div>

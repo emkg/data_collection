@@ -13,9 +13,9 @@
       $sql .= "', '";
       $sql .= $decoded['collectionEnd'];
       $sql .=  "', '";
-      $sql .= $decoded['rhiStart'];
-      $sql .= "', '";
       $sql .= $decoded['rhiEnd'];
+      $sql .= "', '";
+      $sql .= $decoded['rhiStart'];
       $sql .=  "', '";
       $sql .= $decoded['azimuth'];
       $sql .=  "', '";

@@ -215,12 +215,14 @@ export default class Event extends React.Component {
                            aria-required="true"
                            type="number"
                            name="lat"
-                           placeholder="lat" />
+                           placeholder="lat"
+                           step=".01"/>
                     <input type="number"
                            aria-label={"longitude"}
                            aria-required="true"
                            name="long"
-                           placeholder="long" />
+                           placeholder="long"
+                           step=".01"/>
                   </div>
                 )}
 

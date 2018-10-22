@@ -271,9 +271,9 @@ export default class Form extends React.Component {
              {this.props.className === "loc" && (
                <div>
                   <label htmlFor="">Location Lattitude:</label>
-                  <input type="number" name="lat" />
+                  <input type="number" name="lat" step=".01"/>
                   <label htmlFor="">Location Longitude</label>
-                  <input type="number" name="long" />
+                  <input type="number" name="long" step=".01"/>
                   <label htmlFor="">Daily Collection ID:</label>
                   <input type="number" name="dcn" />
                </div>
@@ -289,18 +289,18 @@ export default class Form extends React.Component {
              {this.props.className === "sector" && (
                <div>
                   <label htmlFor="sectorStart">Start Sector (Left Edge):</label>
-                  <input type="number" name="sectorStart" placeholder={this.props.sectorStart}/>
+                  <input type="number" name="sectorStart" step=".01"/>
                   <label htmlFor="sectorEnd">End Sector (Right Edge):</label>
-                  <input type="number" name="sectorEnd" placeholder={this.props.sectorEnd}/>
+                  <input type="number" name="sectorEnd" step=".01"/>
                </div>
              )}
 
              {this.props.className === "rhi" && (
                <div>
-                  <label htmlFor="rhiStart">Start Edge (Top):</label>
-                  <input type="number" name="rhiStart" placeholder={this.props.rhiStart}/>
-                  <label htmlFor="rhiEnd">End Edge (Bottom):</label>
-                  <input type="number" name="rhiEnd" placeholder={this.props.rhiEnd}/>
+                  <label htmlFor="rhiStart">Start Edge (Bottom):</label>
+                  <input type="number" name="rhiStart" step=".01"/>
+                  <label htmlFor="rhiEnd">End Edge (Top):</label>
+                  <input type="number" name="rhiEnd" step=".01"/>
                   <label htmlFor="azimuth">Azimuth:</label>
                   <input type="text" name="azimuth" />
                   <label htmlFor="rhiRemark">Remarks:</label>
