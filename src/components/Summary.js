@@ -3,8 +3,6 @@ import ReactJson from 'react-json-view';
 import CollectionSummaryRow from './CollectionSummaryRow';
 import BigYellowButton from './BigYellowButton';
 
-// TODO: add a way to edit the data
-
 
 /**
  * Summary is a way to see the saved data submitted,
@@ -50,21 +48,16 @@ export default class Summary extends React.Component {
    */
   handleSubmit = () => {
     if(this.state.editing) {
+
       this.props.snackbar('warning', 'Press enter on the open text field so your data gets saved before submitting again.');
+
     } else {
+
       document.cookie = "eventState=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
       this.props.eventOver("Your data has been collected!");
-      this.sendDataToDatabase(this.state.weatherEventData, "event");
-      this.state.collections.map( (c, i) => {
-        debugger;
-        if(c.collectionType === "loc") {
-          debugger;
-          this.sendDataToDatabase(c, "location");
-        } else {
-          debugger;
-          this.sendDataToDatabase(c, c.collectionType);
-        }
-      });
+      const allData = {...this.state.weatherEventData, collections: this.state.collections}
+      this.sendDataToDatabase(allData);
+
       window.scrollTo(0,0);
     }
   }
@@ -87,11 +80,9 @@ export default class Summary extends React.Component {
    * Sends information to permanent storage.
    * @param jsonPayload an object that will be sent
    * to the database stringified
-   * @param type a string that is the collection type
-   * or "event" that corresponds to a php file
    */
-  sendDataToDatabase = (jsonPayload, type) => {
-    fetch(`./api/${type}.php`, {
+  sendDataToDatabase = (jsonPayload) => {
+    fetch('./api/event.php', {
       method: "POST",
       mode: "same-origin",
       credentials: "same-origin",
@@ -140,7 +131,9 @@ export default class Summary extends React.Component {
             </Fragment>
           );
       });
+
       const eventDisplay = this.getCollectionSummaryRows(this.state.weatherEventData);
+
       return (
         <div>
           <h2>How does your data look?</h2>

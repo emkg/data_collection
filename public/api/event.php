@@ -1,5 +1,6 @@
 <?php
   require("db.php");
+  require("collections_sql.php");
 
   $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
@@ -29,16 +30,26 @@
       $sql .= $decoded['eventID'];
       $sql .= "');";
 
+      $collections = $decoded['collections'];
+
+      foreach($collections as $collection) {
+        $type = $collection['collectionType'];
+        $function_name = $type . "SQL";
+        $sql .= call_user_func($function_name, $collection);
+      }
+
 
       echo $sql;
 
 
       // send data to db
-      if ($db->query($sql)) {
+      if ($db->multi_query($sql)) {
       		echo "\nSUCCESS!";
       } else {
           echo "Error: " . $sql . "\n" . mysqli_error($db);
       }
+
+
 
       $db->close();
   }
