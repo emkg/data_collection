@@ -44,9 +44,12 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/components/Tab.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
+import PropsTypes from &apos;prop-types&apos;;
 import cx from &apos;classnames&apos;;
 
-
+/**
+ * Tab is an anchor tag that tells its parent it has been clicked.
+ */
 export default class Tab extends React.Component {
 
   /**
@@ -58,7 +61,7 @@ export default class Tab extends React.Component {
   }
 
   /**
-   * @return an a tag (accessible) that when clicked changes in appearance
+   * @return {jsx} an anchor tag (accessible) that when clicked changes in appearance
    * and has an effect with respect to the handleClick fn passed as props
    */
   render() {
@@ -69,6 +72,11 @@ export default class Tab extends React.Component {
       &lt;/a&gt;
     )
   }
+}
+
+
+Tab.propTypes = {
+  tab: PropTypes.string
 }
 </code></pre>
 

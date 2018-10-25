@@ -1,4 +1,5 @@
 import React from 'react';
+import PropsTypes from 'prop-types';
 import moment from 'moment';
 import cx from 'classnames';
 import Button from '@material-ui/core/Button';
@@ -31,7 +32,7 @@ export default class EventSummaryForm extends React.Component {
   /**
    * collects the checks from the radar signatures check form
    *   is essentially identical to getEventType
-   *  @param event - the event from the input elements
+   *  @param {event} event - the event from the input elements
    */
   getRadarSigs = (event) => {
     // DRY this up! needs to be modularized
@@ -46,7 +47,7 @@ export default class EventSummaryForm extends React.Component {
   /**
    * collects the checks from the event types check form
    *    is essentially identical to getRadarSigs
-   * @param event - the event from the input elements
+   * @param {event} event - the event from the input elements
    */
   getEventType = (event) => {
     // DRY this up! needs to be modularized
@@ -62,7 +63,7 @@ export default class EventSummaryForm extends React.Component {
   /**
    * Updates the state of the other option in
    *  all check forms
-   * @param event - the event from the input element
+   * @param {event} event - the event from the input element
    */
   handleOtherChecks = (event) => {
     const target = event.target;
@@ -74,7 +75,7 @@ export default class EventSummaryForm extends React.Component {
    * stores the value of the new text input element that appears
    * when the other option is checked on either checkform in state
    *
-   * @param event - the event from the input element
+   * @param {event} event - the event from the input element
    */
   handleOtherInput = (event) => {
     stop(event);
@@ -94,7 +95,7 @@ export default class EventSummaryForm extends React.Component {
 
   /**
    * saves weather event summary data to the Event
-   *  @param event - the event from the input element
+   *  @param {event} event - the event from the input element
    */
   handleSubmit = (event) => {
     stop(event);
@@ -110,7 +111,7 @@ export default class EventSummaryForm extends React.Component {
   }
 
   /**
-   * @return a fully accessible form including two checkforms,
+   * @return {jsx} a fully accessible form including two checkforms,
    *  date, time, and a text field for summary information.
    *
    */
@@ -259,4 +260,8 @@ export default class EventSummaryForm extends React.Component {
       </div>
     )
   }
+ }
+
+ EventSummaryForm.propTypes = {
+   
  }

@@ -149,7 +149,7 @@ export default class App extends React.Component {
 
   /**
    * Render the app. The GO button will set weatherEvent to
-   * true and data collection can begin. 
+   * true and data collection can begin.
    * @return If weatherEvent is true, an Event will be rendered.
    * Otherwise, the GO button, and a thankyou message if it
    * exists.
@@ -159,7 +159,7 @@ export default class App extends React.Component {
     const Icon = variantIcon[snackbarVariant];
     return (
       &lt;div className=&quot;app&quot;&gt;
-      &lt;h1&gt;Radar Operations Data Collection&lt;/h1&gt;
+      &lt;h1&gt;R2D2 Data Collection&lt;/h1&gt;
 
         {!this.state.weatherEvent &amp;&amp; (
           &lt;div&gt;
@@ -169,6 +169,7 @@ export default class App extends React.Component {
             &lt;BigYellowButton
                 handleButtonPress={this.startEvent}
                 buttonText=&quot;GO&quot; /&gt;
+            &lt;br/&gt;
           &lt;/div&gt;
         )}
 

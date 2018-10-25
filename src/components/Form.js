@@ -1,4 +1,5 @@
 import React from 'react';
+import PropsTypes from 'prop-types';
 import cx from 'classnames';
 import moment from 'moment';
 import Select from 'react-select';
@@ -124,7 +125,7 @@ export default class Form extends React.Component {
   /**
    * updates the array of options saved to state based on what is
    * chosen by the user on the react-select component
-   * @param selectedOption - an array json with label and value sent
+   * @param {Array<Object>} selectedOption - an array of json with label and value sent
    *   from react-select multi component
    */
   selectOnChange = (selectedOption) => {
@@ -133,7 +134,7 @@ export default class Form extends React.Component {
 
   /**
    * converts the array of json to a list in String format (what our DB requires)
-   * @return a String - flat list / array to string
+   * @return {String} flat list / array to string
    */
   getSelectedCounties() {
     return this.state.selectedOption.map( option => ( option.value )).toString();
@@ -143,7 +144,7 @@ export default class Form extends React.Component {
    * handleSubmit collects the data from the
    *  form based on the className and sends it
    *  up to parent. Also clears form.
-   * @param event - the default event from the submit button
+   * @param {event} event - the default event from the submit button
    */
   handleSubmit = (event) => {
     // prevent page refresh
@@ -238,10 +239,9 @@ export default class Form extends React.Component {
     this.props.snackbar('success', 'Data saved!');
   }
 
-  //TODO: condense forms into components?
   /**
    * renders the form elements based on className prop (based on openTab from Collection)
-   * @return only the fields appropriate for the className
+   * @return {jsx} only the fields appropriate for the className
    */
   render() {
     const { selectedOption } = this.state;
@@ -372,4 +372,8 @@ export default class Form extends React.Component {
       )
     }
   }
+ }
+
+ Form.propTypes = {
+   
  }

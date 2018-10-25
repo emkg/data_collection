@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropsTypes from 'prop-types';
 import ReactJson from 'react-json-view';
 import CollectionSummaryRow from './CollectionSummaryRow';
 import BigYellowButton from './BigYellowButton';
@@ -29,7 +30,7 @@ export default class Summary extends React.Component {
   /**
    * Keeps track of how many CollectionSummaryRows are open
    * for editing. True increases count, false lowers count.
-   * @param bool - a True or False value - true if CollectionSummaryRows are
+   * @param {boolean} bool - true if CollectionSummaryRows are
    *  opened for editing, false if they are closed
    */
   isEditing = (bool) => {
@@ -63,9 +64,9 @@ export default class Summary extends React.Component {
   }
 
   /**
-   * @param stringInCamelCase - a string with uppercase letters
+   * @param {string} stringInCamelCase - a string with uppercase letters
    *   adjacent to lowercase letters
-   * @return a string - the value of stringInCamelCase in all lowercase
+   * @return {string} the value of stringInCamelCase in all lowercase
    *   and spaces between words as indicated by camel cases
    */
   removeCamelCase(stringInCamelCase) {
@@ -78,7 +79,7 @@ export default class Summary extends React.Component {
 
   /**
    * Sends information to permanent storage.
-   * @param jsonPayload an object that will be sent
+   * @param {Object} jsonPayload - an object that will be sent
    * to the database stringified
    */
   sendDataToDatabase = (jsonPayload) => {
@@ -97,9 +98,9 @@ export default class Summary extends React.Component {
    * Creates an array of renderable components based on data passed to this
    * component via props that will allow users to edit data before submitting.
    *
-   * @param object - a json object we iterate to create CollectionSummaryRows
-   * @param array - an optional array of components we can append to, else start from scratch
-   * @return an array of CollectionSummaryRow components
+   * @param {Object} object - a json object we iterate to create CollectionSummaryRows
+   * @param {Array<Object>} array - an optional array of components we can append to, else start from scratch
+   * @return {Array} an array of CollectionSummaryRow components
    */
   getCollectionSummaryRows = (object, array) => {
     let newArray = array || [];
@@ -115,7 +116,7 @@ export default class Summary extends React.Component {
   }
 
   /**
-   * @return a stylish, editable table presenting the event data and
+   * @return {jsx} editable table presenting the event data and
    * collection data ready to be submitted to permanent storage featuring
    * a BigYellowButton signaling the user to submit when ready.
    */
@@ -158,4 +159,8 @@ export default class Summary extends React.Component {
       return ( <div/>)
     }
   }
+}
+
+Summary.propTypes = {
+  
 }

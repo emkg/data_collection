@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 // prvent page refresh
@@ -11,8 +12,8 @@ const stop = (event) => (event.stopPropagation(), event.preventDefault());
  */
 export default class CollectionSummaryRow extends React.Component {
     /**
-     * state stores the value of the Row (String), whether the
-     * editable input field should be open (boolean)
+     * state stores the value of the Row {string}, whether the
+     * editable input field should be open {boolean}
      */
     state = {
       edit: false,
@@ -22,7 +23,7 @@ export default class CollectionSummaryRow extends React.Component {
     /**
      *  stores the value of the event fired (submit) and sets the
      *  state of the edit boolean to false
-     * @param event - the event from the input element
+     * @param {event} event - the event from the input element
      */
     edit = (event) => {
       stop(event);
@@ -44,9 +45,9 @@ export default class CollectionSummaryRow extends React.Component {
     }
 
     /**
-     * @return a fully accessible "row" of labelled data with
+     * @return {jsx} a fully accessible "row" of labelled data with
      *  the ability to become editable on a click event
-     * 
+     *
      */
     render() {
       const { edit } = this.state;
@@ -64,4 +65,10 @@ export default class CollectionSummaryRow extends React.Component {
       )
     }
 
+}
+
+CollectionSummaryRow.propTypes = {
+  fn: PropTypes.func.isRequired,
+  attr: PropTypes.string.isRequired,
+  value: PropTypes.string
 }

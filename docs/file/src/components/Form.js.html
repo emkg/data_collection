@@ -44,6 +44,7 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/components/Form.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
+import PropsTypes from &apos;prop-types&apos;;
 import cx from &apos;classnames&apos;;
 import moment from &apos;moment&apos;;
 import Select from &apos;react-select&apos;;
@@ -169,7 +170,7 @@ export default class Form extends React.Component {
   /**
    * updates the array of options saved to state based on what is
    * chosen by the user on the react-select component
-   * @param selectedOption - an array json with label and value sent
+   * @param {Array&lt;Object&gt;} selectedOption - an array of json with label and value sent
    *   from react-select multi component
    */
   selectOnChange = (selectedOption) =&gt; {
@@ -178,7 +179,7 @@ export default class Form extends React.Component {
 
   /**
    * converts the array of json to a list in String format (what our DB requires)
-   * @return a String - flat list / array to string
+   * @return {String} flat list / array to string
    */
   getSelectedCounties() {
     return this.state.selectedOption.map( option =&gt; ( option.value )).toString();
@@ -188,7 +189,7 @@ export default class Form extends React.Component {
    * handleSubmit collects the data from the
    *  form based on the className and sends it
    *  up to parent. Also clears form.
-   * @param event - the default event from the submit button
+   * @param {event} event - the default event from the submit button
    */
   handleSubmit = (event) =&gt; {
     // prevent page refresh
@@ -283,10 +284,9 @@ export default class Form extends React.Component {
     this.props.snackbar(&apos;success&apos;, &apos;Data saved!&apos;);
   }
 
-  //TODO: condense forms into components?
   /**
    * renders the form elements based on className prop (based on openTab from Collection)
-   * @return only the fields appropriate for the className
+   * @return {jsx} only the fields appropriate for the className
    */
   render() {
     const { selectedOption } = this.state;
@@ -316,9 +316,9 @@ export default class Form extends React.Component {
              {this.props.className === &quot;loc&quot; &amp;&amp; (
                &lt;div&gt;
                   &lt;label htmlFor=&quot;&quot;&gt;Location Lattitude:&lt;/label&gt;
-                  &lt;input type=&quot;number&quot; name=&quot;lat&quot; /&gt;
+                  &lt;input type=&quot;number&quot; name=&quot;lat&quot; step=&quot;.01&quot;/&gt;
                   &lt;label htmlFor=&quot;&quot;&gt;Location Longitude&lt;/label&gt;
-                  &lt;input type=&quot;number&quot; name=&quot;long&quot; /&gt;
+                  &lt;input type=&quot;number&quot; name=&quot;long&quot; step=&quot;.01&quot;/&gt;
                   &lt;label htmlFor=&quot;&quot;&gt;Daily Collection ID:&lt;/label&gt;
                   &lt;input type=&quot;number&quot; name=&quot;dcn&quot; /&gt;
                &lt;/div&gt;
@@ -334,18 +334,18 @@ export default class Form extends React.Component {
              {this.props.className === &quot;sector&quot; &amp;&amp; (
                &lt;div&gt;
                   &lt;label htmlFor=&quot;sectorStart&quot;&gt;Start Sector (Left Edge):&lt;/label&gt;
-                  &lt;input type=&quot;number&quot; name=&quot;sectorStart&quot; placeholder={this.props.sectorStart}/&gt;
+                  &lt;input type=&quot;number&quot; name=&quot;sectorStart&quot; step=&quot;.01&quot;/&gt;
                   &lt;label htmlFor=&quot;sectorEnd&quot;&gt;End Sector (Right Edge):&lt;/label&gt;
-                  &lt;input type=&quot;number&quot; name=&quot;sectorEnd&quot; placeholder={this.props.sectorEnd}/&gt;
+                  &lt;input type=&quot;number&quot; name=&quot;sectorEnd&quot; step=&quot;.01&quot;/&gt;
                &lt;/div&gt;
              )}
 
              {this.props.className === &quot;rhi&quot; &amp;&amp; (
                &lt;div&gt;
-                  &lt;label htmlFor=&quot;rhiStart&quot;&gt;Start Edge (Top):&lt;/label&gt;
-                  &lt;input type=&quot;number&quot; name=&quot;rhiStart&quot; placeholder={this.props.rhiStart}/&gt;
-                  &lt;label htmlFor=&quot;rhiEnd&quot;&gt;End Edge (Bottom):&lt;/label&gt;
-                  &lt;input type=&quot;number&quot; name=&quot;rhiEnd&quot; placeholder={this.props.rhiEnd}/&gt;
+                  &lt;label htmlFor=&quot;rhiStart&quot;&gt;Start Edge (Bottom):&lt;/label&gt;
+                  &lt;input type=&quot;number&quot; name=&quot;rhiStart&quot; step=&quot;.01&quot;/&gt;
+                  &lt;label htmlFor=&quot;rhiEnd&quot;&gt;End Edge (Top):&lt;/label&gt;
+                  &lt;input type=&quot;number&quot; name=&quot;rhiEnd&quot; step=&quot;.01&quot;/&gt;
                   &lt;label htmlFor=&quot;azimuth&quot;&gt;Azimuth:&lt;/label&gt;
                   &lt;input type=&quot;text&quot; name=&quot;azimuth&quot; /&gt;
                   &lt;label htmlFor=&quot;rhiRemark&quot;&gt;Remarks:&lt;/label&gt;
@@ -417,6 +417,10 @@ export default class Form extends React.Component {
       )
     }
   }
+ }
+
+ Form.propTypes = {
+   
  }
 </code></pre>
 

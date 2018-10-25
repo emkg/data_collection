@@ -44,11 +44,10 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/components/Summary.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React, { Fragment } from &apos;react&apos;;
+import PropsTypes from &apos;prop-types&apos;;
 import ReactJson from &apos;react-json-view&apos;;
 import CollectionSummaryRow from &apos;./CollectionSummaryRow&apos;;
 import BigYellowButton from &apos;./BigYellowButton&apos;;
-
-// TODO: add a way to edit the data
 
 
 /**
@@ -76,7 +75,7 @@ export default class Summary extends React.Component {
   /**
    * Keeps track of how many CollectionSummaryRows are open
    * for editing. True increases count, false lowers count.
-   * @param bool - a True or False value - true if CollectionSummaryRows are
+   * @param {boolean} bool - true if CollectionSummaryRows are
    *  opened for editing, false if they are closed
    */
   isEditing = (bool) =&gt; {
@@ -95,32 +94,24 @@ export default class Summary extends React.Component {
    */
   handleSubmit = () =&gt; {
     if(this.state.editing) {
+
       this.props.snackbar(&apos;warning&apos;, &apos;Press enter on the open text field so your data gets saved before submitting again.&apos;);
+
     } else {
 
       document.cookie = &quot;eventState=;expires=Thu, 01 Jan 1970 00:00:00 GMT&quot;;
       this.props.eventOver(&quot;Your data has been collected!&quot;);
-      this.sendDataToDatabase(this.state.weatherEventData, &quot;event&quot;);
-      let cid;
+      const allData = {...this.state.weatherEventData, collections: this.state.collections}
+      this.sendDataToDatabase(allData);
 
-      this.state.collections.map( (c, i) =&gt; {
-        if(c.id !== c.collectionID) {
-          cid = c.collectionID;
-        }
-        if(c.collectionType === &quot;loc&quot;) {
-          cid = c.collectionID, this.sendDataToDatabase(c, &quot;collection&quot;);
-        } else {
-          this.sendDataToDatabase(c, c.collectionType);
-        }
-      });
       window.scrollTo(0,0);
     }
   }
 
   /**
-   * @param stringInCamelCase - a string with uppercase letters
+   * @param {string} stringInCamelCase - a string with uppercase letters
    *   adjacent to lowercase letters
-   * @return a string - the value of stringInCamelCase in all lowercase
+   * @return {string} the value of stringInCamelCase in all lowercase
    *   and spaces between words as indicated by camel cases
    */
   removeCamelCase(stringInCamelCase) {
@@ -133,13 +124,11 @@ export default class Summary extends React.Component {
 
   /**
    * Sends information to permanent storage.
-   * @param jsonPayload an object that will be sent
+   * @param {Object} jsonPayload - an object that will be sent
    * to the database stringified
-   * @param type a string that is the collection type
-   * or &quot;event&quot; that corresponds to a php file
    */
-  sendDataToDatabase = (jsonPayload, type) =&gt; {
-    fetch(`./api/${type}.php`, {
+  sendDataToDatabase = (jsonPayload) =&gt; {
+    fetch(&apos;./api/event.php&apos;, {
       method: &quot;POST&quot;,
       mode: &quot;same-origin&quot;,
       credentials: &quot;same-origin&quot;,
@@ -154,9 +143,9 @@ export default class Summary extends React.Component {
    * Creates an array of renderable components based on data passed to this
    * component via props that will allow users to edit data before submitting.
    *
-   * @param object - a json object we iterate to create CollectionSummaryRows
-   * @param array - an optional array of components we can append to, else start from scratch
-   * @return an array of CollectionSummaryRow components
+   * @param {Object} object - a json object we iterate to create CollectionSummaryRows
+   * @param {Array&lt;Object&gt;} array - an optional array of components we can append to, else start from scratch
+   * @return {Array} an array of CollectionSummaryRow components
    */
   getCollectionSummaryRows = (object, array) =&gt; {
     let newArray = array || [];
@@ -172,7 +161,7 @@ export default class Summary extends React.Component {
   }
 
   /**
-   * @return a stylish, editable table presenting the event data and
+   * @return {jsx} editable table presenting the event data and
    * collection data ready to be submitted to permanent storage featuring
    * a BigYellowButton signaling the user to submit when ready.
    */
@@ -188,7 +177,9 @@ export default class Summary extends React.Component {
             &lt;/Fragment&gt;
           );
       });
+
       const eventDisplay = this.getCollectionSummaryRows(this.state.weatherEventData);
+
       return (
         &lt;div&gt;
           &lt;h2&gt;How does your data look?&lt;/h2&gt;
@@ -213,6 +204,10 @@ export default class Summary extends React.Component {
       return ( &lt;div/&gt;)
     }
   }
+}
+
+Summary.propTypes = {
+  
 }
 </code></pre>
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 
 /**
@@ -29,4 +30,8 @@ export default class BigYellowButton extends React.Component {
     );
 
   }
+}
+
+BigYellowButton.propTypes = {
+  buttonText: PropTypes.string
 }

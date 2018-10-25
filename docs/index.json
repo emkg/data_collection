@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/App.js",
-    "content": "import React from 'react';\nimport Event from './components/Event';\nimport BigYellowButton from './components/BigYellowButton';\nimport cx from 'classnames';\nimport { withStyles } from '@material-ui/core/styles';\nimport Button from '@material-ui/core/Button';\nimport Snackbar from '@material-ui/core/Snackbar';\nimport SnackbarContent from '@material-ui/core/SnackbarContent';\nimport IconButton from '@material-ui/core/IconButton';\nimport CloseIcon from '@material-ui/icons/Close';\nimport CheckCircleIcon from '@material-ui/icons/CheckCircle';\nimport ErrorIcon from '@material-ui/icons/Error';\nimport green from '@material-ui/core/colors/green';\nimport amber from '@material-ui/core/colors/amber';\nimport WarningIcon from '@material-ui/icons/Warning';\nimport './App.css';\n\n// get icons we imported from material-ui for snackbars\nconst variantIcon = {\n  success: CheckCircleIcon,\n  warning: WarningIcon,\n  error: ErrorIcon\n};\n\n// suggested styles from material-ui for snackbars\n// I chose to keep success and warning\nconst snackbarStyles = {\n  success: {\n    backgroundColor: green[600],\n  },\n  warning: {\n    backgroundColor: amber[700],\n  },\n  icon: {\n    fontSize: 20,\n  },\n  iconVariant: {\n    opacity: 0.9,\n    marginRight: '8px',\n  },\n  message: {\n    display: 'flex',\n    alignItems: 'center',\n  }\n};\n\n\n\n/**\n *  App houses the data collection mechanism and model\n *  for the Radar Operations.\n *\n */\nexport default class App extends React.Component {\n  /**\n   * App state keeps track of whether an event is active, and\n   * whether or not we want to see a snackbar. Likewise,\n   * App state stores the snackbar message and variant (success -- green\n   * is for signaling saved information, while warning -- amber/yellow\n   * comes up for validation messages on the final submit page)\n   */\n  state = {\n    weatherEvent: false,\n    snackbarOpen: false,\n    snackbarVariant: 'success',\n    snackbarMessage: ''\n  }\n\n  /**\n   * scrolls the window to the top of the page.\n   */\n  componentDidMount() {\n    window.scrollTo(0,0);\n  }\n\n  /**\n   * Opens a snackbar\n   * @param snackbarVariant - a string, either \"warning\" or \"success\"\n   * @param snackbarMessage - a string, what the message should say\n   **/\n  openSnackbar = (snackbarVariant, snackbarMessage) => {\n   this.setState({ snackbarOpen: true, snackbarVariant, snackbarMessage });\n  };\n\n\n  /**\n   * Closes a snackbar.\n   * @param event - borrowed from material-ui\n   * @param reason - borrowed from material-ui\n   */\n  closeSnackbar = (event, reason) => {\n   this.setState({ snackbarOpen: false });\n };\n\n  /**\n   * Flips weatherEvent in state on if off, off if on.\n   * @param thankyou - a string, optional message\n   *   to be displayed when weatherEvent is false.\n   */\n  startEvent = (thankyou) => {\n    this.setState({ weatherEvent: !this.state.weatherEvent, thankyou })\n    window.scrollTo(0,0);\n  }\n\n  /**\n   * Render the app. The GO button will set weatherEvent to\n   * true and data collection can begin. \n   * @return If weatherEvent is true, an Event will be rendered.\n   * Otherwise, the GO button, and a thankyou message if it\n   * exists.\n   */\n  render() {\n    const { snackbarVariant } = this.state;\n    const Icon = variantIcon[snackbarVariant];\n    return (\n      <div className=\"app\">\n      <h1>Radar Operations Data Collection</h1>\n\n        {!this.state.weatherEvent && (\n          <div>\n            {this.state.thankyou}\n            <p>Press go to collect data\n            when weather events are in progress.</p>\n            <BigYellowButton\n                handleButtonPress={this.startEvent}\n                buttonText=\"GO\" />\n          </div>\n        )}\n\n        {this.state.weatherEvent && (\n          <Event eventOver={this.startEvent} snackbar={this.openSnackbar} />\n        )}\n\n        <Snackbar\n          open={this.state.snackbarOpen}\n          autoHideDuration={6000}\n          onClose={this.closeSnackbar}\n\n          anchorOrigin={{\n            vertical: 'top',\n            horizontal: 'center',\n          }}\n          ContentProps={{\n            'aria-describedby': 'message-id',\n          }}\n        >\n          <SnackbarContent\n            style={snackbarStyles[snackbarVariant]}\n            message={<span id=\"message-id\" style={snackbarStyles.message}>\n                      <Icon style={snackbarStyles.icon, snackbarStyles.iconVariant}/>\n                          {this.state.snackbarMessage}\n                      </span>}\n            action={[\n              <IconButton\n                key=\"close\"\n                aria-label=\"close\"\n                color=\"inherit\"\n                style={snackbarStyles.close}\n                onClick={this.closeSnackbar}\n              >\n              <CloseIcon style={snackbarStyles.icon}/>\n              </IconButton>,\n            ]}\n          />\n        </Snackbar>\n      </div>\n    );\n  }\n}\n",
+    "content": "import React from 'react';\nimport Event from './components/Event';\nimport BigYellowButton from './components/BigYellowButton';\nimport cx from 'classnames';\nimport { withStyles } from '@material-ui/core/styles';\nimport Button from '@material-ui/core/Button';\nimport Snackbar from '@material-ui/core/Snackbar';\nimport SnackbarContent from '@material-ui/core/SnackbarContent';\nimport IconButton from '@material-ui/core/IconButton';\nimport CloseIcon from '@material-ui/icons/Close';\nimport CheckCircleIcon from '@material-ui/icons/CheckCircle';\nimport ErrorIcon from '@material-ui/icons/Error';\nimport green from '@material-ui/core/colors/green';\nimport amber from '@material-ui/core/colors/amber';\nimport WarningIcon from '@material-ui/icons/Warning';\nimport './App.css';\n\n// get icons we imported from material-ui for snackbars\nconst variantIcon = {\n  success: CheckCircleIcon,\n  warning: WarningIcon,\n  error: ErrorIcon\n};\n\n// suggested styles from material-ui for snackbars\n// I chose to keep success and warning\nconst snackbarStyles = {\n  success: {\n    backgroundColor: green[600],\n  },\n  warning: {\n    backgroundColor: amber[700],\n  },\n  icon: {\n    fontSize: 20,\n  },\n  iconVariant: {\n    opacity: 0.9,\n    marginRight: '8px',\n  },\n  message: {\n    display: 'flex',\n    alignItems: 'center',\n  }\n};\n\n\n\n/**\n *  App houses the data collection mechanism and model\n *  for the Radar Operations.\n *\n */\nexport default class App extends React.Component {\n  /**\n   * App state keeps track of whether an event is active, and\n   * whether or not we want to see a snackbar. Likewise,\n   * App state stores the snackbar message and variant (success -- green\n   * is for signaling saved information, while warning -- amber/yellow\n   * comes up for validation messages on the final submit page)\n   */\n  state = {\n    weatherEvent: false,\n    snackbarOpen: false,\n    snackbarVariant: 'success',\n    snackbarMessage: ''\n  }\n\n  /**\n   * scrolls the window to the top of the page.\n   */\n  componentDidMount() {\n    window.scrollTo(0,0);\n  }\n\n  /**\n   * Opens a snackbar\n   * @param snackbarVariant - a string, either \"warning\" or \"success\"\n   * @param snackbarMessage - a string, what the message should say\n   **/\n  openSnackbar = (snackbarVariant, snackbarMessage) => {\n   this.setState({ snackbarOpen: true, snackbarVariant, snackbarMessage });\n  };\n\n\n  /**\n   * Closes a snackbar.\n   * @param event - borrowed from material-ui\n   * @param reason - borrowed from material-ui\n   */\n  closeSnackbar = (event, reason) => {\n   this.setState({ snackbarOpen: false });\n };\n\n  /**\n   * Flips weatherEvent in state on if off, off if on.\n   * @param thankyou - a string, optional message\n   *   to be displayed when weatherEvent is false.\n   */\n  startEvent = (thankyou) => {\n    this.setState({ weatherEvent: !this.state.weatherEvent, thankyou })\n    window.scrollTo(0,0);\n  }\n\n  /**\n   * Render the app. The GO button will set weatherEvent to\n   * true and data collection can begin.\n   * @return If weatherEvent is true, an Event will be rendered.\n   * Otherwise, the GO button, and a thankyou message if it\n   * exists.\n   */\n  render() {\n    const { snackbarVariant } = this.state;\n    const Icon = variantIcon[snackbarVariant];\n    return (\n      <div className=\"app\">\n      <h1>R2D2 Data Collection</h1>\n\n        {!this.state.weatherEvent && (\n          <div>\n            {this.state.thankyou}\n            <p>Press go to collect data\n            when weather events are in progress.</p>\n            <BigYellowButton\n                handleButtonPress={this.startEvent}\n                buttonText=\"GO\" />\n            <br/>\n          </div>\n        )}\n\n        {this.state.weatherEvent && (\n          <Event eventOver={this.startEvent} snackbar={this.openSnackbar} />\n        )}\n\n        <Snackbar\n          open={this.state.snackbarOpen}\n          autoHideDuration={6000}\n          onClose={this.closeSnackbar}\n\n          anchorOrigin={{\n            vertical: 'top',\n            horizontal: 'center',\n          }}\n          ContentProps={{\n            'aria-describedby': 'message-id',\n          }}\n        >\n          <SnackbarContent\n            style={snackbarStyles[snackbarVariant]}\n            message={<span id=\"message-id\" style={snackbarStyles.message}>\n                      <Icon style={snackbarStyles.icon, snackbarStyles.iconVariant}/>\n                          {this.state.snackbarMessage}\n                      </span>}\n            action={[\n              <IconButton\n                key=\"close\"\n                aria-label=\"close\"\n                color=\"inherit\"\n                style={snackbarStyles.close}\n                onClick={this.closeSnackbar}\n              >\n              <CloseIcon style={snackbarStyles.icon}/>\n              </IconButton>,\n            ]}\n          />\n        </Snackbar>\n      </div>\n    );\n  }\n}\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/App.js",
     "access": "public",
@@ -780,7 +780,7 @@
     "static": false,
     "longname": "src/App.js~App#render",
     "access": "public",
-    "description": "Render the app. The GO button will set weatherEvent to\ntrue and data collection can begin. ",
+    "description": "Render the app. The GO button will set weatherEvent to\ntrue and data collection can begin.",
     "lineNumber": 112,
     "return": {
       "nullable": null,
@@ -796,7 +796,7 @@
     "__docId__": 58,
     "kind": "file",
     "name": "src/components/BigYellowButton.js",
-    "content": "import React from 'react';\n\n\n/**\n * BigYellowButton is a large \"button\" with a bold\n * style. With a drop shadow and transforms, this\n * component has a dramatic push down effect.\n * It requires a handleButtonPress function, and buttonText\n * props. It is keyboard/tab accessible.\n */\nexport default class BigYellowButton extends React.Component {\n\n  /**\n   * execute the buttonPress function passed\n   *  as a prop\n   */\n  handleButtonPress = () => {\n    this.props.handleButtonPress()\n  }\n  /**\n   * @return a div wrapped around an anchor tag\n   *\n   */\n  render() {\n    return (\n      <div className=\"big-yellow-button\"\n         onClick={this.handleButtonPress}><a href=\"javascript:;\">{this.props.buttonText || \"PRESS ME\"}</a>\n      </div>\n    );\n\n  }\n}\n",
+    "content": "import React from 'react';\nimport PropTypes from 'prop-types';\n\n\n/**\n * BigYellowButton is a large \"button\" with a bold\n * style. With a drop shadow and transforms, this\n * component has a dramatic push down effect.\n * It requires a handleButtonPress function, and buttonText\n * props. It is keyboard/tab accessible.\n */\nexport default class BigYellowButton extends React.Component {\n\n  /**\n   * execute the buttonPress function passed\n   *  as a prop\n   */\n  handleButtonPress = () => {\n    this.props.handleButtonPress()\n  }\n  /**\n   * @return a div wrapped around an anchor tag\n   *\n   */\n  render() {\n    return (\n      <div className=\"big-yellow-button\"\n         onClick={this.handleButtonPress}><a href=\"javascript:;\">{this.props.buttonText || \"PRESS ME\"}</a>\n      </div>\n    );\n\n  }\n}\n\nBigYellowButton.propTypes = {\n  buttonText: PropTypes.string\n}\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/BigYellowButton.js",
     "access": "public",
@@ -815,7 +815,7 @@
     "importPath": "ops_coll_front/src/components/BigYellowButton.js",
     "importStyle": "BigYellowButton",
     "description": "BigYellowButton is a large \"button\" with a bold\nstyle. With a drop shadow and transforms, this\ncomponent has a dramatic push down effect.\nIt requires a handleButtonPress function, and buttonText\nprops. It is keyboard/tab accessible.",
-    "lineNumber": 11,
+    "lineNumber": 12,
     "interface": false,
     "extends": [
       "react~React.Component"
@@ -830,7 +830,7 @@
     "longname": "src/components/BigYellowButton.js~BigYellowButton#handleButtonPress",
     "access": "public",
     "description": "execute the buttonPress function passed\n as a prop",
-    "lineNumber": 17,
+    "lineNumber": 18,
     "type": {
       "types": [
         "*"
@@ -848,7 +848,7 @@
     "longname": "src/components/BigYellowButton.js~BigYellowButton#render",
     "access": "public",
     "description": "",
-    "lineNumber": 24,
+    "lineNumber": 25,
     "return": {
       "nullable": null,
       "types": [
@@ -863,7 +863,7 @@
     "__docId__": 62,
     "kind": "file",
     "name": "src/components/Collection.js",
-    "content": "import React from 'react';\nimport Tab from './Tab';\nimport Form from './Form';\nimport uuidv4 from 'uuid/v4';\n\n/**\n * Collection renders the data collection forms.\n */\nexport default class Collection extends React.Component {\n  /**\n   * state stores the open tab string, a dailyCollectionNumber number,\n   * and a unique collectionID string generated by uuidv4\n   */\n  state = {\n    openTab: \"vcp\",\n    dailyCollectionNumber: 1,\n    collectionID: uuidv4()\n  }\n\n  /**\n   * change the openTab in state on click\n   * @param newTab - String name of the tab to open\n   */\n  handleClick = (newTab) => {\n    this.setState({ openTab: newTab })\n  }\n\n  /**\n   * When location is updated for mobile radar,\n   * we want to update the collection id. This\n   * signals on all new entries that the location is updated.\n   * @param dcn - Number, the dailyCollectionNumber of the collection\n   * which is updated elsewhere\n   * @return collectionID, a new uuidv4 string\n   */\n  getNewCollectionID = (dcn) => {\n    const collectionID = uuidv4();\n    const dailyCollectionNumber = dcn;\n    this.setState({ collectionID, dailyCollectionNumber });\n    return collectionID;\n  }\n\n  /**\n   * stop ends the data collection in the parent container\n   */\n  stop = () => {\n    this.props.endCollection();\n  }\n\n  /**\n   * render the clickable tabs, Form, and a stop button.\n   * @return a tab container full of Tabs above a Form component\n   */\n  render () {\n    const { openTab } = this.state;\n    return (\n      <div className=\"collection\">\n          {this.props.mobile && (\n            <div className=\"tab-container\">\n              <Tab tab=\"loc\" clicked={openTab === \"loc\"} handleClick={this.handleClick} />\n              <Tab tab=\"vcp\" clicked={openTab === \"vcp\"} handleClick={this.handleClick} />\n              <Tab tab=\"sector\" clicked={openTab === \"sector\"} handleClick={this.handleClick} />\n              <Tab tab=\"rhi\" clicked={openTab === \"rhi\"} handleClick={this.handleClick} />\n              <Tab tab=\"remark\" clicked={openTab === \"remark\"} handleClick={this.handleClick} />\n              <Tab tab=\"eventEnd\" clicked={openTab === \"eventEnd\"} handleClick={this.handleClick} />\n            </div>\n          )}\n          {!this.props.mobile && (\n            <div className=\"tab-container\">\n              <Tab tab=\"vcp\" clicked={openTab === \"vcp\"} handleClick={this.handleClick} />\n              <Tab tab=\"sector\" clicked={openTab === \"sector\"} handleClick={this.handleClick} />\n              <Tab tab=\"rhi\" clicked={openTab === \"rhi\"} handleClick={this.handleClick} />\n              <Tab tab=\"warning\" clicked={openTab === \"warning\"} handleClick={this.handleClick} />\n              <Tab tab=\"report\" clicked={openTab === \"report\"} handleClick={this.handleClick} />\n              <Tab tab=\"remark\" clicked={openTab === \"remark\"} handleClick={this.handleClick} />\n              <Tab tab=\"eventEnd\" clicked={openTab === \"eventEnd\"} handleClick={this.handleClick} />\n            </div>\n          )}\n        <Form convertTime={this.props.convertTime}\n              saveData={this.props.saveData}\n              className={this.state.openTab}\n              dailyCollectionNumber={this.state.dailyCollectionNumber}\n              collectionID={this.state.collectionID}\n              handleNewLocation={this.getNewCollectionID}\n              eventID={this.props.eventID}\n              timeNow={this.props.timeNow}\n              today={this.props.today}\n              snackbar={this.props.snackbar}\n              convertTime={this.props.convertTime}\n              handleSubmit={this.props.handleSubmit}\n        />\n      </div>\n    )\n  }\n}\n",
+    "content": "import React from 'react';\nimport PropTypes from 'prop-types';\nimport Tab from './Tab';\nimport Form from './Form';\nimport uuidv4 from 'uuid/v4';\n\n/**\n * Collection renders the data collection forms.\n */\nexport default class Collection extends React.Component {\n  /**\n   * state stores the open tab {string}, a dailyCollectionNumber {number},\n   * and a unique collectionID {string} generated by uuidv4\n   */\n  state = {\n    openTab: \"vcp\",\n    dailyCollectionNumber: 1,\n    collectionID: uuidv4()\n  }\n\n  /**\n   * change the openTab in state on click\n   * @param {string} newTab - name of the tab to open\n   */\n  handleClick = (newTab) => {\n    this.setState({ openTab: newTab })\n  }\n\n  /**\n   * When location is updated for mobile radar,\n   * we want to update the collection id. This\n   * signals on all new entries that the location is updated.\n   * @param {number} dcn - the dailyCollectionNumber of the collection\n   * which is updated elsewhere\n   * @return {string} collectionID, a new uuidv4\n   */\n  getNewCollectionID = (dcn) => {\n    const collectionID = uuidv4();\n    const dailyCollectionNumber = dcn;\n    this.setState({ collectionID, dailyCollectionNumber });\n    return collectionID;\n  }\n\n  /**\n   * stop ends the data collection in the parent container\n   */\n  stop = () => {\n    this.props.endCollection();\n  }\n\n  /**\n   * render the clickable tabs, Form, and a stop button.\n   * @return a tab container full of Tabs above a Form component\n   */\n  render () {\n    const { openTab } = this.state;\n    return (\n      <div className=\"collection\">\n          {this.props.mobile && (\n            <div className=\"tab-container\">\n              <Tab tab=\"loc\" clicked={openTab === \"loc\"} handleClick={this.handleClick} />\n              <Tab tab=\"vcp\" clicked={openTab === \"vcp\"} handleClick={this.handleClick} />\n              <Tab tab=\"sector\" clicked={openTab === \"sector\"} handleClick={this.handleClick} />\n              <Tab tab=\"rhi\" clicked={openTab === \"rhi\"} handleClick={this.handleClick} />\n              <Tab tab=\"remark\" clicked={openTab === \"remark\"} handleClick={this.handleClick} />\n              <Tab tab=\"eventEnd\" clicked={openTab === \"eventEnd\"} handleClick={this.handleClick} />\n            </div>\n          )}\n          {!this.props.mobile && (\n            <div className=\"tab-container\">\n              <Tab tab=\"vcp\" clicked={openTab === \"vcp\"} handleClick={this.handleClick} />\n              <Tab tab=\"sector\" clicked={openTab === \"sector\"} handleClick={this.handleClick} />\n              <Tab tab=\"rhi\" clicked={openTab === \"rhi\"} handleClick={this.handleClick} />\n              <Tab tab=\"warning\" clicked={openTab === \"warning\"} handleClick={this.handleClick} />\n              <Tab tab=\"report\" clicked={openTab === \"report\"} handleClick={this.handleClick} />\n              <Tab tab=\"remark\" clicked={openTab === \"remark\"} handleClick={this.handleClick} />\n              <Tab tab=\"eventEnd\" clicked={openTab === \"eventEnd\"} handleClick={this.handleClick} />\n            </div>\n          )}\n        <Form convertTime={this.props.convertTime}\n              saveData={this.props.saveData}\n              className={this.state.openTab}\n              dailyCollectionNumber={this.state.dailyCollectionNumber}\n              collectionID={this.state.collectionID}\n              handleNewLocation={this.getNewCollectionID}\n              eventID={this.props.eventID}\n              timeNow={this.props.timeNow}\n              today={this.props.today}\n              snackbar={this.props.snackbar}\n              convertTime={this.props.convertTime}\n              handleSubmit={this.props.handleSubmit}\n        />\n      </div>\n    )\n  }\n}\n\nCollection.propTypes = {\n  saveData: PropTypes.func,\n  eventID: PropTypes.string.isRequired,\n  timeNow: PropTypes.string,\n  today: PropTypes.string,\n  snackbar: PropTypes.string,\n  convertTime: PropTypes.func,\n  handleSubmit: PropTypes.func\n}\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/Collection.js",
     "access": "public",
@@ -882,7 +882,7 @@
     "importPath": "ops_coll_front/src/components/Collection.js",
     "importStyle": "Collection",
     "description": "Collection renders the data collection forms.",
-    "lineNumber": 9,
+    "lineNumber": 10,
     "interface": false,
     "extends": [
       "react~React.Component"
@@ -896,8 +896,8 @@
     "static": false,
     "longname": "src/components/Collection.js~Collection#state",
     "access": "public",
-    "description": "state stores the open tab string, a dailyCollectionNumber number,\nand a unique collectionID string generated by uuidv4",
-    "lineNumber": 14,
+    "description": "state stores the open tab {string}, a dailyCollectionNumber {number},\nand a unique collectionID {string} generated by uuidv4",
+    "lineNumber": 15,
     "type": {
       "types": [
         "*"
@@ -913,7 +913,7 @@
     "longname": "src/components/Collection.js~Collection#handleClick",
     "access": "public",
     "description": null,
-    "lineNumber": 24,
+    "lineNumber": 25,
     "undocument": true,
     "type": {
       "types": [
@@ -930,26 +930,26 @@
     "longname": "src/components/Collection.js~Collection#getNewCollectionID",
     "access": "public",
     "description": "When location is updated for mobile radar,\nwe want to update the collection id. This\nsignals on all new entries that the location is updated.",
-    "lineNumber": 36,
+    "lineNumber": 37,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "number"
         ],
         "spread": false,
         "optional": false,
         "name": "dcn",
-        "description": "Number, the dailyCollectionNumber of the collection\nwhich is updated elsewhere"
+        "description": "the dailyCollectionNumber of the collection\nwhich is updated elsewhere"
       }
     ],
     "return": {
       "nullable": null,
       "types": [
-        "*"
+        "string"
       ],
       "spread": false,
-      "description": "collectionID, a new uuidv4 string"
+      "description": "collectionID, a new uuidv4"
     },
     "type": {
       "types": [
@@ -966,7 +966,7 @@
     "longname": "src/components/Collection.js~Collection#stop",
     "access": "public",
     "description": "stop ends the data collection in the parent container",
-    "lineNumber": 46,
+    "lineNumber": 47,
     "type": {
       "types": [
         "*"
@@ -984,7 +984,7 @@
     "longname": "src/components/Collection.js~Collection#render",
     "access": "public",
     "description": "render the clickable tabs, Form, and a stop button.",
-    "lineNumber": 54,
+    "lineNumber": 55,
     "return": {
       "nullable": null,
       "types": [
@@ -999,7 +999,7 @@
     "__docId__": 69,
     "kind": "file",
     "name": "src/components/CollectionSummaryRow.js",
-    "content": "import React from 'react';\nimport cx from 'classnames';\n\n// prvent page refresh\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n\n/**\n * CollectionSummaryRow is a single row of information with a label\n * and a value. Clicking the label or the value makes the value\n * become a text input field so that the value is editable.\n */\nexport default class CollectionSummaryRow extends React.Component {\n    /**\n     * state stores the value of the Row (String), whether the\n     * editable input field should be open (boolean)\n     */\n    state = {\n      edit: false,\n      value: this.props.value\n    };\n\n    /**\n     *  stores the value of the event fired (submit) and sets the\n     *  state of the edit boolean to false\n     * @param event - the event from the input element\n     */\n    edit = (event) => {\n      stop(event);\n      const value = event.target.newValue.value === \"\"\n                      ? this.state.value\n                      : event.target.newValue.value;\n      this.props.fn(false);\n      this.setState({ edit: false, value: value });\n    }\n\n    /**\n     * turns the state of the edit boolean\n     * to true if false and false if true\n     */\n    showHideInput = () => {\n      const edit = !this.state.edit;\n      this.props.fn(edit);\n      this.setState({ edit });\n    }\n\n    /**\n     * @return a fully accessible \"row\" of labelled data with\n     *  the ability to become editable on a click event\n     * \n     */\n    render() {\n      const { edit } = this.state;\n      return (\n        <div className=\"event-summary-row\" >\n\n            <a tabindex={0} href=\"javascript:;\" className=\"full-width-a-tag\" onClick={this.showHideInput}>{this.props.attr}</a>\n            <a tabindex={0} href=\"javascript:;\" onClick={this.showHideInput} className={cx({ edit }, \"middle\")}>{this.state.value}</a>\n\n\n          <form className={cx({ edit : !edit }, \"edit-preview\")} onSubmit={this.edit}>\n            <input type=\"text\" className=\"edit-preview-input\" name=\"newValue\" placeholder={this.state.value}/>\n          </form>\n        </div>\n      )\n    }\n\n}\n",
+    "content": "import React from 'react';\nimport PropTypes from 'prop-types';\nimport cx from 'classnames';\n\n// prvent page refresh\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n\n/**\n * CollectionSummaryRow is a single row of information with a label\n * and a value. Clicking the label or the value makes the value\n * become a text input field so that the value is editable.\n */\nexport default class CollectionSummaryRow extends React.Component {\n    /**\n     * state stores the value of the Row {string}, whether the\n     * editable input field should be open {boolean}\n     */\n    state = {\n      edit: false,\n      value: this.props.value\n    };\n\n    /**\n     *  stores the value of the event fired (submit) and sets the\n     *  state of the edit boolean to false\n     * @param {event} event - the event from the input element\n     */\n    edit = (event) => {\n      stop(event);\n      const value = event.target.newValue.value === \"\"\n                      ? this.state.value\n                      : event.target.newValue.value;\n      this.props.fn(false);\n      this.setState({ edit: false, value: value });\n    }\n\n    /**\n     * turns the state of the edit boolean\n     * to true if false and false if true\n     */\n    showHideInput = () => {\n      const edit = !this.state.edit;\n      this.props.fn(edit);\n      this.setState({ edit });\n    }\n\n    /**\n     * @return {jsx} a fully accessible \"row\" of labelled data with\n     *  the ability to become editable on a click event\n     *\n     */\n    render() {\n      const { edit } = this.state;\n      return (\n        <div className=\"event-summary-row\" >\n\n            <a tabindex={0} href=\"javascript:;\" className=\"full-width-a-tag\" onClick={this.showHideInput}>{this.props.attr}</a>\n            <a tabindex={0} href=\"javascript:;\" onClick={this.showHideInput} className={cx({ edit }, \"middle\")}>{this.state.value}</a>\n\n\n          <form className={cx({ edit : !edit }, \"edit-preview\")} onSubmit={this.edit}>\n            <input type=\"text\" className=\"edit-preview-input\" name=\"newValue\" placeholder={this.state.value}/>\n          </form>\n        </div>\n      )\n    }\n\n}\n\nCollectionSummaryRow.propTypes = {\n  fn: PropTypes.func.isRequired,\n  attr: PropTypes.string.isRequired,\n  value: PropTypes.string\n}\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/CollectionSummaryRow.js",
     "access": "public",
@@ -1020,7 +1020,7 @@
     "importPath": "ops_coll_front/src/components/CollectionSummaryRow.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 5,
+    "lineNumber": 6,
     "undocument": true,
     "params": [
       {
@@ -1045,7 +1045,7 @@
     "importPath": "ops_coll_front/src/components/CollectionSummaryRow.js",
     "importStyle": "CollectionSummaryRow",
     "description": "CollectionSummaryRow is a single row of information with a label\nand a value. Clicking the label or the value makes the value\nbecome a text input field so that the value is editable.",
-    "lineNumber": 12,
+    "lineNumber": 13,
     "interface": false,
     "extends": [
       "react~React.Component"
@@ -1059,8 +1059,8 @@
     "static": false,
     "longname": "src/components/CollectionSummaryRow.js~CollectionSummaryRow#state",
     "access": "public",
-    "description": "state stores the value of the Row (String), whether the\neditable input field should be open (boolean)",
-    "lineNumber": 17,
+    "description": "state stores the value of the Row {string}, whether the\neditable input field should be open {boolean}",
+    "lineNumber": 18,
     "type": {
       "types": [
         "*"
@@ -1076,12 +1076,12 @@
     "longname": "src/components/CollectionSummaryRow.js~CollectionSummaryRow#edit",
     "access": "public",
     "description": " stores the value of the event fired (submit) and sets the\n state of the edit boolean to false",
-    "lineNumber": 27,
+    "lineNumber": 28,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "event"
         ],
         "spread": false,
         "optional": false,
@@ -1104,7 +1104,7 @@
     "longname": "src/components/CollectionSummaryRow.js~CollectionSummaryRow#showHideInput",
     "access": "public",
     "description": "turns the state of the edit boolean\nto true if false and false if true",
-    "lineNumber": 40,
+    "lineNumber": 41,
     "type": {
       "types": [
         "*"
@@ -1122,11 +1122,11 @@
     "longname": "src/components/CollectionSummaryRow.js~CollectionSummaryRow#render",
     "access": "public",
     "description": "",
-    "lineNumber": 51,
+    "lineNumber": 52,
     "return": {
       "nullable": null,
       "types": [
-        "*"
+        "jsx"
       ],
       "spread": false,
       "description": "a fully accessible \"row\" of labelled data with\n the ability to become editable on a click event"
@@ -1137,7 +1137,7 @@
     "__docId__": 76,
     "kind": "file",
     "name": "src/components/Event.js",
-    "content": "import React from 'react';\nimport Collection from './Collection';\nimport EventSummaryForm from './EventSummaryForm';\nimport Summary from './Summary';\nimport uuidv4 from 'uuid/v4';\nimport moment from 'moment';\nimport Select from 'react-select';\n\n// stop the default event behavior on rendered form elements\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n// we do want a list of mobile radars because mobile radars need locations\nconst mobileInstruments = ['NOXP'];\n// options is required for the react-select component\nconst options = [ { value: 'KOUN', label: \"KOUN\" }, { value: 'NOXP' , label: 'NOXP' }];\n\n/**\n * An Event is home to the collections.\n * If an instrument is stationary, an Event will have\n * one collectionID for its collections.\n * If an instrument is mobile, then the event will\n * have a new collectionID for every location update.\n */\nexport default class Event extends React.Component {\n  /**\n   * Event state stores the mode, a string, either \"begin\", \"collect\", or \"end\"\n   *  an Array of collections (json objects), an unique eventID generated by uuidv4,\n   * today, the string for today's date, selectedOption for react-select component,\n   * mobile - a boolean, true if the instrument is mobile, and an Object\n   * weatherEventData which stores metadata about the Event itself\n   */\n  state = {\n    mode: \"begin\", // \"collect\" or \"end\"\n    collections: [],\n    eventID: uuidv4(),\n    today: new Date().toJSON().slice(0,10),\n    selectedOption: null\n  };\n\n\n  /**\n   * Retreive saved cookie in case data submission was interrupted.\n   */\n  componentDidMount() {\n    try {\n      const savedState = JSON.parse(\n                          decodeURIComponent(\n                            document.cookie.replace(\n                              /(?:(?:^|.*;\\s*)eventState\\s*\\=\\s*([^;]*).*$)|^.*$/, \"$1\")\n                            )\n                          );\n      this.setState({...savedState, mode: \"begin\"});\n    }\n    catch(err) {\n      console.log(\"There is no saved state.\")\n    }\n  }\n\n  /**\n   * saveData pushes a new data object into the\n   * collections array and saves it to state.\n   * Each \"collection\" is an object from\n   * a specific state of the Form in Collection.\n   *\n   * @param data - a json object.\n   */\n  saveData = (data) => {\n    const { collections } = this.state;\n    collections.push(data);\n    this.setState( { collections } )\n    this.saveState();\n  }\n\n  /**\n   * saveState saves the current state to a browser cookie as\n   * an encodedURIComponent under eventState.\n   */\n  saveState() {\n    document.cookie = \"eventState=\" + encodeURIComponent(JSON.stringify(this.state));\n  }\n\n  /**\n   * given @param day - string, @param time - string,\n   * @return a utc time stamp\n   */\n  convertTime = (day, time) => {\n    return moment(`${day} ${time}`).utc().format()\n  }\n\n  /**\n   * changes the mode to \"collect\",\n   * saves initial event info, and if the instrument\n   * is mobile, adds the first collection to state\n   * @param event - the event fired from the form submit\n   */\n  handleKickoffSubmit = (event) => {\n    stop(event);\n\n    const event_info = {\n      eventStart: this.convertTime(event.target.eventstartday.value,\n                                  event.target.eventstarttime.value)\n    }\n\n    if(this.state.mobile) {\n      const initCollection = {...event_info,\n          dailyCollectionNumber: event.target.initID.value,\n          locationLat: event.target.lat.value,\n          locationLong: event.target.long.value\n        };\n      //this.setState({ initID: initCollection.collectionID })\n      this.saveData(initCollection);\n    }\n\n    const instrument = this.state.selectedOption.value;\n    const mobile = mobileInstruments.includes(instrument);\n\n    this.setState({\n      mode: \"collect\",\n      mobile: mobile,\n      weatherEventData: {\n        eventStart: event_info.eventStart,\n        instrument: instrument,\n        collector: event.target.collector.value,\n        collectorEmail: event.target.collectorEmail.value\n      }\n    });\n\n    this.saveState();\n    window.scrollTo(0,0);\n  }\n\n  /**\n   * stores the summary data and flips mode to \"end\".\n   * sent as function prop to EventSummaryForm\n   * @param finalWeatherEventData - a json object of the event summary\n   */\n  handleEventSummarySubmit = (finalWeatherEventData) => {\n    let weatherEventData = Object.assign(this.state.weatherEventData, finalWeatherEventData);\n    weatherEventData = {...weatherEventData, eventID: this.state.eventID};\n    this.setState({weatherEventData, mode: \"end\" })\n    this.saveState();\n    window.scrollTo(0,0);\n  }\n\n  /**\n   * Determines if the selectedOption is a mobile instrument\n   * based on the global list of mobile instruments.\n   * @param selectedOption - a string, comes from the react-select component\n   */\n  isMobile = (selectedOption) => {\n      mobileInstruments.includes(selectedOption.value)\n      ? this.setState({ mobile : true, selectedOption })\n      : this.setState({ mobile : false, selectedOption })\n  }\n\n  /**\n   * @return the UTC time now in a format that time input can\n   *   display\n   */\n  getTimeNow = () => {\n    return new moment().utc().toJSON().slice(11,16);\n  }\n\n  /**\n   *  Event renders different data collection forms depending on the\n   *  saved mode in state.\n   *  @return Instrument if mode \"begin\", Collection\n   *  if mode \"collect\", and a Summary if mode is \"end\".\n   */\n  render() {\n    const { selectedOption } = this.state;\n    return (\n      <div className=\"event\">\n        {this.state.mode === \"begin\" ?\n          ( <div className=\"kickoff\">\n              <form onSubmit={this.handleKickoffSubmit}>\n\n                <label htmlFor=\"collector\">Your name:</label>\n                <input type=\"text\" name=\"collector\" placeholder=\"Jane Doe\"/>\n                <label htmlFor=\"collectorEmail\">A good contact email:</label>\n                <input type=\"email\" name=\"collectorEmail\" placeholder=\"jane.doe@noaa.gov\"/>\n                <p>  Weather Event Start:</p>\n                <div className=\"datetime-input\">\n                  <input type=\"date\"\n                         aria-label={\"weather event start day\"}\n                         aria-required=\"true\"\n                         name=\"eventstartday\"\n                         min=\"2018-01-01\"\n                         required\n                         defaultValue={this.state.today}\n                  />\n                  <input type=\"time\"\n                         aria-label={\"weather event start time\"}\n                         aria-required=\"true\"\n                         name=\"eventstarttime\"\n                         min=\"00:00\"\n                         max=\"23:59\"\n                         required\n                         defaultValue={this.getTimeNow()}\n                  />\n                </div>\n\n                <label htmlFor=\"initID\">Daily Collection Number:</label>\n                <input type=\"number\" name=\"initID\" placeholder=\"1\"/>\n\n                <p>Instrument:</p>\n                <Select aria-label=\"Select an instrument\"\n                        aria-required=\"true\"\n                        onChange={this.isMobile}\n                        options={options} value={selectedOption}/>\n                {this.state.mobile && (\n                  <div>\n                    <input aria-label={\"lattitude\"}\n                           aria-required=\"true\"\n                           type=\"number\"\n                           name=\"lat\"\n                           placeholder=\"lat\" />\n                    <input type=\"number\"\n                           aria-label={\"longitude\"}\n                           aria-required=\"true\"\n                           name=\"long\"\n                           placeholder=\"long\" />\n                  </div>\n                )}\n\n                <input className=\"form-enter-data\" value=\"GO!\" type=\"submit\" />\n              </form>\n            </div>\n          )\n          : this.state.mode === \"collect\"\n\n            ? (<Collection\n                  convertTime={this.convertTime}\n                  saveData={this.saveData}\n                  mobile={this.state.mobile}\n                  eventID={this.state.eventID}\n                  timeNow={this.getTimeNow()}\n                  today={this.state.today}\n                  snackbar={this.props.snackbar}\n                  convertTime={this.convertTime}\n                  handleSubmit={this.handleEventSummarySubmit}\n                />)\n\n            : (<Summary eventOver={this.props.eventOver}\n                          weatherEventData={this.state.weatherEventData}\n                          collections={this.state.collections}\n                          snackbar={this.props.snackbar}\n                 />)\n        }\n      </div>\n    )\n  }\n }\n",
+    "content": "import React from 'react';\nimport PropTypes from 'prop-types';\nimport Collection from './Collection';\nimport EventSummaryForm from './EventSummaryForm';\nimport Summary from './Summary';\nimport uuidv4 from 'uuid/v4';\nimport moment from 'moment';\nimport Select from 'react-select';\n\n// stop the default event behavior on rendered form elements\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n// we do want a list of mobile radars because mobile radars need locations\nconst mobileInstruments = ['NOXP', 'TPD'];\n\n// options is required for the react-select component\nconst options = [\n   { value: 'KOUN', label: \"KOUN\" },\n   { value: 'NOXP', label: 'NOXP' },\n   { value: 'ATD', label: 'ATD' },\n   { value: 'TPD' , label: 'TDP' }];\n\n/**\n * An Event is home to the collections.\n * If an instrument is stationary, an Event will have\n * one collectionID for its collections.\n * If an instrument is mobile, then the event will\n * have a new collectionID for every location update.\n */\nexport default class Event extends React.Component {\n  /**\n   * Event state stores the mode {string}, either \"begin\", \"collect\", or \"end\"\n   *  an {Array<Object>} of collections, an unique eventID {string} generated by uuidv4,\n   * today {string} today's date, selectedOption {Object} for react-select component,\n   * mobile {boolean}, true if the instrument is mobile, and\n   * weatherEventData {Object} stores metadata about the Event itself\n   */\n  state = {\n    mode: \"begin\", // \"collect\" or \"end\"\n    collections: [],\n    eventID: uuidv4(),\n    today: new Date().toJSON().slice(0,10),\n    selectedOption: null\n  };\n\n\n  /**\n   * Retreive saved cookie in case data submission was interrupted.\n   */\n  componentDidMount() {\n    try {\n      const savedState = JSON.parse(\n                          decodeURIComponent(\n                            document.cookie.replace(\n                              /(?:(?:^|.*;\\s*)eventState\\s*\\=\\s*([^;]*).*$)|^.*$/, \"$1\")\n                            )\n                          );\n      this.setState({...savedState, mode: \"begin\"});\n    }\n    catch(err) {\n      console.log(\"There is no saved state.\")\n    }\n  }\n\n  /**\n   * saveData pushes a new data object into the\n   * collections array and saves it to state.\n   * Each \"collection\" is an object from\n   * a specific state of the Form in Collection.\n   *\n   * @param {Object} data - collection objects generated from Form.\n   */\n  saveData = (data) => {\n    const { collections } = this.state;\n    collections.push(data);\n    this.setState( { collections } )\n    this.saveState();\n  }\n\n  /**\n   * saveState saves the current state to a browser cookie as\n   * an encodedURIComponent under eventState.\n   */\n  saveState() {\n    document.cookie = \"eventState=\" + encodeURIComponent(JSON.stringify(this.state));\n  }\n\n  /**\n   * combines a given day and time into one UTC time stamp\n   * @param {string} day\n   * @param {string} time\n   * @return {string} a utc time stamp\n   */\n  convertTime = (day, time) => {\n    return moment(`${day} ${time}`).utc().format()\n  }\n\n  /**\n   * changes the mode to \"collect\",\n   * saves initial event info, and if the instrument\n   * is mobile, adds the first collection to state\n   * @param {event} event fired from the form submit\n   */\n  handleKickoffSubmit = (event) => {\n    stop(event);\n\n    const start = this.convertTime(event.target.eventstartday.value,\n                                  event.target.eventstarttime.value);\n    if(this.state.mobile) {\n      const initCollection = {\n          collectionStart: start,\n          eventID: this.state.eventID,\n          dailyCollectionNumber: event.target.initID.value,\n          locationLat: event.target.lat.value,\n          locationLong: event.target.long.value,\n          dailyCollectionNumber: 1,\n          collectionType: \"loc\"\n        };\n      //this.setState({ initID: initCollection.collectionID })\n      this.saveData(initCollection);\n    }\n\n    const instrument = this.state.selectedOption.value;\n    const mobile = mobileInstruments.includes(instrument);\n\n    this.setState({\n      mode: \"collect\",\n      mobile: mobile,\n      weatherEventData: {\n        eventStart: start,\n        instrument: instrument,\n        collector: event.target.collector.value,\n        collectorEmail: event.target.collectorEmail.value\n      }\n    });\n\n    this.saveState();\n    window.scrollTo(0,0);\n  }\n\n  /**\n   * stores the summary data and flips mode to \"end\".\n   * sent as function prop to EventSummaryForm\n   * @param {Object} finalWeatherEventData - the event summary\n   */\n  handleEventSummarySubmit = (finalWeatherEventData) => {\n    let weatherEventData = Object.assign(this.state.weatherEventData, finalWeatherEventData);\n    weatherEventData = {...weatherEventData, eventID: this.state.eventID};\n    this.setState({weatherEventData, mode: \"end\" })\n    this.saveState();\n    window.scrollTo(0,0);\n  }\n\n  /**\n   * Determines if the selectedOption is a mobile instrument\n   * based on the global list of mobile instruments.\n   * @param {{\"value\": \"string\", \"label\": \"string\" }} selectedOption\n   * - comes from the react-select component\n   */\n  isMobile = (selectedOption) => {\n      mobileInstruments.includes(selectedOption.value)\n      ? this.setState({ mobile : true, selectedOption })\n      : this.setState({ mobile : false, selectedOption })\n  }\n\n  /**\n   * @return {string} the UTC time now in a format that time input can\n   *   display\n   */\n  getTimeNow = () => {\n    return new moment().utc().toJSON().slice(11,16);\n  }\n\n  /**\n   *  Event renders different data collection forms depending on the\n   *  saved mode in state.\n   *  @return Instrument if mode \"begin\", Collection\n   *  if mode \"collect\", and a Summary if mode is \"end\".\n   */\n  render() {\n    const { selectedOption } = this.state;\n    return (\n      <div className=\"event\">\n        {this.state.mode === \"begin\" ?\n          ( <div className=\"kickoff\">\n              <form onSubmit={this.handleKickoffSubmit}>\n\n                <label htmlFor=\"collector\">Your name:</label>\n                <input type=\"text\" name=\"collector\" placeholder=\"Jane Doe\"/>\n                <label htmlFor=\"collectorEmail\">A good contact email:</label>\n                <input type=\"email\" name=\"collectorEmail\" placeholder=\"jane.doe@noaa.gov\"/>\n                <p>  Weather Event Start:</p>\n                <div className=\"datetime-input\">\n                  <input type=\"date\"\n                         aria-label={\"weather event start day\"}\n                         aria-required=\"true\"\n                         name=\"eventstartday\"\n                         min=\"2018-01-01\"\n                         required\n                         defaultValue={this.state.today}\n                  />\n                  <input type=\"time\"\n                         aria-label={\"weather event start time\"}\n                         aria-required=\"true\"\n                         name=\"eventstarttime\"\n                         min=\"00:00\"\n                         max=\"23:59\"\n                         required\n                         defaultValue={this.getTimeNow()}\n                  />\n                </div>\n\n                <label htmlFor=\"initID\">Daily Collection Number:</label>\n                <input type=\"number\" name=\"initID\" placeholder=\"1\"/>\n\n                <p>Instrument:</p>\n                <Select aria-label=\"Select an instrument\"\n                        aria-required=\"true\"\n                        onChange={this.isMobile}\n                        options={options} value={selectedOption}/>\n                {this.state.mobile && (\n                  <div>\n                    <input aria-label={\"lattitude\"}\n                           aria-required=\"true\"\n                           type=\"number\"\n                           name=\"lat\"\n                           placeholder=\"lat\"\n                           step=\".01\"/>\n                    <input type=\"number\"\n                           aria-label={\"longitude\"}\n                           aria-required=\"true\"\n                           name=\"long\"\n                           placeholder=\"long\"\n                           step=\".01\"/>\n                  </div>\n                )}\n\n                <input className=\"form-enter-data\" value=\"GO!\" type=\"submit\" />\n              </form>\n            </div>\n          )\n          : this.state.mode === \"collect\"\n\n            ? (<Collection\n                  convertTime={this.convertTime}\n                  saveData={this.saveData}\n                  mobile={this.state.mobile}\n                  eventID={this.state.eventID}\n                  timeNow={this.getTimeNow()}\n                  today={this.state.today}\n                  snackbar={this.props.snackbar}\n                  convertTime={this.convertTime}\n                  handleSubmit={this.handleEventSummarySubmit}\n                />)\n\n            : (<Summary eventOver={this.props.eventOver}\n                          weatherEventData={this.state.weatherEventData}\n                          collections={this.state.collections}\n                          snackbar={this.props.snackbar}\n                 />)\n        }\n      </div>\n    )\n  }\n }\n\n Event.propTypes = {\n\n }\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/Event.js",
     "access": "public",
@@ -1158,7 +1158,7 @@
     "importPath": "ops_coll_front/src/components/Event.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 10,
+    "lineNumber": 11,
     "undocument": true,
     "params": [
       {
@@ -1183,7 +1183,7 @@
     "importPath": "ops_coll_front/src/components/Event.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 12,
+    "lineNumber": 13,
     "undocument": true,
     "type": {
       "types": [
@@ -1204,7 +1204,7 @@
     "importPath": "ops_coll_front/src/components/Event.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 14,
+    "lineNumber": 16,
     "undocument": true,
     "type": {
       "types": [
@@ -1225,7 +1225,7 @@
     "importPath": "ops_coll_front/src/components/Event.js",
     "importStyle": "Event",
     "description": "An Event is home to the collections.\nIf an instrument is stationary, an Event will have\none collectionID for its collections.\nIf an instrument is mobile, then the event will\nhave a new collectionID for every location update.",
-    "lineNumber": 23,
+    "lineNumber": 29,
     "interface": false,
     "extends": [
       "react~React.Component"
@@ -1239,8 +1239,8 @@
     "static": false,
     "longname": "src/components/Event.js~Event#state",
     "access": "public",
-    "description": "Event state stores the mode, a string, either \"begin\", \"collect\", or \"end\"\n an Array of collections (json objects), an unique eventID generated by uuidv4,\ntoday, the string for today's date, selectedOption for react-select component,\nmobile - a boolean, true if the instrument is mobile, and an Object\nweatherEventData which stores metadata about the Event itself",
-    "lineNumber": 31,
+    "description": "Event state stores the mode {string}, either \"begin\", \"collect\", or \"end\"\n an {Array<Object>} of collections, an unique eventID {string} generated by uuidv4,\ntoday {string} today's date, selectedOption {Object} for react-select component,\nmobile {boolean}, true if the instrument is mobile, and\nweatherEventData {Object} stores metadata about the Event itself",
+    "lineNumber": 37,
     "type": {
       "types": [
         "*"
@@ -1258,7 +1258,7 @@
     "longname": "src/components/Event.js~Event#componentDidMount",
     "access": "public",
     "description": "Retreive saved cookie in case data submission was interrupted.",
-    "lineNumber": 43,
+    "lineNumber": 49,
     "params": [],
     "return": null
   },
@@ -1271,17 +1271,17 @@
     "longname": "src/components/Event.js~Event#saveData",
     "access": "public",
     "description": "saveData pushes a new data object into the\ncollections array and saves it to state.\nEach \"collection\" is an object from\na specific state of the Form in Collection.",
-    "lineNumber": 66,
+    "lineNumber": 72,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "Object"
         ],
         "spread": false,
         "optional": false,
         "name": "data",
-        "description": "a json object."
+        "description": "collection objects generated from Form."
       }
     ],
     "type": {
@@ -1301,7 +1301,7 @@
     "longname": "src/components/Event.js~Event#saveState",
     "access": "public",
     "description": "saveState saves the current state to a browser cookie as\nan encodedURIComponent under eventState.",
-    "lineNumber": 77,
+    "lineNumber": 83,
     "params": [],
     "return": null
   },
@@ -1313,12 +1313,34 @@
     "static": false,
     "longname": "src/components/Event.js~Event#convertTime",
     "access": "public",
-    "description": "given @param day - string, @param time - string,",
-    "lineNumber": 85,
+    "description": "combines a given day and time into one UTC time stamp",
+    "lineNumber": 93,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "day",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "time",
+        "description": ""
+      }
+    ],
     "return": {
       "nullable": null,
       "types": [
-        "*"
+        "string"
       ],
       "spread": false,
       "description": "a utc time stamp"
@@ -1338,17 +1360,17 @@
     "longname": "src/components/Event.js~Event#handleKickoffSubmit",
     "access": "public",
     "description": "changes the mode to \"collect\",\nsaves initial event info, and if the instrument\nis mobile, adds the first collection to state",
-    "lineNumber": 95,
+    "lineNumber": 103,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "event"
         ],
         "spread": false,
         "optional": false,
         "name": "event",
-        "description": "the event fired from the form submit"
+        "description": "fired from the form submit"
       }
     ],
     "type": {
@@ -1366,17 +1388,17 @@
     "longname": "src/components/Event.js~Event#handleEventSummarySubmit",
     "access": "public",
     "description": "stores the summary data and flips mode to \"end\".\nsent as function prop to EventSummaryForm",
-    "lineNumber": 136,
+    "lineNumber": 145,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "Object"
         ],
         "spread": false,
         "optional": false,
         "name": "finalWeatherEventData",
-        "description": "a json object of the event summary"
+        "description": "the event summary"
       }
     ],
     "type": {
@@ -1394,17 +1416,17 @@
     "longname": "src/components/Event.js~Event#isMobile",
     "access": "public",
     "description": "Determines if the selectedOption is a mobile instrument\nbased on the global list of mobile instruments.",
-    "lineNumber": 149,
+    "lineNumber": 159,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "{\"value\": \"string\", \"label\": \"string\" }"
         ],
         "spread": false,
         "optional": false,
         "name": "selectedOption",
-        "description": "a string, comes from the react-select component"
+        "description": "comes from the react-select component"
       }
     ],
     "type": {
@@ -1422,11 +1444,11 @@
     "longname": "src/components/Event.js~Event#getTimeNow",
     "access": "public",
     "description": "",
-    "lineNumber": 159,
+    "lineNumber": 169,
     "return": {
       "nullable": null,
       "types": [
-        "*"
+        "string"
       ],
       "spread": false,
       "description": "the UTC time now in a format that time input can\n  display"
@@ -1448,7 +1470,7 @@
     "longname": "src/components/Event.js~Event#render",
     "access": "public",
     "description": " Event renders different data collection forms depending on the\n saved mode in state.",
-    "lineNumber": 169,
+    "lineNumber": 179,
     "return": {
       "nullable": null,
       "types": [
@@ -1463,7 +1485,7 @@
     "__docId__": 91,
     "kind": "file",
     "name": "src/components/EventSummaryForm.js",
-    "content": "import React from 'react';\nimport moment from 'moment';\nimport cx from 'classnames';\nimport Button from '@material-ui/core/Button';\nimport { withStyles } from '@material-ui/core/styles';\nimport SaveIcon from '@material-ui/icons/Save';\n\n\n\n// prevent page from refreshing when form is submitted.\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n\n/**\n * EventSummaryForm stores the form elements necessary to\n *  summarize a weather event. It is the last step in the\n * data collection process before the preview in Summary.\n */\nexport default class EventSummaryForm extends React.Component {\n  /**\n   * state stores the checked radar signatures and event types\n   * (both arrays) and the strings typed in the \"other\" input when\n   * that option gets checked\n   */\n  state = {\n    radarSigs: [],\n    eventTypes: [],\n    radSigOtherChecked: false,\n    eventTypeOtherChecked: false\n  }\n\n  /**\n   * collects the checks from the radar signatures check form\n   *   is essentially identical to getEventType\n   *  @param event - the event from the input elements\n   */\n  getRadarSigs = (event) => {\n    // DRY this up! needs to be modularized\n    const target = event.target;\n    let { radarSigs } = this.state;\n    target.checked ?\n      ( radarSigs.push(target.value) ) :\n      ( radarSigs = radarSigs.filter( e => e !== target.value))\n    this.setState({ radarSigs });\n  }\n\n  /**\n   * collects the checks from the event types check form\n   *    is essentially identical to getRadarSigs\n   * @param event - the event from the input elements\n   */\n  getEventType = (event) => {\n    // DRY this up! needs to be modularized\n    const target = event.target;\n    let { eventTypes } = this.state;\n    target.checked ?\n      ( eventTypes.push(target.value) ) :\n      ( eventTypes = eventTypes.filter( e => e !== target.value))\n\n    this.setState({ eventTypes });\n  }\n\n  /**\n   * Updates the state of the other option in\n   *  all check forms\n   * @param event - the event from the input element\n   */\n  handleOtherChecks = (event) => {\n    const target = event.target;\n    const name = target.name;\n    this.setState({ [name] : target.checked });\n  }\n\n  /**\n   * stores the value of the new text input element that appears\n   * when the other option is checked on either checkform in state\n   *\n   * @param event - the event from the input element\n   */\n  handleOtherInput = (event) => {\n    stop(event);\n    this.setState({ [event.target.name] : event.target.value })\n  }\n\n  /**\n   * gathers values put in the \"other\" text input if they exist\n   *  and appends them to existing arrays for radarSigs and eventTypes\n   */\n  getOtherValues() {\n    let { radarSigs, eventTypes } = this.state;\n    this.state.radSigOtherValue && radarSigs.push(this.state.radSigOtherValue);\n    this.state.eventTypeOtherValue && eventTypes.push(this.state.eventTypeOtherValue);\n    this.setState({ radarSigs, eventTypes })\n  }\n\n  /**\n   * saves weather event summary data to the Event\n   *  @param event - the event from the input element\n   */\n  handleSubmit = (event) => {\n    stop(event);\n    const e = event.target;\n    this.getOtherValues();\n    const data = {\n      eventType: this.state.eventTypes.toString(),\n      eventRadarSigs: this.state.radarSigs.toString(),\n      eventEnd: this.props.convertTime(e.endDay.value, e.endTime.value),\n      eventDescription: e.summary.value\n    }\n    this.props.handleSubmit(data);\n  }\n\n  /**\n   * @return a fully accessible form including two checkforms,\n   *  date, time, and a text field for summary information.\n   *\n   */\n  render() {\n    return (\n      <div className=\"event-summary\">\n        <form onSubmit={this.handleSubmit}>\n        <h2>Weather Event Summary</h2>\n        <p>Enter the details of the weather event to summarize before submitting the data to storage. </p>\n        <div className=\"checkform\">\n            <h3>Radar Signatures</h3>\n            <div>\n              <label htmlFor=\"downburst\">\n                <input type=\"checkbox\" id=\"downburst\" onChange={this.getRadarSigs} value=\"downburst\" />\n                downburst\n              </label>\n\n              <label htmlFor=\"hail\">\n                <input type=\"checkbox\" id=\"hail\" onChange={this.getRadarSigs} value=\"hail\" />\n                hail\n              </label>\n\n              <label htmlFor=\"bow-echo\">\n                <input type=\"checkbox\" id=\"bow-echo\" onChange={this.getRadarSigs} value=\"bow echo\" />\n                bow echo\n              </label>\n\n              <label htmlFor=\"TDS\">\n                <input type=\"checkbox\" id=\"TDS\" onChange={this.getRadarSigs} value=\"TDS\" />\n                TDS\n              </label>\n\n              <label htmlFor=\"mesocyclone\">\n                <input type=\"checkbox\" id=\"mesocyclone\" onChange={this.getRadarSigs} value=\"mesocyclone\" />\n                mesocyclone\n              </label>\n\n              <label htmlFor=\"TVS\">\n                <input type=\"checkbox\" id=\"TVS\" onChange={this.getRadarSigs} value=\"TVS\" />\n                TVS\n              </label>\n\n              <label htmlFor=\"refreezing\">\n                <input type=\"checkbox\" id=\"refreezing\" onChange={this.getRadarSigs} value=\"refreezing\" />\n                refreezing (winter)\n              </label>\n              <label htmlFor=\"radSigOtherChecked\">\n                <input type=\"checkbox\" id=\"radSigOther\" name=\"radSigOtherChecked\" onChange={this.handleOtherChecks} value={this.state.radarSigsOtherValue} />\n                {this.state.radSigOtherChecked\n                  ?  (<input className=\"other-input\" type=\"text\" name=\"radSigOtherValue\" onChange={this.handleOtherInput}/>)\n                  :  (<React.Fragment>other</React.Fragment>)\n                }\n              </label>\n\n            </div>\n         </div>\n\n         <div className=\"checkform\">\n            <h3>Event Type</h3>\n              <div>\n                <label htmlFor=\"tornadic-supercell\">\n                  <input type=\"checkbox\" id=\"tornadic-supercell\" onChange={this.getEventType} value=\"tornadic-supercell\"  />\n                  tornadic supercell\n                </label>\n\n                <label htmlFor=\"nontornadic-supercell\">\n                  <input type=\"checkbox\" id=\"nontornadic-supercell\" onChange={this.getEventType} value=\"nontornadic-supercell\"  />\n                  nontornadic supercell\n                </label>\n\n                <label htmlFor=\"quasi-linear-convextive-system\">\n                  <input type=\"checkbox\"\n                         id=\"quasi-linear-convextive-system\"\n                         onChange={this.getEventType}\n                         value=\"quasi-linear convextive system\"\n                   />\n                  quasi-linear convextive system\n                </label>\n\n                <label htmlFor=\"mutilcell-storms\">\n                  <input type=\"checkbox\" id=\"mutilcell-storms\" onChange={this.getEventType} value=\"mutilcell storms\" />\n                  mutilcell storms\n                </label>\n\n                <label htmlFor=\"mesoscale-convective-system\">\n                  <input type=\"checkbox\" id=\"mesoscale-convective-system\" onChange={this.getEventType} value=\"mesoscale convective system\" />\n                  mesoscale convective system\n                </label>\n\n                <label htmlFor=\"heavy-rain\">\n                  <input type=\"checkbox\" id=\"heavy-rain\" onChange={this.getEventType} value=\"heavy rain/flash flooding\"  />\n                  heavy rain/flash flooding\n                </label>\n\n\n\n                <label htmlFor=\"winter-precipitation\">\n                  <input type=\"checkbox\" id=\"winter-precipitation\" onChange={this.getEventType} value=\"winter precipitation\" />\n                  winter precipitation\n                </label>\n\n                <label htmlFor=\"convective-initiation\">\n                  <input type=\"checkbox\" id=\"convective-initiation\" onChange={this.getEventType} value=\"convective initiation\" />\n                  convective initiation\n                </label>\n\n                <label htmlFor=\"eventTypeOtherChecked\">\n                  <input type=\"checkbox\" id=\"radSigOther\" name=\"eventTypeOtherChecked\" onChange={this.handleOtherChecks} value={this.state.eventTypeOtherValue} />\n                  {this.state.eventTypeOtherChecked\n                    ?  (<input className=\"other-input\" type=\"text\" name=\"eventTypeOtherValue\" onChange={this.handleOtherInput}/>)\n                    :  (<React.Fragment>other</React.Fragment>)\n                  }\n                </label>\n              </div>\n          </div>\n\n          <p>Weather Event End Day and Time:</p>\n          <div className=\"datetime-input\">\n            <input type=\"date\"\n                   aria-label={\"weather event end day\"}\n                   aria-required=\"true\"\n                   name=\"endDay\"\n                   min=\"2018-01-01\"\n                   required\n                   defaultValue={this.props.today}\n            />\n            <input type=\"time\"\n                   aria-label={\"weather event end time\"}\n                   aria-required=\"true\"\n                   name=\"endTime\"\n                   min=\"00:00\"\n                   max=\"23:59\"\n                   required\n                   defaultValue={this.props.timeNow}\n              />\n          </div>\n          <label htmlFor=\"summary\">Weather Event Summary:</label>\n          <textarea name=\"summary\"\n                    cols=\"50\"\n                    rows=\"10\"\n          />\n          <Button variant=\"contained\" size=\"small\" type=\"submit\" aria-label=\"Save Data\" aria-required=\"true\">\n            <SaveIcon  /> Save\n          </Button>\n        </form>\n      </div>\n    )\n  }\n }\n",
+    "content": "import React from 'react';\nimport PropsTypes from 'prop-types';\nimport moment from 'moment';\nimport cx from 'classnames';\nimport Button from '@material-ui/core/Button';\nimport { withStyles } from '@material-ui/core/styles';\nimport SaveIcon from '@material-ui/icons/Save';\n\n\n\n// prevent page from refreshing when form is submitted.\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n\n/**\n * EventSummaryForm stores the form elements necessary to\n *  summarize a weather event. It is the last step in the\n * data collection process before the preview in Summary.\n */\nexport default class EventSummaryForm extends React.Component {\n  /**\n   * state stores the checked radar signatures and event types\n   * (both arrays) and the strings typed in the \"other\" input when\n   * that option gets checked\n   */\n  state = {\n    radarSigs: [],\n    eventTypes: [],\n    radSigOtherChecked: false,\n    eventTypeOtherChecked: false\n  }\n\n  /**\n   * collects the checks from the radar signatures check form\n   *   is essentially identical to getEventType\n   *  @param {event} event - the event from the input elements\n   */\n  getRadarSigs = (event) => {\n    // DRY this up! needs to be modularized\n    const target = event.target;\n    let { radarSigs } = this.state;\n    target.checked ?\n      ( radarSigs.push(target.value) ) :\n      ( radarSigs = radarSigs.filter( e => e !== target.value))\n    this.setState({ radarSigs });\n  }\n\n  /**\n   * collects the checks from the event types check form\n   *    is essentially identical to getRadarSigs\n   * @param {event} event - the event from the input elements\n   */\n  getEventType = (event) => {\n    // DRY this up! needs to be modularized\n    const target = event.target;\n    let { eventTypes } = this.state;\n    target.checked ?\n      ( eventTypes.push(target.value) ) :\n      ( eventTypes = eventTypes.filter( e => e !== target.value))\n\n    this.setState({ eventTypes });\n  }\n\n  /**\n   * Updates the state of the other option in\n   *  all check forms\n   * @param {event} event - the event from the input element\n   */\n  handleOtherChecks = (event) => {\n    const target = event.target;\n    const name = target.name;\n    this.setState({ [name] : target.checked });\n  }\n\n  /**\n   * stores the value of the new text input element that appears\n   * when the other option is checked on either checkform in state\n   *\n   * @param {event} event - the event from the input element\n   */\n  handleOtherInput = (event) => {\n    stop(event);\n    this.setState({ [event.target.name] : event.target.value })\n  }\n\n  /**\n   * gathers values put in the \"other\" text input if they exist\n   *  and appends them to existing arrays for radarSigs and eventTypes\n   */\n  getOtherValues() {\n    let { radarSigs, eventTypes } = this.state;\n    this.state.radSigOtherValue && radarSigs.push(this.state.radSigOtherValue);\n    this.state.eventTypeOtherValue && eventTypes.push(this.state.eventTypeOtherValue);\n    this.setState({ radarSigs, eventTypes })\n  }\n\n  /**\n   * saves weather event summary data to the Event\n   *  @param {event} event - the event from the input element\n   */\n  handleSubmit = (event) => {\n    stop(event);\n    const e = event.target;\n    this.getOtherValues();\n    const data = {\n      eventType: this.state.eventTypes.toString(),\n      eventRadarSigs: this.state.radarSigs.toString(),\n      eventEnd: this.props.convertTime(e.endDay.value, e.endTime.value),\n      eventDescription: e.summary.value\n    }\n    this.props.handleSubmit(data);\n  }\n\n  /**\n   * @return {jsx} a fully accessible form including two checkforms,\n   *  date, time, and a text field for summary information.\n   *\n   */\n  render() {\n    return (\n      <div className=\"event-summary\">\n        <form onSubmit={this.handleSubmit}>\n        <h2>Weather Event Summary</h2>\n        <p>Enter the details of the weather event to summarize before submitting the data to storage. </p>\n        <div className=\"checkform\">\n            <h3>Radar Signatures</h3>\n            <div>\n              <label htmlFor=\"downburst\">\n                <input type=\"checkbox\" id=\"downburst\" onChange={this.getRadarSigs} value=\"downburst\" />\n                downburst\n              </label>\n\n              <label htmlFor=\"hail\">\n                <input type=\"checkbox\" id=\"hail\" onChange={this.getRadarSigs} value=\"hail\" />\n                hail\n              </label>\n\n              <label htmlFor=\"bow-echo\">\n                <input type=\"checkbox\" id=\"bow-echo\" onChange={this.getRadarSigs} value=\"bow echo\" />\n                bow echo\n              </label>\n\n              <label htmlFor=\"TDS\">\n                <input type=\"checkbox\" id=\"TDS\" onChange={this.getRadarSigs} value=\"TDS\" />\n                TDS\n              </label>\n\n              <label htmlFor=\"mesocyclone\">\n                <input type=\"checkbox\" id=\"mesocyclone\" onChange={this.getRadarSigs} value=\"mesocyclone\" />\n                mesocyclone\n              </label>\n\n              <label htmlFor=\"TVS\">\n                <input type=\"checkbox\" id=\"TVS\" onChange={this.getRadarSigs} value=\"TVS\" />\n                TVS\n              </label>\n\n              <label htmlFor=\"refreezing\">\n                <input type=\"checkbox\" id=\"refreezing\" onChange={this.getRadarSigs} value=\"refreezing\" />\n                refreezing (winter)\n              </label>\n              <label htmlFor=\"radSigOtherChecked\">\n                <input type=\"checkbox\" id=\"radSigOther\" name=\"radSigOtherChecked\" onChange={this.handleOtherChecks} value={this.state.radarSigsOtherValue} />\n                {this.state.radSigOtherChecked\n                  ?  (<input className=\"other-input\" type=\"text\" name=\"radSigOtherValue\" onChange={this.handleOtherInput}/>)\n                  :  (<React.Fragment>other</React.Fragment>)\n                }\n              </label>\n\n            </div>\n         </div>\n\n         <div className=\"checkform\">\n            <h3>Event Type</h3>\n              <div>\n                <label htmlFor=\"tornadic-supercell\">\n                  <input type=\"checkbox\" id=\"tornadic-supercell\" onChange={this.getEventType} value=\"tornadic-supercell\"  />\n                  tornadic supercell\n                </label>\n\n                <label htmlFor=\"nontornadic-supercell\">\n                  <input type=\"checkbox\" id=\"nontornadic-supercell\" onChange={this.getEventType} value=\"nontornadic-supercell\"  />\n                  nontornadic supercell\n                </label>\n\n                <label htmlFor=\"quasi-linear-convextive-system\">\n                  <input type=\"checkbox\"\n                         id=\"quasi-linear-convextive-system\"\n                         onChange={this.getEventType}\n                         value=\"quasi-linear convextive system\"\n                   />\n                  quasi-linear convextive system\n                </label>\n\n                <label htmlFor=\"mutilcell-storms\">\n                  <input type=\"checkbox\" id=\"mutilcell-storms\" onChange={this.getEventType} value=\"mutilcell storms\" />\n                  mutilcell storms\n                </label>\n\n                <label htmlFor=\"mesoscale-convective-system\">\n                  <input type=\"checkbox\" id=\"mesoscale-convective-system\" onChange={this.getEventType} value=\"mesoscale convective system\" />\n                  mesoscale convective system\n                </label>\n\n                <label htmlFor=\"heavy-rain\">\n                  <input type=\"checkbox\" id=\"heavy-rain\" onChange={this.getEventType} value=\"heavy rain/flash flooding\"  />\n                  heavy rain/flash flooding\n                </label>\n\n\n\n                <label htmlFor=\"winter-precipitation\">\n                  <input type=\"checkbox\" id=\"winter-precipitation\" onChange={this.getEventType} value=\"winter precipitation\" />\n                  winter precipitation\n                </label>\n\n                <label htmlFor=\"convective-initiation\">\n                  <input type=\"checkbox\" id=\"convective-initiation\" onChange={this.getEventType} value=\"convective initiation\" />\n                  convective initiation\n                </label>\n\n                <label htmlFor=\"eventTypeOtherChecked\">\n                  <input type=\"checkbox\" id=\"radSigOther\" name=\"eventTypeOtherChecked\" onChange={this.handleOtherChecks} value={this.state.eventTypeOtherValue} />\n                  {this.state.eventTypeOtherChecked\n                    ?  (<input className=\"other-input\" type=\"text\" name=\"eventTypeOtherValue\" onChange={this.handleOtherInput}/>)\n                    :  (<React.Fragment>other</React.Fragment>)\n                  }\n                </label>\n              </div>\n          </div>\n\n          <p>Weather Event End Day and Time:</p>\n          <div className=\"datetime-input\">\n            <input type=\"date\"\n                   aria-label={\"weather event end day\"}\n                   aria-required=\"true\"\n                   name=\"endDay\"\n                   min=\"2018-01-01\"\n                   required\n                   defaultValue={this.props.today}\n            />\n            <input type=\"time\"\n                   aria-label={\"weather event end time\"}\n                   aria-required=\"true\"\n                   name=\"endTime\"\n                   min=\"00:00\"\n                   max=\"23:59\"\n                   required\n                   defaultValue={this.props.timeNow}\n              />\n          </div>\n          <label htmlFor=\"summary\">Weather Event Summary:</label>\n          <textarea name=\"summary\"\n                    cols=\"50\"\n                    rows=\"10\"\n          />\n          <Button variant=\"contained\" size=\"small\" type=\"submit\" aria-label=\"Save Data\" aria-required=\"true\">\n            <SaveIcon  /> Save\n          </Button>\n        </form>\n      </div>\n    )\n  }\n }\n\n EventSummaryForm.propTypes = {\n   \n }\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/EventSummaryForm.js",
     "access": "public",
@@ -1484,7 +1506,7 @@
     "importPath": "ops_coll_front/src/components/EventSummaryForm.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 11,
+    "lineNumber": 12,
     "undocument": true,
     "params": [
       {
@@ -1509,7 +1531,7 @@
     "importPath": "ops_coll_front/src/components/EventSummaryForm.js",
     "importStyle": "EventSummaryForm",
     "description": "EventSummaryForm stores the form elements necessary to\n summarize a weather event. It is the last step in the\ndata collection process before the preview in Summary.",
-    "lineNumber": 18,
+    "lineNumber": 19,
     "interface": false,
     "extends": [
       "react~React.Component"
@@ -1524,7 +1546,7 @@
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#state",
     "access": "public",
     "description": "state stores the checked radar signatures and event types\n(both arrays) and the strings typed in the \"other\" input when\nthat option gets checked",
-    "lineNumber": 24,
+    "lineNumber": 25,
     "type": {
       "types": [
         "*"
@@ -1540,7 +1562,7 @@
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#getRadarSigs",
     "access": "public",
     "description": null,
-    "lineNumber": 36,
+    "lineNumber": 37,
     "undocument": true,
     "type": {
       "types": [
@@ -1557,12 +1579,12 @@
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#getEventType",
     "access": "public",
     "description": "collects the checks from the event types check form\n   is essentially identical to getRadarSigs",
-    "lineNumber": 51,
+    "lineNumber": 52,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "event"
         ],
         "spread": false,
         "optional": false,
@@ -1585,12 +1607,12 @@
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#handleOtherChecks",
     "access": "public",
     "description": "Updates the state of the other option in\n all check forms",
-    "lineNumber": 67,
+    "lineNumber": 68,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "event"
         ],
         "spread": false,
         "optional": false,
@@ -1613,12 +1635,12 @@
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#handleOtherInput",
     "access": "public",
     "description": "stores the value of the new text input element that appears\nwhen the other option is checked on either checkform in state",
-    "lineNumber": 79,
+    "lineNumber": 80,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "event"
         ],
         "spread": false,
         "optional": false,
@@ -1643,7 +1665,7 @@
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#getOtherValues",
     "access": "public",
     "description": "gathers values put in the \"other\" text input if they exist\n and appends them to existing arrays for radarSigs and eventTypes",
-    "lineNumber": 88,
+    "lineNumber": 89,
     "params": [],
     "return": null
   },
@@ -1656,12 +1678,12 @@
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#handleSubmit",
     "access": "public",
     "description": "saves weather event summary data to the Event",
-    "lineNumber": 99,
+    "lineNumber": 100,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "event"
         ],
         "spread": false,
         "optional": false,
@@ -1686,11 +1708,11 @@
     "longname": "src/components/EventSummaryForm.js~EventSummaryForm#render",
     "access": "public",
     "description": "",
-    "lineNumber": 117,
+    "lineNumber": 118,
     "return": {
       "nullable": null,
       "types": [
-        "*"
+        "jsx"
       ],
       "spread": false,
       "description": "a fully accessible form including two checkforms,\n date, time, and a text field for summary information."
@@ -1701,7 +1723,7 @@
     "__docId__": 102,
     "kind": "file",
     "name": "src/components/Form.js",
-    "content": "import React from 'react';\nimport cx from 'classnames';\nimport moment from 'moment';\nimport Select from 'react-select';\nimport Button from '@material-ui/core/Button';\nimport EventSummaryForm from './EventSummaryForm';\nimport { withStyles } from '@material-ui/core/styles';\nimport SaveIcon from '@material-ui/icons/Save';\n\n// a json list of all the counties in Oklahoma.\n// Required format for options in react-select component\nconst options = [\n  { value: 'Alfalfa', label: 'Alfalfa' },\n  { value: 'Atoka', label: 'Atoka' },\n  { value: 'Beaver', label: 'Beaver' },\n  { value: 'Beckham', label: 'Beckham' },\n  { value: 'Blaine', label: 'Blaine' },\n  { value: 'Bryan', label: 'Bryan' },\n  { value: 'Caddo', label: 'Caddo' },\n  { value: 'Canadian', label: 'Canadian' },\n  { value: 'Carter', label: 'Carter' },\n  { value: 'Cherokee', label: 'Cherokee' },\n  { value: 'Choctaw', label: 'Choctaw' },\n  { value: 'Cimarron', label: 'Cimarron' },\n  { value: 'Cleveland', label: 'Cleveland' },\n  { value: 'Coal', label: 'Coal' },\n  { value: 'Comanche', label: 'Comanche' },\n  { value: 'Cotton', label: 'Cotton' },\n  { value: 'Craig', label: 'Craig' },\n  { value: 'Creek', label: 'Creek' },\n  { value: 'Custer', label: 'Custer' },\n  { value: 'Delaware', label: 'Delaware' },\n  { value: 'Dewey', label: 'Dewey' },\n  { value: 'Ellis', label: 'Ellis' },\n  { value: 'Garfield', label: 'Garfield' },\n  { value: 'Garvin', label: 'Garvin' },\n  { value: 'Grady', label: 'Grady' },\n  { value: 'Grant', label: 'Grant' },\n  { value: 'Greer', label: 'Greer' },\n  { value: 'Harmon', label: 'Harmon' },\n  { value: 'Harper', label: 'Harper' },\n  { value: 'Haskell', label: 'Haskell' },\n  { value: 'Hughes', label: 'Hughes' },\n  { value: 'Jackson', label: 'Jackson' },\n  { value: 'Jefferson', label: 'Jefferson' },\n  { value: 'Johnston', label: 'Johnston' },\n  { value: 'Kay', label: 'Kay' },\n  { value: 'Kingfisher', label: 'Kingfisher' },\n  { value: 'Kiowa', label: 'Kiowa' },\n  { value: 'Latimer', label: 'Latimer' },\n  { value: 'Le Flore', label: 'Le' },\n  { value: 'Lincoln', label: 'Lincoln' },\n  { value: 'Logan', label: 'Logan' },\n  { value: 'Love', label: 'Love' },\n  { value: 'Major', label: 'Major' },\n  { value: 'Marshall', label: 'Marshall' },\n  { value: 'Mayes', label: 'Mayes' },\n  { value: 'McClain', label: 'McClain' },\n  { value: 'McCurtain', label: 'McCurtain' },\n  { value: 'McIntosh', label: 'McIntosh' },\n  { value: 'Murray', label: 'Murray' },\n  { value: 'Muskogee', label: 'Muskogee' },\n  { value: 'Noble', label: 'Noble' },\n  { value: 'Nowata', label: 'Nowata' },\n  { value: 'Okfuskee', label: 'Okfuskee' },\n  { value: 'Oklahoma', label: 'Oklahoma' },\n  { value: 'Okmulgee', label: 'Okmulgee' },\n  { value: 'Osage', label: 'Osage' },\n  { value: 'Ottawa', label: 'Ottawa' },\n  { value: 'Pawnee', label: 'Pawnee' },\n  { value: 'Payne', label: 'Payne' },\n  { value: 'Pittsburg', label: 'Pittsburg' },\n  { value: 'Pontotoc', label: 'Pontotoc' },\n  { value: 'Pottawatomie', label: 'Pottawatomie' },\n  { value: 'Pushmataha', label: 'Pushmataha' },\n  { value: 'Roger Mills', label: 'Roger' },\n  { value: 'Rogers', label: 'Rogers' },\n  { value: 'Seminole', label: 'Seminole' },\n  { value: 'Sequoyah', label: 'Sequoyah' },\n  { value: 'Stephens', label: 'Stephens' },\n  { value: 'Texas', label: 'Texas' },\n  { value: 'Tillman', label: 'Tillman' },\n  { value: 'Tulsa', label: 'Tulsa' },\n  { value: 'Wagoner', label: 'Wagoner' },\n  { value: 'Washington', label: 'Washington' },\n  { value: 'Washita', label: 'Washita' },\n  { value: 'Woods', label: 'Woods' },\n  { value: 'Woodward', label: 'Woodward' }\n]\n\n// prevent default form behavior so app doesn't refresh on submit\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n\n/**\n * Form is the master form where all the data is input.\n * Form renders only the fields needed based on the\n *  className prop.\n */\nexport default class Form extends React.Component {\n  /**\n   * state stores a Map of collection json objects and a\n   * selectedOption string for the sake of the react-select Component\n   * (especially important for the multi select option presented in Form)\n   */\n  state = {\n    submitted: new Map(),\n    selectedOption: null\n  }\n\n  /**\n   * When Component unmounts, we need to save all of the data we\n   * stored in this.state.submitted, the map of json objects\n   * made by each collection \"submit\"\n   */\n  componentWillUnmount() {\n    // we tack a collectionEnd property onto the end of each object in submitted Map\n    // and we set that value to now ... this will likely be a problem based on the timing\n    // of this operation\n    for(let [key, val] of this.state.submitted) {\n      this.props.saveData({...val, collectionEnd: new moment().utc().format()});\n    }\n  }\n\n  /**\n   * updates the array of options saved to state based on what is\n   * chosen by the user on the react-select component\n   * @param selectedOption - an array json with label and value sent\n   *   from react-select multi component\n   */\n  selectOnChange = (selectedOption) => {\n    this.setState({ selectedOption })\n  }\n\n  /**\n   * converts the array of json to a list in String format (what our DB requires)\n   * @return a String - flat list / array to string\n   */\n  getSelectedCounties() {\n    return this.state.selectedOption.map( option => ( option.value )).toString();\n  }\n\n  /**\n   * handleSubmit collects the data from the\n   *  form based on the className and sends it\n   *  up to parent. Also clears form.\n   * @param event - the default event from the submit button\n   */\n  handleSubmit = (event) => {\n    // prevent page refresh\n    stop(event);\n    // shorten this bc it will be repeated a lot\n    const e = event.target;\n\n    // we need start day and time for all collections\n    const startDay = e.startDay.value;\n    const startTime = e.startTime.value;\n\n    // data we'll append to for each collection type\n    const data = {\n      eventID: this.props.eventID,\n      collectionID: this.props.collectionID,\n      collectionStart: this.props.convertTime(startDay, startTime), // combine for one utc time stamp\n      collectionType: this.props.className,\n      dailyCollectionNumber: this.props.dailyCollectionNumber\n    }\n\n    /* what we want is to add the type of the event\n    // to the \"submitted\" map in state.\n    // Let the start time of the new collection of the same type\n    // that was previously saved be the end time for the older collection\n    // of this type. There can only be one one collection of a kind\n    // in the map, so we save it to Event as soon as we need to replace it.\n    */\n    let { submitted } = this.state;\n\n    if(submitted.get(data.collectionType)) {\n        submitted.get(data.collectionType).collectionEnd = data.collectionStart;\n        this.props.saveData(submitted.get(data.collectionType))\n    } // we have to save this collection or else we'll overwrite it\n\n    // based on className, store specific fields in object and saveData.\n    // not very DRY, is goal to condense this code if possible\n    if(this.props.className === \"loc\") {\n        const location = {...data,\n          collectionID: this.props.handleNewLocation(e.dcn.value),\n          dailyCollectionNumber: e.dcn.value,\n          locationLat: e.lat.value,\n          locationLong: e.long.value,\n        };\n        e.lat.value = \"\"; e.long.value = \"\";\n        submitted.set(data.collectionType, location);\n        this.setState({ submitted });\n    } else if(this.props.className === \"vcp\") {\n        const vcp = {...data, VCP: e.vcp.value};\n        e.vcp.value = \"\";\n        submitted.set(data.collectionType, vcp);\n        this.setState({ submitted });\n    } else if(this.props.className === \"sector\") {\n        const sector = {...data,\n          sectorStart: e.sectorStart.value,\n          sectorEnd: e.sectorEnd.value\n        };\n        e.sectorStart.value = \"\"; e.sectorEnd.value = \"\";\n        submitted.set(data.collectionType, sector);\n        this.setState({ submitted });\n    } else if (this.props.className === \"rhi\") {\n        const rhi = {...data,\n          rhiStart: e.rhiStart.value,\n          rhiEnd: e.rhiEnd.value,\n          azimuth: e.azimuth.value,\n          rhiRemark: e.rhiRemark.value\n        };\n        submitted.set(data.collectionType, rhi);\n        this.setState({ submitted });\n    } else if(this.props.className === \"warning\") {\n        const warning = {...data,\n          warningType: e.warningType.value,\n          warningCounties: this.getSelectedCounties(),\n          warningText: e.warningText.value\n        };\n        e.warningType.value = \"\";\n        e.warningText.value = \"\";\n        submitted.set(data.collectionType, warning);\n        this.setState({ submitted, selectedOption: null });\n    } else if(this.props.className === \"report\") {\n        const report = {...data, reportText: e.reportText.value };\n        e.reportText.value = \"\";\n        submitted.set(data.collectionType, report);\n        this.setState({ submitted });\n    } else {\n        // remark\n        const remark = {...data, remark: e.remark.value};\n        e.remark.value = \"\";\n        submitted.set(data.collectionType, remark);\n        this.setState({ submitted });\n    }\n    // w00t: show a green snackbar that says 'Data saved!'\n    this.props.snackbar('success', 'Data saved!');\n  }\n\n  //TODO: condense forms into components?\n  /**\n   * renders the form elements based on className prop (based on openTab from Collection)\n   * @return only the fields appropriate for the className\n   */\n  render() {\n    const { selectedOption } = this.state;\n    if(this.props.className !== \"eventEnd\") {\n      return (\n        <div className={cx(this.props.className)}>\n          <form onSubmit={this.handleSubmit}>\n             <p>{`Start Time for ${this.props.className}`}</p>\n             <div className=\"datetime-input\">\n                <input type=\"date\"\n                       aria-label={\"weather event start day\"}\n                       aria-required=\"true\"\n                       name=\"startDay\"\n                       min=\"2018-01-01\"\n                       defaultValue={this.props.today}\n                />\n                <input type=\"time\"\n                       aria-label={`start time for ${this.props.className}`}\n                       aria-required=\"true\"\n                       name=\"startTime\"\n                       min=\"00:00\"\n                       max=\"23:59\"\n                       required\n                       defaultValue={this.props.timeNow}\n                />\n              </div>\n             {this.props.className === \"loc\" && (\n               <div>\n                  <label htmlFor=\"\">Location Lattitude:</label>\n                  <input type=\"number\" name=\"lat\" />\n                  <label htmlFor=\"\">Location Longitude</label>\n                  <input type=\"number\" name=\"long\" />\n                  <label htmlFor=\"\">Daily Collection ID:</label>\n                  <input type=\"number\" name=\"dcn\" />\n               </div>\n             )}\n\n             {this.props.className === \"vcp\" && (\n               <div>\n                  <label htmlFor=\"vcp\">VCP:</label>\n                  <input type=\"text\" name=\"vcp\" />\n               </div>\n             )}\n\n             {this.props.className === \"sector\" && (\n               <div>\n                  <label htmlFor=\"sectorStart\">Start Sector (Left Edge):</label>\n                  <input type=\"number\" name=\"sectorStart\" placeholder={this.props.sectorStart}/>\n                  <label htmlFor=\"sectorEnd\">End Sector (Right Edge):</label>\n                  <input type=\"number\" name=\"sectorEnd\" placeholder={this.props.sectorEnd}/>\n               </div>\n             )}\n\n             {this.props.className === \"rhi\" && (\n               <div>\n                  <label htmlFor=\"rhiStart\">Start Edge (Top):</label>\n                  <input type=\"number\" name=\"rhiStart\" placeholder={this.props.rhiStart}/>\n                  <label htmlFor=\"rhiEnd\">End Edge (Bottom):</label>\n                  <input type=\"number\" name=\"rhiEnd\" placeholder={this.props.rhiEnd}/>\n                  <label htmlFor=\"azimuth\">Azimuth:</label>\n                  <input type=\"text\" name=\"azimuth\" />\n                  <label htmlFor=\"rhiRemark\">Remarks:</label>\n                  <textarea  cols=\"20\" rows=\"10\" name=\"rhiRemark\" />\n               </div>\n             )}\n\n             {this.props.className === \"warning\" && (\n               <div>\n                 <div className=\"external-link\">\n                   <a href=\"https://www.weather.gov\"\n                      target=\"_blank\"\n                      rel=\"noopener noreferrer\">\n                     {\"Lookup Warnings\"}\n                   </a>\n                 </div>\n                 <label htmlFor=\"warningType\">Warning Type:</label>\n                 <input name=\"warningType\" type=\"text\" placeholder=\"tornado? severe thunderstorm?\" />\n                  <p>Warning Counties:</p>\n                  <Select aria-label=\"select counties for warning\"\n                          aria-required=\"true\"\n                          options={options}\n                          isMulti={true}\n                          onChange={this.selectOnChange} value={selectedOption}\n                  />\n                  <br/>\n                  <br/>\n                  <label htmlFor=\"warningText\">Warning Text:</label>\n                  <textarea name=\"warningText\" cols=\"50\" rows=\"10\" placeholder={this.props.warningText}/>\n               </div>\n             )}\n\n             {this.props.className === \"report\" && (\n               <div>\n                  <div className=\"external-link\">\n                    <a href=\"https://www.spc.noaa.gov/climo/reports/today.html\"\n                       target=\"_blank\"\n                       rel=\"noopener noreferrer\">\n                      {\"Search Today's Reports\"}\n                    </a>\n                  </div>\n                  <label htmlFor=\"reportText\">Report Text:</label>\n                  <textarea name=\"reportText\" cols=\"50\" rows=\"10\" placeholder={this.props.reportText}/>\n               </div>\n             )}\n\n             {this.props.className === \"remark\" && (\n               <div>\n                  <label htmlFor=\"remark\">Remarks:</label>\n                  <textarea name=\"remark\" cols=\"50\" rows=\"10\" placeholder={this.props.remarks}/>\n               </div>\n             )}\n\n              <Button variant=\"contained\" size=\"small\" type=\"submit\" aria-label=\"Save Data\" aria-required=\"true\">\n                <SaveIcon  /> Save\n              </Button>\n\n          </form>\n        </div>\n      )\n    } else {\n      return(\n        <EventSummaryForm\n            convertTime={this.props.convertTime}\n            handleSubmit={this.props.handleSubmit}\n            timeNow={this.props.timeNow}\n            today={this.props.today}\n        />\n      )\n    }\n  }\n }\n",
+    "content": "import React from 'react';\nimport PropsTypes from 'prop-types';\nimport cx from 'classnames';\nimport moment from 'moment';\nimport Select from 'react-select';\nimport Button from '@material-ui/core/Button';\nimport EventSummaryForm from './EventSummaryForm';\nimport { withStyles } from '@material-ui/core/styles';\nimport SaveIcon from '@material-ui/icons/Save';\n\n// a json list of all the counties in Oklahoma.\n// Required format for options in react-select component\nconst options = [\n  { value: 'Alfalfa', label: 'Alfalfa' },\n  { value: 'Atoka', label: 'Atoka' },\n  { value: 'Beaver', label: 'Beaver' },\n  { value: 'Beckham', label: 'Beckham' },\n  { value: 'Blaine', label: 'Blaine' },\n  { value: 'Bryan', label: 'Bryan' },\n  { value: 'Caddo', label: 'Caddo' },\n  { value: 'Canadian', label: 'Canadian' },\n  { value: 'Carter', label: 'Carter' },\n  { value: 'Cherokee', label: 'Cherokee' },\n  { value: 'Choctaw', label: 'Choctaw' },\n  { value: 'Cimarron', label: 'Cimarron' },\n  { value: 'Cleveland', label: 'Cleveland' },\n  { value: 'Coal', label: 'Coal' },\n  { value: 'Comanche', label: 'Comanche' },\n  { value: 'Cotton', label: 'Cotton' },\n  { value: 'Craig', label: 'Craig' },\n  { value: 'Creek', label: 'Creek' },\n  { value: 'Custer', label: 'Custer' },\n  { value: 'Delaware', label: 'Delaware' },\n  { value: 'Dewey', label: 'Dewey' },\n  { value: 'Ellis', label: 'Ellis' },\n  { value: 'Garfield', label: 'Garfield' },\n  { value: 'Garvin', label: 'Garvin' },\n  { value: 'Grady', label: 'Grady' },\n  { value: 'Grant', label: 'Grant' },\n  { value: 'Greer', label: 'Greer' },\n  { value: 'Harmon', label: 'Harmon' },\n  { value: 'Harper', label: 'Harper' },\n  { value: 'Haskell', label: 'Haskell' },\n  { value: 'Hughes', label: 'Hughes' },\n  { value: 'Jackson', label: 'Jackson' },\n  { value: 'Jefferson', label: 'Jefferson' },\n  { value: 'Johnston', label: 'Johnston' },\n  { value: 'Kay', label: 'Kay' },\n  { value: 'Kingfisher', label: 'Kingfisher' },\n  { value: 'Kiowa', label: 'Kiowa' },\n  { value: 'Latimer', label: 'Latimer' },\n  { value: 'Le Flore', label: 'Le' },\n  { value: 'Lincoln', label: 'Lincoln' },\n  { value: 'Logan', label: 'Logan' },\n  { value: 'Love', label: 'Love' },\n  { value: 'Major', label: 'Major' },\n  { value: 'Marshall', label: 'Marshall' },\n  { value: 'Mayes', label: 'Mayes' },\n  { value: 'McClain', label: 'McClain' },\n  { value: 'McCurtain', label: 'McCurtain' },\n  { value: 'McIntosh', label: 'McIntosh' },\n  { value: 'Murray', label: 'Murray' },\n  { value: 'Muskogee', label: 'Muskogee' },\n  { value: 'Noble', label: 'Noble' },\n  { value: 'Nowata', label: 'Nowata' },\n  { value: 'Okfuskee', label: 'Okfuskee' },\n  { value: 'Oklahoma', label: 'Oklahoma' },\n  { value: 'Okmulgee', label: 'Okmulgee' },\n  { value: 'Osage', label: 'Osage' },\n  { value: 'Ottawa', label: 'Ottawa' },\n  { value: 'Pawnee', label: 'Pawnee' },\n  { value: 'Payne', label: 'Payne' },\n  { value: 'Pittsburg', label: 'Pittsburg' },\n  { value: 'Pontotoc', label: 'Pontotoc' },\n  { value: 'Pottawatomie', label: 'Pottawatomie' },\n  { value: 'Pushmataha', label: 'Pushmataha' },\n  { value: 'Roger Mills', label: 'Roger' },\n  { value: 'Rogers', label: 'Rogers' },\n  { value: 'Seminole', label: 'Seminole' },\n  { value: 'Sequoyah', label: 'Sequoyah' },\n  { value: 'Stephens', label: 'Stephens' },\n  { value: 'Texas', label: 'Texas' },\n  { value: 'Tillman', label: 'Tillman' },\n  { value: 'Tulsa', label: 'Tulsa' },\n  { value: 'Wagoner', label: 'Wagoner' },\n  { value: 'Washington', label: 'Washington' },\n  { value: 'Washita', label: 'Washita' },\n  { value: 'Woods', label: 'Woods' },\n  { value: 'Woodward', label: 'Woodward' }\n]\n\n// prevent default form behavior so app doesn't refresh on submit\nconst stop = (event) => (event.stopPropagation(), event.preventDefault());\n\n/**\n * Form is the master form where all the data is input.\n * Form renders only the fields needed based on the\n *  className prop.\n */\nexport default class Form extends React.Component {\n  /**\n   * state stores a Map of collection json objects and a\n   * selectedOption string for the sake of the react-select Component\n   * (especially important for the multi select option presented in Form)\n   */\n  state = {\n    submitted: new Map(),\n    selectedOption: null\n  }\n\n  /**\n   * When Component unmounts, we need to save all of the data we\n   * stored in this.state.submitted, the map of json objects\n   * made by each collection \"submit\"\n   */\n  componentWillUnmount() {\n    // we tack a collectionEnd property onto the end of each object in submitted Map\n    // and we set that value to now ... this will likely be a problem based on the timing\n    // of this operation\n    for(let [key, val] of this.state.submitted) {\n      this.props.saveData({...val, collectionEnd: new moment().utc().format()});\n    }\n  }\n\n  /**\n   * updates the array of options saved to state based on what is\n   * chosen by the user on the react-select component\n   * @param {Array<Object>} selectedOption - an array of json with label and value sent\n   *   from react-select multi component\n   */\n  selectOnChange = (selectedOption) => {\n    this.setState({ selectedOption })\n  }\n\n  /**\n   * converts the array of json to a list in String format (what our DB requires)\n   * @return {String} flat list / array to string\n   */\n  getSelectedCounties() {\n    return this.state.selectedOption.map( option => ( option.value )).toString();\n  }\n\n  /**\n   * handleSubmit collects the data from the\n   *  form based on the className and sends it\n   *  up to parent. Also clears form.\n   * @param {event} event - the default event from the submit button\n   */\n  handleSubmit = (event) => {\n    // prevent page refresh\n    stop(event);\n    // shorten this bc it will be repeated a lot\n    const e = event.target;\n\n    // we need start day and time for all collections\n    const startDay = e.startDay.value;\n    const startTime = e.startTime.value;\n\n    // data we'll append to for each collection type\n    const data = {\n      eventID: this.props.eventID,\n      collectionID: this.props.collectionID,\n      collectionStart: this.props.convertTime(startDay, startTime), // combine for one utc time stamp\n      collectionType: this.props.className,\n      dailyCollectionNumber: this.props.dailyCollectionNumber\n    }\n\n    /* what we want is to add the type of the event\n    // to the \"submitted\" map in state.\n    // Let the start time of the new collection of the same type\n    // that was previously saved be the end time for the older collection\n    // of this type. There can only be one one collection of a kind\n    // in the map, so we save it to Event as soon as we need to replace it.\n    */\n    let { submitted } = this.state;\n\n    if(submitted.get(data.collectionType)) {\n        submitted.get(data.collectionType).collectionEnd = data.collectionStart;\n        this.props.saveData(submitted.get(data.collectionType))\n    } // we have to save this collection or else we'll overwrite it\n\n    // based on className, store specific fields in object and saveData.\n    // not very DRY, is goal to condense this code if possible\n    if(this.props.className === \"loc\") {\n        const location = {...data,\n          collectionID: this.props.handleNewLocation(e.dcn.value),\n          dailyCollectionNumber: e.dcn.value,\n          locationLat: e.lat.value,\n          locationLong: e.long.value,\n        };\n        e.lat.value = \"\"; e.long.value = \"\";\n        submitted.set(data.collectionType, location);\n        this.setState({ submitted });\n    } else if(this.props.className === \"vcp\") {\n        const vcp = {...data, VCP: e.vcp.value};\n        e.vcp.value = \"\";\n        submitted.set(data.collectionType, vcp);\n        this.setState({ submitted });\n    } else if(this.props.className === \"sector\") {\n        const sector = {...data,\n          sectorStart: e.sectorStart.value,\n          sectorEnd: e.sectorEnd.value\n        };\n        e.sectorStart.value = \"\"; e.sectorEnd.value = \"\";\n        submitted.set(data.collectionType, sector);\n        this.setState({ submitted });\n    } else if (this.props.className === \"rhi\") {\n        const rhi = {...data,\n          rhiStart: e.rhiStart.value,\n          rhiEnd: e.rhiEnd.value,\n          azimuth: e.azimuth.value,\n          rhiRemark: e.rhiRemark.value\n        };\n        submitted.set(data.collectionType, rhi);\n        this.setState({ submitted });\n    } else if(this.props.className === \"warning\") {\n        const warning = {...data,\n          warningType: e.warningType.value,\n          warningCounties: this.getSelectedCounties(),\n          warningText: e.warningText.value\n        };\n        e.warningType.value = \"\";\n        e.warningText.value = \"\";\n        submitted.set(data.collectionType, warning);\n        this.setState({ submitted, selectedOption: null });\n    } else if(this.props.className === \"report\") {\n        const report = {...data, reportText: e.reportText.value };\n        e.reportText.value = \"\";\n        submitted.set(data.collectionType, report);\n        this.setState({ submitted });\n    } else {\n        // remark\n        const remark = {...data, remark: e.remark.value};\n        e.remark.value = \"\";\n        submitted.set(data.collectionType, remark);\n        this.setState({ submitted });\n    }\n    // w00t: show a green snackbar that says 'Data saved!'\n    this.props.snackbar('success', 'Data saved!');\n  }\n\n  /**\n   * renders the form elements based on className prop (based on openTab from Collection)\n   * @return {jsx} only the fields appropriate for the className\n   */\n  render() {\n    const { selectedOption } = this.state;\n    if(this.props.className !== \"eventEnd\") {\n      return (\n        <div className={cx(this.props.className)}>\n          <form onSubmit={this.handleSubmit}>\n             <p>{`Start Time for ${this.props.className}`}</p>\n             <div className=\"datetime-input\">\n                <input type=\"date\"\n                       aria-label={\"weather event start day\"}\n                       aria-required=\"true\"\n                       name=\"startDay\"\n                       min=\"2018-01-01\"\n                       defaultValue={this.props.today}\n                />\n                <input type=\"time\"\n                       aria-label={`start time for ${this.props.className}`}\n                       aria-required=\"true\"\n                       name=\"startTime\"\n                       min=\"00:00\"\n                       max=\"23:59\"\n                       required\n                       defaultValue={this.props.timeNow}\n                />\n              </div>\n             {this.props.className === \"loc\" && (\n               <div>\n                  <label htmlFor=\"\">Location Lattitude:</label>\n                  <input type=\"number\" name=\"lat\" step=\".01\"/>\n                  <label htmlFor=\"\">Location Longitude</label>\n                  <input type=\"number\" name=\"long\" step=\".01\"/>\n                  <label htmlFor=\"\">Daily Collection ID:</label>\n                  <input type=\"number\" name=\"dcn\" />\n               </div>\n             )}\n\n             {this.props.className === \"vcp\" && (\n               <div>\n                  <label htmlFor=\"vcp\">VCP:</label>\n                  <input type=\"text\" name=\"vcp\" />\n               </div>\n             )}\n\n             {this.props.className === \"sector\" && (\n               <div>\n                  <label htmlFor=\"sectorStart\">Start Sector (Left Edge):</label>\n                  <input type=\"number\" name=\"sectorStart\" step=\".01\"/>\n                  <label htmlFor=\"sectorEnd\">End Sector (Right Edge):</label>\n                  <input type=\"number\" name=\"sectorEnd\" step=\".01\"/>\n               </div>\n             )}\n\n             {this.props.className === \"rhi\" && (\n               <div>\n                  <label htmlFor=\"rhiStart\">Start Edge (Bottom):</label>\n                  <input type=\"number\" name=\"rhiStart\" step=\".01\"/>\n                  <label htmlFor=\"rhiEnd\">End Edge (Top):</label>\n                  <input type=\"number\" name=\"rhiEnd\" step=\".01\"/>\n                  <label htmlFor=\"azimuth\">Azimuth:</label>\n                  <input type=\"text\" name=\"azimuth\" />\n                  <label htmlFor=\"rhiRemark\">Remarks:</label>\n                  <textarea  cols=\"20\" rows=\"10\" name=\"rhiRemark\" />\n               </div>\n             )}\n\n             {this.props.className === \"warning\" && (\n               <div>\n                 <div className=\"external-link\">\n                   <a href=\"https://www.weather.gov\"\n                      target=\"_blank\"\n                      rel=\"noopener noreferrer\">\n                     {\"Lookup Warnings\"}\n                   </a>\n                 </div>\n                 <label htmlFor=\"warningType\">Warning Type:</label>\n                 <input name=\"warningType\" type=\"text\" placeholder=\"tornado? severe thunderstorm?\" />\n                  <p>Warning Counties:</p>\n                  <Select aria-label=\"select counties for warning\"\n                          aria-required=\"true\"\n                          options={options}\n                          isMulti={true}\n                          onChange={this.selectOnChange} value={selectedOption}\n                  />\n                  <br/>\n                  <br/>\n                  <label htmlFor=\"warningText\">Warning Text:</label>\n                  <textarea name=\"warningText\" cols=\"50\" rows=\"10\" placeholder={this.props.warningText}/>\n               </div>\n             )}\n\n             {this.props.className === \"report\" && (\n               <div>\n                  <div className=\"external-link\">\n                    <a href=\"https://www.spc.noaa.gov/climo/reports/today.html\"\n                       target=\"_blank\"\n                       rel=\"noopener noreferrer\">\n                      {\"Search Today's Reports\"}\n                    </a>\n                  </div>\n                  <label htmlFor=\"reportText\">Report Text:</label>\n                  <textarea name=\"reportText\" cols=\"50\" rows=\"10\" placeholder={this.props.reportText}/>\n               </div>\n             )}\n\n             {this.props.className === \"remark\" && (\n               <div>\n                  <label htmlFor=\"remark\">Remarks:</label>\n                  <textarea name=\"remark\" cols=\"50\" rows=\"10\" placeholder={this.props.remarks}/>\n               </div>\n             )}\n\n              <Button variant=\"contained\" size=\"small\" type=\"submit\" aria-label=\"Save Data\" aria-required=\"true\">\n                <SaveIcon  /> Save\n              </Button>\n\n          </form>\n        </div>\n      )\n    } else {\n      return(\n        <EventSummaryForm\n            convertTime={this.props.convertTime}\n            handleSubmit={this.props.handleSubmit}\n            timeNow={this.props.timeNow}\n            today={this.props.today}\n        />\n      )\n    }\n  }\n }\n\n Form.propTypes = {\n   \n }\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/Form.js",
     "access": "public",
@@ -1720,7 +1742,7 @@
     "importPath": "ops_coll_front/src/components/Form.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 12,
+    "lineNumber": 13,
     "undocument": true,
     "type": {
       "types": [
@@ -1743,7 +1765,7 @@
     "importPath": "ops_coll_front/src/components/Form.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 92,
+    "lineNumber": 93,
     "undocument": true,
     "params": [
       {
@@ -1768,7 +1790,7 @@
     "importPath": "ops_coll_front/src/components/Form.js",
     "importStyle": "Form",
     "description": "Form is the master form where all the data is input.\nForm renders only the fields needed based on the\n className prop.",
-    "lineNumber": 99,
+    "lineNumber": 100,
     "interface": false,
     "extends": [
       "react~React.Component"
@@ -1783,7 +1805,7 @@
     "longname": "src/components/Form.js~Form#state",
     "access": "public",
     "description": "state stores a Map of collection json objects and a\nselectedOption string for the sake of the react-select Component\n(especially important for the multi select option presented in Form)",
-    "lineNumber": 105,
+    "lineNumber": 106,
     "type": {
       "types": [
         "*"
@@ -1801,7 +1823,7 @@
     "longname": "src/components/Form.js~Form#componentWillUnmount",
     "access": "public",
     "description": null,
-    "lineNumber": 115,
+    "lineNumber": 116,
     "undocument": true,
     "params": [],
     "return": null
@@ -1815,17 +1837,17 @@
     "longname": "src/components/Form.js~Form#selectOnChange",
     "access": "public",
     "description": "updates the array of options saved to state based on what is\nchosen by the user on the react-select component",
-    "lineNumber": 130,
+    "lineNumber": 131,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "Array<Object>"
         ],
         "spread": false,
         "optional": false,
         "name": "selectedOption",
-        "description": "an array json with label and value sent\n  from react-select multi component"
+        "description": "an array of json with label and value sent\n  from react-select multi component"
       }
     ],
     "type": {
@@ -1845,14 +1867,14 @@
     "longname": "src/components/Form.js~Form#getSelectedCounties",
     "access": "public",
     "description": "converts the array of json to a list in String format (what our DB requires)",
-    "lineNumber": 138,
+    "lineNumber": 139,
     "return": {
       "nullable": null,
       "types": [
-        "*"
+        "String"
       ],
       "spread": false,
-      "description": "a String - flat list / array to string"
+      "description": "flat list / array to string"
     },
     "params": []
   },
@@ -1865,12 +1887,12 @@
     "longname": "src/components/Form.js~Form#handleSubmit",
     "access": "public",
     "description": "handleSubmit collects the data from the\n form based on the className and sends it\n up to parent. Also clears form.",
-    "lineNumber": 148,
+    "lineNumber": 149,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "event"
         ],
         "spread": false,
         "optional": false,
@@ -1899,7 +1921,7 @@
     "return": {
       "nullable": null,
       "types": [
-        "*"
+        "jsx"
       ],
       "spread": false,
       "description": "only the fields appropriate for the className"
@@ -1910,7 +1932,7 @@
     "__docId__": 112,
     "kind": "file",
     "name": "src/components/Summary.js",
-    "content": "import React, { Fragment } from 'react';\nimport ReactJson from 'react-json-view';\nimport CollectionSummaryRow from './CollectionSummaryRow';\nimport BigYellowButton from './BigYellowButton';\n\n// TODO: add a way to edit the data\n\n\n/**\n * Summary is a way to see the saved data submitted,\n * edit it, and submit it.\n */\nexport default class Summary extends React.Component {\n  /**\n   * state stores a count of open CollectionSummaryRows as editing, a number\n   * as well as the collections prop object and weatherEventData prop object\n   */\n  state = { editing: 0 };\n\n  /**\n   * when component mounts, put collection and weather event data\n   * in state.\n   */\n  componentDidMount() {\n    const { collections } = this.props;\n    const { weatherEventData } = this.props;\n    this.setState({ collections, weatherEventData });\n\n  }\n\n  /**\n   * Keeps track of how many CollectionSummaryRows are open\n   * for editing. True increases count, false lowers count.\n   * @param bool - a True or False value - true if CollectionSummaryRows are\n   *  opened for editing, false if they are closed\n   */\n  isEditing = (bool) => {\n    let { editing } = this.state;\n    bool ? editing++ : editing--;\n    this.setState({ editing })\n  }\n\n  /**\n   *  handleSubmit will send the full state of this weather event\n   *  to storage. Send Thankyou to app. Submits this Event.\n   *\n   *  If editable fields are open, a yellow snackbar will appear\n   *  with a helpful message to the user instead of submitting incomplete\n   *   information to the DB.\n   */\n  handleSubmit = () => {\n    if(this.state.editing) {\n      this.props.snackbar('warning', 'Press enter on the open text field so your data gets saved before submitting again.');\n    } else {\n\n      document.cookie = \"eventState=;expires=Thu, 01 Jan 1970 00:00:00 GMT\";\n      this.props.eventOver(\"Your data has been collected!\");\n      this.sendDataToDatabase(this.state.weatherEventData, \"event\");\n      let cid;\n\n      this.state.collections.map( (c, i) => {\n        if(c.id !== c.collectionID) {\n          cid = c.collectionID;\n        }\n        if(c.collectionType === \"loc\") {\n          cid = c.collectionID, this.sendDataToDatabase(c, \"collection\");\n        } else {\n          this.sendDataToDatabase(c, c.collectionType);\n        }\n      });\n      window.scrollTo(0,0);\n    }\n  }\n\n  /**\n   * @param stringInCamelCase - a string with uppercase letters\n   *   adjacent to lowercase letters\n   * @return a string - the value of stringInCamelCase in all lowercase\n   *   and spaces between words as indicated by camel cases\n   */\n  removeCamelCase(stringInCamelCase) {\n    return stringInCamelCase.replace(\n      /[a-z][A-Z]/g, (letters, i) => (\n        letters[0] + \" \" + letters[1].toLowerCase()\n      )\n    );\n  }\n\n  /**\n   * Sends information to permanent storage.\n   * @param jsonPayload an object that will be sent\n   * to the database stringified\n   * @param type a string that is the collection type\n   * or \"event\" that corresponds to a php file\n   */\n  sendDataToDatabase = (jsonPayload, type) => {\n    fetch(`./api/${type}.php`, {\n      method: \"POST\",\n      mode: \"same-origin\",\n      credentials: \"same-origin\",\n      headers: {\n        \"Content-Type\": \"application/json\"\n      },\n      body: JSON.stringify(jsonPayload)\n    })\n  }\n\n  /**\n   * Creates an array of renderable components based on data passed to this\n   * component via props that will allow users to edit data before submitting.\n   *\n   * @param object - a json object we iterate to create CollectionSummaryRows\n   * @param array - an optional array of components we can append to, else start from scratch\n   * @return an array of CollectionSummaryRow components\n   */\n  getCollectionSummaryRows = (object, array) => {\n    let newArray = array || [];\n    for (var property in object) {\n      if (property.slice(-2) !== \"ID\" && property !== \"\" && property !== \"//\") {\n        newArray.push(<CollectionSummaryRow\n                    fn={this.isEditing}\n                    attr={this.removeCamelCase(property)}\n                    value={object[property]}/>);\n      }\n    }\n    return newArray;\n  }\n\n  /**\n   * @return a stylish, editable table presenting the event data and\n   * collection data ready to be submitted to permanent storage featuring\n   * a BigYellowButton signaling the user to submit when ready.\n   */\n  render() {\n    if(this.state.collections) {\n      const collectionsDisplay = this.state.collections.map((c, i) => {\n          let rows = [];\n          rows.push(<h4>{c[\"collectionType\"]}</h4>);\n          rows = this.getCollectionSummaryRows(c, rows);\n          return (\n            <Fragment>\n              {rows}\n            </Fragment>\n          );\n      });\n      const eventDisplay = this.getCollectionSummaryRows(this.state.weatherEventData);\n      return (\n        <div>\n          <h2>How does your data look?</h2>\n\n          <h3>Event Summary</h3>\n          {eventDisplay}\n\n          <br/>\n          <br/>\n\n          <h3>Individual Collections</h3>\n          <div className=\"collections-summary\" >\n            {collectionsDisplay}\n          </div>\n\n          <BigYellowButton\n              handleButtonPress={this.handleSubmit}\n              buttonText=\"It's ALL GOOD!\" />\n        </div>\n      )\n    } else {\n      return ( <div/>)\n    }\n  }\n}\n",
+    "content": "import React, { Fragment } from 'react';\nimport PropsTypes from 'prop-types';\nimport ReactJson from 'react-json-view';\nimport CollectionSummaryRow from './CollectionSummaryRow';\nimport BigYellowButton from './BigYellowButton';\n\n\n/**\n * Summary is a way to see the saved data submitted,\n * edit it, and submit it.\n */\nexport default class Summary extends React.Component {\n  /**\n   * state stores a count of open CollectionSummaryRows as editing, a number\n   * as well as the collections prop object and weatherEventData prop object\n   */\n  state = { editing: 0 };\n\n  /**\n   * when component mounts, put collection and weather event data\n   * in state.\n   */\n  componentDidMount() {\n    const { collections } = this.props;\n    const { weatherEventData } = this.props;\n    this.setState({ collections, weatherEventData });\n\n  }\n\n  /**\n   * Keeps track of how many CollectionSummaryRows are open\n   * for editing. True increases count, false lowers count.\n   * @param {boolean} bool - true if CollectionSummaryRows are\n   *  opened for editing, false if they are closed\n   */\n  isEditing = (bool) => {\n    let { editing } = this.state;\n    bool ? editing++ : editing--;\n    this.setState({ editing })\n  }\n\n  /**\n   *  handleSubmit will send the full state of this weather event\n   *  to storage. Send Thankyou to app. Submits this Event.\n   *\n   *  If editable fields are open, a yellow snackbar will appear\n   *  with a helpful message to the user instead of submitting incomplete\n   *   information to the DB.\n   */\n  handleSubmit = () => {\n    if(this.state.editing) {\n\n      this.props.snackbar('warning', 'Press enter on the open text field so your data gets saved before submitting again.');\n\n    } else {\n\n      document.cookie = \"eventState=;expires=Thu, 01 Jan 1970 00:00:00 GMT\";\n      this.props.eventOver(\"Your data has been collected!\");\n      const allData = {...this.state.weatherEventData, collections: this.state.collections}\n      this.sendDataToDatabase(allData);\n\n      window.scrollTo(0,0);\n    }\n  }\n\n  /**\n   * @param {string} stringInCamelCase - a string with uppercase letters\n   *   adjacent to lowercase letters\n   * @return {string} the value of stringInCamelCase in all lowercase\n   *   and spaces between words as indicated by camel cases\n   */\n  removeCamelCase(stringInCamelCase) {\n    return stringInCamelCase.replace(\n      /[a-z][A-Z]/g, (letters, i) => (\n        letters[0] + \" \" + letters[1].toLowerCase()\n      )\n    );\n  }\n\n  /**\n   * Sends information to permanent storage.\n   * @param {Object} jsonPayload - an object that will be sent\n   * to the database stringified\n   */\n  sendDataToDatabase = (jsonPayload) => {\n    fetch('./api/event.php', {\n      method: \"POST\",\n      mode: \"same-origin\",\n      credentials: \"same-origin\",\n      headers: {\n        \"Content-Type\": \"application/json\"\n      },\n      body: JSON.stringify(jsonPayload)\n    })\n  }\n\n  /**\n   * Creates an array of renderable components based on data passed to this\n   * component via props that will allow users to edit data before submitting.\n   *\n   * @param {Object} object - a json object we iterate to create CollectionSummaryRows\n   * @param {Array<Object>} array - an optional array of components we can append to, else start from scratch\n   * @return {Array} an array of CollectionSummaryRow components\n   */\n  getCollectionSummaryRows = (object, array) => {\n    let newArray = array || [];\n    for (var property in object) {\n      if (property.slice(-2) !== \"ID\" && property !== \"\" && property !== \"//\") {\n        newArray.push(<CollectionSummaryRow\n                    fn={this.isEditing}\n                    attr={this.removeCamelCase(property)}\n                    value={object[property]}/>);\n      }\n    }\n    return newArray;\n  }\n\n  /**\n   * @return {jsx} editable table presenting the event data and\n   * collection data ready to be submitted to permanent storage featuring\n   * a BigYellowButton signaling the user to submit when ready.\n   */\n  render() {\n    if(this.state.collections) {\n      const collectionsDisplay = this.state.collections.map((c, i) => {\n          let rows = [];\n          rows.push(<h4>{c[\"collectionType\"]}</h4>);\n          rows = this.getCollectionSummaryRows(c, rows);\n          return (\n            <Fragment>\n              {rows}\n            </Fragment>\n          );\n      });\n\n      const eventDisplay = this.getCollectionSummaryRows(this.state.weatherEventData);\n\n      return (\n        <div>\n          <h2>How does your data look?</h2>\n\n          <h3>Event Summary</h3>\n          {eventDisplay}\n\n          <br/>\n          <br/>\n\n          <h3>Individual Collections</h3>\n          <div className=\"collections-summary\" >\n            {collectionsDisplay}\n          </div>\n\n          <BigYellowButton\n              handleButtonPress={this.handleSubmit}\n              buttonText=\"It's ALL GOOD!\" />\n        </div>\n      )\n    } else {\n      return ( <div/>)\n    }\n  }\n}\n\nSummary.propTypes = {\n  \n}\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/Summary.js",
     "access": "public",
@@ -1929,7 +1951,7 @@
     "importPath": "ops_coll_front/src/components/Summary.js",
     "importStyle": "Summary",
     "description": "Summary is a way to see the saved data submitted,\nedit it, and submit it.",
-    "lineNumber": 13,
+    "lineNumber": 12,
     "interface": false,
     "extends": [
       "react~React.Component"
@@ -1944,7 +1966,7 @@
     "longname": "src/components/Summary.js~Summary#state",
     "access": "public",
     "description": "state stores a count of open CollectionSummaryRows as editing, a number\nas well as the collections prop object and weatherEventData prop object",
-    "lineNumber": 18,
+    "lineNumber": 17,
     "type": {
       "types": [
         "*"
@@ -1962,7 +1984,7 @@
     "longname": "src/components/Summary.js~Summary#componentDidMount",
     "access": "public",
     "description": "when component mounts, put collection and weather event data\nin state.",
-    "lineNumber": 24,
+    "lineNumber": 23,
     "params": [],
     "return": null
   },
@@ -1975,17 +1997,17 @@
     "longname": "src/components/Summary.js~Summary#isEditing",
     "access": "public",
     "description": "Keeps track of how many CollectionSummaryRows are open\nfor editing. True increases count, false lowers count.",
-    "lineNumber": 37,
+    "lineNumber": 36,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "boolean"
         ],
         "spread": false,
         "optional": false,
         "name": "bool",
-        "description": "a True or False value - true if CollectionSummaryRows are\n opened for editing, false if they are closed"
+        "description": "true if CollectionSummaryRows are\n opened for editing, false if they are closed"
       }
     ],
     "type": {
@@ -2003,7 +2025,7 @@
     "longname": "src/components/Summary.js~Summary#handleSubmit",
     "access": "public",
     "description": " handleSubmit will send the full state of this weather event\n to storage. Send Thankyou to app. Submits this Event.\n\n If editable fields are open, a yellow snackbar will appear\n with a helpful message to the user instead of submitting incomplete\n  information to the DB.",
-    "lineNumber": 51,
+    "lineNumber": 50,
     "type": {
       "types": [
         "*"
@@ -2021,12 +2043,12 @@
     "longname": "src/components/Summary.js~Summary#removeCamelCase",
     "access": "public",
     "description": "",
-    "lineNumber": 81,
+    "lineNumber": 72,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "string"
         ],
         "spread": false,
         "optional": false,
@@ -2037,10 +2059,10 @@
     "return": {
       "nullable": null,
       "types": [
-        "*"
+        "string"
       ],
       "spread": false,
-      "description": "a string - the value of stringInCamelCase in all lowercase\n  and spaces between words as indicated by camel cases"
+      "description": "the value of stringInCamelCase in all lowercase\n  and spaces between words as indicated by camel cases"
     }
   },
   {
@@ -2052,27 +2074,17 @@
     "longname": "src/components/Summary.js~Summary#sendDataToDatabase",
     "access": "public",
     "description": "Sends information to permanent storage.",
-    "lineNumber": 96,
+    "lineNumber": 85,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "Object"
         ],
         "spread": false,
         "optional": false,
         "name": "jsonPayload",
         "description": "an object that will be sent\nto the database stringified"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "*"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "type",
-        "description": "a string that is the collection type\nor \"event\" that corresponds to a php file"
       }
     ],
     "type": {
@@ -2090,12 +2102,12 @@
     "longname": "src/components/Summary.js~Summary#getCollectionSummaryRows",
     "access": "public",
     "description": "Creates an array of renderable components based on data passed to this\ncomponent via props that will allow users to edit data before submitting.",
-    "lineNumber": 116,
+    "lineNumber": 105,
     "params": [
       {
         "nullable": null,
         "types": [
-          "*"
+          "Object"
         ],
         "spread": false,
         "optional": false,
@@ -2105,7 +2117,7 @@
       {
         "nullable": null,
         "types": [
-          "*"
+          "Array<Object>"
         ],
         "spread": false,
         "optional": false,
@@ -2116,7 +2128,7 @@
     "return": {
       "nullable": null,
       "types": [
-        "*"
+        "Array"
       ],
       "spread": false,
       "description": "an array of CollectionSummaryRow components"
@@ -2138,14 +2150,14 @@
     "longname": "src/components/Summary.js~Summary#render",
     "access": "public",
     "description": "",
-    "lineNumber": 134,
+    "lineNumber": 123,
     "return": {
       "nullable": null,
       "types": [
-        "*"
+        "jsx"
       ],
       "spread": false,
-      "description": "a stylish, editable table presenting the event data and\ncollection data ready to be submitted to permanent storage featuring\na BigYellowButton signaling the user to submit when ready."
+      "description": "editable table presenting the event data and\ncollection data ready to be submitted to permanent storage featuring\na BigYellowButton signaling the user to submit when ready."
     },
     "params": []
   },
@@ -2153,7 +2165,7 @@
     "__docId__": 122,
     "kind": "file",
     "name": "src/components/Tab.js",
-    "content": "import React from 'react';\nimport cx from 'classnames';\n\n\nexport default class Tab extends React.Component {\n\n  /**\n   * passes the value of this tabs prop back up to the parent container\n   * via the handleClick fn prop\n   */\n  handleClick = () => {\n    this.props.handleClick(this.props.tab);\n  }\n\n  /**\n   * @return an a tag (accessible) that when clicked changes in appearance\n   * and has an effect with respect to the handleClick fn passed as props\n   */\n  render() {\n    const { clicked } = this.props;\n    return (\n      <a href=\"#\" className={cx(\"tab\", { clicked })} onClick={this.handleClick}>\n        {this.props.tab}\n      </a>\n    )\n  }\n}\n",
+    "content": "import React from 'react';\nimport PropsTypes from 'prop-types';\nimport cx from 'classnames';\n\n/**\n * Tab is an anchor tag that tells its parent it has been clicked.\n */\nexport default class Tab extends React.Component {\n\n  /**\n   * passes the value of this tabs prop back up to the parent container\n   * via the handleClick fn prop\n   */\n  handleClick = () => {\n    this.props.handleClick(this.props.tab);\n  }\n\n  /**\n   * @return {jsx} an anchor tag (accessible) that when clicked changes in appearance\n   * and has an effect with respect to the handleClick fn passed as props\n   */\n  render() {\n    const { clicked } = this.props;\n    return (\n      <a href=\"#\" className={cx(\"tab\", { clicked })} onClick={this.handleClick}>\n        {this.props.tab}\n      </a>\n    )\n  }\n}\n\n\nTab.propTypes = {\n  tab: PropTypes.string\n}\n",
     "static": true,
     "longname": "/Users/emily.grimes/Desktop/data_collection/src/components/Tab.js",
     "access": "public",
@@ -2171,9 +2183,8 @@
     "export": true,
     "importPath": "ops_coll_front/src/components/Tab.js",
     "importStyle": "Tab",
-    "description": null,
-    "lineNumber": 5,
-    "undocument": true,
+    "description": "Tab is an anchor tag that tells its parent it has been clicked.",
+    "lineNumber": 8,
     "interface": false,
     "extends": [
       "react~React.Component"
@@ -2188,7 +2199,7 @@
     "longname": "src/components/Tab.js~Tab#handleClick",
     "access": "public",
     "description": "passes the value of this tabs prop back up to the parent container\nvia the handleClick fn prop",
-    "lineNumber": 11,
+    "lineNumber": 14,
     "type": {
       "types": [
         "*"
@@ -2206,14 +2217,14 @@
     "longname": "src/components/Tab.js~Tab#render",
     "access": "public",
     "description": "",
-    "lineNumber": 19,
+    "lineNumber": 22,
     "return": {
       "nullable": null,
       "types": [
-        "*"
+        "jsx"
       ],
       "spread": false,
-      "description": "an a tag (accessible) that when clicked changes in appearance\nand has an effect with respect to the handleClick fn passed as props"
+      "description": "an anchor tag (accessible) that when clicked changes in appearance\nand has an effect with respect to the handleClick fn passed as props"
     },
     "params": []
   },
@@ -2249,7 +2260,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"ops_coll_front\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"dependencies\": {\n    \"@material-ui/core\": \"^3.1.0\",\n    \"@material-ui/icons\": \"^3.0.1\",\n    \"classnames\": \"^2.2.6\",\n    \"date-fns\": \"^1.29.0\",\n    \"moment\": \"^2.22.2\",\n    \"react\": \"^16.4.1\",\n    \"react-dom\": \"^16.4.1\",\n    \"react-scripts\": \"1.1.4\",\n    \"react-select\": \"^2.0.0\"\n  },\n  \"devDependencies\": {\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-jsx-plugin\": \"^1.0.0\",\n    \"esdoc-react-plugin\": \"^1.0.1\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"react-json-view\": \"^1.19.1\"\n  },\n  \"proxy\": \"http://local.radops/public/\",\n  \"scripts\": {\n    \"start\": \"react-scripts start\",\n    \"build\": \"react-scripts build\",\n    \"test\": \"react-scripts test --env=jsdom\",\n    \"eject\": \"react-scripts eject\"\n  },\n  \"esdoc\": {\n    \"source\": \"./src\",\n    \"destination\": \"./docs\",\n    \"plugins\": [\n      {\n        \"name\": \"esdoc-react-plugin\"\n      },\n      {\n        \"name\": \"esdoc-standard-plugin\"\n      },\n      {\n        \"name\": \"esdoc-jsx-plugin\",\n        \"option\": {\n          \"enable\": true\n        }\n      },\n      {\n        \"name\": \"esdoc-ecmascript-proposal-plugin\",\n        \"option\": {\n          \"all\": true\n        }\n      }\n    ]\n  }\n}\n",
+    "content": "{\n  \"name\": \"ops_coll_front\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"dependencies\": {\n    \"@material-ui/core\": \"^3.2.2\",\n    \"@material-ui/icons\": \"^3.0.1\",\n    \"classnames\": \"^2.2.6\",\n    \"date-fns\": \"^1.29.0\",\n    \"moment\": \"^2.22.2\",\n    \"react\": \"^16.4.1\",\n    \"react-dom\": \"^16.4.1\",\n    \"react-scripts\": \"1.1.4\",\n    \"react-select\": \"^2.1.0\",\n    \"uuid\": \"^3.3.2\"\n  },\n  \"devDependencies\": {\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-jsx-plugin\": \"^1.0.0\",\n    \"esdoc-react-plugin\": \"^1.0.1\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"react-json-view\": \"^1.19.1\"\n  },\n  \"homepage\": \"/projects/webdev/radops\",\n  \"scripts\": {\n    \"start\": \"react-scripts start\",\n    \"build\": \"react-scripts build\",\n    \"test\": \"react-scripts test --env=jsdom\",\n    \"eject\": \"react-scripts eject\"\n  },\n  \"esdoc\": {\n    \"source\": \"./src\",\n    \"destination\": \"./docs\",\n    \"plugins\": [\n      {\n        \"name\": \"esdoc-react-plugin\"\n      },\n      {\n        \"name\": \"esdoc-standard-plugin\"\n      },\n      {\n        \"name\": \"esdoc-jsx-plugin\",\n        \"option\": {\n          \"enable\": true\n        }\n      },\n      {\n        \"name\": \"esdoc-ecmascript-proposal-plugin\",\n        \"option\": {\n          \"all\": true\n        }\n      }\n    ]\n  }\n}\n",
     "longname": "/Users/emily.grimes/Desktop/data_collection/package.json",
     "name": "package.json",
     "static": true,

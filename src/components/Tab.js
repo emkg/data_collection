@@ -1,7 +1,10 @@
 import React from 'react';
+import PropsTypes from 'prop-types';
 import cx from 'classnames';
 
-
+/**
+ * Tab is an anchor tag that tells its parent it has been clicked.
+ */
 export default class Tab extends React.Component {
 
   /**
@@ -13,7 +16,7 @@ export default class Tab extends React.Component {
   }
 
   /**
-   * @return an a tag (accessible) that when clicked changes in appearance
+   * @return {jsx} an anchor tag (accessible) that when clicked changes in appearance
    * and has an effect with respect to the handleClick fn passed as props
    */
   render() {
@@ -24,4 +27,9 @@ export default class Tab extends React.Component {
       </a>
     )
   }
+}
+
+
+Tab.propTypes = {
+  tab: PropTypes.string
 }

@@ -43,13 +43,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Event from &apos;<span><a href="file/src/components/Event.js.html#lineNumber23">ops_coll_front/src/components/Event.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Event from &apos;<span><a href="file/src/components/Event.js.html#lineNumber29">ops_coll_front/src/components/Event.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/components/Event.js.html#lineNumber23">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/components/Event.js.html#lineNumber29">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -107,13 +107,13 @@ have a new collectionID for every location update.</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-convertTime">convertTime</a></span></span><span class="code" data-ice="signature">: <span>*</span>: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-convertTime">convertTime</a></span></span><span class="code" data-ice="signature">(day: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, time: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>: <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>given @param day - string, @param time - string,</p>
+        <div data-ice="description"><p>combines a given day and time into one UTC time stamp</p>
 </div>
       </div>
     </td>
@@ -136,7 +136,7 @@ have a new collectionID for every location update.</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-getTimeNow">getTimeNow</a></span></span><span class="code" data-ice="signature">: <span>*</span>: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-getTimeNow">getTimeNow</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -164,7 +164,7 @@ have a new collectionID for every location update.</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-handleEventSummarySubmit">handleEventSummarySubmit</a></span></span><span class="code" data-ice="signature">(finalWeatherEventData: <span>*</span>): <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-handleEventSummarySubmit">handleEventSummarySubmit</a></span></span><span class="code" data-ice="signature">(finalWeatherEventData: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -193,7 +193,7 @@ have a new collectionID for every location update.</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-handleKickoffSubmit">handleKickoffSubmit</a></span></span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-handleKickoffSubmit">handleKickoffSubmit</a></span></span><span class="code" data-ice="signature">(event: <span>event</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -224,7 +224,7 @@ is mobile, adds the first collection to state</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-isMobile">isMobile</a></span></span><span class="code" data-ice="signature">(selectedOption: <span>*</span>): <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-isMobile">isMobile</a></span></span><span class="code" data-ice="signature">(selectedOption: {&quot;value&quot;: <span>&quot;string&quot;</span>, &quot;label&quot;: <span>&quot;string&quot;</span>}): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -254,7 +254,7 @@ based on the global list of mobile instruments.</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-saveData">saveData</a></span></span><span class="code" data-ice="signature">(data: <span>*</span>): <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/components/Event.js~Event.html#instance-member-saveData">saveData</a></span></span><span class="code" data-ice="signature">(data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -290,11 +290,11 @@ collections array and saves it to state.</p>
       <div>
         
         
-        <div data-ice="description"><p>Event state stores the mode, a string, either &quot;begin&quot;, &quot;collect&quot;, or &quot;end&quot;
- an Array of collections (json objects), an unique eventID generated by uuidv4,
-today, the string for today&apos;s date, selectedOption for react-select component,
-mobile - a boolean, true if the instrument is mobile, and an Object
-weatherEventData which stores metadata about the Event itself</p>
+        <div data-ice="description"><p>Event state stores the mode {string}, either &quot;begin&quot;, &quot;collect&quot;, or &quot;end&quot;
+ an {Array&lt;Object&gt;} of collections, an unique eventID {string} generated by uuidv4,
+today {string} today&apos;s date, selectedOption {Object} for react-select component,
+mobile {boolean}, true if the instrument is mobile, and
+weatherEventData {Object} stores metadata about the Event itself</p>
 </div>
       </div>
     </td>
@@ -418,18 +418,18 @@ an encodedURIComponent under eventState.</p>
     
     
     
-    <span class="code" data-ice="name">convertTime</span><span class="code" data-ice="signature">: <span>*</span>: <span>*</span></span>
+    <span class="code" data-ice="name">convertTime</span><span class="code" data-ice="signature">(day: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, time: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber85">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber93">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>given @param day - string, @param time - string,</p>
+  <div data-ice="description"><p>combines a given day and time into one UTC time stamp</p>
 </div>
 
   
@@ -442,7 +442,7 @@ an encodedURIComponent under eventState.</p>
     <table>
       <tbody>
         <tr>
-          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
           <td class="return-desc" data-ice="returnDescription"><p>a utc time stamp</p>
 </td>
         </tr>
@@ -475,11 +475,11 @@ an encodedURIComponent under eventState.</p>
     
     
     
-    <span class="code" data-ice="name">getTimeNow</span><span class="code" data-ice="signature">: <span>*</span>: <span>*</span></span>
+    <span class="code" data-ice="name">getTimeNow</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber159">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber169">source</a></span></span>
     </span>
   </h3>
 
@@ -498,7 +498,7 @@ an encodedURIComponent under eventState.</p>
     <table>
       <tbody>
         <tr>
-          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
           <td class="return-desc" data-ice="returnDescription"><p>the UTC time now in a format that time input can
   display</p>
 </td>
@@ -532,11 +532,11 @@ an encodedURIComponent under eventState.</p>
     
     
     
-    <span class="code" data-ice="name">handleEventSummarySubmit</span><span class="code" data-ice="signature">(finalWeatherEventData: <span>*</span>): <span>*</span></span>
+    <span class="code" data-ice="name">handleEventSummarySubmit</span><span class="code" data-ice="signature">(finalWeatherEventData: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber136">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber145">source</a></span></span>
     </span>
   </h3>
 
@@ -577,11 +577,11 @@ sent as function prop to EventSummaryForm</p>
     
     
     
-    <span class="code" data-ice="name">handleKickoffSubmit</span><span class="code" data-ice="signature">(event: <span>*</span>): <span>*</span></span>
+    <span class="code" data-ice="name">handleKickoffSubmit</span><span class="code" data-ice="signature">(event: <span>event</span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber95">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber103">source</a></span></span>
     </span>
   </h3>
 
@@ -623,11 +623,11 @@ is mobile, adds the first collection to state</p>
     
     
     
-    <span class="code" data-ice="name">isMobile</span><span class="code" data-ice="signature">(selectedOption: <span>*</span>): <span>*</span></span>
+    <span class="code" data-ice="name">isMobile</span><span class="code" data-ice="signature">(selectedOption: {&quot;value&quot;: <span>&quot;string&quot;</span>, &quot;label&quot;: <span>&quot;string&quot;</span>}): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber149">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber159">source</a></span></span>
     </span>
   </h3>
 
@@ -668,11 +668,11 @@ based on the global list of mobile instruments.</p>
     
     
     
-    <span class="code" data-ice="name">saveData</span><span class="code" data-ice="signature">(data: <span>*</span>): <span>*</span></span>
+    <span class="code" data-ice="name">saveData</span><span class="code" data-ice="signature">(data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber66">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber72">source</a></span></span>
     </span>
   </h3>
 
@@ -719,18 +719,18 @@ a specific state of the Form in Collection.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber31">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber37">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Event state stores the mode, a string, either &quot;begin&quot;, &quot;collect&quot;, or &quot;end&quot;
- an Array of collections (json objects), an unique eventID generated by uuidv4,
-today, the string for today&apos;s date, selectedOption for react-select component,
-mobile - a boolean, true if the instrument is mobile, and an Object
-weatherEventData which stores metadata about the Event itself</p>
+  <div data-ice="description"><p>Event state stores the mode {string}, either &quot;begin&quot;, &quot;collect&quot;, or &quot;end&quot;
+ an {Array&lt;Object&gt;} of collections, an unique eventID {string} generated by uuidv4,
+today {string} today&apos;s date, selectedOption {Object} for react-select component,
+mobile {boolean}, true if the instrument is mobile, and
+weatherEventData {Object} stores metadata about the Event itself</p>
 </div>
 
   
@@ -770,7 +770,7 @@ weatherEventData which stores metadata about the Event itself</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber43">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber49">source</a></span></span>
     </span>
   </h3>
 
@@ -814,7 +814,7 @@ weatherEventData which stores metadata about the Event itself</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber169">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber179">source</a></span></span>
     </span>
   </h3>
 
@@ -873,7 +873,7 @@ weatherEventData which stores metadata about the Event itself</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber77">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/Event.js.html#lineNumber83">source</a></span></span>
     </span>
   </h3>
 
